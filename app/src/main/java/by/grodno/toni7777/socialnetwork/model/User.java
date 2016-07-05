@@ -15,12 +15,13 @@ public class User {
     private ContactInfo contactInfo;
     private String avatarUrl;
     private List<Long> friends;
-    private List<Post> wall;
+    private Wall wall;
+    private List<Long> groupsID;
 
     public User() {
     }
 
-    public User(long userID, String name, String lastname, Date birthDate, Sex sex, String country, String city, ContactInfo contactInfo, String avatarUrl, List<Long> friends, List<Post> wall) {
+    public User(long userID, String name, String lastname, Date birthDate, Sex sex, String country, String city, ContactInfo contactInfo, String avatarUrl, List<Long> friends, Wall wall, List<Long> groupsID) {
         this.userID = userID;
         this.name = name;
         this.lastname = lastname;
@@ -32,6 +33,7 @@ public class User {
         this.avatarUrl = avatarUrl;
         this.friends = friends;
         this.wall = wall;
+        this.groupsID = groupsID;
     }
 
     public long getUserID() {
@@ -114,12 +116,20 @@ public class User {
         this.friends = friends;
     }
 
-    public List<Post> getWall() {
+    public Wall getWall() {
         return wall;
     }
 
-    public void setWall(List<Post> wall) {
+    public void setWall(Wall wall) {
         this.wall = wall;
+    }
+
+    public List<Long> getGroupsID() {
+        return groupsID;
+    }
+
+    public void setGroupsID(List<Long> groupsID) {
+        this.groupsID = groupsID;
     }
 
     @Override
@@ -143,7 +153,8 @@ public class User {
         if (avatarUrl != null ? !avatarUrl.equals(user.avatarUrl) : user.avatarUrl != null)
             return false;
         if (friends != null ? !friends.equals(user.friends) : user.friends != null) return false;
-        return wall != null ? wall.equals(user.wall) : user.wall == null;
+        if (wall != null ? !wall.equals(user.wall) : user.wall != null) return false;
+        return groupsID != null ? groupsID.equals(user.groupsID) : user.groupsID == null;
 
     }
 
@@ -160,6 +171,7 @@ public class User {
         result = 31 * result + (avatarUrl != null ? avatarUrl.hashCode() : 0);
         result = 31 * result + (friends != null ? friends.hashCode() : 0);
         result = 31 * result + (wall != null ? wall.hashCode() : 0);
+        result = 31 * result + (groupsID != null ? groupsID.hashCode() : 0);
         return result;
     }
 
@@ -177,6 +189,7 @@ public class User {
                 ", avatarUrl='" + avatarUrl + '\'' +
                 ", friends=" + friends +
                 ", wall=" + wall +
+                ", groupsID=" + groupsID +
                 '}';
     }
 }
