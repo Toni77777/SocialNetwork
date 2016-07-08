@@ -1,32 +1,28 @@
 package by.grodno.toni7777.socialnetwork.login;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
+import by.grodno.toni7777.socialnetwork.base.BaseActivity;
 import by.grodno.toni7777.socialnetwork.test.UserLogin;
 
-public class LoginActivity extends AppCompatActivity implements LoginView {
+public class LoginActivity extends BaseActivity implements LoginView {
 
     @BindView(R.id.login)
     EditText loginInfo;
     @BindView(R.id.password)
     EditText passInfo;
     private LoginPresenter presenter;
-    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        unbinder = ButterKnife.bind(this);
         presenter = new LoginPresenterImp(this, ((SocialNetworkApp) getApplication()).getNetworkService());
     }
 
@@ -51,8 +47,5 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     protected void onDestroy() {
         super.onDestroy();
         presenter.rxUnSubscribe();
-        if (unbinder != null) {
-            unbinder.unbind();
-        }
     }
 }
