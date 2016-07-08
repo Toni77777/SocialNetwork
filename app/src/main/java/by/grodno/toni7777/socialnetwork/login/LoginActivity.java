@@ -8,6 +8,7 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.test.UserLogin;
@@ -19,12 +20,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @BindView(R.id.password)
     EditText passInfo;
     private LoginPresenter presenter;
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         presenter = new LoginPresenterImp(this, ((SocialNetworkApp) getApplication()).getNetworkService());
     }
 
@@ -49,5 +51,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     protected void onDestroy() {
         super.onDestroy();
         presenter.rxUnSubscribe();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 }
