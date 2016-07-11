@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppThemeLogin" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.Login" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#FFA000</item>
         <item name="colorPrimaryDark">#BFBFA7</item>
@@ -20,5 +20,11 @@
         <item name="android:background">?colorPrimary</item>
         <item name="android:minHeight">?actionBarSize</item>
     </style>
+
+    <style name="LoginButton">
+        <item name="android:background">@drawable/button_round</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
 
 </resources>

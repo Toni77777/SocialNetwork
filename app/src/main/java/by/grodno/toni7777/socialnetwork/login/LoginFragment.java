@@ -32,7 +32,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         super.onCreate(savedInstanceState);
         presenter = new LoginPresenterImp(this, ((SocialNetworkApp) getActivity().getApplication()).getNetworkService());
 
-//        if (isLoginnedUser()) {
+//        if (isLoggedIn()) {
 //            ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
 //        }
     }
@@ -76,7 +76,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         presenter.rxUnSubscribe();
     }
 
-    private boolean isLoginnedUser() {
+    private boolean isLoggedIn() {
         return true;
     }
 

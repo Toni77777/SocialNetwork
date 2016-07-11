@@ -39,35 +39,32 @@
 
         <Button
             android:id="@+id/sing_in"
+            style="@style/LoginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_round"
             android:minWidth="160dp"
             android:text="@string/authorization_log_in"
-            android:textColor="#ffffff"
         />
 
         <Button
             android:id="@+id/sing_up"
+            style="@style/LoginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/button_round"
             android:minWidth="160dp"
             android:text="@string/authorization_sing_up"
-            android:textColor="#ffffff"
         />
 
         <TextView
             android:id="@+id/forgot_password"
+            style="@style/LoginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
-            android:background="@drawable/button_round"
             android:text="@string/authorization_forgot_password"
-            android:textColor="#ffffff"
         />
 
     </LinearLayout>
