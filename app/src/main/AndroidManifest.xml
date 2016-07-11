@@ -12,14 +12,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SocialNetworkActivity">
+        <activity
+            android:name=".LoginActivity"
+            android:noHistory="true"
+            android:theme="@style/AppThemeLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".wall.WallActivity">
         </activity>
     </application>
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Социальная сеть</string>
+    <string name="authorization_login">Логин</string>
+    <string name="authorization_password">Пароль</string>
+    <string name="authorization_log_in">Войти</string>
+    <string name="authorization_sing_up">Регистрация</string>
+    <string name="authorization_forgot_password">Востановить пароль</string>
+</resources>
