@@ -5,6 +5,7 @@ import by.grodno.toni7777.socialnetwork.test.UserLogin;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
+import rx.functions.Action1;
 
 public class LoginPresenterImp implements LoginPresenter {
 
@@ -22,22 +23,11 @@ public class LoginPresenterImp implements LoginPresenter {
         Observable<UserLogin> loginObservable = (Observable<UserLogin>)
                 networkService.getPreparedObservable(networkService.getLoginService().loginRequest(login, password));
 
-        subscription = loginObservable.subscribe(new Observer<UserLogin>() {
-            @Override
-            public void onCompleted() {
+        subscription = loginObservable.subscribe(userLogin -> {
+            loginView.loginSuccess(userLogin);
 
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                loginView.loginError(e);
-            }
-
-            @Override
-            public void onNext(UserLogin userLogin) {
-                loginView.loginSuccess(userLogin);
-            }
-
+        }, throwable -> {
+            loginView.loginError(throwable);
         });
     }
 
