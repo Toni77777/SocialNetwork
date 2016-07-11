@@ -59,6 +59,15 @@ public class LoginFragment extends BaseFragment implements LoginView {
         presenter.loginRequest(loginn, pass);
     }
 
+    @OnClick(R.id.sing_up)
+    void singUn() {
+    }
+
+    //Need back stack activity
+    @OnClick(R.id.forgot_password)
+    void restorePassword() {
+    }
+
     @Override
     public void loginSuccess(UserLogin userLogin) {
         Log.e("USER", userLogin.toString());
