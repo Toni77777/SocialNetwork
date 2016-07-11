@@ -2,19 +2,19 @@ package by.grodno.toni7777.socialnetwork.base;
 
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
 
-public class ToolbarActivity extends AppCompatActivity {
+public class ToolbarActivity extends BaseActivity {
 
-    private Toolbar mToolbar;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     @Override
     public void onContentChanged() {
         super.onContentChanged();
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) {
             mToolbar.setTitle(getTitle());
             setSupportActionBar(mToolbar);
