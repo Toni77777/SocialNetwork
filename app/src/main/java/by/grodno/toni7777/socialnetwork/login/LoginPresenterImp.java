@@ -1,32 +1,38 @@
 package by.grodno.toni7777.socialnetwork.login;
 
-import android.util.Log;
 
-import by.grodno.toni7777.socialnetwork.network.NetworkService;
-import by.grodno.toni7777.socialnetwork.test.UserLogin;
-import rx.Observable;
+import javax.inject.Inject;
+
+import by.grodno.toni7777.socialnetwork.di.ApplicationModule;
+import by.grodno.toni7777.socialnetwork.di.DaggerApplicationComponent;
+import by.grodno.toni7777.socialnetwork.network.LoginService;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class LoginPresenterImp implements LoginPresenter {
 
+    @Inject
+    LoginService loginService;
     private LoginView loginView;
-    private NetworkService networkService;
     private Subscription subscription;
 
-    public LoginPresenterImp(LoginView loginView, NetworkService networkService) {
-
+    public LoginPresenterImp(LoginView loginView) {
         this.loginView = loginView;
-        this.networkService = networkService;
+        DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule())
+                .build()
+                .inject(this);
     }
 
     @Override
     public void loginRequest(String login, String password) {
-        Observable<UserLogin> loginObservable = (Observable<UserLogin>)
-                networkService.getPreparedObservable(networkService.getLoginService().loginRequest(login, password));
-
-        subscription = loginObservable.subscribe(
-                userLogin -> loginView.loginSuccess(userLogin),
-                throwable -> loginView.loginError(throwable));
+        subscription = loginService.loginRequest(login, password)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        userLogin -> loginView.loginSuccess(userLogin),
+                        throwable -> loginView.loginError(throwable));
     }
 
     @Override
