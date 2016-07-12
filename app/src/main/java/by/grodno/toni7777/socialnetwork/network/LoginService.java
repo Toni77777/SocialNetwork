@@ -10,7 +10,7 @@ import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 public interface LoginService {
 
     @GET(LOGIN_URL)
-    Observable<UserLogin> loginRequest(@Query("login") String login,
-                                       @Query("pass") String pass);
+    Observable<UserLogin> loginRequest(@Query(LOGIN) String login,
+                                       @Query(PASSWORD) String pass);
 
 }
