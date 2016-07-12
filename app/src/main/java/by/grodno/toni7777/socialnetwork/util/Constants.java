@@ -7,6 +7,9 @@ public final class Constants {
     public static final String LOGIN = "login";
     public static final String PASSWORD = "pass";
 
+
+    public static final String INJECT_LOGIN = "login";
+
     private Constants() {
     }
 
