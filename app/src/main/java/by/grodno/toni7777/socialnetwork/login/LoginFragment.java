@@ -1,6 +1,5 @@
 package by.grodno.toni7777.socialnetwork.login;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;

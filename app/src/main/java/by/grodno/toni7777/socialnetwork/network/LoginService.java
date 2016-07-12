@@ -1,6 +1,5 @@
 package by.grodno.toni7777.socialnetwork.network;
 
-
 import by.grodno.toni7777.socialnetwork.test.UserLogin;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

@@ -1,6 +1,5 @@
 package by.grodno.toni7777.socialnetwork.login;
 
-
 import javax.inject.Inject;
 
 import by.grodno.toni7777.socialnetwork.di.ApplicationModule;
