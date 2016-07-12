@@ -14,6 +14,7 @@ public class LoginPresenterImp implements LoginPresenter {
     private Subscription subscription;
 
     public LoginPresenterImp(LoginView loginView, NetworkService networkService) {
+
         this.loginView = loginView;
         this.networkService = networkService;
     }

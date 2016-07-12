@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.BuildConfig;
@@ -16,11 +18,17 @@ import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseActivity;
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
+import by.grodno.toni7777.socialnetwork.network.NetworkService;
 import by.grodno.toni7777.socialnetwork.test.UserLogin;
 import by.grodno.toni7777.socialnetwork.wall.WallActivity;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscription;
 
 public class LoginFragment extends BaseFragment implements LoginView {
 
+    @Inject
+    NetworkService networkService;
     @BindView(R.id.login)
     EditText login;
     @BindView(R.id.password)
@@ -32,6 +40,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
         super.onCreate(savedInstanceState);
         presenter = new LoginPresenterImp(this, ((SocialNetworkApp) getActivity().getApplication()).getNetworkService());
 
+//        ((SocialNetworkApp) getActivity().getApplication()).from(getActivity()).
+        SocialNetworkApp.from(getContext()).getComponent().inject(this);
 //        if (isLoggedIn()) {
 //            ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
 //        }
@@ -61,6 +71,26 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @OnClick(R.id.sing_up)
     void singUn() {
+        Observable<UserLogin> loginObservable = (Observable<UserLogin>)
+                networkService.getPreparedObservable(networkService.getLoginService().loginRequest("anton", "8816880"));
+
+
+        loginObservable.subscribe(new Observer<UserLogin>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("DI", "Dagger2 Error" + e.toString());
+            }
+
+            @Override
+            public void onNext(UserLogin userLogin) {
+                Log.e("DI", "Dagger2" + userLogin.toString());
+            }
+        });
     }
 
     //Need back stack activity

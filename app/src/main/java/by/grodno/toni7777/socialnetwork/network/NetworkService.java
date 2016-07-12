@@ -2,8 +2,6 @@ package by.grodno.toni7777.socialnetwork.network;
 
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -12,6 +10,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public final class NetworkService {
+
     private LoginService loginService;
 
     public NetworkService() {
@@ -30,21 +29,9 @@ public final class NetworkService {
         loginService = retrofit.create(LoginService.class);
     }
 
-
     public OkHttpClient newClient() {
-
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.addInterceptor(chain -> {
-            Response response = chain.proceed(chain.request());
-            return response;
-        });
-
-        builder.addInterceptor(chain -> {
-            Request request = chain.request().newBuilder().build();
-            return chain.proceed(request);
-        });
-
-        return builder.build();
+        return new OkHttpClient.Builder()
+                .build();
     }
 
     public LoginService getLoginService() {
