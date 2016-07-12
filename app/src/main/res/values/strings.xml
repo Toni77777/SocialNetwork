@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SocialNetwork</string>
+    <string name="authorization_login">Login</string>
+    <string name="authorization_password">Password</string>
+    <string name="authorization_log_in">Log In</string>
+    <string name="authorization_sing_up">Sing Up</string>
+    <string name="authorization_forgot_password">Forgot password</string>
 </resources>
