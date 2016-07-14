@@ -15,7 +15,7 @@ import rx.schedulers.Schedulers;
 public class LoginPresenterImp implements LoginPresenter {
 
     @Inject//remove
-    LoginService loginService;
+            LoginService loginService;
     private LoginView loginView;
     private Subscription subscription;
 
@@ -32,7 +32,7 @@ public class LoginPresenterImp implements LoginPresenter {
     public void loginRequest(String login, String password) {
         subscription = loginService.loginRequest(BuildConfig.GRANT_TYPE_VALUE,
                 BuildConfig.CLIENT_ID_VALUE, login, password)
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.newThread())  // .subscribeOn(Schedulers.from())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         userLogin -> loginView.loginSuccess(userLogin),

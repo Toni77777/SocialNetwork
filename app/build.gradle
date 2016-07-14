@@ -4,7 +4,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "23.0.3"
+    buildToolsVersion "24.0.0"
 
     defaultConfig {
         applicationId "by.grodno.toni7777.socialnetwork"
@@ -25,17 +25,25 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "Boolean", "MOCK_SERVER", "true"
             buildConfigField "String", "BASE_URL", "\"http://private-bc396-authorisation.apiary-mock.com\""
         }
 
         release {
-            buildConfigField "Boolean", "MOCK_SERVER", "false"
             buildConfigField "String", "BASE_URL", "\"https://sjc2016vs2.fwd.wf\""
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    productFlavors {
+        lollipop {
+            applicationId "by.grodno.toni7777.socialnetwork"
+            versionName "1.0-lollipop"
+            minSdkVersion 21
+            targetSdkVersion 23
+        }
+
     }
 
     compileOptions {
