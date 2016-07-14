@@ -14,11 +14,12 @@ import rx.schedulers.Schedulers;
 
 public class LoginPresenterImp implements LoginPresenter {
 
-    @Inject
+    @Inject//remove
     LoginService loginService;
     private LoginView loginView;
     private Subscription subscription;
 
+    //@Inject
     public LoginPresenterImp(LoginView loginView) {
         this.loginView = loginView;
         DaggerApplicationComponent.builder()

@@ -9,6 +9,6 @@ import javax.inject.Singleton;
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
 
-    void inject(LoginPresenterImp login);
+    void inject(LoginPresenterImp login);//remove
 
 }
