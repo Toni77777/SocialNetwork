@@ -13,20 +13,26 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "LOGIN_URL", "\"/oauth/token\""
+        buildConfigField "String", "GRANT_TYPE", "\"grant_type\""
+        buildConfigField "String", "CLIENT_ID", "\"client_id\""
+        buildConfigField "String", "GRANT_TYPE_VALUE", "\"password\""
+        buildConfigField "String", "CLIENT_ID_VALUE", "\"my-trusted-client\""
+        buildConfigField "String", "LOGIN", "\"user\""
+        buildConfigField "String", "PASS", "\"user\""
+
     }
     buildTypes {
 
         debug {
             buildConfigField "Boolean", "MOCK_SERVER", "true"
-            buildConfigField "String", "LOGIN", "\"anton\""
-            buildConfigField "String", "PASS", "\"8816880\""
-
+            buildConfigField "String", "BASE_URL", "\"http://private-bc396-authorisation.apiary-mock.com\""
         }
 
         release {
             buildConfigField "Boolean", "MOCK_SERVER", "false"
-            buildConfigField "String", "LOIGN", "\"anton\""
-            buildConfigField "String", "PASS", "\"8816880\""
+            buildConfigField "String", "BASE_URL", "\"https://sjc2016vs2.fwd.wf\""
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

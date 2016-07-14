@@ -44,10 +44,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (BuildConfig.MOCK_SERVER) {
-            login.setText(BuildConfig.LOGIN);
-            password.setText(BuildConfig.PASS);
-        }
+        login.setText(BuildConfig.LOGIN);
+        password.setText(BuildConfig.PASS);
     }
 
     @OnClick(R.id.sing_in)

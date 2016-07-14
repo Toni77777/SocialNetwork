@@ -2,9 +2,9 @@ package by.grodno.toni7777.socialnetwork.di;
 
 import javax.inject.Singleton;
 
+import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.network.LoginService;
 
-import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 
 import dagger.Module;
 import dagger.Provides;
@@ -26,7 +26,7 @@ public class ApplicationModule {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(okHttpClient)

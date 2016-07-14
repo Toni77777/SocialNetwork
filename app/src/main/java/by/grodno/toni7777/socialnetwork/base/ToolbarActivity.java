@@ -16,7 +16,6 @@ public class ToolbarActivity extends BaseActivity {
     public void onContentChanged() {
         super.onContentChanged();
         if (mToolbar != null) {
-            mToolbar.setTitle(getTitle());
             setSupportActionBar(mToolbar);
         }
     }

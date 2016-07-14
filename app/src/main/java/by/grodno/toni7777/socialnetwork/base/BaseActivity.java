@@ -14,7 +14,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onContentChanged() {
         super.onContentChanged();
-        unbinder =ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
     }
 
     @Override
@@ -26,7 +26,6 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void startToActivity(Class<? extends Activity> toActivity) {
-        startActivity(new Intent(this, toActivity).
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+        startActivity(new Intent(this, toActivity));
     }
 }
