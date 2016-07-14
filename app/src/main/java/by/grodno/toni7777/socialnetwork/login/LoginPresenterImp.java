@@ -1,13 +1,10 @@
 package by.grodno.toni7777.socialnetwork.login;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import by.grodno.toni7777.socialnetwork.di.ApplicationModule;
 import by.grodno.toni7777.socialnetwork.di.DaggerApplicationComponent;
 import by.grodno.toni7777.socialnetwork.network.LoginService;
-
-import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -17,7 +14,6 @@ import rx.schedulers.Schedulers;
 public class LoginPresenterImp implements LoginPresenter {
 
     @Inject
-    @Named(LOGIN)
     LoginService loginService;
     private LoginView loginView;
     private Subscription subscription;
