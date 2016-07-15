@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.BuildConfig;
@@ -21,9 +23,12 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @BindView(R.id.login)
     EditText login;
+
     @BindView(R.id.password)
     EditText password;
-    private LoginPresenter presenter;
+
+    @Inject
+    LoginPresenter presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

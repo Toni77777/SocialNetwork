@@ -19,7 +19,6 @@ public class LoginPresenterImp implements LoginPresenter {
     private LoginView loginView;
     private Subscription subscription;
 
-    //@Inject
     public LoginPresenterImp(LoginView loginView) {
         this.loginView = loginView;
         DaggerApplicationComponent.builder()

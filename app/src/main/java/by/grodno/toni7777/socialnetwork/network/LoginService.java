@@ -6,13 +6,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
 
-import static by.grodno.toni7777.socialnetwork.util.Constants.*;
-
 public interface LoginService {
-
-//    @GET(BuildConfig.LOGIN_URL)
-//    Observable<UserLogin> loginRequest(@Query(LOGIN) String login,
-//                                       @Query(PASSWORD) String pass);
 
     @GET(BuildConfig.LOGIN_URL)
     Observable<UserLogin> loginRequest(@Query("grant_type") String grandType,

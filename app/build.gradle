@@ -38,10 +38,8 @@ android {
 
     productFlavors {
         lollipop {
-            applicationId "by.grodno.toni7777.socialnetwork"
             versionName "1.0-lollipop"
             minSdkVersion 21
-            targetSdkVersion 23
         }
 
     }
