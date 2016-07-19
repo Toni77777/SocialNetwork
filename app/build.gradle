@@ -67,5 +67,4 @@ dependencies {
     compile 'com.google.dagger:dagger:2.5'
     provided 'javax.annotation:jsr250-api:1.0'
 
-    compile 'com.github.fcannizzaro:material-stepper:1.1.8'
 }

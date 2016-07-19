@@ -1,41 +1,44 @@
 package by.grodno.toni7777.socialnetwork.registration;
 
 import android.os.Bundle;
-
-import static by.grodno.toni7777.socialnetwork.util.Constants.*;
-
-import com.github.fcannizzaro.materialstepper.AbstractStep;
-import com.github.fcannizzaro.materialstepper.style.TabStepper;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 
 import by.grodno.toni7777.socialnetwork.R;
-import by.grodno.toni7777.socialnetwork.registration.tab.ContactTab;
-import by.grodno.toni7777.socialnetwork.registration.tab.InfoTab;
-import by.grodno.toni7777.socialnetwork.registration.tab.LoginTab;
+import by.grodno.toni7777.socialnetwork.base.ToolbarActivity;
+import by.grodno.toni7777.socialnetwork.registration.fragment.InfoFragment;
+import by.grodno.toni7777.socialnetwork.registration.fragment.LoginFragment;
 
-public class RegistrationActivity extends TabStepper {
+public class RegistrationActivity extends ToolbarActivity
+        implements InfoFragment.OnInfoPass, LoginFragment.OnLoginPass {
+
+    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setLinear(true);
-        setPreviousVisible();
-        setDisabledTouch();
-        addStep(createFragmentWithTitle(new InfoTab(), getString(R.string.tab_title_info)));
-        addStep(createFragmentWithTitle(new LoginTab(), getString(R.string.tab_title_login)));
-        addStep(createFragmentWithTitle(new ContactTab(), getString(R.string.tab_title_contact)));
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_toolbar);
+        mFragmentManager = getSupportFragmentManager();
+        if (savedInstanceState == null) {
+            mFragmentManager.beginTransaction()
+                    .add(R.id.content, new InfoFragment())
+                    .commit();
+        }
     }
 
     @Override
-    public void onComplete() {
-        super.onComplete();
-//        finish();
+    public void onInfoPass(String name, String surname, String sex, String dateBirth) {
+        Log.e("Info", name + surname + sex + dateBirth);
+
+        mFragmentManager.beginTransaction()
+                .replace(R.id.content, new LoginFragment())
+                .commit();
     }
 
-    private AbstractStep createFragmentWithTitle(AbstractStep fragment, String title) {
-        Bundle bundle = new Bundle();
-        bundle.putString(TAB_TITLE_SHARE, title);
-        bundle.putString(TAB_ERROR_SHARE, getString(R.string.tab_error_message));
-        fragment.setArguments(bundle);
-        return fragment;
+
+    @Override
+    public void onLoginPass(String login, String password, String email) {
+        Log.e("Login", login + password + email);
+
     }
 }

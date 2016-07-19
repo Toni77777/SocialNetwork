@@ -1,6 +1,7 @@
-package by.grodno.toni7777.socialnetwork.registration.tab;
+package by.grodno.toni7777.socialnetwork.registration.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,11 +22,14 @@ import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.registration.DatePickerFragment;
 import by.grodno.toni7777.socialnetwork.registration.ErrorTextWatcher;
 
-import static by.grodno.toni7777.socialnetwork.util.Constants.*;
-import static by.grodno.toni7777.socialnetwork.util.Util.*;
-import static by.grodno.toni7777.socialnetwork.util.Validation.*;
+import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_DATE_PICKER;
+import static by.grodno.toni7777.socialnetwork.util.Util.hasKeySparseIntArray;
+import static by.grodno.toni7777.socialnetwork.util.Util.showErrorMessage;
+import static by.grodno.toni7777.socialnetwork.util.Validation.ERROR_NAME;
+import static by.grodno.toni7777.socialnetwork.util.Validation.ERROR_SURNAME;
+import static by.grodno.toni7777.socialnetwork.util.Validation.validateInformation;
 
-public class InfoTab extends Tab {
+public class InfoFragment extends TabFragment {
 
     @BindView(R.id.name_layout)
     TextInputLayout mNameLayout;
@@ -42,10 +46,12 @@ public class InfoTab extends Tab {
     @BindView(R.id.sex)
     Spinner mSex;
 
+    private OnInfoPass mInfoPasser;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_tab_info, container, false);
+        return inflater.inflate(R.layout.tab_fragment_info, container, false);
     }
 
     @Override
@@ -69,7 +75,8 @@ public class InfoTab extends Tab {
     }
 
     @Override
-    public boolean nextIf() {
+    @OnClick(R.id.next)
+    public void nextTab() {
         String name = mNameLayout.getEditText().getText().toString();
         String surname = mSurnameLayout.getEditText().getText().toString();
         String sex = mSex.getSelectedItem().toString();
@@ -77,19 +84,13 @@ public class InfoTab extends Tab {
         SparseIntArray errors = validateInformation(name, surname, dateBirth);
         if (errors.size() > 0) {
             showErrors(errors);
-            return false;
         } else {
-            getStepDataFor(TABS_SHARE_TO_LOGIN).putString(TABS_SHARE_NAME, name);
-            getStepDataFor(TABS_SHARE_TO_LOGIN).putString(TABS_SHARE_SURNAME, surname);
-            getStepDataFor(TABS_SHARE_TO_LOGIN).putString(TABS_SHARE_SEX, sex);
-            getStepDataFor(TABS_SHARE_TO_LOGIN).putString(TABS_SHARE_DATE_BIRTH, dateBirth);
-            return true;
+            mInfoPasser.onInfoPass(name, surname, sex, dateBirth);
         }
     }
 
     @Override
     public void showErrors(SparseIntArray errors) {
-        mDateBirthLayout.setError("Error");
         if (hasKeySparseIntArray(errors, ERROR_NAME)) {
             int errorType = errors.get(ERROR_NAME);
             showErrorMessage(mNameLayout, errorType);
@@ -98,7 +99,6 @@ public class InfoTab extends Tab {
             int errorType = errors.get(ERROR_SURNAME);
             showErrorMessage(mSurnameLayout, errorType);
         }
-
     }
 
     @OnClick(R.id.choose_date_birth)
@@ -119,6 +119,20 @@ public class InfoTab extends Tab {
                     break;
             }
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnInfoPass) {
+            mInfoPasser = (OnInfoPass) context;
+        } else {
+            throw new RuntimeException("Host activity must implements OnInfoPass interface.");
+        }
+    }
+
+    public interface OnInfoPass {
+        void onInfoPass(String name, String surname, String sex, String dateBirth);
     }
 
     private static final int REQUEST_DATE_BIRTH = 1504;

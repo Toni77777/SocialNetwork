@@ -64,7 +64,6 @@ public class LoginFragment extends BaseFragment implements LoginView {
     @OnClick(R.id.sing_up)
     void singUn() {
         ((BaseActivity) getActivity()).startToActivity(RegistrationActivity.class);
-
     }
 
     //Need back stack activity
