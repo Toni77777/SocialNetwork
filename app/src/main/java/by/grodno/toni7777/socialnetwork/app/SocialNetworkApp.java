@@ -2,19 +2,29 @@ package by.grodno.toni7777.socialnetwork.app;
 
 import android.app.Application;
 
-import by.grodno.toni7777.socialnetwork.network.NetworkService;
+import by.grodno.toni7777.socialnetwork.di.ApplicationComponent;
+import by.grodno.toni7777.socialnetwork.di.ApplicationModule;
+import by.grodno.toni7777.socialnetwork.di.DaggerApplicationComponent;
 
 public class SocialNetworkApp extends Application {
 
-    private NetworkService networkService;
+    private ApplicationComponent mApplicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        networkService = new NetworkService();
+        mApplicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule())
+                .build();
     }
 
-    public NetworkService getNetworkService() {
-        return networkService;
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        mApplicationComponent = null;
+    }
+
+    public ApplicationComponent getApplicationComponent() {
+        return mApplicationComponent;
     }
 }

@@ -1,6 +1,5 @@
 package by.grodno.toni7777.socialnetwork.login;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -9,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
-import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseActivity;
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
 import by.grodno.toni7777.socialnetwork.test.UserLogin;
@@ -23,14 +23,17 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @BindView(R.id.login)
     EditText login;
+
     @BindView(R.id.password)
     EditText password;
-    private LoginPresenter presenter;
+
+    @Inject
+    LoginPresenter presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new LoginPresenterImp(this, ((SocialNetworkApp) getActivity().getApplication()).getNetworkService());
+        presenter = new LoginPresenterImp(this);
 
 //        if (isLoggedIn()) {
 //            ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
@@ -46,10 +49,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (BuildConfig.DEBUG) {
-            login.setText("anton");
-            password.setText("8816880");
-        }
+        login.setText(BuildConfig.LOGIN);
+        password.setText(BuildConfig.PASS);
     }
 
     @OnClick(R.id.sing_in)
@@ -61,11 +62,13 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @OnClick(R.id.sing_up)
     void singUn() {
+
     }
 
     //Need back stack activity
     @OnClick(R.id.forgot_password)
     void restorePassword() {
+
     }
 
     @Override
