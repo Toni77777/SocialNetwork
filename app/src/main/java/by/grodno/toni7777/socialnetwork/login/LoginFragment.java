@@ -16,6 +16,7 @@ import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.BaseActivity;
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
+import by.grodno.toni7777.socialnetwork.registration.RegistrationActivity;
 import by.grodno.toni7777.socialnetwork.test.UserLogin;
 import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
@@ -62,6 +63,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @OnClick(R.id.sing_up)
     void singUn() {
+        ((BaseActivity) getActivity()).startToActivity(RegistrationActivity.class);
 
     }
 

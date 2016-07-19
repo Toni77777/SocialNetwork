@@ -5,4 +5,11 @@
     <string name="authorization_log_in">Log In</string>
     <string name="authorization_sing_up">Sing Up</string>
     <string name="authorization_forgot_password">Forgot password</string>
+
+    <string name="tab_title_contact">Contact</string>
+    <string name="tab_title_info">Info</string>
+    <string name="tab_title_login">Login</string>
+
+    <string name="tab_error_message">Please correct the errors</string>
+    <string name="error_field_empty">The field can not be empty</string>
 </resources>
