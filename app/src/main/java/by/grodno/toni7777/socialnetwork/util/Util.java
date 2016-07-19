@@ -7,6 +7,7 @@ import android.util.SparseIntArray;
 import by.grodno.toni7777.socialnetwork.R;
 
 import static by.grodno.toni7777.socialnetwork.util.Validation.EMPTY_FIELD;
+import static by.grodno.toni7777.socialnetwork.util.Validation.MAX_LENGTH_FIELD;
 
 
 public final class Util {
@@ -24,8 +25,11 @@ public final class Util {
         switch (error) {
             case EMPTY_FIELD:
                 return context.getString(R.string.error_field_empty);
+            case MAX_LENGTH_FIELD:
+                return context.getString(R.string.error_field_max);
+            default:
+                throw new IllegalArgumentException("Unknown error type " + error);
         }
-        return null;
     }
 
 }

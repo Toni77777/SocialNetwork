@@ -15,8 +15,8 @@ public final class Validation {
         return errors;
     }
 
-    private static void validate(CharSequence field, int keyError, SparseIntArray errors) {
-        if (TextUtils.isEmpty(field)) {
+    private static void validate(String field, int keyError, SparseIntArray errors) {
+        if (TextUtils.isEmpty(field.trim())) {
             errors.append(keyError, EMPTY_FIELD);
         }
     }
@@ -32,5 +32,6 @@ public final class Validation {
     public static final int ERROR_DATE_BIRTH = 103;
 
     public static final int EMPTY_FIELD = 1;
+    public static final int MAX_LENGTH_FIELD = 2;
 
 }

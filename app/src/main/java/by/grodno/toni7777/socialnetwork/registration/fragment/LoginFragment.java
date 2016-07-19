@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 
 public class LoginFragment extends TabFragment {
@@ -22,12 +23,11 @@ public class LoginFragment extends TabFragment {
 
     @Override
     public void showErrors(SparseIntArray errors) {
-
     }
 
     @Override
+    @OnClick(R.id.next)
     public void nextTab() {
-//        mLoginPass.onInfoPass();
         mLoginPass.onLoginPass("Login", "Pass", "Email");
     }
 

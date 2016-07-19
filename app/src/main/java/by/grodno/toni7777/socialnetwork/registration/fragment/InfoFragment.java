@@ -101,7 +101,7 @@ public class InfoFragment extends TabFragment {
         }
     }
 
-    @OnClick(R.id.choose_date_birth)
+    @OnClick(R.id.date_birth)
     public void showDatePicker() {
         DialogFragment fragment = new DatePickerFragment();
         fragment.setTargetFragment(this, REQUEST_DATE_BIRTH);

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,20 +50,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
+                android:gravity="center_horizontal"
                 android:inputType="none"
                 android:text="dd/mm/yyyy"/>
 
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/choose_date_birth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Date birth"/>
-
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -71,9 +65,10 @@
         android:background="#ab362abe"
         android:orientation="horizontal">
 
-        <View android:layout_width="0dp"
-              android:layout_height="match_parent"
-              android:layout_weight="2"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
 
         <Button
             android:id="@+id/next"
@@ -82,9 +77,7 @@
             android:layout_weight="1"
             android:background="#be2a2a"
             android:text="Next"
-            android:textColor="#FFFFFF"
-        />
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
-
 
 </RelativeLayout>

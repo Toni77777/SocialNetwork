@@ -11,5 +11,6 @@
     <string name="tab_title_login">Login</string>
 
     <string name="tab_error_message">Please correct the errors</string>
-    <string name="error_field_empty">The field can not be empty</string>
+    <string name="error_field_empty">Field can not be empty</string>
+    <string name="error_field_max">Exceeded the maximum field length</string>
 </resources>

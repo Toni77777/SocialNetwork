@@ -76,6 +76,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     public void loginSuccess(UserLogin userLogin) {
         Log.e("USER", userLogin.toString());
         ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
+        getActivity().finish();
     }
 
     @Override

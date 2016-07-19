@@ -1,18 +1,23 @@
 package by.grodno.toni7777.socialnetwork.registration;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.ToolbarActivity;
+import by.grodno.toni7777.socialnetwork.registration.fragment.ContactFragment;
 import by.grodno.toni7777.socialnetwork.registration.fragment.InfoFragment;
 import by.grodno.toni7777.socialnetwork.registration.fragment.LoginFragment;
+
+import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_PROFILE;
 
 public class RegistrationActivity extends ToolbarActivity
         implements InfoFragment.OnInfoPass, LoginFragment.OnLoginPass {
 
     private FragmentManager mFragmentManager;
+    private Profile mProfile;
+    private static final String STATE_PROFILE = "profile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +29,28 @@ public class RegistrationActivity extends ToolbarActivity
                     .add(R.id.content, new InfoFragment())
                     .commit();
         }
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(STATE_PROFILE)) {
+                mProfile = savedInstanceState.getParcelable(STATE_PROFILE);
+            }
+        } else {
+            mProfile = new Profile();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(STATE_PROFILE, mProfile);
     }
 
     @Override
     public void onInfoPass(String name, String surname, String sex, String dateBirth) {
-        Log.e("Info", name + surname + sex + dateBirth);
-
+        mProfile.setName(name);
+        mProfile.setSurname(surname);
+        mProfile.setSex(sex);
+        mProfile.setDateBirth(dateBirth);
         mFragmentManager.beginTransaction()
                 .replace(R.id.content, new LoginFragment())
                 .commit();
@@ -38,7 +59,18 @@ public class RegistrationActivity extends ToolbarActivity
 
     @Override
     public void onLoginPass(String login, String password, String email) {
-        Log.e("Login", login + password + email);
+        mProfile.setLogin(login);
+        mProfile.setPassword(password);
+        mProfile.setEmail(email);
+
+        Fragment contactFragment = new ContactFragment();
+        Bundle profile = new Bundle();
+        profile.putParcelable(SHARE_PROFILE, mProfile);
+        contactFragment.setArguments(profile);
+
+        mFragmentManager.beginTransaction()
+                .replace(R.id.content, contactFragment)
+                .commit();
 
     }
 }
