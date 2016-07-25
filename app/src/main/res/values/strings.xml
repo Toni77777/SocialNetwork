@@ -13,4 +13,5 @@
     <string name="tab_error_message">Please correct the errors</string>
     <string name="error_field_empty">Field can not be empty</string>
     <string name="error_field_max">Exceeded the maximum field length</string>
+    <string name="error_field_format">Wrong format</string>
 </resources>

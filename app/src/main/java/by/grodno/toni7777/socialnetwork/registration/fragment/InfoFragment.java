@@ -14,19 +14,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.registration.DatePickerFragment;
 import by.grodno.toni7777.socialnetwork.registration.ErrorTextWatcher;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_DATE_PICKER;
 import static by.grodno.toni7777.socialnetwork.util.Util.hasKeySparseIntArray;
+import static by.grodno.toni7777.socialnetwork.util.Util.inNotEmptySparseIntArray;
 import static by.grodno.toni7777.socialnetwork.util.Util.showErrorMessage;
 import static by.grodno.toni7777.socialnetwork.util.Validation.ERROR_NAME;
 import static by.grodno.toni7777.socialnetwork.util.Validation.ERROR_SURNAME;
+import static by.grodno.toni7777.socialnetwork.util.Validation.ERROR_DATE_BIRTH;
 import static by.grodno.toni7777.socialnetwork.util.Validation.validateInformation;
 
 public class InfoFragment extends TabFragment {
@@ -40,9 +42,6 @@ public class InfoFragment extends TabFragment {
     @BindView(R.id.date_birth_layout)
     TextInputLayout mDateBirthLayout;
 
-    @BindView(R.id.date_birth)
-    TextView mDateBirth;
-
     @BindView(R.id.sex)
     Spinner mSex;
 
@@ -51,7 +50,7 @@ public class InfoFragment extends TabFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_fragment_info, container, false);
+        return inflater.inflate(R.layout.fragment_tab_info, container, false);
     }
 
     @Override
@@ -72,6 +71,12 @@ public class InfoFragment extends TabFragment {
                 mSurnameLayout.setError(null);
             }
         });
+
+        if (BuildConfig.DEBUG) {
+            mNameLayout.getEditText().setText("Anton");
+            mSurnameLayout.getEditText().setText("Palaikou");
+            mDateBirthLayout.getEditText().setText("15/4/1995");
+        }
     }
 
     @Override
@@ -80,9 +85,9 @@ public class InfoFragment extends TabFragment {
         String name = mNameLayout.getEditText().getText().toString();
         String surname = mSurnameLayout.getEditText().getText().toString();
         String sex = mSex.getSelectedItem().toString();
-        String dateBirth = mDateBirth.getText().toString();
+        String dateBirth = mDateBirthLayout.getEditText().getText().toString();
         SparseIntArray errors = validateInformation(name, surname, dateBirth);
-        if (errors.size() > 0) {
+        if (inNotEmptySparseIntArray(errors)) {
             showErrors(errors);
         } else {
             mInfoPasser.onInfoPass(name, surname, sex, dateBirth);
@@ -98,6 +103,10 @@ public class InfoFragment extends TabFragment {
         if (hasKeySparseIntArray(errors, ERROR_SURNAME)) {
             int errorType = errors.get(ERROR_SURNAME);
             showErrorMessage(mSurnameLayout, errorType);
+        }
+        if (hasKeySparseIntArray(errors, ERROR_DATE_BIRTH)) {
+            int errorType = errors.get(ERROR_DATE_BIRTH);
+            showErrorMessage(mDateBirthLayout, errorType);
         }
     }
 
@@ -115,7 +124,7 @@ public class InfoFragment extends TabFragment {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_DATE_BIRTH:
-                    mDateBirth.setText(data.getStringExtra(SHARE_DATE_PICKER));
+                    mDateBirthLayout.getEditText().setText(data.getStringExtra(SHARE_DATE_PICKER));
                     break;
             }
         }
