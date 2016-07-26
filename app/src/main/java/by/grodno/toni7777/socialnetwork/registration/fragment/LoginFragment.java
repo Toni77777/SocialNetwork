@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
+import android.text.Editable;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,9 @@ import static by.grodno.toni7777.socialnetwork.util.Util.inNotEmptySparseIntArra
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.registration.ErrorTextWatcher;
 
 public class LoginFragment extends TabFragment {
 
@@ -41,6 +44,18 @@ public class LoginFragment extends TabFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tab_login, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        resetErrorAfterChange(mLoginView, mPasswordView, mConfirmPassView, mMailView);
+        if (BuildConfig.DEBUG) {
+            mLoginView.getEditText().setText("Toni777");
+            mPasswordView.getEditText().setText("password");
+            mConfirmPassView.getEditText().setText("password");
+            mMailView.getEditText().setText("toxa95401@gmail.com");
+        }
     }
 
     @Override

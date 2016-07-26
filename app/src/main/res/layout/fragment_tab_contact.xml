@@ -48,21 +48,10 @@
     </LinearLayout>
 
 
-    <FrameLayout
+    <include
+        layout="@layout/tab_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#ab362abe">
-
-        <Button
-            android:id="@+id/complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="#be2a2a"
-            android:text="Complete"
-            android:textColor="#FFFFFF"/>
-
-    </FrameLayout>
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

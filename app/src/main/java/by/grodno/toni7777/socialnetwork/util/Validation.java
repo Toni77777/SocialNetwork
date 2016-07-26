@@ -26,6 +26,11 @@ public final class Validation {
         return errors;
     }
 
+    public static SparseIntArray validateContact(String phone, String skype, String city) {
+        SparseIntArray errors = new SparseIntArray();
+        return errors;
+    }
+
     private static void validate(String field, int keyError, SparseIntArray errors) {
         if (TextUtils.isEmpty(field.trim())) {
             errors.append(keyError, EMPTY_FIELD);
@@ -66,6 +71,10 @@ public final class Validation {
     public static final int ERROR_PASSWORD = 202;
     public static final int ERROR_CONFIRM_PASS = 203;
     public static final int ERROR_EMAIL = 204;
+
+    public static final int ERROR_PHONE = 301;
+    public static final int ERROR_SKYPE = 302;
+    public static final int ERROR_CITY = 303;
 
     public static final int EMPTY_FIELD = 1;
     public static final int MAX_LENGTH_FIELD = 2;

@@ -2,11 +2,14 @@ package by.grodno.toni7777.socialnetwork.registration.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ViewSwitcher;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.registration.Profile;
@@ -14,6 +17,18 @@ import by.grodno.toni7777.socialnetwork.registration.Profile;
 import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_PROFILE;
 
 public class ContactFragment extends TabFragment {
+
+    @BindView(R.id.phone_layout)
+    TextInputLayout mPhoneView;
+
+    @BindView(R.id.skype_layout)
+    TextInputLayout mSkypeView;
+
+    @BindView(R.id.city_layout)
+    TextInputLayout mCityView;
+
+    @BindView(R.id.navigation_switcher)
+    ViewSwitcher mNavigationView;
 
     private Profile mProfile;
     private static final String STATE_PROFILE = "profile";
@@ -40,15 +55,24 @@ public class ContactFragment extends TabFragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mNavigationView.showNext();
+        resetErrorAfterChange(mPhoneView, mSkypeView, mCityView);
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(STATE_PROFILE, mProfile);
     }
 
-
     @Override
     @OnClick(R.id.complete)
-    public void nextTab() {
+    public void complete() {
+        String phone = mPhoneView.getEditText().getText().toString();
+        String skype = mSkypeView.getEditText().getText().toString();
+        String city = mCityView.getEditText().getText().toString();
 
     }
 
@@ -56,6 +80,4 @@ public class ContactFragment extends TabFragment {
     public void showErrors(SparseIntArray errors) {
 
     }
-
-
 }

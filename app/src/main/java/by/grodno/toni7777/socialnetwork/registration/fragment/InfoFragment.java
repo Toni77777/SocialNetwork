@@ -17,6 +17,7 @@ import android.widget.Spinner;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.registration.DatePickerFragment;
 import by.grodno.toni7777.socialnetwork.registration.ErrorTextWatcher;
@@ -56,26 +57,12 @@ public class InfoFragment extends TabFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mSexView.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, new String[]{"male", "female"}));
-
-        mNameView.getEditText().addTextChangedListener(new ErrorTextWatcher() {
-            @Override
-            public void afterTextChanged(Editable editable) {
-                mNameView.setError(null);
-            }
-        });
-
-        mSurnameView.getEditText().addTextChangedListener(new ErrorTextWatcher() {
-            @Override
-            public void afterTextChanged(Editable editable) {
-                mSurnameView.setError(null);
-            }
-        });
-
-//        if (BuildConfig.DEBUG) {
-//            mNameView.getEditText().setText("Anton");
-//            mSurnameView.getEditText().setText("Palaikou");
-//            mDateBirthView.getEditText().setText("15/4/1995");
-//        }
+        resetErrorAfterChange(mNameView, mSurnameView);
+        if (BuildConfig.DEBUG) {
+            mNameView.getEditText().setText("Anton");
+            mSurnameView.getEditText().setText("Palaikou");
+            mDateBirthView.getEditText().setText("15/4/1995");
+        }
     }
 
     @Override
