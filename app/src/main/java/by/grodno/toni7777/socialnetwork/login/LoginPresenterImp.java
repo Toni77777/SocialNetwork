@@ -31,7 +31,7 @@ public class LoginPresenterImp implements LoginPresenter {
     public void loginRequest(String login, String password) {
         subscription = loginService.loginRequest(BuildConfig.GRANT_TYPE_VALUE,
                 BuildConfig.CLIENT_ID_VALUE, login, password)
-                .subscribeOn(Schedulers.newThread())  // .subscribeOn(Schedulers.from())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         userLogin -> loginView.loginSuccess(userLogin),

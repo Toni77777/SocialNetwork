@@ -24,16 +24,16 @@ import by.grodno.toni7777.socialnetwork.R;
 public class LoginFragment extends TabFragment {
 
     @BindView(R.id.login_layout)
-    TextInputLayout mLoginLayout;
+    TextInputLayout mLoginView;
 
     @BindView(R.id.password_layout)
-    TextInputLayout mPasswordLayout;
+    TextInputLayout mPasswordView;
 
     @BindView(R.id.confirm_password_layout)
-    TextInputLayout mConfirmPassLayout;
+    TextInputLayout mConfirmPassView;
 
     @BindView(R.id.mail_layout)
-    TextInputLayout mMailLayout;
+    TextInputLayout mMailView;
 
     private OnLoginPass mLoginPass;
 
@@ -46,10 +46,10 @@ public class LoginFragment extends TabFragment {
     @Override
     @OnClick(R.id.next)
     public void nextTab() {
-        String login = mLoginLayout.getEditText().getText().toString();
-        String password = mPasswordLayout.getEditText().getText().toString();
-        String confirmPass = mConfirmPassLayout.getEditText().getText().toString();
-        String email = mMailLayout.getEditText().getText().toString();
+        String login = mLoginView.getEditText().getText().toString();
+        String password = mPasswordView.getEditText().getText().toString();
+        String confirmPass = mConfirmPassView.getEditText().getText().toString();
+        String email = mMailView.getEditText().getText().toString();
         SparseIntArray errors = validateLogin(login, password, confirmPass, email);
         if (inNotEmptySparseIntArray(errors)) {
             showErrors(errors);
@@ -62,15 +62,15 @@ public class LoginFragment extends TabFragment {
     public void showErrors(SparseIntArray errors) {
         if (hasKeySparseIntArray(errors, ERROR_LOGIN)) {
             int errorType = errors.get(ERROR_LOGIN);
-            showErrorMessage(mLoginLayout, errorType);
+            showErrorMessage(mLoginView, errorType);
         }
         if (hasKeySparseIntArray(errors, ERROR_PASSWORD)) {
             int errorType = errors.get(ERROR_PASSWORD);
-            showErrorMessage(mPasswordLayout, errorType);
+            showErrorMessage(mPasswordView, errorType);
         }
         if (hasKeySparseIntArray(errors, ERROR_EMAIL)) {
             int errorType = errors.get(ERROR_EMAIL);
-            showErrorMessage(mMailLayout, errorType);
+            showErrorMessage(mMailView, errorType);
         }
     }
 

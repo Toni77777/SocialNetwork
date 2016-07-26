@@ -17,7 +17,6 @@ import android.widget.Spinner;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.registration.DatePickerFragment;
 import by.grodno.toni7777.socialnetwork.registration.ErrorTextWatcher;
@@ -34,16 +33,16 @@ import static by.grodno.toni7777.socialnetwork.util.Validation.validateInformati
 public class InfoFragment extends TabFragment {
 
     @BindView(R.id.name_layout)
-    TextInputLayout mNameLayout;
+    TextInputLayout mNameView;
 
     @BindView(R.id.surname_layout)
-    TextInputLayout mSurnameLayout;
+    TextInputLayout mSurnameView;
 
     @BindView(R.id.date_birth_layout)
-    TextInputLayout mDateBirthLayout;
+    TextInputLayout mDateBirthView;
 
     @BindView(R.id.sex)
-    Spinner mSex;
+    Spinner mSexView;
 
     private OnInfoPass mInfoPasser;
 
@@ -56,36 +55,36 @@ public class InfoFragment extends TabFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mSex.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, new String[]{"male", "female"}));
+        mSexView.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, new String[]{"male", "female"}));
 
-        mNameLayout.getEditText().addTextChangedListener(new ErrorTextWatcher() {
+        mNameView.getEditText().addTextChangedListener(new ErrorTextWatcher() {
             @Override
             public void afterTextChanged(Editable editable) {
-                mNameLayout.setError(null);
+                mNameView.setError(null);
             }
         });
 
-        mSurnameLayout.getEditText().addTextChangedListener(new ErrorTextWatcher() {
+        mSurnameView.getEditText().addTextChangedListener(new ErrorTextWatcher() {
             @Override
             public void afterTextChanged(Editable editable) {
-                mSurnameLayout.setError(null);
+                mSurnameView.setError(null);
             }
         });
 
-        if (BuildConfig.DEBUG) {
-            mNameLayout.getEditText().setText("Anton");
-            mSurnameLayout.getEditText().setText("Palaikou");
-            mDateBirthLayout.getEditText().setText("15/4/1995");
-        }
+//        if (BuildConfig.DEBUG) {
+//            mNameView.getEditText().setText("Anton");
+//            mSurnameView.getEditText().setText("Palaikou");
+//            mDateBirthView.getEditText().setText("15/4/1995");
+//        }
     }
 
     @Override
     @OnClick(R.id.next)
     public void nextTab() {
-        String name = mNameLayout.getEditText().getText().toString();
-        String surname = mSurnameLayout.getEditText().getText().toString();
-        String sex = mSex.getSelectedItem().toString();
-        String dateBirth = mDateBirthLayout.getEditText().getText().toString();
+        String name = mNameView.getEditText().getText().toString();
+        String surname = mSurnameView.getEditText().getText().toString();
+        String sex = mSexView.getSelectedItem().toString();
+        String dateBirth = mDateBirthView.getEditText().getText().toString();
         SparseIntArray errors = validateInformation(name, surname, dateBirth);
         if (inNotEmptySparseIntArray(errors)) {
             showErrors(errors);
@@ -98,15 +97,15 @@ public class InfoFragment extends TabFragment {
     public void showErrors(SparseIntArray errors) {
         if (hasKeySparseIntArray(errors, ERROR_NAME)) {
             int errorType = errors.get(ERROR_NAME);
-            showErrorMessage(mNameLayout, errorType);
+            showErrorMessage(mNameView, errorType);
         }
         if (hasKeySparseIntArray(errors, ERROR_SURNAME)) {
             int errorType = errors.get(ERROR_SURNAME);
-            showErrorMessage(mSurnameLayout, errorType);
+            showErrorMessage(mSurnameView, errorType);
         }
         if (hasKeySparseIntArray(errors, ERROR_DATE_BIRTH)) {
             int errorType = errors.get(ERROR_DATE_BIRTH);
-            showErrorMessage(mDateBirthLayout, errorType);
+            showErrorMessage(mDateBirthView, errorType);
         }
     }
 
@@ -115,7 +114,7 @@ public class InfoFragment extends TabFragment {
         DialogFragment fragment = new DatePickerFragment();
         fragment.setTargetFragment(this, REQUEST_DATE_BIRTH);
         fragment.show(getFragmentManager(), PICKER);
-        mDateBirthLayout.setError(null);
+        mDateBirthView.setError(null);
     }
 
     @Override
@@ -124,7 +123,7 @@ public class InfoFragment extends TabFragment {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_DATE_BIRTH:
-                    mDateBirthLayout.getEditText().setText(data.getStringExtra(SHARE_DATE_PICKER));
+                    mDateBirthView.getEditText().setText(data.getStringExtra(SHARE_DATE_PICKER));
                     break;
             }
         }
