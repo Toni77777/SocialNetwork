@@ -70,4 +70,6 @@ dependencies {
     compile 'com.hannesdorfmann.mosby:mvp:2.0.1'
     compile 'com.hannesdorfmann.mosby:viewstate:2.0.1'
 
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
 }

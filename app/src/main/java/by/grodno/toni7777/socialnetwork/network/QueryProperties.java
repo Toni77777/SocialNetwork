@@ -7,6 +7,11 @@ public final class QueryProperties {
     public static final String USER_NAME = "username";
     public static final String USER_PASSWORD = "password";
 
+    public static final String POSTS_URL = "/posts";
+    public static final String USER_ID = "idUser";
+    public static final String OFFSET = "offset";
+    public static final String LIMIT = "limit";
+
     private QueryProperties() {
     }
 }

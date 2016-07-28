@@ -16,8 +16,8 @@ import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.BaseActivity;
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
+import by.grodno.toni7777.socialnetwork.network.model.UserLoginDTO;
 import by.grodno.toni7777.socialnetwork.registration.RegistrationActivity;
-import by.grodno.toni7777.socialnetwork.test.UserLogin;
 import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
 public class LoginFragment extends BaseFragment implements LoginView {
@@ -73,7 +73,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     @Override
-    public void loginSuccess(UserLogin userLogin) {
+    public void loginSuccess(UserLoginDTO userLogin) {
         Log.e("USER", userLogin.toString());
         ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
         getActivity().finish();
