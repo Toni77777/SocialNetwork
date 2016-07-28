@@ -5,25 +5,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.R;
+
+import static by.grodno.toni7777.socialnetwork.util.ImageLoad.*;
+
+import by.grodno.toni7777.socialnetwork.network.model.OwnerDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 
 public class PostAdapter extends BaseAdapter {
 
-    private Context mContext;
     private List<PostDTO> posts;
     private LayoutInflater mLayoutInflater;
 
     public PostAdapter(Context context, List<PostDTO> posts) {
-        mContext = context;
         this.posts = posts;
         mLayoutInflater = LayoutInflater.from(context);
     }
@@ -51,31 +51,40 @@ public class PostAdapter extends BaseAdapter {
         if (view == null) {
             view = mLayoutInflater.inflate(R.layout.item_post, viewGroup, false);
             holder = new RepoViewHolder();
-            holder.name = (TextView) view.findViewById(R.id.owner);
-            holder.text = (TextView) view.findViewById(R.id.post_text);
-            holder.image = (ImageView) view.findViewById(R.id.post_image);
+            holder.ownerAvatar = (ImageView) view.findViewById(R.id.owner_image);
+            holder.owner = (TextView) view.findViewById(R.id.owner_name);
+            holder.postImage = (ImageView) view.findViewById(R.id.post_image);
+            holder.postText = (TextView) view.findViewById(R.id.post_text);
+            holder.like = (Button) view.findViewById(R.id.like);
+            holder.likeCount = (TextView) view.findViewById(R.id.like_count);
+            holder.dislike = (Button) view.findViewById(R.id.dislike);
+            holder.dislikeCount = (TextView) view.findViewById(R.id.dislike_count);
             view.setTag(holder);
         } else {
             holder = (RepoViewHolder) view.getTag();
-
         }
 
         PostDTO post = posts.get(position);
-        holder.name.setText(post.getOwner().getName() + " " + post.getOwner().getLastname());
-        holder.text.setText(post.getText());
+        OwnerDTO owner = post.getOwner();
 
-        Glide.with(mContext).load(post.getImage())
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.image);
+        loadImage(holder.ownerAvatar, owner.getAvatar());
+        holder.owner.setText(owner.getName() + " " + owner.getLastname());
+        loadImage(holder.postImage, post.getImage());
+        holder.postText.setText(post.getText());
+        holder.likeCount.setText(String.valueOf(post.getLike()));
+        holder.dislikeCount.setText(String.valueOf(post.getDislike()));
         return view;
     }
 
     private static class RepoViewHolder {
-        protected TextView name;
-        protected TextView text;
-        protected ImageView image;
+        protected ImageView ownerAvatar;
+        protected TextView owner;
+        protected ImageView postImage;
+        protected TextView postText;
+        protected Button like;
+        protected TextView likeCount;
+        protected Button dislike;
+        protected TextView dislikeCount;
     }
 
     public void update(List<PostDTO> newPosts) {

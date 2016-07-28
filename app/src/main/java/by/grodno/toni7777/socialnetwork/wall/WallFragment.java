@@ -11,17 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
-import com.hannesdorfmann.mosby.mvp.viewstate.lce.MvpLceViewStateFragment;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.base.BaseViewStateFragment;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.wall.adapter.PostAdapter;
 
-public class WallFragment extends MvpLceViewStateFragment<SwipeRefreshLayout, List<PostDTO>, WallView, WallPresenter>
+public class WallFragment extends BaseViewStateFragment<SwipeRefreshLayout, List<PostDTO>, WallView, WallPresenter>
         implements WallView, SwipeRefreshLayout.OnRefreshListener {
 
     private PostAdapter mPostAdapter;
@@ -64,7 +64,7 @@ public class WallFragment extends MvpLceViewStateFragment<SwipeRefreshLayout, Li
 
     @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return null;
+        return "Error";
     }
 
     @Override
