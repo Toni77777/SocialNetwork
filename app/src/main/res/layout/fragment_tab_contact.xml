@@ -17,7 +17,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Phone"
+                android:hint="@string/registration_phone"
                 android:inputType="phone"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -30,7 +30,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Skype"/>
+                android:hint="@string/registration_skype"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -41,7 +41,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="City"/>
+                android:hint="@string/registration_city"/>
 
         </android.support.design.widget.TextInputLayout>
 

@@ -15,6 +15,8 @@ import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.registration.Profile;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_PROFILE;
+import static by.grodno.toni7777.socialnetwork.util.Util.inNotEmptySparseIntArray;
+import static by.grodno.toni7777.socialnetwork.util.Validation.validateContact;
 
 public class ContactFragment extends TabFragment {
 
@@ -73,7 +75,12 @@ public class ContactFragment extends TabFragment {
         String phone = mPhoneView.getEditText().getText().toString();
         String skype = mSkypeView.getEditText().getText().toString();
         String city = mCityView.getEditText().getText().toString();
-
+        SparseIntArray errors = validateContact(phone, skype, city);
+        if (inNotEmptySparseIntArray(errors)) {
+            showErrors(errors);
+        } else {
+            // request registration
+        }
     }
 
     @Override

@@ -17,7 +17,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Login"/>
+                android:hint="@string/registration_login"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -29,7 +29,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Pass"
+                android:hint="@string/registration_password"
                 android:inputType="textPassword"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -42,7 +42,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Conf pass"
+                android:hint="@string/registration_confirm_password"
                 android:inputType="textPassword"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -55,7 +55,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"/>
+                android:hint="@string/registration_email"/>
 
         </android.support.design.widget.TextInputLayout>
 
