@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import by.grodno.toni7777.socialnetwork.R;
 
 import static by.grodno.toni7777.socialnetwork.util.ImageLoad.*;
@@ -46,22 +48,13 @@ public class PostAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View contentView, ViewGroup viewGroup) {
         View view = contentView;
-        RepoViewHolder holder = null;
-
+        PostViewHolder holder = null;
         if (view == null) {
             view = mLayoutInflater.inflate(R.layout.item_post, viewGroup, false);
-            holder = new RepoViewHolder();
-            holder.ownerAvatar = (ImageView) view.findViewById(R.id.owner_image);
-            holder.owner = (TextView) view.findViewById(R.id.owner_name);
-            holder.postImage = (ImageView) view.findViewById(R.id.post_image);
-            holder.postText = (TextView) view.findViewById(R.id.post_text);
-            holder.like = (Button) view.findViewById(R.id.like);
-            holder.likeCount = (TextView) view.findViewById(R.id.like_count);
-            holder.dislike = (Button) view.findViewById(R.id.dislike);
-            holder.dislikeCount = (TextView) view.findViewById(R.id.dislike_count);
+            holder = new PostViewHolder(view);
             view.setTag(holder);
         } else {
-            holder = (RepoViewHolder) view.getTag();
+            holder = (PostViewHolder) view.getTag();
         }
 
         PostDTO post = posts.get(position);
@@ -76,15 +69,35 @@ public class PostAdapter extends BaseAdapter {
         return view;
     }
 
-    private static class RepoViewHolder {
-        protected ImageView ownerAvatar;
-        protected TextView owner;
-        protected ImageView postImage;
-        protected TextView postText;
-        protected Button like;
-        protected TextView likeCount;
-        protected Button dislike;
-        protected TextView dislikeCount;
+    static class PostViewHolder {
+
+        @BindView(R.id.owner_image)
+        ImageView ownerAvatar;
+
+        @BindView(R.id.owner_name)
+        TextView owner;
+
+        @BindView(R.id.post_image)
+        ImageView postImage;
+
+        @BindView(R.id.post_text)
+        TextView postText;
+
+        @BindView(R.id.like)
+        Button like;
+
+        @BindView(R.id.like_count)
+        TextView likeCount;
+
+        @BindView(R.id.dislike)
+        Button dislike;
+
+        @BindView(R.id.dislike_count)
+        TextView dislikeCount;
+
+        public PostViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 
     public void update(List<PostDTO> newPosts) {
