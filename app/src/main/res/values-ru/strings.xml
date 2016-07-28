@@ -6,4 +6,17 @@
     <string name="authorization_log_in">Войти</string>
     <string name="authorization_sing_up">Регистрация</string>
     <string name="authorization_forgot_password">Востановить пароль</string>
+
+    <string name="register_navigation_next">Далее</string>
+    <string name="register_navigation_create_account">Зарегистрироватсья</string>
+    <string name="registration_name">Имя</string>
+    <string name="registration_surname">Фамилия</string>
+    <string name="registration_login">Login</string>
+    <string name="registration_password">Пароль</string>
+    <string name="registration_confirm_password">Подтвердить пароль</string>
+    <string name="registration_email">Электронная почта</string>
+    <string name="registration_phone">Телефон</string>
+    <string name="registration_skype">Skype</string>
+    <string name="registration_city">Город</string>
+
 </resources>
