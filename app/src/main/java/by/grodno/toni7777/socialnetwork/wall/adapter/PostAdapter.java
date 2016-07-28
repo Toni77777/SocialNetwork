@@ -1,10 +1,9 @@
 package by.grodno.toni7777.socialnetwork.wall.adapter;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,57 +19,38 @@ import static by.grodno.toni7777.socialnetwork.util.ImageLoad.*;
 import by.grodno.toni7777.socialnetwork.network.model.OwnerDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 
-public class PostAdapter extends BaseAdapter {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
-    private List<PostDTO> posts;
-    private LayoutInflater mLayoutInflater;
+    private List<PostDTO> mPosts;
 
-    public PostAdapter(Context context, List<PostDTO> posts) {
-        this.posts = posts;
-        mLayoutInflater = LayoutInflater.from(context);
+    public PostAdapter(List<PostDTO> posts) {
+        mPosts = posts;
     }
 
     @Override
-    public int getCount() {
-        return posts.size();
+    public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
+        return new PostViewHolder(view);
     }
 
     @Override
-    public Object getItem(int position) {
-        return posts.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View contentView, ViewGroup viewGroup) {
-        View view = contentView;
-        PostViewHolder holder = null;
-        if (view == null) {
-            view = mLayoutInflater.inflate(R.layout.item_post, viewGroup, false);
-            holder = new PostViewHolder(view);
-            view.setTag(holder);
-        } else {
-            holder = (PostViewHolder) view.getTag();
-        }
-
-        PostDTO post = posts.get(position);
+    public void onBindViewHolder(PostViewHolder holder, int position) {
+        PostDTO post = mPosts.get(position);
         OwnerDTO owner = post.getOwner();
-
         loadImage(holder.ownerAvatar, owner.getAvatar());
         holder.owner.setText(owner.getName() + " " + owner.getLastname());
         loadImage(holder.postImage, post.getImage());
         holder.postText.setText(post.getText());
         holder.likeCount.setText(String.valueOf(post.getLike()));
         holder.dislikeCount.setText(String.valueOf(post.getDislike()));
-        return view;
     }
 
-    static class PostViewHolder {
+    @Override
+    public int getItemCount() {
+        return mPosts.size();
+    }
 
+    static class PostViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.owner_image)
         ImageView ownerAvatar;
 
@@ -96,17 +76,19 @@ public class PostAdapter extends BaseAdapter {
         TextView dislikeCount;
 
         public PostViewHolder(View view) {
+            super(view);
             ButterKnife.bind(this, view);
         }
+
     }
 
     public void update(List<PostDTO> newPosts) {
-        posts.clear();
-        posts.addAll(newPosts);
+        mPosts.clear();
+        mPosts.addAll(newPosts);
         notifyDataSetChanged();
     }
 
     public List<PostDTO> getPosts() {
-        return posts;
+        return mPosts;
     }
 }
