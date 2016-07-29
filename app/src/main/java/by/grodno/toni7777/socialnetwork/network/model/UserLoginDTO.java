@@ -1,6 +1,6 @@
-package by.grodno.toni7777.socialnetwork.test;
+package by.grodno.toni7777.socialnetwork.network.model;
 
-public class UserLogin {
+public class UserLoginDTO {
 
     private String access_token;
     private String token_type;
@@ -8,10 +8,10 @@ public class UserLogin {
     private int expires_in;
     private String scope;
 
-    public UserLogin() {
+    public UserLoginDTO() {
     }
 
-    public UserLogin(String access_token, String token_type, String refresh_token, int expires_in, String scope) {
+    public UserLoginDTO(String access_token, String token_type, String refresh_token, int expires_in, String scope) {
         this.access_token = access_token;
         this.token_type = token_type;
         this.refresh_token = refresh_token;
@@ -64,7 +64,7 @@ public class UserLogin {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserLogin userLogin = (UserLogin) o;
+        UserLoginDTO userLogin = (UserLoginDTO) o;
 
         if (expires_in != userLogin.expires_in) return false;
         if (access_token != null ? !access_token.equals(userLogin.access_token) : userLogin.access_token != null)
@@ -89,7 +89,7 @@ public class UserLogin {
 
     @Override
     public String toString() {
-        return "UserLogin{" +
+        return "UserLoginDTO{" +
                 "access_token='" + access_token + '\'' +
                 ", token_type='" + token_type + '\'' +
                 ", refresh_token='" + refresh_token + '\'' +

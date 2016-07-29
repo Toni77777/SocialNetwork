@@ -12,5 +12,10 @@ public class WallActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toolbar);
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.content, new WallFragment())
+                    .commit();
+        }
     }
 }
