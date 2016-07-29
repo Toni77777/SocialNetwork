@@ -24,7 +24,7 @@ public class WallModel extends BaseRxModel {
     protected void loadRxData(Observable observable) {
         rxUnSubscribe();
         subscription = observable
-                .delay(5, TimeUnit.SECONDS)
+//                .delay(3, TimeUnit.SECONDS) // Delay for emulated hard task load
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer() {

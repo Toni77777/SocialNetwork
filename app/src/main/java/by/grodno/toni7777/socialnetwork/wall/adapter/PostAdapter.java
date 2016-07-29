@@ -79,11 +79,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             super(view);
             ButterKnife.bind(this, view);
         }
-
     }
 
     public void update(List<PostDTO> newPosts) {
-        mPosts.clear();
         mPosts.addAll(newPosts);
         notifyDataSetChanged();
     }

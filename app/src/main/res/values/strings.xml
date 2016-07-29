@@ -27,4 +27,6 @@
     <string name="registration_skype">Skype</string>
     <string name="registration_city">City</string>
 
+    <string name="progress_wait">Please wait, loading more</string>
+
 </resources>

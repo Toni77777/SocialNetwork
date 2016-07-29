@@ -10,9 +10,9 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.*;
 public interface WallService {
 
     @GET(POSTS_URL)
-    Observable<WallDTO> getPost(@Query(USER_ID) String userId,
-                                @Query(OFFSET) String offset,
-                                @Query(LIMIT) String limit);
+    Observable<WallDTO> getPost(@Query(USER_ID) int userId,
+                                @Query(OFFSET) int offset,
+                                @Query(LIMIT) int limit);
 
 //    https://sjc2016vs3.fwd.wf/posts?idUser=1&offset=0&limit=10
 

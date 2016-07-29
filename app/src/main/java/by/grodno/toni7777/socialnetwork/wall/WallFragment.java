@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
@@ -21,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.BaseViewStateFragment;
+import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.wall.adapter.PostAdapter;
 
@@ -29,7 +30,12 @@ public class WallFragment extends BaseViewStateFragment<SwipeRefreshLayout, List
 
     @BindView(R.id.posts_recycler)
     RecyclerView mPostsRecycler;
+
+    @BindView(R.id.progress_pagination_view)
+    RelativeLayout mProgressPaginView;
+
     private PostAdapter mPostAdapter;
+    private static final int START_LOAD = 0;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -44,11 +50,30 @@ public class WallFragment extends BaseViewStateFragment<SwipeRefreshLayout, List
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         contentView.setOnRefreshListener(this);
         mPostAdapter = new PostAdapter(new ArrayList<>());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mPostsRecycler.setAdapter(mPostAdapter);
-        mPostsRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mPostsRecycler.setLayoutManager(linearLayoutManager);
+        mPostsRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, presenter));
+
+//        mPostsRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                if (dy > 0) {
+//                    int visibleItems = linearLayoutManager.getChildCount();
+//                    int totalItems = linearLayoutManager.getItemCount();
+//                    int pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
+//
+//                    if ((visibleItems + pastVisibleItems) >= totalItems) {
+//                        Log.e("Need", "Need load more data");
+//                        mRelativeLayout.setVisibility(View.VISIBLE);
+//                        presenter.loadPagination(true, totalItems);
+//                    }
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -69,7 +94,7 @@ public class WallFragment extends BaseViewStateFragment<SwipeRefreshLayout, List
 
     @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return "Error";
+        return "Error"; // need check error for show
     }
 
     @Override
@@ -85,18 +110,20 @@ public class WallFragment extends BaseViewStateFragment<SwipeRefreshLayout, List
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadRepos(pullToRefresh);
+        presenter.loadDataWithOffset(pullToRefresh, START_LOAD);
     }
 
     @Override
     public void showContent() {
         super.showContent();
         contentView.setRefreshing(false);
+        mProgressPaginView.setVisibility(View.GONE);
     }
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
         super.showError(e, pullToRefresh);
         contentView.setRefreshing(false);
+        mProgressPaginView.setVisibility(View.GONE);
     }
 }
