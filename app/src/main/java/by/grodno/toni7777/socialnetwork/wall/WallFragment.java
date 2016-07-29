@@ -56,24 +56,6 @@ public class WallFragment extends BaseViewStateFragment<SwipeRefreshLayout, List
         mPostsRecycler.setAdapter(mPostAdapter);
         mPostsRecycler.setLayoutManager(linearLayoutManager);
         mPostsRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, presenter));
-
-//        mPostsRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                if (dy > 0) {
-//                    int visibleItems = linearLayoutManager.getChildCount();
-//                    int totalItems = linearLayoutManager.getItemCount();
-//                    int pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
-//
-//                    if ((visibleItems + pastVisibleItems) >= totalItems) {
-//                        Log.e("Need", "Need load more data");
-//                        mRelativeLayout.setVisibility(View.VISIBLE);
-//                        presenter.loadPagination(true, totalItems);
-//                    }
-//                }
-//            }
-//        });
     }
 
     @Override
