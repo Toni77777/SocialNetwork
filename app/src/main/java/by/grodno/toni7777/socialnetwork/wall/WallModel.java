@@ -7,6 +7,7 @@ import by.grodno.toni7777.socialnetwork.mvp.RxModelListener;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 import rx.Observable;
 import rx.Observer;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -27,7 +28,7 @@ public class WallModel extends BaseRxModel {
 //                .delay(3, TimeUnit.SECONDS) // Delay for emulated hard task load
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer() {
+                .subscribe(new Subscriber() {
                     @Override
                     public void onCompleted() {
                         rxUnSubscribe();
@@ -42,8 +43,7 @@ public class WallModel extends BaseRxModel {
 
                     @Override
                     public void onNext(Object o) {
-                        WallDTO wall = (WallDTO) o;
-                        listener.loadRxNext(wall.getPosts());
+                        listener.loadRxNext(((WallDTO) o).getPosts());
                     }
                 });
     }

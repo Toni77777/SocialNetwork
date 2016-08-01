@@ -1,6 +1,6 @@
 package by.grodno.toni7777.socialnetwork.test;
 
-import by.grodno.toni7777.socialnetwork.network.WallService;
+import by.grodno.toni7777.socialnetwork.network.NetService;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkService {
 
-    public static WallService netWall() {
+    public static NetService netWall() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://sjc2016vs3.fwd.wf")
@@ -17,6 +17,6 @@ public class NetworkService {
                 .client(new OkHttpClient.Builder().build())
                 .build();
 
-        return retrofit.create(WallService.class);
+        return retrofit.create(NetService.class);
     }
 }

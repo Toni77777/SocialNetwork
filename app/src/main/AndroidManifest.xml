@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".wall.WallActivity"
-            android:label="Wall">
+            android:label="@string/activity_label_wall">
         </activity>
         <activity
             android:name=".registration.RegistrationActivity"

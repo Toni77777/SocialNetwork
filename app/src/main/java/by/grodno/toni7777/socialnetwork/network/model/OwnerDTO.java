@@ -6,15 +6,15 @@ public class OwnerDTO {
 
     private String name;
     @SerializedName("lastName")
-    private String lastname;
+    private String surname;
     private String avatar;
 
     public OwnerDTO() {
     }
 
-    public OwnerDTO(String name, String lastname, String avatar) {
+    public OwnerDTO(String name, String surname, String avatar) {
         this.name = name;
-        this.lastname = lastname;
+        this.surname = surname;
         this.avatar = avatar;
     }
 
@@ -26,12 +26,12 @@ public class OwnerDTO {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getAvatar() {
@@ -50,7 +50,7 @@ public class OwnerDTO {
         OwnerDTO ownerDTO = (OwnerDTO) o;
 
         if (name != null ? !name.equals(ownerDTO.name) : ownerDTO.name != null) return false;
-        if (lastname != null ? !lastname.equals(ownerDTO.lastname) : ownerDTO.lastname != null)
+        if (surname != null ? !surname.equals(ownerDTO.surname) : ownerDTO.surname != null)
             return false;
         return avatar != null ? avatar.equals(ownerDTO.avatar) : ownerDTO.avatar == null;
 
@@ -59,7 +59,7 @@ public class OwnerDTO {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (avatar != null ? avatar.hashCode() : 0);
         return result;
     }
@@ -68,7 +68,7 @@ public class OwnerDTO {
     public String toString() {
         return "OwnerDTO{" +
                 "name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", surname='" + surname + '\'' +
                 ", avatar='" + avatar + '\'' +
                 '}';
     }

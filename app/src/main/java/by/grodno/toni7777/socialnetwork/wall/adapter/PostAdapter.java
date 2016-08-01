@@ -36,18 +36,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position) {
         PostDTO post = mPosts.get(position);
-        OwnerDTO owner = post.getOwner();
-        loadImage(holder.ownerAvatar, owner.getAvatar());
-        holder.owner.setText(owner.getName() + " " + owner.getLastname());
-        loadImage(holder.postImage, post.getImage());
-        holder.postText.setText(post.getText());
-        holder.likeCount.setText(String.valueOf(post.getLike()));
-        holder.dislikeCount.setText(String.valueOf(post.getDislike()));
+        holder.bind(post);
     }
 
     @Override
     public int getItemCount() {
         return mPosts.size();
+    }
+
+    public void update(List<PostDTO> newPosts) {
+        mPosts.addAll(newPosts);
+        notifyDataSetChanged();
+    }
+
+    public List<PostDTO> getPosts() {
+        return mPosts;
     }
 
     static class PostViewHolder extends RecyclerView.ViewHolder {
@@ -79,14 +82,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             super(view);
             ButterKnife.bind(this, view);
         }
-    }
 
-    public void update(List<PostDTO> newPosts) {
-        mPosts.addAll(newPosts);
-        notifyDataSetChanged();
-    }
-
-    public List<PostDTO> getPosts() {
-        return mPosts;
+        void bind(PostDTO post) {
+            OwnerDTO ownerDTO = post.getOwner();
+            loadImage(ownerAvatar, ownerDTO.getAvatar());
+            owner.setText(ownerDTO.getName() + " " + ownerDTO.getSurname());
+            loadImage(postImage, post.getImage());
+            postText.setText(post.getText());
+            likeCount.setText(String.valueOf(post.getLike()));
+            dislikeCount.setText(String.valueOf(post.getDislike()));
+        }
     }
 }
