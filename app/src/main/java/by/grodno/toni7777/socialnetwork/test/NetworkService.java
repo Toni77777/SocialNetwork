@@ -11,7 +11,7 @@ public class NetworkService {
     public static NetService netWall() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://sjc2016vs3.fwd.wf")
+                .baseUrl("https://sjc2016vs4.fwd.wf")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(new OkHttpClient.Builder().build())

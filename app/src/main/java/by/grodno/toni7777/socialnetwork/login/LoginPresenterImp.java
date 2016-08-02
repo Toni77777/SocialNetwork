@@ -7,6 +7,7 @@ import by.grodno.toni7777.socialnetwork.di.ApplicationModule;
 import by.grodno.toni7777.socialnetwork.di.DaggerApplicationComponent;
 import by.grodno.toni7777.socialnetwork.network.LoginService;
 
+import by.grodno.toni7777.socialnetwork.network.NetService;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

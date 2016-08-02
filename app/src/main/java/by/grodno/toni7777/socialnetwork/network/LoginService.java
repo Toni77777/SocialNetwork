@@ -11,11 +11,11 @@ import rx.Observable;
 
 public interface LoginService {
 
-//    @GET(BuildConfig.LOGIN_URL)
-//    Observable<UserLoginDTO> loginRequest(@Query(GRAND_TYPE) String grandType,
-//                                          @Query(CLIENT_ID) String clientId,
-//                                          @Query(USER_NAME) String username,
-//                                          @Query(USER_PASSWORD) String password);
+    @GET(BuildConfig.LOGIN_URL)
+    Observable<UserLoginDTO> loginRequest(@Query(GRAND_TYPE) String grandType,
+                                          @Query(CLIENT_ID) String clientId,
+                                          @Query(USER_NAME) String username,
+                                          @Query(USER_PASSWORD) String password);
 
 
 }

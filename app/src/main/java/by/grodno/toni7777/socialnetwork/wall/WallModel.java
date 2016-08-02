@@ -1,23 +1,21 @@
 package by.grodno.toni7777.socialnetwork.wall;
 
-import java.util.concurrent.TimeUnit;
-
-import by.grodno.toni7777.socialnetwork.mvp.BaseRxModel;
-import by.grodno.toni7777.socialnetwork.mvp.RxModelListener;
+import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
+import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
+
+import static by.grodno.toni7777.socialnetwork.util.RxUtil.*;
+
 import rx.Observable;
-import rx.Observer;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
-public class WallModel extends BaseRxModel {
+public class WallModel extends BaseModel {
 
-    private RxModelListener listener;
+    private ModelListener listener;
     private Subscription subscription;
 
-    public WallModel(RxModelListener listener) {
+    public WallModel(ModelListener listener) {
         this.listener = listener;
     }
 
@@ -26,8 +24,7 @@ public class WallModel extends BaseRxModel {
         rxUnSubscribe();
         subscription = observable
 //                .delay(3, TimeUnit.SECONDS) // Delay for emulated hard task load
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(applySchedulers())
                 .subscribe(new Subscriber() {
                     @Override
                     public void onCompleted() {

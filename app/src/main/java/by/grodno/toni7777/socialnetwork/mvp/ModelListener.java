@@ -1,6 +1,6 @@
 package by.grodno.toni7777.socialnetwork.mvp;
 
-public interface RxModelListener<M> {
+public interface ModelListener<M> {
 
     void loadRxCompleted();
 
