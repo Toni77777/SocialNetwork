@@ -25,7 +25,10 @@
         </activity>
         <activity
             android:name=".registration.RegistrationActivity"
-            android:label="Registration">
+            android:label="@string/activity_label_registration">
+        </activity>
+        <activity android:name=".friends.FriendsActivity"
+                  android:label="@string/activity_label_friends">
         </activity>
     </application>
 

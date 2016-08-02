@@ -1,6 +1,7 @@
 package by.grodno.toni7777.socialnetwork.network;
 
 import by.grodno.toni7777.socialnetwork.BuildConfig;
+import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.UserLoginDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 import retrofit2.http.GET;
@@ -11,7 +12,6 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.CLIENT_ID
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.GRAND_TYPE;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.LIMIT;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.OFFSET;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.POSTS_URL;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_ID;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_NAME;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_PASSWORD;
@@ -24,10 +24,14 @@ public interface NetService {
                                           @Query(USER_NAME) String username,
                                           @Query(USER_PASSWORD) String password);
 
-    @GET(POSTS_URL)
+    @GET(BuildConfig.POSTS_URL)
     Observable<WallDTO> getPost(@Query(USER_ID) int userId,
                                 @Query(OFFSET) int offset,
                                 @Query(LIMIT) int limit);
 
-//    https://sjc2016vs3.fwd.wf/posts?idUser=1&offset=0&limit=10
+
+//    @GET(BuildConfig.FRIENDS_URL) // need for request get friends list
+//    Observable<FriendsDTO> getFriends();
+
+
 }

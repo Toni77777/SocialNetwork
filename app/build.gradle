@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField "String", "FRIENDS_URL", "\"/friends\""
         buildConfigField "String", "POSTS_URL", "\"/posts\""
         buildConfigField "String", "LOGIN_URL", "\"/oauth/token\""
         buildConfigField "String", "GRANT_TYPE", "\"grant_type\""
@@ -42,7 +43,6 @@ android {
             versionName "1.0-lollipop"
             minSdkVersion 21
         }
-
     }
 
     compileOptions {
@@ -74,5 +74,6 @@ dependencies {
     compile 'com.hannesdorfmann.mosby:viewstate:2.0.1'
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
+//    compile 'com.kirich1409:rxloader:0.2.0'
 
 }

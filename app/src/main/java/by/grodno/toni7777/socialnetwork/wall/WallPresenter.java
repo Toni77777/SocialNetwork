@@ -26,18 +26,18 @@ public class WallPresenter extends MvpBasePresenter<WallView>
         }
         mPullRefresh = forceRefresh;
         Observable<WallDTO> observable = NetworkService.netWall().getPost(1, offset, LIMIT); // fake userId = 1
-        model.loadRxData(observable);
+        model.loadData(observable);
     }
 
     @Override
-    public void loadRxCompleted() {
+    public void loadCompleted() {
         if (isViewAttached()) {
             getView().showContent();
         }
     }
 
     @Override
-    public void loadRxNext(List<PostDTO> post) {
+    public void loadNext(List<PostDTO> post) {
         if (isViewAttached()) {
             getView().setData(post);
         }
@@ -45,7 +45,7 @@ public class WallPresenter extends MvpBasePresenter<WallView>
 
 
     @Override
-    public void loadRxError(Throwable e) {
+    public void loadError(Throwable e) {
         if (isViewAttached()) {
             getView().showError(e, mPullRefresh);
         }

@@ -4,7 +4,7 @@ import rx.Observable;
 
 public abstract class BaseModel<M> {
 
-    protected abstract void loadRxData(Observable<M> observable);
+    protected abstract void loadData(Observable<M> observable);
 
-    protected abstract void rxUnSubscribe();
+    protected abstract void unsubscribe();
 }

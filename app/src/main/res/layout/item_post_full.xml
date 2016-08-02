@@ -9,7 +9,8 @@
     android:layout_gravity="center"
     card_view:cardCornerRadius="10dp"
     card_view:cardElevation="8dp"
-    card_view:cardMaxElevation="8dp" card_view:cardUseCompatPadding="true">
+    card_view:cardMaxElevation="8dp"
+    card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,9 +24,9 @@
             android:id="@+id/owner_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@color/colorAccent"
         />
 
@@ -34,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@id/owner_image"
+            android:layout_toEndOf="@id/owner_image"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@android:color/black"
@@ -74,9 +75,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/post_text"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:layout_toRightOf="@id/like"
+            android:layout_toEndOf="@id/like"
             tools:text="14"/>
 
         <Button
@@ -84,9 +85,9 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_below="@+id/post_text"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:layout_toRightOf="@id/like_count"
+            android:layout_toEndOf="@id/like_count"
             android:background="@color/colorPrimaryDark"/>
 
         <TextView
@@ -94,9 +95,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/post_text"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:layout_toRightOf="@id/dislike"
+            android:layout_toEndOf="@id/dislike"
             tools:text="1"/>
 
     </RelativeLayout>

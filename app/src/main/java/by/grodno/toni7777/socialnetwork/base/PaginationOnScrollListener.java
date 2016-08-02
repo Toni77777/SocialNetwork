@@ -10,10 +10,10 @@ public class PaginationOnScrollListener extends RecyclerView.OnScrollListener {
     private LinearLayoutManager mLinearLayoutManager;
     private View mProgressView;
 
-    public PaginationOnScrollListener(LinearLayoutManager linearLayoutManager,
+    public PaginationOnScrollListener(LinearLayoutManager layoutManager,
                                       View progressView, LoadPagination listener) {
         mProgressView = progressView;
-        mLinearLayoutManager = linearLayoutManager;
+        mLinearLayoutManager = layoutManager;
         mListener = listener;
     }
 

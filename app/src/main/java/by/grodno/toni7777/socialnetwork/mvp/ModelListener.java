@@ -2,10 +2,10 @@ package by.grodno.toni7777.socialnetwork.mvp;
 
 public interface ModelListener<M> {
 
-    void loadRxCompleted();
+    void loadCompleted();
 
-    void loadRxNext(M data);
+    void loadNext(M data);
 
-    void loadRxError(Throwable e);
+    void loadError(Throwable e);
 
 }

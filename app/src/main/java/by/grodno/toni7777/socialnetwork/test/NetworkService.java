@@ -11,7 +11,19 @@ public class NetworkService {
     public static NetService netWall() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://sjc2016vs4.fwd.wf")
+                .baseUrl("http://private-5b721-wallposts.apiary-mock.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(new OkHttpClient.Builder().build())
+                .build();
+
+        return retrofit.create(NetService.class);
+    }
+
+    public static NetService netFriends() {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://private-5821d-friends9.apiary-mock.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(new OkHttpClient.Builder().build())

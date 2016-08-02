@@ -1,52 +1,59 @@
 package by.grodno.toni7777.socialnetwork.wall;
 
+import java.util.List;
+
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
+import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 
-import static by.grodno.toni7777.socialnetwork.util.RxUtil.*;
-
+import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 
-public class WallModel extends BaseModel {
+public class WallModel extends BaseModel<WallDTO> {
 
-    private ModelListener listener;
+    private ModelListener<List<PostDTO>> listener;
     private Subscription subscription;
 
-    public WallModel(ModelListener listener) {
+    public WallModel(ModelListener<List<PostDTO>> listener) {
         this.listener = listener;
     }
 
     @Override
-    protected void loadRxData(Observable observable) {
-        rxUnSubscribe();
+    protected void loadData(Observable<WallDTO> observable) {
+        unsubscribe();
         subscription = observable
-//                .delay(3, TimeUnit.SECONDS) // Delay for emulated hard task load
-                .compose(applySchedulers())
-                .subscribe(new Subscriber() {
+                .doOnNext(this::saveInCache)
+                .compose(RxUtil.<WallDTO>applySchedulers())
+                .subscribe(new Subscriber<WallDTO>() {
                     @Override
                     public void onCompleted() {
-                        rxUnSubscribe();
-                        listener.loadRxCompleted();
+                        unsubscribe();
+                        listener.loadCompleted();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        rxUnSubscribe();
-                        listener.loadRxError(e);
+                        unsubscribe();
+                        listener.loadError(e);
                     }
 
                     @Override
-                    public void onNext(Object o) {
-                        listener.loadRxNext(((WallDTO) o).getPosts());
+                    public void onNext(WallDTO o) {
+                        listener.loadNext(o.getPosts());
                     }
                 });
     }
 
+    private void saveInCache(WallDTO wallDTO) {
+        // TODO Put in cache
+    }
+
+
     @Override
-    protected void rxUnSubscribe() {
+    protected void unsubscribe() {
         if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }

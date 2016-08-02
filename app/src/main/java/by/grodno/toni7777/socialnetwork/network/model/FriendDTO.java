@@ -1,22 +1,13 @@
 package by.grodno.toni7777.socialnetwork.network.model;
 
-import com.google.gson.annotations.SerializedName;
-
-public class OwnerDTO {
+public class FriendDTO {
 
     private String name;
-    @SerializedName("lastName")
     private String surname;
+    private long id;
     private String avatar;
-    private String fullName;
 
-    public OwnerDTO() {
-    }
-
-    public OwnerDTO(String name, String surname, String avatar) {
-        this.name = name;
-        this.surname = surname;
-        this.avatar = avatar;
+    public FriendDTO() {
     }
 
     public String getName() {
@@ -35,6 +26,14 @@ public class OwnerDTO {
         this.surname = surname;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getAvatar() {
         return avatar;
     }
@@ -43,24 +42,18 @@ public class OwnerDTO {
         this.avatar = avatar;
     }
 
-    public String getFullName(){
-        if (fullName == null) {
-            fullName = name + " " + surname;
-        }
-        return fullName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OwnerDTO ownerDTO = (OwnerDTO) o;
+        FriendDTO friendDTO = (FriendDTO) o;
 
-        if (name != null ? !name.equals(ownerDTO.name) : ownerDTO.name != null) return false;
-        if (surname != null ? !surname.equals(ownerDTO.surname) : ownerDTO.surname != null)
+        if (id != friendDTO.id) return false;
+        if (name != null ? !name.equals(friendDTO.name) : friendDTO.name != null) return false;
+        if (surname != null ? !surname.equals(friendDTO.surname) : friendDTO.surname != null)
             return false;
-        return avatar != null ? avatar.equals(ownerDTO.avatar) : ownerDTO.avatar == null;
+        return avatar != null ? avatar.equals(friendDTO.avatar) : friendDTO.avatar == null;
 
     }
 
@@ -68,15 +61,17 @@ public class OwnerDTO {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (int) (id ^ (id >>> 32));
         result = 31 * result + (avatar != null ? avatar.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "OwnerDTO{" +
+        return "FriendDTO{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", id=" + id +
                 ", avatar='" + avatar + '\'' +
                 '}';
     }

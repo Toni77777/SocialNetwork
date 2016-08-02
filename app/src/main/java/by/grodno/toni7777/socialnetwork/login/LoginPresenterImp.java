@@ -40,7 +40,7 @@ public class LoginPresenterImp implements LoginPresenter {
     }
 
     @Override
-    public void rxUnSubscribe() {
+    public void unsubscribe() {
         if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
