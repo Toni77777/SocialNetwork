@@ -27,7 +27,7 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "BASE_URL", "\"http://private-bc396-authorisation.apiary-mock.com\""
+            buildConfigField "String", "BASE_URL", "\"https://sjc2016vs4.fwd.wf/\""
         }
 
         release {
@@ -74,6 +74,5 @@ dependencies {
     compile 'com.hannesdorfmann.mosby:viewstate:2.0.1'
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
-//    compile 'com.kirich1409:rxloader:0.2.0'
 
 }
