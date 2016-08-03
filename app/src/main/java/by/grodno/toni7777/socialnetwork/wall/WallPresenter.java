@@ -5,19 +5,29 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
+import by.grodno.toni7777.socialnetwork.network.NetService;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
-import by.grodno.toni7777.socialnetwork.test.NetworkService;
+
+import static by.grodno.toni7777.socialnetwork.util.Constants.LIMIT;
+
 import rx.Observable;
 
 public class WallPresenter extends MvpBasePresenter<WallView>
         implements ModelListener<List<PostDTO>>, MvpPresenter<WallView>, LoadPagination {
 
-    private WallModel model = new WallModel(this);
+    private WallModel mModel = new WallModel(this);
     private boolean mPullRefresh;
-    private static final int LIMIT = 4;
+    private NetService mNetService;
+
+    @Inject
+    public WallPresenter(NetService netService) {
+        mNetService = netService;
+    }
 
     @Override
     public void loadDataWithOffset(boolean forceRefresh, int offset) {
@@ -25,8 +35,8 @@ public class WallPresenter extends MvpBasePresenter<WallView>
             getView().showLoading(forceRefresh);
         }
         mPullRefresh = forceRefresh;
-        Observable<WallDTO> observable = NetworkService.netWall().getPost(1, offset, LIMIT); // fake userId = 1
-        model.loadData(observable);
+        Observable<WallDTO> observable = mNetService.getPost(1, offset, LIMIT); // fake userID = 1
+        mModel.loadData(observable);
     }
 
     @Override
@@ -42,7 +52,6 @@ public class WallPresenter extends MvpBasePresenter<WallView>
             getView().setData(post);
         }
     }
-
 
     @Override
     public void loadError(Throwable e) {

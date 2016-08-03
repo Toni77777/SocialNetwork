@@ -36,9 +36,9 @@ public class LoginFragment extends BaseFragment implements LoginView {
         super.onCreate(savedInstanceState);
         mPresenter = new LoginPresenterImp(this);
 
-//        if (isLoggedIn()) {
-//            ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
-//        }
+        if (isLoggedIn()) {
+            ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
+        }
     }
 
     @Nullable

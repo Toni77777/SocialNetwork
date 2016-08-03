@@ -1,6 +1,7 @@
 package by.grodno.toni7777.socialnetwork.wall;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
@@ -48,7 +49,7 @@ public class WallModel extends BaseModel<WallDTO> {
     }
 
     private void saveInCache(WallDTO wallDTO) {
-        // TODO Put in cache
+        // TODO Put in cache to do next step
     }
 
 

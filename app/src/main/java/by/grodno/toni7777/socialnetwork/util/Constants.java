@@ -9,6 +9,10 @@ public final class Constants {
 
     public static final String DATE_DEFAULT = "dd/mm/yyyy";
 
+    public static final int START_LOAD = 0;
+
+    public static final int LIMIT = 4;
+
     private Constants() {
     }
 }
