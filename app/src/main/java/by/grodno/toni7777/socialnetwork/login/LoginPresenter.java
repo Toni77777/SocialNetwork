@@ -4,5 +4,5 @@ public interface LoginPresenter {
 
     void loginRequest(String login, String password);
 
-    void rxUnSubscribe();
+    void unsubscribe();
 }

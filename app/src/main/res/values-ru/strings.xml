@@ -19,4 +19,13 @@
     <string name="registration_skype">Skype</string>
     <string name="registration_city">Город</string>
 
+    <string name="progress_wait">Пожалуйста подождите, идет загрузка</string>
+
+    <string name="activity_label_wall">Стена</string>
+    <string name="activity_label_registration">Регистрация</string>
+    <string name="activity_label_friends">Друзья</string>
+
+    <string name="nav_wall">Стена</string>
+    <string name="nav_friends">Друзья</string>
+
 </resources>

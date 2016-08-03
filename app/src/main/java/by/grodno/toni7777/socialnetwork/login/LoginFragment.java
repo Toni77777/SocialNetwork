@@ -16,29 +16,29 @@ import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.BaseActivity;
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
+import by.grodno.toni7777.socialnetwork.network.model.UserLoginDTO;
 import by.grodno.toni7777.socialnetwork.registration.RegistrationActivity;
-import by.grodno.toni7777.socialnetwork.test.UserLogin;
 import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
 public class LoginFragment extends BaseFragment implements LoginView {
 
     @BindView(R.id.login)
-    EditText login;
+    EditText mLogin;
 
     @BindView(R.id.password)
-    EditText password;
+    EditText mPassword;
 
     @Inject
-    LoginPresenter presenter;
+    LoginPresenter mPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new LoginPresenterImp(this);
+        mPresenter = new LoginPresenterImp(this);
 
-//        if (isLoggedIn()) {
-//            ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
-//        }
+        if (isLoggedIn()) {
+            ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
+        }
     }
 
     @Nullable
@@ -50,15 +50,15 @@ public class LoginFragment extends BaseFragment implements LoginView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        login.setText(BuildConfig.LOGIN);
-        password.setText(BuildConfig.PASS);
+        mLogin.setText(BuildConfig.LOGIN);
+        mPassword.setText(BuildConfig.PASS);
     }
 
     @OnClick(R.id.sing_in)
     void singIn() {
-        String loginn = login.getText().toString();
-        String pass = password.getText().toString();
-        presenter.loginRequest(loginn, pass);
+        String login = mLogin.getText().toString();
+        String pass = mPassword.getText().toString();
+        mPresenter.loginRequest(login, pass);
     }
 
     @OnClick(R.id.sing_up)
@@ -73,7 +73,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     @Override
-    public void loginSuccess(UserLogin userLogin) {
+    public void loginSuccess(UserLoginDTO userLogin) {
         Log.e("USER", userLogin.toString());
         ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
         getActivity().finish();
@@ -87,7 +87,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        presenter.rxUnSubscribe();
+        mPresenter.unsubscribe();
     }
 
     private boolean isLoggedIn() {
