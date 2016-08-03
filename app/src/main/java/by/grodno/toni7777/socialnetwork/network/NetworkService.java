@@ -16,7 +16,7 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_ID;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_NAME;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_PASSWORD;
 
-public interface NetService {
+public interface NetworkService {
 
     @GET(BuildConfig.LOGIN_URL)
     Observable<UserLoginDTO> loginRequest(@Query(GRAND_TYPE) String grandType,

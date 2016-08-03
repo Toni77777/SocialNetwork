@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
-import by.grodno.toni7777.socialnetwork.network.NetService;
+import by.grodno.toni7777.socialnetwork.network.NetworkService;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 
@@ -22,11 +22,11 @@ public class WallPresenter extends MvpBasePresenter<WallView>
 
     private WallModel mModel = new WallModel(this);
     private boolean mPullRefresh;
-    private NetService mNetService;
+    private NetworkService mNetworkService;
 
     @Inject
-    public WallPresenter(NetService netService) {
-        mNetService = netService;
+    public WallPresenter(NetworkService networkService) {
+        mNetworkService = networkService;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class WallPresenter extends MvpBasePresenter<WallView>
             getView().showLoading(forceRefresh);
         }
         mPullRefresh = forceRefresh;
-        Observable<WallDTO> observable = mNetService.getPost(1, offset, LIMIT); // fake userID = 1
+        Observable<WallDTO> observable = mNetworkService.getPost(1, offset, LIMIT); // fake userID = 1
         mModel.loadData(observable);
     }
 

@@ -2,52 +2,55 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_nav_profile_24dp"
+        android:title="@string/nav_item_profile"
+    />
+
+    <item
         android:id="@+id/nav_wall"
         android:icon="@drawable/ic_nav_wall_24dp"
-        android:title="@string/nav_wall"
+        android:title="@string/nav_item_wall"
     />
 
     <item
         android:id="@+id/nav_message"
         android:icon="@drawable/ic_nav_message_24dp"
-        android:title="Message"
+        android:title="@string/nav_item_message"
     />
 
     <item
         android:id="@+id/nav_friends"
         android:icon="@drawable/ic_nav_friends_24dp"
-        android:title="@string/nav_friends"
-
+        android:title="@string/nav_item_friends"
     />
 
     <item
         android:id="@+id/nav_groups"
         android:icon="@drawable/ic_nav_groups_24dp"
-        android:title="Groups"
+        android:title="@string/nav_item_groups"
     />
-
 
     <item
         android:id="@+id/nav_search"
         android:icon="@drawable/ic_nav_search_24dp"
-        android:title="Search"
+        android:title="@string/nav_item_search"
     />
 
     <item
         android:id="@+id/nav_settings"
         android:icon="@drawable/ic_nav_settings_24dp"
-        android:title="Settings"
+        android:title="@string/nav_item_settings"
     />
 
-
-    <item android:title="Authorization">
+    <item android:title="@string/nav_menu_authorization">
         <menu>
             <item
                 android:id="@+id/nav_sing_in"
-                android:title="Sing in"/>
+                android:title="@string/nav_item_sing_in"/>
             <item
                 android:id="@+id/nav_logout"
-                android:title="Logout"/>
+                android:title="@string/nav_item_logout"/>
         </menu>
     </item>
 

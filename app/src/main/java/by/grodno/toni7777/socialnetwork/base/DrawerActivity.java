@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.IntentCompat;
 import android.support.v4.view.GravityCompat;
@@ -20,9 +19,6 @@ public class DrawerActivity extends ToolbarActivity implements NavigationView.On
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-
-    @BindView(R.id.coordinatorLayout)
-    CoordinatorLayout mCoordinatorLayout;
 
     @BindView(R.id.navigation)
     NavigationView mNavigationView;
@@ -58,7 +54,6 @@ public class DrawerActivity extends ToolbarActivity implements NavigationView.On
         } else if (id == R.id.nav_friends) {
 //            startSectionActivity(FriendsActivity.class);
         }
-
         return true;
     }
 
@@ -74,9 +69,4 @@ public class DrawerActivity extends ToolbarActivity implements NavigationView.On
             startActivity(IntentCompat.makeRestartActivityTask(new ComponentName(this, clas)));
         }
     }
-
-    public CoordinatorLayout getCoordinatorLayout() {
-        return mCoordinatorLayout;
-    }
-
 }
