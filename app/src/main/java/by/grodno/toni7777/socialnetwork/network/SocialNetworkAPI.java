@@ -16,7 +16,7 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_ID;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_NAME;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_PASSWORD;
 
-public interface NetworkService {
+public interface SocialNetworkAPI {
 
     @GET(BuildConfig.LOGIN_URL)
     Observable<UserLoginDTO> loginRequest(@Query(GRAND_TYPE) String grandType,
@@ -30,8 +30,7 @@ public interface NetworkService {
                                 @Query(LIMIT) int limit);
 
 
-//    @GET(BuildConfig.FRIENDS_URL) // need for request get friends list
-//    Observable<FriendsDTO> getFriends();
-
-
+    Observable<FriendsDTO> getFriends(@Query(USER_ID) int userId,
+                                      @Query(OFFSET) int offset,
+                                      @Query(LIMIT) int limit);
 }

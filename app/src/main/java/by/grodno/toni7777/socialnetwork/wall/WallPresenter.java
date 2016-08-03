@@ -9,12 +9,13 @@ import javax.inject.Inject;
 
 import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
-import by.grodno.toni7777.socialnetwork.network.NetworkService;
+import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.LIMIT;
 
+import by.grodno.toni7777.socialnetwork.test.NetworkServiceTest;
 import rx.Observable;
 
 public class WallPresenter extends MvpBasePresenter<WallView>
@@ -22,11 +23,11 @@ public class WallPresenter extends MvpBasePresenter<WallView>
 
     private WallModel mModel = new WallModel(this);
     private boolean mPullRefresh;
-    private NetworkService mNetworkService;
+    private SocialNetworkAPI mSocialNetworkAPI;
 
     @Inject
-    public WallPresenter(NetworkService networkService) {
-        mNetworkService = networkService;
+    public WallPresenter(SocialNetworkAPI socialNetworkAPI) {
+        mSocialNetworkAPI = socialNetworkAPI;
     }
 
     @Override
@@ -35,7 +36,8 @@ public class WallPresenter extends MvpBasePresenter<WallView>
             getView().showLoading(forceRefresh);
         }
         mPullRefresh = forceRefresh;
-        Observable<WallDTO> observable = mNetworkService.getPost(1, offset, LIMIT); // fake userID = 1
+        Observable<WallDTO> observable = NetworkServiceTest.netWall().getPost(1, offset, LIMIT); // fake userID = 1
+//        Observable<WallDTO> observable = mSocialNetworkAPI.getPost(1, offset, LIMIT); // fake userID = 1
         mModel.loadData(observable);
     }
 

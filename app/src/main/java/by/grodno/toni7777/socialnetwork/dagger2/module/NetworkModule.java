@@ -2,7 +2,7 @@ package by.grodno.toni7777.socialnetwork.dagger2.module;
 
 import javax.inject.Singleton;
 
-import by.grodno.toni7777.socialnetwork.network.NetworkService;
+import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.wall.WallPresenter;
 import dagger.Module;
 import dagger.Provides;
@@ -38,14 +38,14 @@ public class NetworkModule {
 
     @Singleton
     @Provides
-    NetworkService provideNetService(Retrofit retrofit) {
-        return retrofit.create(NetworkService.class);
+    SocialNetworkAPI provideNetService(Retrofit retrofit) {
+        return retrofit.create(SocialNetworkAPI.class);
     }
 
     @Singleton
     @Provides
-    public WallPresenter provideWallPresenter(NetworkService networkService) {
-        return new WallPresenter(networkService);
+    public WallPresenter provideWallPresenter(SocialNetworkAPI socialNetworkAPI) {
+        return new WallPresenter(socialNetworkAPI);
     }
 
 }

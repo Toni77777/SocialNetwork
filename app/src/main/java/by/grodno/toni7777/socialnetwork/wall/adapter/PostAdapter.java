@@ -133,7 +133,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
-            loadImage(ownerAvatar, ownerDTO.getAvatar());
+            loadCircleImage(ownerAvatar, ownerDTO.getAvatar());
             owner.setText(ownerDTO.getFullName());
             loadImage(postImage, post.getImage());
             postText.setText(post.getText());
@@ -179,7 +179,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
-            loadImage(ownerAvatar, ownerDTO.getAvatar());
+            loadCircleImage(ownerAvatar, ownerDTO.getAvatar());
             owner.setText(ownerDTO.getFullName());
             loadImage(postImage, post.getImage());
             likeCount.setText(String.valueOf(post.getLike()));
@@ -224,7 +224,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
-            loadImage(ownerAvatar, ownerDTO.getAvatar());
+            loadCircleImage(ownerAvatar, ownerDTO.getAvatar());
             owner.setText(ownerDTO.getFullName());
             postText.setText(post.getText());
             likeCount.setText(String.valueOf(post.getLike()));

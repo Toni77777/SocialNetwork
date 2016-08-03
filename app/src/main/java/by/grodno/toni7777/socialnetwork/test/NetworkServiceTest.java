@@ -1,6 +1,6 @@
 package by.grodno.toni7777.socialnetwork.test;
 
-import by.grodno.toni7777.socialnetwork.network.NetworkService;
+import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -12,19 +12,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class NetworkServiceTest {
 
-    public static NetworkService netWall() {
+    public static SocialNetworkAPI netWall() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://private-5b721-wallposts.apiary-mock.com/")
+                .baseUrl("http://private-5b721-wallposts.apiary-mock.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(new OkHttpClient.Builder().build())
                 .build();
 
-        return retrofit.create(NetworkService.class);
+        return retrofit.create(SocialNetworkAPI.class);
     }
 
-    public static NetworkService netFriends() {
+    public static SocialNetworkAPI netFriends() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://private-5821d-friends9.apiary-mock.com")
@@ -33,6 +33,6 @@ public class NetworkServiceTest {
                 .client(new OkHttpClient.Builder().build())
                 .build();
 
-        return retrofit.create(NetworkService.class);
+        return retrofit.create(SocialNetworkAPI.class);
     }
 }
