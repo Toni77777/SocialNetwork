@@ -6,6 +6,10 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * I need this class for tess,
+ * because Ipiary api get different base URL
+ */
 public class NetworkService {
 
     public static NetService netWall() {
