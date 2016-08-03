@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -109,13 +110,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView postText;
 
         @BindView(R.id.like)
-        Button like;
+        ImageButton like;
 
         @BindView(R.id.like_count)
         TextView likeCount;
 
         @BindView(R.id.dislike)
-        Button dislike;
+        ImageButton dislike;
 
         @BindView(R.id.dislike_count)
         TextView dislikeCount;
@@ -155,13 +156,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         ImageView postImage;
 
         @BindView(R.id.like)
-        Button like;
+        ImageButton like;
 
         @BindView(R.id.like_count)
         TextView likeCount;
 
         @BindView(R.id.dislike)
-        Button dislike;
+        ImageButton dislike;
 
         @BindView(R.id.dislike_count)
         TextView dislikeCount;
@@ -200,13 +201,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView postText;
 
         @BindView(R.id.like)
-        Button like;
+        ImageButton like;
 
         @BindView(R.id.like_count)
         TextView likeCount;
 
         @BindView(R.id.dislike)
-        Button dislike;
+        ImageButton dislike;
 
         @BindView(R.id.dislike_count)
         TextView dislikeCount;

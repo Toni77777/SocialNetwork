@@ -3,7 +3,6 @@
     android:id="@+id/card_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -27,7 +26,6 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="16dp"
-            android:background="@color/colorAccent"
         />
 
         <TextView
@@ -40,7 +38,6 @@
             android:maxLines="1"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            tools:text="Owner name lastname"
         />
 
         <TextView
@@ -50,17 +47,16 @@
             android:layout_below="@+id/owner_image"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
-            android:textSize="18sp"
-            tools:text="Message from post"/>
+            android:textSize="18sp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/like"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_below="@+id/post_text"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
-            android:background="@color/colorPrimaryDark"/>
+            android:background="@drawable/ic_like_default"/>
 
         <TextView
             android:id="@+id/like_count"
@@ -69,18 +65,17 @@
             android:layout_below="@+id/post_text"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:layout_toEndOf="@id/like"
-            tools:text="14"/>
+            android:layout_toEndOf="@id/like"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/dislike"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_below="@+id/post_text"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:layout_toEndOf="@id/like_count"
-            android:background="@color/colorPrimaryDark"/>
+            android:background="@drawable/ic_dislike_default"/>
 
         <TextView
             android:id="@+id/dislike_count"
@@ -89,8 +84,7 @@
             android:layout_below="@+id/post_text"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:layout_toEndOf="@id/dislike"
-            tools:text="1"/>
+            android:layout_toEndOf="@id/dislike"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>
