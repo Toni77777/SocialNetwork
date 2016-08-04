@@ -1,10 +1,15 @@
 package by.grodno.toni7777.socialnetwork.login;
 
-import by.grodno.toni7777.socialnetwork.test.UserLogin;
+import com.hannesdorfmann.mosby.mvp.MvpView;
 
-public interface LoginView {
+public interface LoginView extends MvpView {
 
-    void loginSuccess(UserLogin userLogin);
+    void showLoginForm();
 
-    void loginError(Throwable e);
+    void showError();
+
+    void showLoading();
+
+    void loginSuccess();
+
 }

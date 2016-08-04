@@ -9,19 +9,19 @@ import butterknife.Unbinder;
 
 public class BaseActivity extends AppCompatActivity {
 
-    private Unbinder unbinder;
+    private Unbinder mUnbinder;
 
     @Override
     public void onContentChanged() {
         super.onContentChanged();
-        unbinder = ButterKnife.bind(this);
+        mUnbinder = ButterKnife.bind(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (unbinder != null) {
-            unbinder.unbind();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
         }
     }
 

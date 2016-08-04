@@ -19,12 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".wall.WallActivity">
+        <activity
+            android:name=".wall.WallActivity"
+            android:label="@string/activity_label_wall">
         </activity>
         <activity
             android:name=".registration.RegistrationActivity"
-            android:label="Registration">
+            android:label="@string/activity_label_registration">
         </activity>
+
     </application>
 
 </manifest>
