@@ -1,34 +1,29 @@
-package by.grodno.toni7777.socialnetwork.wall;
-
-import java.util.List;
+package by.grodno.toni7777.socialnetwork.login;
 
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
-import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
-import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
-
+import by.grodno.toni7777.socialnetwork.network.model.UserLoginDTO;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
 import rx.Subscription;
 
-public class WallModel extends BaseModel<WallDTO> {
+public class LoginModel extends BaseModel<UserLoginDTO> {
 
-    private ModelListener<List<PostDTO>> listener;
+    private ModelListener<UserLoginDTO> listener;
     private Subscription subscription;
 
-    public WallModel(ModelListener<List<PostDTO>> listener) {
+    public LoginModel(ModelListener<UserLoginDTO> listener) {
         this.listener = listener;
     }
 
     @Override
-    protected void loadData(Observable<WallDTO> observable) {
-        unsubscribe();
+    protected void loadData(Observable<UserLoginDTO> observable) {
         subscription = observable
-                .doOnNext(this::saveInCache)
-                .compose(RxUtil.<WallDTO>applySchedulers())
+//                .delay(10, TimeUnit.SECONDS)
+                .compose(RxUtil.<UserLoginDTO>applySchedulers())
                 .subscribe(
-                        wallDTO -> {
-                            listener.loadNext(wallDTO.getPosts());
+                        user -> {
+                            listener.loadNext(user);
                         },
                         throwable -> {
                             unsubscribe();
@@ -37,14 +32,8 @@ public class WallModel extends BaseModel<WallDTO> {
                         () -> {
                             unsubscribe();
                             listener.loadCompleted();
-                        }
-                );
+                        });
     }
-
-    private void saveInCache(WallDTO wallDTO) {
-        // TODO Put in cache to do next step
-    }
-
 
     @Override
     protected void unsubscribe() {

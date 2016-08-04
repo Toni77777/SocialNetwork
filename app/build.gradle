@@ -13,13 +13,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "FRIENDS_URL", "\"/friends\""
-        buildConfigField "String", "POSTS_URL", "\"/posts\""
-        buildConfigField "String", "LOGIN_URL", "\"/oauth/token\""
-        buildConfigField "String", "GRANT_TYPE", "\"grant_type\""
-        buildConfigField "String", "CLIENT_ID", "\"client_id\""
-        buildConfigField "String", "GRANT_TYPE_VALUE", "\"password\""
-        buildConfigField "String", "CLIENT_ID_VALUE", "\"my-trusted-client\""
         buildConfigField "String", "LOGIN", "\"user\""
         buildConfigField "String", "PASS", "\"user\""
 
@@ -74,5 +67,7 @@ dependencies {
     compile 'com.hannesdorfmann.mosby:viewstate:2.0.1'
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.0'
 
 }

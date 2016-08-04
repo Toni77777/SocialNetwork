@@ -2,42 +2,65 @@ package by.grodno.toni7777.socialnetwork.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.dd.processbutton.iml.ActionProcessButton;
+import com.hannesdorfmann.mosby.mvp.viewstate.MvpViewStateFragment;
+import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseActivity;
-import by.grodno.toni7777.socialnetwork.base.BaseFragment;
-import by.grodno.toni7777.socialnetwork.network.model.UserLoginDTO;
 import by.grodno.toni7777.socialnetwork.registration.RegistrationActivity;
 import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
-public class LoginFragment extends BaseFragment implements LoginView {
+
+public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresenter>
+        implements LoginView {
 
     @BindView(R.id.login)
-    EditText mLogin;
+    EditText mLoginView;
 
     @BindView(R.id.password)
-    EditText mPassword;
+    EditText mPasswordView;
+
+    @BindView(R.id.errorView)
+    TextView mErrorView;
+
+    @BindView(R.id.sing_in)
+    ActionProcessButton mAuthorizationButton;
+
+    @BindView(R.id.sing_up)
+    Button mRegistrationButton;
+
+    @BindView(R.id.forgot_password)
+    TextView mForgotPassView;
 
     @Inject
     LoginPresenter mPresenter;
 
+    private Unbinder mUnbinder;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new LoginPresenterImp(this);
+        setRetainInstance(true);
 
         if (isLoggedIn()) {
             ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
+            getActivity().finish();
         }
     }
 
@@ -49,16 +72,20 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ((SocialNetworkApp) getActivity().getApplication()).getNetworkComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
-        mLogin.setText(BuildConfig.LOGIN);
-        mPassword.setText(BuildConfig.PASS);
+        mUnbinder = ButterKnife.bind(this, view);
+        mLoginView.setText(BuildConfig.LOGIN);
+        mPasswordView.setText(BuildConfig.PASS);
+
+        mAuthorizationButton.setMode(ActionProcessButton.Mode.ENDLESS);
     }
 
     @OnClick(R.id.sing_in)
     void singIn() {
-        String login = mLogin.getText().toString();
-        String pass = mPassword.getText().toString();
-        mPresenter.loginRequest(login, pass);
+        String login = mLoginView.getText().toString();
+        String pass = mPasswordView.getText().toString();
+        mPresenter.authorization(login, pass);
     }
 
     @OnClick(R.id.sing_up)
@@ -66,32 +93,74 @@ public class LoginFragment extends BaseFragment implements LoginView {
         ((BaseActivity) getActivity()).startToActivity(RegistrationActivity.class);
     }
 
-    //Need back stack activity
     @OnClick(R.id.forgot_password)
     void restorePassword() {
+        // TODO start restore activity
+    }
 
+    private boolean isLoggedIn() {
+        // TODO check autoriration
+        return false;
     }
 
     @Override
-    public void loginSuccess(UserLoginDTO userLogin) {
-        Log.e("USER", userLogin.toString());
+    public void showError() {
+        ((LoginViewState) viewState).setShowError();
+        setViewsEnabled(true);
+        mAuthorizationButton.setProgress(0);
+        mErrorView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showLoading() {
+        ((LoginViewState) viewState).setShowLoading();
+        setViewsEnabled(false);
+        mErrorView.setVisibility(View.GONE);
+        mAuthorizationButton.setProgress(30);
+    }
+
+    @Override
+    public void loginSuccess() {
+        mAuthorizationButton.setProgress(100);
         ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
         getActivity().finish();
     }
 
     @Override
-    public void loginError(Throwable e) {
-        Log.e("USER", e.toString());
+    public LoginPresenter createPresenter() {
+        return mPresenter;
+    }
+
+    @Override
+    public ViewState createViewState() {
+        return new LoginViewState();
+    }
+
+    @Override
+    public void onNewViewStateInstance() {
+        showLoginForm();
+    }
+
+    @Override
+    public void showLoginForm() {
+        ((LoginViewState) viewState).setShowLoginForm();
+        mErrorView.setVisibility(View.GONE);
+        setViewsEnabled(true);
+        mAuthorizationButton.setProgress(0);
+    }
+
+    private void setViewsEnabled(boolean enabled) {
+        mLoginView.setEnabled(enabled);
+        mPasswordView.setEnabled(enabled);
+        mRegistrationButton.setEnabled(enabled);
+        mForgotPassView.setEnabled(enabled);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mPresenter.unsubscribe();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
     }
-
-    private boolean isLoggedIn() {
-        return true;
-    }
-
 }
