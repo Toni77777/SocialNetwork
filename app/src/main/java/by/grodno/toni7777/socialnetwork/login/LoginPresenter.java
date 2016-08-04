@@ -29,8 +29,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView>
         if (isViewAttached()) {
             getView().showLoading();
         }
-        Observable<UserLoginDTO> observable = NetworkServiceTest.netLogin().loginRequest(QueryProperties.GRAND_TYPE_VALUE, QueryProperties.CLIENT_ID_VALUE, login, password);
-//        Observable<WallDTO> observable = mSocialNetworkAPI.getPost(1, offset, LIMIT); // fake userID = 1
+        Observable<UserLoginDTO> observable = mSocialNetworkAPI.loginRequest(QueryProperties.GRAND_TYPE_VALUE, QueryProperties.CLIENT_ID_VALUE, login, password);
         mModel.loadData(observable);
     }
 
@@ -51,6 +50,5 @@ public class LoginPresenter extends MvpBasePresenter<LoginView>
     @Override
     public void loadNext(UserLoginDTO data) {
         // TODO need rupdate to save data to strorage (in model), and refactor code, delete this method
-        Log.e("USER", "USER after login" + data);
     }
 }

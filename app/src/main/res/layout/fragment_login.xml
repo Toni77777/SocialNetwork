@@ -61,7 +61,7 @@
             custom:pb_textError="Error"
             custom:pb_textProgress="Loading"/>
 
-        <Button
+        <com.dd.processbutton.iml.ActionProcessButton
             android:id="@+id/sing_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,6 +69,9 @@
             android:layout_marginTop="8dp"
             android:minWidth="200dp"
             android:text="@string/authorization_sing_up"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            custom:pb_colorPressed="@color/blue_pressed"
         />
 
         <TextView
@@ -81,13 +84,13 @@
         />
 
         <TextView
-            android:id="@+id/errorView"
+            android:id="@+id/error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="8dp"
-            android:text="Bad username or password"
+            android:text="@string/error_autorization"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="14sp"
             android:visibility="gone"

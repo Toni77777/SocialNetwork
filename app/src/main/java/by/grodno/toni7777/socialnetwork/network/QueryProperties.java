@@ -3,7 +3,7 @@ package by.grodno.toni7777.socialnetwork.network;
 public final class QueryProperties {
 
     public static final String GRAND_TYPE = "grant_type";
-    public static final String GRAND_TYPE_VALUE = "grant_type";
+    public static final String GRAND_TYPE_VALUE = "password";
     public static final String CLIENT_ID = "client_id";
     public static final String CLIENT_ID_VALUE = "passwordClient";
     public static final String USER_NAME = "username";

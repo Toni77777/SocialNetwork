@@ -13,6 +13,10 @@ public final class Constants {
 
     public static final int LIMIT = 4;
 
+    public static final int ACTION_BUTTON_START = 0;
+    public static final int ACTION_BUTTON_PROGRESS = 25;
+    public static final int ACTION_BUTTON_FINISH = 100;
+
     private Constants() {
     }
 }

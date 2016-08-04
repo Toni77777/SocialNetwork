@@ -1,5 +1,7 @@
 package by.grodno.toni7777.socialnetwork.login;
 
+import android.util.Log;
+
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.model.UserLoginDTO;
@@ -19,7 +21,6 @@ public class LoginModel extends BaseModel<UserLoginDTO> {
     @Override
     protected void loadData(Observable<UserLoginDTO> observable) {
         subscription = observable
-//                .delay(10, TimeUnit.SECONDS)
                 .compose(RxUtil.<UserLoginDTO>applySchedulers())
                 .subscribe(
                         user -> {

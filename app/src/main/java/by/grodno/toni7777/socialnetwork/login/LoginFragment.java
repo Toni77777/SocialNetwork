@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -23,6 +22,9 @@ import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseActivity;
+
+import static by.grodno.toni7777.socialnetwork.util.Constants.*;
+
 import by.grodno.toni7777.socialnetwork.registration.RegistrationActivity;
 import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
@@ -36,14 +38,14 @@ public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresente
     @BindView(R.id.password)
     EditText mPasswordView;
 
-    @BindView(R.id.errorView)
+    @BindView(R.id.error)
     TextView mErrorView;
 
     @BindView(R.id.sing_in)
     ActionProcessButton mAuthorizationButton;
 
     @BindView(R.id.sing_up)
-    Button mRegistrationButton;
+    ActionProcessButton mRegistrationButton;
 
     @BindView(R.id.forgot_password)
     TextView mForgotPassView;
@@ -77,7 +79,6 @@ public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresente
         mUnbinder = ButterKnife.bind(this, view);
         mLoginView.setText(BuildConfig.LOGIN);
         mPasswordView.setText(BuildConfig.PASS);
-
         mAuthorizationButton.setMode(ActionProcessButton.Mode.ENDLESS);
     }
 
@@ -91,6 +92,7 @@ public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresente
     @OnClick(R.id.sing_up)
     void singUn() {
         ((BaseActivity) getActivity()).startToActivity(RegistrationActivity.class);
+        mErrorView.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.forgot_password)
@@ -116,12 +118,12 @@ public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresente
         ((LoginViewState) viewState).setShowLoading();
         setViewsEnabled(false);
         mErrorView.setVisibility(View.GONE);
-        mAuthorizationButton.setProgress(30);
+        mAuthorizationButton.setProgress(ACTION_BUTTON_PROGRESS);
     }
 
     @Override
     public void loginSuccess() {
-        mAuthorizationButton.setProgress(100);
+        mAuthorizationButton.setProgress(ACTION_BUTTON_FINISH);
         ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
         getActivity().finish();
     }
@@ -146,7 +148,7 @@ public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresente
         ((LoginViewState) viewState).setShowLoginForm();
         mErrorView.setVisibility(View.GONE);
         setViewsEnabled(true);
-        mAuthorizationButton.setProgress(0);
+        mAuthorizationButton.setProgress(ACTION_BUTTON_START);
     }
 
     private void setViewsEnabled(boolean enabled) {
