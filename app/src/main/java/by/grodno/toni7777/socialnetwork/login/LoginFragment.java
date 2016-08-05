@@ -2,6 +2,7 @@ package by.grodno.toni7777.socialnetwork.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import by.grodno.toni7777.socialnetwork.base.BaseActivity;
 import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 
 import by.grodno.toni7777.socialnetwork.registration.RegistrationActivity;
+import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
 
@@ -109,7 +111,7 @@ public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresente
     public void showError() {
         ((LoginViewState) viewState).setShowError();
         setViewsEnabled(true);
-        mAuthorizationButton.setProgress(0);
+        mAuthorizationButton.setProgress(Constants.ACTION_BUTTON_START);
         mErrorView.setVisibility(View.VISIBLE);
     }
 

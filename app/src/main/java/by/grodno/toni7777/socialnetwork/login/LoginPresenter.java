@@ -1,6 +1,5 @@
 package by.grodno.toni7777.socialnetwork.login;
 
-import android.util.Log;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
@@ -29,7 +28,8 @@ public class LoginPresenter extends MvpBasePresenter<LoginView>
         if (isViewAttached()) {
             getView().showLoading();
         }
-        Observable<UserLoginDTO> observable = mSocialNetworkAPI.loginRequest(QueryProperties.GRAND_TYPE_VALUE, QueryProperties.CLIENT_ID_VALUE, login, password);
+        Observable<UserLoginDTO> observable = NetworkServiceTest.netLogin().loginRequest(QueryProperties.GRAND_TYPE_VALUE, QueryProperties.CLIENT_ID_VALUE, login, password);
+//        Observable<UserLoginDTO> observable = mSocialNetworkAPI.loginRequest(QueryProperties.GRAND_TYPE_VALUE, QueryProperties.CLIENT_ID_VALUE, login, password);
         mModel.loadData(observable);
     }
 
