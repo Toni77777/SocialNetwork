@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.people.PeopleActivity;
 import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
 public class DrawerActivity extends ToolbarActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,7 +54,7 @@ public class DrawerActivity extends ToolbarActivity implements NavigationView.On
         if (id == R.id.nav_wall) {
             startSectionActivity(WallActivity.class);
         } else if (id == R.id.nav_friends) {
-//            startSectionActivity(FriendsActivity.class);
+            startSectionActivity(PeopleActivity.class);
         }
         return true;
     }

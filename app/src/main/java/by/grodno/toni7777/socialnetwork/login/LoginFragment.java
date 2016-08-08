@@ -104,7 +104,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
 
     private boolean isLoggedIn() {
         // TODO check autoriration
-        return false;
+        return true;
     }
 
     @Override

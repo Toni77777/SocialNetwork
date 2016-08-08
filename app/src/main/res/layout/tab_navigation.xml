@@ -10,7 +10,7 @@
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:background="#be2a2a"
         android:text="@string/register_navigation_next"
         android:textColor="#FFFFFF"/>

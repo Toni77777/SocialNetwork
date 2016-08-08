@@ -1,7 +1,6 @@
 package by.grodno.toni7777.socialnetwork.network;
 
-import by.grodno.toni7777.socialnetwork.BuildConfig;
-import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
+import by.grodno.toni7777.socialnetwork.network.model.PeopleDTO;
 import by.grodno.toni7777.socialnetwork.network.model.UserLoginDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 import retrofit2.http.GET;
@@ -34,7 +33,7 @@ public interface SocialNetworkAPI {
                                 @Query(LIMIT) int limit);
 
     @GET(FRIENDS_URL)
-    Observable<FriendsDTO> getFriends(@Query(USER_ID) int userId,
-                                      @Query(OFFSET) int offset,
-                                      @Query(LIMIT) int limit);
+    Observable<PeopleDTO> getFriends(@Query(USER_ID) int userId,
+                                     @Query(OFFSET) int offset,
+                                     @Query(LIMIT) int limit);
 }

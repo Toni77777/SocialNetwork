@@ -27,7 +27,9 @@
             android:name=".registration.RegistrationActivity"
             android:label="@string/activity_label_registration">
         </activity>
-
+        <activity android:name=".people.PeopleActivity"
+                  android:label="@string/activity_label_friends">
+        </activity>
     </application>
 
 </manifest>
