@@ -3,6 +3,7 @@ package by.grodno.toni7777.socialnetwork.dagger2.module;
 import javax.inject.Singleton;
 
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.people.PeoplePresenter;
 import by.grodno.toni7777.socialnetwork.wall.WallPresenter;
 import dagger.Module;
 import dagger.Provides;
@@ -46,6 +47,12 @@ public class NetworkModule {
     @Provides
     public WallPresenter provideWallPresenter(SocialNetworkAPI socialNetworkAPI) {
         return new WallPresenter(socialNetworkAPI);
+    }
+
+    @Singleton
+    @Provides
+    public PeoplePresenter providePeoplePresenter(SocialNetworkAPI socialNetworkAPI) {
+        return new PeoplePresenter(socialNetworkAPI);
     }
 
 }

@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -16,26 +17,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
-import by.grodno.toni7777.socialnetwork.base.BaseEventFragment;
+import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
+import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
 import by.grodno.toni7777.socialnetwork.base.event.NewFriend;
 import by.grodno.toni7777.socialnetwork.base.event.PersonEvent;
+import by.grodno.toni7777.socialnetwork.network.model.PeopleDTO;
 import by.grodno.toni7777.socialnetwork.people.adapter.PeopleAdapter;
-import by.grodno.toni7777.socialnetwork.people.fake.FakeFriens;
 
-public class PeopleFragment extends BaseEventFragment implements SearchView.OnQueryTextListener {
+import static by.grodno.toni7777.socialnetwork.util.Constants.START_LOAD;
 
-    @BindView(R.id.friends_recycler)
-    RecyclerView mPostsRecycler;
+public class PeopleFragment extends BaseEventStateFragment<SwipeRefreshLayout, PeopleDTO, PeopleView, PeoplePresenter>
+        implements PeopleView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
+
+    @BindView(R.id.people_recycler)
+    RecyclerView mPeopleRecycler;
 
     @BindView(R.id.progress_pagination_view)
     RelativeLayout mProgressPaginView;
 
-    private PeopleAdapter mFriendAdapter;
+    @Inject
+    PeoplePresenter mPeoplePresenter;
+
+    private PeopleAdapter mPeopleAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,20 +87,28 @@ public class PeopleFragment extends BaseEventFragment implements SearchView.OnQu
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        mFriendAdapter = new PeopleAdapter(FakeFriens.createFriends(5));
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mPostsRecycler.setAdapter(mFriendAdapter);
-        mPostsRecycler.setLayoutManager(linearLayoutManager);
+    public PeoplePresenter createPresenter() {
+        return mPeoplePresenter;
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ((SocialNetworkApp) getContext().getApplicationContext()).getNetworkComponent().inject(this);
+        super.onViewCreated(view, savedInstanceState);
+        mPeopleAdapter = new PeopleAdapter(new ArrayList<>(), new ArrayList<>());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        mPeopleRecycler.setLayoutManager(linearLayoutManager);
+        mPeopleRecycler.setAdapter(mPeopleAdapter);
+        contentView.setOnRefreshListener(this);
+//        mPeopleRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, presenter));
+    }
+
 
     @Override
     public boolean onQueryTextChange(String newText) {
         Log.e("Search", "onQueryTextChange " + newText);
-        mFriendAdapter.clear();
-        mFriendAdapter.update(FakeFriens.createAfterSearch(5));
+//        mPeopleAdapter.clear();
+//        mPeopleAdapter.update(FakeFriens.createAfterSearch(5));
         return false;
     }
 
@@ -94,9 +118,40 @@ public class PeopleFragment extends BaseEventFragment implements SearchView.OnQu
         return false;
     }
 
+    @Override
+    public LceViewState<PeopleDTO, PeopleView> createViewState() {
+        setRetainInstance(true);
+        return new RetainingLceViewState<>();
+    }
+
+    @Override
+    public PeopleDTO getData() {
+        return mPeopleAdapter.getPeople();
+    }
+
+    @Override
+    public void setData(PeopleDTO data) {
+        contentView.setRefreshing(false);
+        mPeopleAdapter.update(data);
+    }
+
+    @Override
+    public void loadData(boolean pullToRefresh) {
+        presenter.loadDataWithOffset(pullToRefresh, START_LOAD);
+    }
+
+    @Override
+    public void onRefresh() {
+        loadData(true);
+    }
+
+    @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        return null;
+    }
+
     @Subscribe
     public void addPersonToFriend(PersonEvent event) {
         EventBus.getDefault().post(new NewFriend(event.mId));
     }
-
 }

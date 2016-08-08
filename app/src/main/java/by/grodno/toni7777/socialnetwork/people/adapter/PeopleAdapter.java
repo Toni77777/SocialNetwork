@@ -24,24 +24,28 @@ import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.event.NewFriend;
 import by.grodno.toni7777.socialnetwork.base.event.PersonEvent;
 import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
+import by.grodno.toni7777.socialnetwork.network.model.PeopleDTO;
+import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
 public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleViewHolder> {
 
     private static final int FRIEND = R.layout.item_friends;
-    private static final int PEOPLE = R.layout.item_person;
+    private static final int PERSON = R.layout.item_person;
 
     private List<FriendDTO> mFriends;
+    private List<PersonDTO> mPersons;
 
-    public PeopleAdapter(List<FriendDTO> friends) {
+    public PeopleAdapter(List<FriendDTO> friends, List<PersonDTO> persons) {
         mFriends = friends;
+        mPersons = persons;
     }
 
     @Override
     public PeopleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == FRIEND) {
             return FriendViewHolder.newInstance(parent);
-        } else if (viewType == PEOPLE) {
+        } else if (viewType == PERSON) {
             return PersonViewHolder.newInstance(parent);
         } else {
             throw new IllegalArgumentException("Unknown view type " + viewType);
@@ -51,12 +55,20 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleView
     @Override
     public void onBindViewHolder(PeopleViewHolder holder, int position) {
         int viewType = holder.getItemViewType();
-        FriendDTO friend = mFriends.get(position);
+
+        Object people = null;
+        if (mFriends != null) {
+            if (mFriends.size() > position) {
+                people = mFriends.get(position);
+            } else if (mPersons != null) {
+                people = mFriends.get(position - mFriends.size());
+            }
+        }
 
         if (viewType == FRIEND) {
-            ((FriendViewHolder) holder).bind(friend);
-        } else if (viewType == PEOPLE) {
-            ((PersonViewHolder) holder).bind(friend);
+            ((FriendViewHolder) holder).bind((FriendDTO) people);
+        } else if (viewType == PERSON) {
+            ((PersonViewHolder) holder).bind((PersonDTO) people);
         } else {
             throw new IllegalArgumentException("View type not found");
         }
@@ -64,33 +76,60 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleView
 
     @Override
     public int getItemViewType(int position) {
-        FriendDTO friend = mFriends.get(position);
-
-        if (friend.isOnline()) {
-            return FRIEND;
-        } else if (!friend.isOnline()) {
-            return PEOPLE;
+        if (mFriends != null) {
+            if (mFriends.size() < position) {
+                return FRIEND;
+            } else if (mPersons != null) {
+                return PERSON;
+            }
         } else {
-            throw new IllegalArgumentException("View type not found");
+            return PERSON;
         }
+        throw new IllegalArgumentException("View type not found");
     }
+
 
     @Override
     public int getItemCount() {
-        return mFriends.size();
+        if ((mFriends != null) & (mPersons != null)) {
+            return mFriends.size() + mPersons.size();
+        } else if ((mPersons == null) & (mFriends != null)) {
+            return mFriends.size();
+        } else if (((mFriends == null) & (mPersons != null))) {
+            return mPersons.size();
+        } else {
+            throw new IllegalArgumentException("Have not data");
+        }
     }
 
     public void clear() {
+        mPersons.clear();
         mFriends.clear();
     }
 
-    public void update(List<FriendDTO> newFriends) {
-        mFriends.addAll(newFriends);
+    public void update(PeopleDTO people) {
+        if ((people.getFriends() != null) & (mFriends != null)) {
+            mFriends.addAll(people.getFriends());
+        } else if (mFriends == null) {
+            mFriends = people.getFriends();
+        }
+        if ((people.getPersons() != null) & (mPersons != null)) {
+            mPersons.addAll(people.getFriends());
+        } else if (mPersons == null) {
+            mPersons = people.getPersons();
+        }
         notifyDataSetChanged();
     }
 
-    public List<FriendDTO> getFriends() {
-        return mFriends;
+    public PeopleDTO getPeople() {
+        PeopleDTO people = new PeopleDTO();
+        if (mFriends != null) {
+            people.setFriends(mFriends);
+        }
+        if (mPersons != null) {
+            people.setPersons(mPersons);
+        }
+        return people;
     }
 
     static class PeopleViewHolder extends RecyclerView.ViewHolder {
@@ -98,7 +137,6 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleView
             super(v);
         }
     }
-
 
     static class FriendViewHolder extends PeopleViewHolder {
 
@@ -158,10 +196,10 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleView
             ButterKnife.bind(this, view);
         }
 
-        void bind(FriendDTO friend) {
-            mId = friend.getId();
-            ImageLoad.loadCircleImage(mAvatar, friend.getAvatar());
-            mName.setText(friend.getFullName());
+        void bind(PersonDTO person) {
+            mId = person.getId();
+            ImageLoad.loadCircleImage(mAvatar, person.getAvatar());
+            mName.setText(person.getFullName());
         }
 
         @NonNull

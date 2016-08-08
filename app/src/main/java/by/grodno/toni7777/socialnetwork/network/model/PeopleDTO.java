@@ -13,7 +13,7 @@ public class PeopleDTO {
     private long mFriendNumber;
 
     @SerializedName("persons")
-    private List<FriendDTO> mPersons;
+    private List<PersonDTO> mPersons;
 
     @SerializedName("persons_number")
     private long mPersonsNumber;
@@ -21,7 +21,12 @@ public class PeopleDTO {
     public PeopleDTO() {
     }
 
-    public PeopleDTO(List<FriendDTO> friends, long friendNumber, List<FriendDTO> persons, long personsNumber) {
+    public PeopleDTO(List<FriendDTO> friends, List<PersonDTO> persons) {
+        mFriends = friends;
+        mPersons = persons;
+    }
+
+    public PeopleDTO(List<FriendDTO> friends, long friendNumber, List<PersonDTO> persons, long personsNumber) {
         mFriends = friends;
         mFriendNumber = friendNumber;
         mPersons = persons;
@@ -44,11 +49,11 @@ public class PeopleDTO {
         mFriendNumber = friendNumber;
     }
 
-    public List<FriendDTO> getPersons() {
+    public List<PersonDTO> getPersons() {
         return mPersons;
     }
 
-    public void setPersons(List<FriendDTO> persons) {
+    public void setPersons(List<PersonDTO> persons) {
         mPersons = persons;
     }
 
@@ -59,6 +64,7 @@ public class PeopleDTO {
     public void setPersonsNumber(long personsNumber) {
         mPersonsNumber = personsNumber;
     }
+
 
     @Override
     public boolean equals(Object o) {
