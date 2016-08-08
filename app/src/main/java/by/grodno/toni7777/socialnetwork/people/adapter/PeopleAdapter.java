@@ -77,7 +77,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleView
     @Override
     public int getItemViewType(int position) {
         if (mFriends != null) {
-            if (mFriends.size() < position) {
+            if (mFriends.size() > position) {
                 return FRIEND;
             } else if (mPersons != null) {
                 return PERSON;
