@@ -1,34 +1,39 @@
 package by.grodno.toni7777.socialnetwork.network.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class FriendsDTO {
 
-    private List<FriendDTO> friends;
-    private long numbers;
+    @SerializedName("friends")
+    private List<FriendDTO> mFriends;
+
+    @SerializedName("numbers")
+    private long mNumbers;
 
     public FriendsDTO() {
     }
 
     public FriendsDTO(List<FriendDTO> friends, long numbers) {
-        this.friends = friends;
-        this.numbers = numbers;
+        mFriends = friends;
+        mNumbers = numbers;
     }
 
     public List<FriendDTO> getFriends() {
-        return friends;
+        return mFriends;
     }
 
     public void setFriends(List<FriendDTO> friends) {
-        this.friends = friends;
+        mFriends = friends;
     }
 
     public long getNumbers() {
-        return numbers;
+        return mNumbers;
     }
 
     public void setNumbers(long numbers) {
-        this.numbers = numbers;
+        mNumbers = numbers;
     }
 
     @Override
@@ -38,23 +43,23 @@ public class FriendsDTO {
 
         FriendsDTO that = (FriendsDTO) o;
 
-        if (numbers != that.numbers) return false;
-        return friends != null ? friends.equals(that.friends) : that.friends == null;
+        if (mNumbers != that.mNumbers) return false;
+        return mFriends != null ? mFriends.equals(that.mFriends) : that.mFriends == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = friends != null ? friends.hashCode() : 0;
-        result = 31 * result + (int) (numbers ^ (numbers >>> 32));
+        int result = mFriends != null ? mFriends.hashCode() : 0;
+        result = 31 * result + (int) (mNumbers ^ (mNumbers >>> 32));
         return result;
     }
 
     @Override
     public String toString() {
         return "FriendsDTO{" +
-                "friends=" + friends +
-                ", numbers=" + numbers +
+                "mFriends=" + mFriends +
+                ", mNumbers=" + mNumbers +
                 '}';
     }
 }

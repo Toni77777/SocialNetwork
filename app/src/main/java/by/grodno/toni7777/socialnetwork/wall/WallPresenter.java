@@ -21,8 +21,8 @@ import rx.Observable;
 public class WallPresenter extends MvpBasePresenter<WallView>
         implements ModelListener<List<PostDTO>>, MvpPresenter<WallView>, LoadPagination {
 
-    private WallModel mModel = new WallModel(this);
-    private boolean mPullRefresh;
+    private final WallModel mModel = new WallModel(this);
+    private boolean mForceRefresh;
     private SocialNetworkAPI mSocialNetworkAPI;
 
     @Inject
@@ -35,14 +35,14 @@ public class WallPresenter extends MvpBasePresenter<WallView>
         if (isViewAttached()) {
             getView().showLoading(forceRefresh);
         }
-        mPullRefresh = forceRefresh;
+        mForceRefresh = forceRefresh;
         Observable<WallDTO> observable = NetworkServiceTest.netWall().getPost(1, offset, LIMIT); // fake userID = 1
 //        Observable<WallDTO> observable = mSocialNetworkAPI.getPost(1, offset, LIMIT); // fake userID = 1
         mModel.loadData(observable);
     }
 
     @Override
-    public void loadCompleted() {
+    public void onLoadCompleted() {
         if (isViewAttached()) {
             getView().showContent();
         }
@@ -58,7 +58,7 @@ public class WallPresenter extends MvpBasePresenter<WallView>
     @Override
     public void loadError(Throwable e) {
         if (isViewAttached()) {
-            getView().showError(e, mPullRefresh);
+            getView().showError(e, mForceRefresh);
         }
     }
 }

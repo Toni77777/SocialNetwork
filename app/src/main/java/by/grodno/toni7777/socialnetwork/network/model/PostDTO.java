@@ -1,62 +1,73 @@
 package by.grodno.toni7777.socialnetwork.network.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PostDTO {
 
-    private OwnerDTO owner;
-    private String image;
-    private String text;
-    private int like;
-    private int dislike;
+    @SerializedName("owner")
+    private OwnerDTO mOwner;
+
+    @SerializedName("image")
+    private String mImage;
+
+    @SerializedName("text")
+    private String mText;
+
+    @SerializedName("like")
+    private int mLike;
+
+    @SerializedName("dislike")
+    private int mDislike;
 
     public PostDTO() {
     }
 
     public PostDTO(OwnerDTO owner, String image, String text, int like, int dislike) {
-        this.owner = owner;
-        this.image = image;
-        this.text = text;
-        this.like = like;
-        this.dislike = dislike;
+        mOwner = owner;
+        mImage = image;
+        mText = text;
+        mLike = like;
+        mDislike = dislike;
     }
 
     public OwnerDTO getOwner() {
-        return owner;
+        return mOwner;
     }
 
     public void setOwner(OwnerDTO owner) {
-        this.owner = owner;
+        mOwner = owner;
     }
 
     public String getImage() {
-        return image;
+        return mImage;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        mImage = image;
     }
 
     public String getText() {
-        return text;
+        return mText;
     }
 
     public void setText(String text) {
-        this.text = text;
+        mText = text;
     }
 
     public int getLike() {
-        return like;
+        return mLike;
     }
 
     public void setLike(int like) {
-        this.like = like;
+        mLike = like;
     }
 
     public int getDislike() {
-        return dislike;
+        return mDislike;
     }
 
     public void setDislike(int dislike) {
-        this.dislike = dislike;
+        mDislike = dislike;
     }
 
     @Override
@@ -66,32 +77,32 @@ public class PostDTO {
 
         PostDTO postDTO = (PostDTO) o;
 
-        if (like != postDTO.like) return false;
-        if (dislike != postDTO.dislike) return false;
-        if (owner != null ? !owner.equals(postDTO.owner) : postDTO.owner != null) return false;
-        if (image != null ? !image.equals(postDTO.image) : postDTO.image != null) return false;
-        return text != null ? text.equals(postDTO.text) : postDTO.text == null;
+        if (mLike != postDTO.mLike) return false;
+        if (mDislike != postDTO.mDislike) return false;
+        if (mOwner != null ? !mOwner.equals(postDTO.mOwner) : postDTO.mOwner != null) return false;
+        if (mImage != null ? !mImage.equals(postDTO.mImage) : postDTO.mImage != null) return false;
+        return mText != null ? mText.equals(postDTO.mText) : postDTO.mText == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = owner != null ? owner.hashCode() : 0;
-        result = 31 * result + (image != null ? image.hashCode() : 0);
-        result = 31 * result + (text != null ? text.hashCode() : 0);
-        result = 31 * result + like;
-        result = 31 * result + dislike;
+        int result = mOwner != null ? mOwner.hashCode() : 0;
+        result = 31 * result + (mImage != null ? mImage.hashCode() : 0);
+        result = 31 * result + (mText != null ? mText.hashCode() : 0);
+        result = 31 * result + mLike;
+        result = 31 * result + mDislike;
         return result;
     }
 
     @Override
     public String toString() {
         return "PostDTO{" +
-                "owner=" + owner +
-                ", image='" + image + '\'' +
-                ", text='" + text + '\'' +
-                ", like=" + like +
-                ", dislike=" + dislike +
+                "mOwner=" + mOwner +
+                ", mImage='" + mImage + '\'' +
+                ", mText='" + mText + '\'' +
+                ", mLike=" + mLike +
+                ", mDislike=" + mDislike +
                 '}';
     }
 }

@@ -1,45 +1,61 @@
 package by.grodno.toni7777.socialnetwork.network.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class FriendDTO {
 
-    private String name;
-    private String surname;
-    private long id;
-    private String avatar;
+    @SerializedName("name")
+    private String mName;
+
+    @SerializedName("surname")
+    private String mSurname;
+
+    @SerializedName("id")
+    private long mId;
+
+    @SerializedName("avatar")
+    private String mAvatar;
 
     public FriendDTO() {
     }
 
+    public FriendDTO(String name, String surname, long id, String avatar) {
+        mName = name;
+        mSurname = surname;
+        mId = id;
+        mAvatar = avatar;
+    }
+
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        mName = name;
     }
 
     public String getSurname() {
-        return surname;
+        return mSurname;
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        mSurname = surname;
     }
 
     public long getId() {
-        return id;
+        return mId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        mId = id;
     }
 
     public String getAvatar() {
-        return avatar;
+        return mAvatar;
     }
 
     public void setAvatar(String avatar) {
-        this.avatar = avatar;
+        mAvatar = avatar;
     }
 
     @Override
@@ -49,30 +65,30 @@ public class FriendDTO {
 
         FriendDTO friendDTO = (FriendDTO) o;
 
-        if (id != friendDTO.id) return false;
-        if (name != null ? !name.equals(friendDTO.name) : friendDTO.name != null) return false;
-        if (surname != null ? !surname.equals(friendDTO.surname) : friendDTO.surname != null)
+        if (mId != friendDTO.mId) return false;
+        if (mName != null ? !mName.equals(friendDTO.mName) : friendDTO.mName != null) return false;
+        if (mSurname != null ? !mSurname.equals(friendDTO.mSurname) : friendDTO.mSurname != null)
             return false;
-        return avatar != null ? avatar.equals(friendDTO.avatar) : friendDTO.avatar == null;
+        return mAvatar != null ? mAvatar.equals(friendDTO.mAvatar) : friendDTO.mAvatar == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + (int) (id ^ (id >>> 32));
-        result = 31 * result + (avatar != null ? avatar.hashCode() : 0);
+        int result = mName != null ? mName.hashCode() : 0;
+        result = 31 * result + (mSurname != null ? mSurname.hashCode() : 0);
+        result = 31 * result + (int) (mId ^ (mId >>> 32));
+        result = 31 * result + (mAvatar != null ? mAvatar.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "FriendDTO{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", id=" + id +
-                ", avatar='" + avatar + '\'' +
+                "mName='" + mName + '\'' +
+                ", mSurname='" + mSurname + '\'' +
+                ", mId=" + mId +
+                ", mAvatar='" + mAvatar + '\'' +
                 '}';
     }
 }

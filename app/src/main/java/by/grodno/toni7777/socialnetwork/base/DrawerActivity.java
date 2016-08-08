@@ -22,6 +22,7 @@ public class DrawerActivity extends ToolbarActivity implements NavigationView.On
 
     @BindView(R.id.navigation)
     NavigationView mNavigationView;
+
     private ActionBarDrawerToggle mDrawerToggle;
 
     @Override

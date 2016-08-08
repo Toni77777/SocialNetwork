@@ -4,48 +4,47 @@ import com.google.gson.annotations.SerializedName;
 
 public class OwnerDTO {
 
-    private String name;
+    @SerializedName("name")
+    private String mName;
+
     @SerializedName("lastName")
-    private String surname;
-    private String avatar;
+    private String mSurname;
+
+    @SerializedName("avatar")
+    private String mAvatar;
+
     private String fullName;
 
     public OwnerDTO() {
     }
 
-    public OwnerDTO(String name, String surname, String avatar) {
-        this.name = name;
-        this.surname = surname;
-        this.avatar = avatar;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public String getAvatar() {
-        return avatar;
+        return mAvatar;
     }
 
     public void setAvatar(String avatar) {
-        this.avatar = avatar;
+        mAvatar = avatar;
     }
 
-    public String getFullName(){
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
+
+    public String getSurname() {
+        return mSurname;
+    }
+
+    public void setSurname(String surname) {
+        mSurname = surname;
+    }
+
+    public String getFullName() {
         if (fullName == null) {
-            fullName = name + " " + surname;
+            fullName = mName + " " + mSurname;
         }
         return fullName;
     }
@@ -57,27 +56,28 @@ public class OwnerDTO {
 
         OwnerDTO ownerDTO = (OwnerDTO) o;
 
-        if (name != null ? !name.equals(ownerDTO.name) : ownerDTO.name != null) return false;
-        if (surname != null ? !surname.equals(ownerDTO.surname) : ownerDTO.surname != null)
+        if (mName != null ? !mName.equals(ownerDTO.mName) : ownerDTO.mName != null) return false;
+        if (mSurname != null ? !mSurname.equals(ownerDTO.mSurname) : ownerDTO.mSurname != null)
             return false;
-        return avatar != null ? avatar.equals(ownerDTO.avatar) : ownerDTO.avatar == null;
+        return mAvatar != null ? mAvatar.equals(ownerDTO.mAvatar) : ownerDTO.mAvatar == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + (avatar != null ? avatar.hashCode() : 0);
+        int result = mName != null ? mName.hashCode() : 0;
+        result = 31 * result + (mSurname != null ? mSurname.hashCode() : 0);
+        result = 31 * result + (mAvatar != null ? mAvatar.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "OwnerDTO{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", avatar='" + avatar + '\'' +
+                "mName='" + mName + '\'' +
+                ", mSurname='" + mSurname + '\'' +
+                ", mAvatar='" + mAvatar + '\'' +
+                ", fullName='" + fullName + '\'' +
                 '}';
     }
 }

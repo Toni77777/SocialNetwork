@@ -34,7 +34,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView>
     }
 
     @Override
-    public void loadCompleted() {
+    public void onLoadCompleted() {
         if (isViewAttached()) {
             getView().loginSuccess();
         }

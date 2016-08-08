@@ -39,17 +39,12 @@ public class WallFragment extends BaseViewStateFragment<SwipeRefreshLayout, List
     RecyclerView mPostsRecycler;
 
     @BindView(R.id.progress_pagination_view)
-    RelativeLayout mProgressPaginView;
+    View mProgressPaginView;
 
     private PostAdapter mPostAdapter;
 
     @Inject
     WallPresenter mWallPresenter;
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,7 +53,7 @@ public class WallFragment extends BaseViewStateFragment<SwipeRefreshLayout, List
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        ((SocialNetworkApp) getActivity().getApplication()).getNetworkComponent().inject(this);
+        ((SocialNetworkApp) getContext().getApplicationContext()).getNetworkComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         contentView.setOnRefreshListener(this);
         mPostAdapter = new PostAdapter(new ArrayList<>());

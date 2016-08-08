@@ -13,30 +13,30 @@ import rx.Subscription;
 
 public class WallModel extends BaseModel<WallDTO> {
 
-    private ModelListener<List<PostDTO>> listener;
-    private Subscription subscription;
+    private ModelListener<List<PostDTO>> mListener;
+    private Subscription mSubscription;
 
     public WallModel(ModelListener<List<PostDTO>> listener) {
-        this.listener = listener;
+        this.mListener = listener;
     }
 
     @Override
     protected void loadData(Observable<WallDTO> observable) {
         unsubscribe();
-        subscription = observable
+        mSubscription = observable
                 .doOnNext(this::saveInCache)
                 .compose(RxUtil.<WallDTO>applySchedulers())
                 .subscribe(
                         wallDTO -> {
-                            listener.loadNext(wallDTO.getPosts());
+                            mListener.loadNext(wallDTO.getPosts());
                         },
                         throwable -> {
                             unsubscribe();
-                            listener.loadError(throwable);
+                            mListener.loadError(throwable);
                         },
                         () -> {
                             unsubscribe();
-                            listener.loadCompleted();
+                            mListener.onLoadCompleted();
                         }
                 );
     }
@@ -48,8 +48,8 @@ public class WallModel extends BaseModel<WallDTO> {
 
     @Override
     protected void unsubscribe() {
-        if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
+        if (mSubscription != null && !mSubscription.isUnsubscribed()) {
+            mSubscription.unsubscribe();
         }
     }
 }

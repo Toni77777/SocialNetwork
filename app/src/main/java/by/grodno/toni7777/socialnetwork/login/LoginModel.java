@@ -1,7 +1,5 @@
 package by.grodno.toni7777.socialnetwork.login;
 
-import android.util.Log;
-
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.model.UserLoginDTO;
@@ -11,35 +9,35 @@ import rx.Subscription;
 
 public class LoginModel extends BaseModel<UserLoginDTO> {
 
-    private ModelListener<UserLoginDTO> listener;
-    private Subscription subscription;
+    private ModelListener<UserLoginDTO> mListener;
+    private Subscription mSubscription;
 
     public LoginModel(ModelListener<UserLoginDTO> listener) {
-        this.listener = listener;
+        this.mListener = listener;
     }
 
     @Override
     protected void loadData(Observable<UserLoginDTO> observable) {
-        subscription = observable
+        mSubscription = observable
                 .compose(RxUtil.<UserLoginDTO>applySchedulers())
                 .subscribe(
                         user -> {
-                            listener.loadNext(user);
+                            mListener.loadNext(user);
                         },
                         throwable -> {
                             unsubscribe();
-                            listener.loadError(throwable);
+                            mListener.loadError(throwable);
                         },
                         () -> {
                             unsubscribe();
-                            listener.loadCompleted();
+                            mListener.onLoadCompleted();
                         });
     }
 
     @Override
     protected void unsubscribe() {
-        if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
+        if (mSubscription != null && !mSubscription.isUnsubscribed()) {
+            mSubscription.unsubscribe();
         }
     }
 }

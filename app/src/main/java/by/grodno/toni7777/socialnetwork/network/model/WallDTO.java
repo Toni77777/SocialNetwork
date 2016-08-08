@@ -7,31 +7,33 @@ import java.util.List;
 public class WallDTO {
 
     @SerializedName("entity")
-    private List<PostDTO> posts;
-    private long numbers;
+    private List<PostDTO> mPosts;
+
+    @SerializedName("numbers")
+    private long mNumbers;
 
     public WallDTO() {
     }
 
     public WallDTO(List<PostDTO> posts, long numbers) {
-        this.posts = posts;
-        this.numbers = numbers;
+        mPosts = posts;
+        mNumbers = numbers;
     }
 
     public List<PostDTO> getPosts() {
-        return posts;
+        return mPosts;
     }
 
     public void setPosts(List<PostDTO> posts) {
-        this.posts = posts;
+        mPosts = posts;
     }
 
     public long getNumbers() {
-        return numbers;
+        return mNumbers;
     }
 
     public void setNumbers(long numbers) {
-        this.numbers = numbers;
+        mNumbers = numbers;
     }
 
     @Override
@@ -41,23 +43,23 @@ public class WallDTO {
 
         WallDTO wallDTO = (WallDTO) o;
 
-        if (numbers != wallDTO.numbers) return false;
-        return posts != null ? posts.equals(wallDTO.posts) : wallDTO.posts == null;
+        if (mNumbers != wallDTO.mNumbers) return false;
+        return mPosts != null ? mPosts.equals(wallDTO.mPosts) : wallDTO.mPosts == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = posts != null ? posts.hashCode() : 0;
-        result = 31 * result + (int) (numbers ^ (numbers >>> 32));
+        int result = mPosts != null ? mPosts.hashCode() : 0;
+        result = 31 * result + (int) (mNumbers ^ (mNumbers >>> 32));
         return result;
     }
 
     @Override
     public String toString() {
         return "WallDTO{" +
-                "posts=" + posts +
-                ", numbers=" + numbers +
+                "mPosts=" + mPosts +
+                ", mNumbers=" + mNumbers +
                 '}';
     }
 }

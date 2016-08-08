@@ -26,12 +26,13 @@ import by.grodno.toni7777.socialnetwork.base.BaseActivity;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 
+import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
 import by.grodno.toni7777.socialnetwork.registration.RegistrationActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
 
-public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresenter>
+public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPresenter>
         implements LoginView {
 
     @BindView(R.id.login)
@@ -55,7 +56,6 @@ public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresente
     @Inject
     LoginPresenter mPresenter;
 
-    private Unbinder mUnbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,9 +76,8 @@ public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresente
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        ((SocialNetworkApp) getActivity().getApplication()).getNetworkComponent().inject(this);
+        ((SocialNetworkApp) getContext().getApplicationContext()).getNetworkComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
-        mUnbinder = ButterKnife.bind(this, view);
         mLoginView.setText(BuildConfig.LOGIN);
         mPasswordView.setText(BuildConfig.PASS);
         mAuthorizationButton.setMode(ActionProcessButton.Mode.ENDLESS);
@@ -158,13 +157,5 @@ public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresente
         mPasswordView.setEnabled(enabled);
         mRegistrationButton.setEnabled(enabled);
         mForgotPassView.setEnabled(enabled);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mUnbinder != null) {
-            mUnbinder.unbind();
-        }
     }
 }
