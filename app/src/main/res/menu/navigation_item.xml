@@ -32,12 +32,6 @@
     />
 
     <item
-        android:id="@+id/nav_search"
-        android:icon="@drawable/ic_nav_search_24dp"
-        android:title="@string/nav_item_search"
-    />
-
-    <item
         android:id="@+id/nav_settings"
         android:icon="@drawable/ic_nav_settings_24dp"
         android:title="@string/nav_item_settings"

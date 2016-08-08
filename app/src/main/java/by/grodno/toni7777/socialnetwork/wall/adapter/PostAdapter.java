@@ -24,9 +24,9 @@ import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private final List<PostDTO> mPosts;
-    private static final int FULL = 0;
-    private static final int IMAGE = 1;
-    private static final int TEXT = 2;
+    private static final int FULL = R.layout.item_post_full;
+    private static final int IMAGE = R.layout.item_post_image;
+    private static final int TEXT = R.layout.item_post_text;
 
     public PostAdapter(List<PostDTO> posts) {
         mPosts = posts;
@@ -35,11 +35,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == FULL) {
-            return PostViewHolder.newInstance(parent);
+            return FullPostViewHolder.newInstance(parent);
         } else if (viewType == IMAGE) {
-            return ImageViewHolder.newInstance(parent);
+            return ImagePostViewHolder.newInstance(parent);
         } else if (viewType == TEXT) {
-            return TextViewHolder.newInstance(parent);
+            return TextPostViewHolder.newInstance(parent);
         } else {
             throw new IllegalArgumentException("Unknown view type " + viewType);
         }
@@ -51,11 +51,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         PostDTO post = mPosts.get(position);
 
         if (viewType == FULL) {
-            ((PostViewHolder) holder).bind(post);
+            ((FullPostViewHolder) holder).bind(post);
         } else if (viewType == IMAGE) {
-            ((ImageViewHolder) holder).bind(post);
+            ((ImagePostViewHolder) holder).bind(post);
         } else if (viewType == TEXT) {
-            ((TextViewHolder) holder).bind(post);
+            ((TextPostViewHolder) holder).bind(post);
         }
     }
 
@@ -94,7 +94,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
     }
 
-    static class PostViewHolder extends ViewHolder {
+    static class FullPostViewHolder extends ViewHolder {
 
         @BindView(R.id.owner_image)
         ImageView ownerAvatar;
@@ -121,12 +121,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView dislikeCount;
 
         @NonNull
-        public static PostViewHolder newInstance(ViewGroup parent) {
-            return new PostViewHolder(LayoutInflater.from(parent.getContext())
+        public static FullPostViewHolder newInstance(ViewGroup parent) {
+            return new FullPostViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_post_full, parent, false));
         }
 
-        private PostViewHolder(View view) {
+        private FullPostViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
@@ -143,7 +143,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
 
-    static class ImageViewHolder extends ViewHolder {
+    static class ImagePostViewHolder extends ViewHolder {
 
         @BindView(R.id.owner_image)
         ImageView ownerAvatar;
@@ -167,12 +167,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView dislikeCount;
 
         @NonNull
-        public static ImageViewHolder newInstance(ViewGroup parent) {
-            return new ImageViewHolder(LayoutInflater.from(parent.getContext())
+        public static ImagePostViewHolder newInstance(ViewGroup parent) {
+            return new ImagePostViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_post_image, parent, false));
         }
 
-        private ImageViewHolder(View view) {
+        private ImagePostViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
@@ -188,7 +188,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     }
 
-    static class TextViewHolder extends ViewHolder {
+    static class TextPostViewHolder extends ViewHolder {
 
         @BindView(R.id.owner_image)
         ImageView ownerAvatar;
@@ -212,12 +212,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView dislikeCount;
 
         @NonNull
-        public static TextViewHolder newInstance(ViewGroup parent) {
-            return new TextViewHolder(LayoutInflater.from(parent.getContext())
+        public static TextPostViewHolder newInstance(ViewGroup parent) {
+            return new TextPostViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_post_text, parent, false));
         }
 
-        private TextViewHolder(View view) {
+        private TextPostViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/loading_view"/>
+        <include layout="@layout/loading"/>
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/contentView"
@@ -22,7 +22,7 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <include layout="@layout/error_view"/>
+        <include layout="@layout/error"/>
 
         <include
             android:id="@+id/progress_pagination_view"

@@ -1,5 +1,6 @@
 package by.grodno.toni7777.socialnetwork.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -63,7 +64,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
         setRetainInstance(true);
 
         if (isLoggedIn()) {
-            ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
+            getContext().startActivity(new Intent(getContext(), WallActivity.class));
             getActivity().finish();
         }
     }
@@ -92,7 +93,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
 
     @OnClick(R.id.sing_up)
     void singUn() {
-        ((BaseActivity) getActivity()).startToActivity(RegistrationActivity.class);
+        getContext().startActivity(new Intent(getContext(), RegistrationActivity.class));
         mErrorView.setVisibility(View.GONE);
     }
 
@@ -125,7 +126,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
     @Override
     public void loginSuccess() {
         mAuthorizationButton.setProgress(ACTION_BUTTON_FINISH);
-        ((BaseActivity) getActivity()).startToActivity(WallActivity.class);
+        getContext().startActivity(new Intent(getContext(), WallActivity.class));
         getActivity().finish();
     }
 

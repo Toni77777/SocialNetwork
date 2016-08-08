@@ -30,7 +30,6 @@
     <string name="nav_item_friends">Друзья</string>
     <string name="nav_item_message">Сообщения</string>
     <string name="nav_item_groups">Группы</string>
-    <string name="nav_item_search">Поиск</string>
     <string name="nav_item_settings">Настройки</string>
     <string name="nav_menu_authorization">Авторизация</string>
     <string name="nav_item_sing_in">Вход</string>
