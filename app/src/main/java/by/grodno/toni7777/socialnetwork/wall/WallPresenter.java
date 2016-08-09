@@ -1,5 +1,7 @@
 package by.grodno.toni7777.socialnetwork.wall;
 
+import android.util.Log;
+
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 
@@ -16,6 +18,7 @@ import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 import static by.grodno.toni7777.socialnetwork.util.Constants.LIMIT;
 
 import by.grodno.toni7777.socialnetwork.test.NetworkServiceTest;
+import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import rx.Observable;
 
 public class WallPresenter extends MvpBasePresenter<WallView>
@@ -24,10 +27,16 @@ public class WallPresenter extends MvpBasePresenter<WallView>
     private final WallModel mModel = new WallModel(this);
     private boolean mForceRefresh;
     private SocialNetworkAPI mSocialNetworkAPI;
+    private LoginPreferences mLoginPreferences;
 
+    //    @Inject
+//    public WallPresenter(SocialNetworkAPI socialNetworkAPI) {
+//        mSocialNetworkAPI = socialNetworkAPI;
+//    }
     @Inject
-    public WallPresenter(SocialNetworkAPI socialNetworkAPI) {
+    public WallPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
         mSocialNetworkAPI = socialNetworkAPI;
+        mLoginPreferences = loginPreferences;
     }
 
     @Override
@@ -36,6 +45,7 @@ public class WallPresenter extends MvpBasePresenter<WallView>
             getView().showLoading(forceRefresh);
         }
         mForceRefresh = forceRefresh;
+        Log.e("TOKEN", "Token = " + mLoginPreferences.getAccessToken());
         Observable<WallDTO> observable = NetworkServiceTest.netWall().getPost(1, offset, LIMIT); // fake userID = 1
 //        Observable<WallDTO> observable = mSocialNetworkAPI.getPost(1, offset, LIMIT); // fake userID = 1
         mModel.loadData(observable);

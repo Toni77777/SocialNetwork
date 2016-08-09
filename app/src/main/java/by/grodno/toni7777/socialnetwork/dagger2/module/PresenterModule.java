@@ -1,8 +1,7 @@
 package by.grodno.toni7777.socialnetwork.dagger2.module;
 
-import javax.inject.Singleton;
 
-import by.grodno.toni7777.socialnetwork.dagger2.scope.PrefensecScope;
+import by.grodno.toni7777.socialnetwork.dagger2.scope.PresenterScope;
 import by.grodno.toni7777.socialnetwork.login.LoginPresenter;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
@@ -13,15 +12,15 @@ import dagger.Provides;
 @Module
 public class PresenterModule {
 
-    @PrefensecScope
+    @PresenterScope
     @Provides
-    public WallPresenter provideWallPresenter(SocialNetworkAPI socialNetworkAPI) {
-        return new WallPresenter(socialNetworkAPI);
+    public WallPresenter provideWallPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
+        return new WallPresenter(socialNetworkAPI, loginPreferences);
     }
 
-    @PrefensecScope
+    @PresenterScope
     @Provides
-    public LoginPresenter provideLoginPresenter(SocialNetworkAPI socialNetworkAPI) {
-        return new LoginPresenter(socialNetworkAPI);
+    public LoginPresenter provideLoginPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
+        return new LoginPresenter(socialNetworkAPI, loginPreferences);
     }
 }

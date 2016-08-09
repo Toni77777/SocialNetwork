@@ -17,6 +17,7 @@ public final class QueryProperties {
     public static final String USER_ID = "userId";
     public static final String OFFSET = "offset";
     public static final String LIMIT = "limit";
+    public static final String ACCESS_TOKEN = "access_token";
 
     private QueryProperties() {
     }

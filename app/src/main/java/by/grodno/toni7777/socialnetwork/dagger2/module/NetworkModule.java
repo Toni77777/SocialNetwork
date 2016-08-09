@@ -1,11 +1,11 @@
 package by.grodno.toni7777.socialnetwork.dagger2.module;
 
+import android.content.Context;
+
 import javax.inject.Singleton;
 
-import by.grodno.toni7777.socialnetwork.login.LoginPresenter;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
-import by.grodno.toni7777.socialnetwork.wall.WallPresenter;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -17,9 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkModule {
 
     final String mBaseUrl;
+    final Context mContext;
 
-    public NetworkModule(String baseUrl) {
+    public NetworkModule(String baseUrl, Context context) {
         mBaseUrl = baseUrl;
+        mContext = context;
     }
 
     //    @Provides
@@ -43,18 +45,11 @@ public class NetworkModule {
     SocialNetworkAPI provideNetService(Retrofit retrofit) {
         return retrofit.create(SocialNetworkAPI.class);
     }
-//
-//    @Singleton
-//    @Provides
-//    public WallPresenter provideWallPresenter(SocialNetworkAPI socialNetworkAPI) {
-//        return new WallPresenter(socialNetworkAPI);
-//    }
-//
-//    @Singleton
-//    @Provides
-//    public LoginPresenter provideLoginPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
-//        return new LoginPresenter(socialNetworkAPI, loginPreferences);
-//    }
 
+    @Provides
+    @Singleton
+    LoginPreferences providesSharedPreferences() {
+        return new LoginPreferences(mContext);
+    }
 
 }

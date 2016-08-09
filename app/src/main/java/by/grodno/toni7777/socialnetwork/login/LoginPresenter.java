@@ -23,16 +23,16 @@ public class LoginPresenter extends MvpBasePresenter<LoginView>
     private SocialNetworkAPI mSocialNetworkAPI;
     private LoginPreferences mLoginPreferences;
 
-//    @Inject
-//    public LoginPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
-//        mSocialNetworkAPI = socialNetworkAPI;
-//        mLoginPreferences = loginPreferences;
-//    }
-
     @Inject
-    public LoginPresenter(SocialNetworkAPI socialNetworkAPI) {
+    public LoginPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
         mSocialNetworkAPI = socialNetworkAPI;
+        mLoginPreferences = loginPreferences;
     }
+
+//    @Inject
+//    public LoginPresenter(SocialNetworkAPI socialNetworkAPI) {
+//        mSocialNetworkAPI = socialNetworkAPI;
+//    }
 
     public void authorization(String login, String password) {
         if (isViewAttached()) {
@@ -60,5 +60,6 @@ public class LoginPresenter extends MvpBasePresenter<LoginView>
     @Override
     public void loadNext(UserDTO data) {
         // TODO need rupdate to save data to strorage (in model), and refactor code, delete this method
+        mLoginPreferences.setAccessToken(data.getAccessToken());
     }
 }

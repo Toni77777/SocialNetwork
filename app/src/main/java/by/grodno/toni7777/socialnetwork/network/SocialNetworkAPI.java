@@ -8,6 +8,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.ACCESS_TOKEN;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.CLIENT_ID;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.FRIENDS_URL;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.GRAND_TYPE;
@@ -30,10 +31,12 @@ public interface SocialNetworkAPI {
     @GET(POSTS_URL)
     Observable<WallDTO> getPost(@Query(USER_ID) int userId,
                                 @Query(OFFSET) int offset,
-                                @Query(LIMIT) int limit);
+                                @Query(LIMIT) int limit,
+                                @Query(ACCESS_TOKEN) String accessToken);
 
     @GET(FRIENDS_URL)
     Observable<FriendsDTO> getFriends(@Query(USER_ID) int userId,
                                       @Query(OFFSET) int offset,
-                                      @Query(LIMIT) int limit);
+                                      @Query(LIMIT) int limit,
+                                      @Query(ACCESS_TOKEN) String accessToken);
 }

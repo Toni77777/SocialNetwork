@@ -6,7 +6,6 @@ import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.dagger2.component.DaggerNetworkComponent;
 import by.grodno.toni7777.socialnetwork.dagger2.component.DaggerPresenterComponent;
 import by.grodno.toni7777.socialnetwork.dagger2.component.NetworkComponent;
-import by.grodno.toni7777.socialnetwork.dagger2.component.PreferencesComponent;
 import by.grodno.toni7777.socialnetwork.dagger2.component.PresenterComponent;
 import by.grodno.toni7777.socialnetwork.dagger2.module.NetworkModule;
 import by.grodno.toni7777.socialnetwork.dagger2.module.PresenterModule;
@@ -20,12 +19,8 @@ public class SocialNetworkApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-//        mPreferencesComponent = DaggerPreferencesComponent.builder()
-//                .preferencesModule(new PreferencesModule(getBaseContext()))
-//                .build();
-
         mNetworkComponent = DaggerNetworkComponent.builder()
-                .networkModule(new NetworkModule(BuildConfig.BASE_URL))
+                .networkModule(new NetworkModule(BuildConfig.BASE_URL, getBaseContext()))
                 .build();
 
         mPresenterComponent = DaggerPresenterComponent.builder()
