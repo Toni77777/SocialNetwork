@@ -23,5 +23,6 @@
     <dimen name="post_marging_start">16dp</dimen>
     <dimen name="post_image_height">300dp</dimen>
     <dimen name="post_like_dislike">24dp</dimen>
+    <dimen name="post_image_margin_top">4dp</dimen>
 
 </resources>

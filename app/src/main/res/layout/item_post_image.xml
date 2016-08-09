@@ -53,8 +53,8 @@
             android:layout_width="@dimen/post_like_dislike"
             android:layout_height="@dimen/post_like_dislike"
             android:layout_below="@+id/post_image"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/post_image_margin_top"
+            android:layout_marginTop="@dimen/post_image_margin_top"
             android:background="@drawable/ic_like_default"/>
 
         <TextView
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/post_image"
             android:layout_marginStart="@dimen/post_marging_start"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/post_image_margin_top"
             android:layout_toEndOf="@id/like"/>
 
         <ImageButton
@@ -72,7 +72,7 @@
             android:layout_height="@dimen/post_like_dislike"
             android:layout_below="@+id/post_image"
             android:layout_marginStart="@dimen/post_marging_start"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/post_image_margin_top"
             android:layout_toEndOf="@id/like_count"
             android:background="@drawable/ic_dislike_default"/>
 
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/post_image"
             android:layout_marginStart="@dimen/post_marging_start"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/post_image_margin_top"
             android:layout_toEndOf="@id/dislike"/>
 
     </RelativeLayout>
