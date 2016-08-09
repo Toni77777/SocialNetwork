@@ -6,4 +6,11 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="progress_padding">4dp</dimen>
+
+    <dimen name="nav_header_avatar_height">80dp</dimen>
+    <dimen name="nav_header_avatar_width">80dp</dimen>
+    <dimen name="post_owner_avatar_width">60dp</dimen>
+    <dimen name="post_owner_avatar_height">60dp</dimen>
+
 </resources>

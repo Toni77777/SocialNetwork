@@ -1,5 +1,6 @@
 package by.grodno.toni7777.socialnetwork.network;
 
+
 public final class QueryProperties {
 
     public static final String GRAND_TYPE = "grant_type";
