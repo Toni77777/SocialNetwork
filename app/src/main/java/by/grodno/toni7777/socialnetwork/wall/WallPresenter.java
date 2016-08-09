@@ -29,10 +29,6 @@ public class WallPresenter extends MvpBasePresenter<WallView>
     private SocialNetworkAPI mSocialNetworkAPI;
     private LoginPreferences mLoginPreferences;
 
-    //    @Inject
-//    public WallPresenter(SocialNetworkAPI socialNetworkAPI) {
-//        mSocialNetworkAPI = socialNetworkAPI;
-//    }
     @Inject
     public WallPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
         mSocialNetworkAPI = socialNetworkAPI;
@@ -46,7 +42,8 @@ public class WallPresenter extends MvpBasePresenter<WallView>
         }
         mForceRefresh = forceRefresh;
         Log.e("TOKEN", "Token = " + mLoginPreferences.getAccessToken());
-        Observable<WallDTO> observable = NetworkServiceTest.netWall().getPost(1, offset, LIMIT); // fake userID = 1
+        Log.e("TOKEN", "User id = " + mLoginPreferences.getUserId());
+        Observable<WallDTO> observable = NetworkServiceTest.netWall().getPost(1, offset, LIMIT, "9ad3cccb-f0bd-4245-876b-26ece79c08fe"); // fake userID = 1
 //        Observable<WallDTO> observable = mSocialNetworkAPI.getPost(1, offset, LIMIT); // fake userID = 1
         mModel.loadData(observable);
     }

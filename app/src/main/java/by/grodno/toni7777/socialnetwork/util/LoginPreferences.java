@@ -7,17 +7,26 @@ public class LoginPreferences {
 
     private static final String LOGIN_PREFERENCES = "saveAccessToken";
     private static final String TOKEN_PREFERENCES = "accessToken";
-    private SharedPreferences mTokenPreferences;
+    private static final String USER_ID_PREFERENCES = "userId";
+    private SharedPreferences mUserPreferences;
 
     public LoginPreferences(Context context) {
-        mTokenPreferences = context.getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE);
+        mUserPreferences = context.getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE);
     }
 
     public void setAccessToken(String token) {
-        mTokenPreferences.edit().putString(TOKEN_PREFERENCES, token).apply();
+        mUserPreferences.edit().putString(TOKEN_PREFERENCES, token).apply();
     }
 
     public String getAccessToken() {
-        return mTokenPreferences.getString(TOKEN_PREFERENCES, "");
+        return mUserPreferences.getString(TOKEN_PREFERENCES, "");
+    }
+
+    public long getUserId() {
+        return mUserPreferences.getLong(USER_ID_PREFERENCES, -1);
+    }
+
+    public void setUserId(long userId) {
+        mUserPreferences.edit().putLong(USER_ID_PREFERENCES, userId).apply();
     }
 }

@@ -2,6 +2,7 @@ package by.grodno.toni7777.socialnetwork.network;
 
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
 import by.grodno.toni7777.socialnetwork.network.model.UserDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 import retrofit2.http.GET;
@@ -43,7 +44,5 @@ public interface SocialNetworkAPI {
                                       @Query(ACCESS_TOKEN) String accessToken);
 
     @GET(PROFILE_URL)
-    Observable<UserDTO> getProfileInfo(@Query(ACCESS_TOKEN) String accessToken);
-
-    //TODO /users/profile?access_token=smsdmsd
+    Observable<ProfileDTO> getProfileInfo(@Query(ACCESS_TOKEN) String accessToken);
 }

@@ -19,20 +19,14 @@ import rx.Observable;
 public class LoginPresenter extends MvpBasePresenter<LoginView>
         implements ModelListener<AuthorizationDTO>, MvpPresenter<LoginView> {
 
-    private LoginModel mModel = new LoginModel(this);
+    private LoginModel mModel;
     private SocialNetworkAPI mSocialNetworkAPI;
-    private LoginPreferences mLoginPreferences;
 
     @Inject
     public LoginPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
         mSocialNetworkAPI = socialNetworkAPI;
-        mLoginPreferences = loginPreferences;
+        mModel = new LoginModel(loginPreferences, this);
     }
-
-//    @Inject
-//    public LoginPresenter(SocialNetworkAPI socialNetworkAPI) {
-//        mSocialNetworkAPI = socialNetworkAPI;
-//    }
 
     public void authorization(String login, String password) {
         if (isViewAttached()) {
@@ -60,6 +54,10 @@ public class LoginPresenter extends MvpBasePresenter<LoginView>
     @Override
     public void loadNext(AuthorizationDTO data) {
         // TODO need rupdate to save data to strorage (in model), and refactor code, delete this method
-        mLoginPreferences.setAccessToken(data.getAccessToken());
+//        mLoginPreferences.setAccessToken(data.getAccessToken());
+    }
+
+    public void loadProfileInfo() {
+
     }
 }
