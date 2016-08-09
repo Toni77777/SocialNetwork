@@ -1,5 +1,6 @@
 package by.grodno.toni7777.socialnetwork.network;
 
+import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.UserDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
@@ -19,14 +20,15 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_NAME
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_PASSWORD;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.LOGIN_URL;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.POSTS_URL;
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.PROFILE_URL;
 
 public interface SocialNetworkAPI {
 
     @POST(LOGIN_URL)
-    Observable<UserDTO> loginRequest(@Query(GRAND_TYPE) String grandType,
-                                     @Query(CLIENT_ID) String clientId,
-                                     @Query(USER_NAME) String username,
-                                     @Query(USER_PASSWORD) String password);
+    Observable<AuthorizationDTO> loginRequest(@Query(GRAND_TYPE) String grandType,
+                                              @Query(CLIENT_ID) String clientId,
+                                              @Query(USER_NAME) String username,
+                                              @Query(USER_PASSWORD) String password);
 
     @GET(POSTS_URL)
     Observable<WallDTO> getPost(@Query(USER_ID) int userId,
@@ -39,4 +41,9 @@ public interface SocialNetworkAPI {
                                       @Query(OFFSET) int offset,
                                       @Query(LIMIT) int limit,
                                       @Query(ACCESS_TOKEN) String accessToken);
+
+    @GET(PROFILE_URL)
+    Observable<UserDTO> getProfileInfo(@Query(ACCESS_TOKEN) String accessToken);
+
+    //TODO /users/profile?access_token=smsdmsd
 }

@@ -4,24 +4,24 @@ import android.util.Log;
 
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
-import by.grodno.toni7777.socialnetwork.network.model.UserDTO;
+import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
 import rx.Subscription;
 
-public class LoginModel extends BaseModel<UserDTO> {
+public class LoginModel extends BaseModel<AuthorizationDTO> {
 
-    private ModelListener<UserDTO> mListener;
+    private ModelListener<AuthorizationDTO> mListener;
     private Subscription mSubscription;
 
-    public LoginModel(ModelListener<UserDTO> listener) {
+    public LoginModel(ModelListener<AuthorizationDTO> listener) {
         this.mListener = listener;
     }
 
     @Override
-    protected void loadData(Observable<UserDTO> observable) {
+    protected void loadData(Observable<AuthorizationDTO> observable) {
         mSubscription = observable
-                .compose(RxUtil.<UserDTO>applySchedulers())
+                .compose(RxUtil.<AuthorizationDTO>applySchedulers())
                 .subscribe(
                         user -> {
                             mListener.loadNext(user);

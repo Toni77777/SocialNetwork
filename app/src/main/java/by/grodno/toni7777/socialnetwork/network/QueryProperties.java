@@ -13,6 +13,7 @@ public final class QueryProperties {
     public static final String LOGIN_URL = "/oauth/token";
     public static final String POSTS_URL = "/posts";
     public static final String FRIENDS_URL = "/friends";
+    public static final String PROFILE_URL = "/users/profile";
 
     public static final String USER_ID = "userId";
     public static final String OFFSET = "offset";
