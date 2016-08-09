@@ -1,8 +1,7 @@
 package by.grodno.toni7777.socialnetwork.network;
 
-import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
-import by.grodno.toni7777.socialnetwork.network.model.UserLoginDTO;
+import by.grodno.toni7777.socialnetwork.network.model.UserDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -23,10 +22,10 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.POSTS_URL
 public interface SocialNetworkAPI {
 
     @POST(LOGIN_URL)
-    Observable<UserLoginDTO> loginRequest(@Query(GRAND_TYPE) String grandType,
-                                          @Query(CLIENT_ID) String clientId,
-                                          @Query(USER_NAME) String username,
-                                          @Query(USER_PASSWORD) String password);
+    Observable<UserDTO> loginRequest(@Query(GRAND_TYPE) String grandType,
+                                     @Query(CLIENT_ID) String clientId,
+                                     @Query(USER_NAME) String username,
+                                     @Query(USER_PASSWORD) String password);
 
     @GET(POSTS_URL)
     Observable<WallDTO> getPost(@Query(USER_ID) int userId,

@@ -53,7 +53,8 @@ public class WallFragment extends BaseViewStateFragment<SwipeRefreshLayout, List
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        ((SocialNetworkApp) getContext().getApplicationContext()).getNetworkComponent().inject(this);
+//        ((SocialNetworkApp) getContext().getApplicationContext()).getNetworkComponent().inject(this);
+        ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         contentView.setOnRefreshListener(this);
         mPostAdapter = new PostAdapter(new ArrayList<>());

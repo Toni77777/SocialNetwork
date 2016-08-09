@@ -57,7 +57,7 @@ public class NetworkServiceTest {
 
         Retrofit retrofit = new Retrofit.Builder()
 //                .baseUrl("http://private-bc396-authorisation.apiary-mock.com")
-                .baseUrl("https://sjc2016vs4.fwd.wf")
+                .baseUrl("https://sjc2016vs5.fwd.wf")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(client)

@@ -72,7 +72,9 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        ((SocialNetworkApp) getContext().getApplicationContext()).getNetworkComponent().inject(this);
+//        ((SocialNetworkApp) getContext().getApplicationContext()).getNetworkComponent().inject(this);
+//        ((SocialNetworkApp) getContext().getApplicationContext()).getPreferencesComponent().inject(this);
+        ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         mLoginView.setText(BuildConfig.LOGIN);
         mPasswordView.setText(BuildConfig.PASS);
@@ -99,7 +101,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
 
     private boolean isLoggedIn() {
         // TODO check autoriration
-        return true;
+        return false;
     }
 
     @Override
@@ -151,11 +153,8 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
     private void setViewsEnabled(boolean enabled) {
         mLoginView.setEnabled(enabled);
         mPasswordView.setEnabled(enabled);
-        methot(enabled);
-    }
-
-    private void methot(boolean enabled) {
         mRegistrationButton.setEnabled(enabled);
         mForgotPassView.setEnabled(enabled);
     }
+
 }
