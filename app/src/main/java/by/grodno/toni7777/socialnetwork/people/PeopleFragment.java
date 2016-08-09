@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
@@ -100,6 +101,8 @@ public class PeopleFragment extends BaseEventStateFragment<SwipeRefreshLayout, P
         mPeopleRecycler.setLayoutManager(linearLayoutManager);
         mPeopleRecycler.setAdapter(mPeopleAdapter);
         contentView.setOnRefreshListener(this);
+
+
 //        mPeopleRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, presenter));
     }
 
@@ -107,8 +110,6 @@ public class PeopleFragment extends BaseEventStateFragment<SwipeRefreshLayout, P
     @Override
     public boolean onQueryTextChange(String newText) {
         Log.e("Search", "onQueryTextChange " + newText);
-//        mPeopleAdapter.clear();
-//        mPeopleAdapter.update(FakeFriens.createAfterSearch(5));
         return false;
     }
 
@@ -132,7 +133,10 @@ public class PeopleFragment extends BaseEventStateFragment<SwipeRefreshLayout, P
     @Override
     public void setData(PeopleDTO data) {
         contentView.setRefreshing(false);
+        mPeopleAdapter.clear();
         mPeopleAdapter.update(data);
+
+
     }
 
     @Override

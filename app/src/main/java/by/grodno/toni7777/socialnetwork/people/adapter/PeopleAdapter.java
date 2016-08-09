@@ -103,8 +103,12 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleView
     }
 
     public void clear() {
-        mPersons.clear();
-        mFriends.clear();
+        if (mPersons != null) {
+            mPersons.clear();
+        }
+        if (mFriends != null) {
+            mFriends.clear();
+        }
     }
 
     public void update(PeopleDTO people) {
