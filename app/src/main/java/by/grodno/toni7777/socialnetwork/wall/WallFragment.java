@@ -6,11 +6,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
@@ -53,7 +50,6 @@ public class WallFragment extends BaseViewStateFragment<SwipeRefreshLayout, List
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-//        ((SocialNetworkApp) getContext().getApplicationContext()).getNetworkComponent().inject(this);
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         contentView.setOnRefreshListener(this);

@@ -1,33 +1,44 @@
 package by.grodno.toni7777.socialnetwork.login;
 
+import android.util.Log;
+
+import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
-import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
+import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
+import by.grodno.toni7777.socialnetwork.test.NetworkServiceTest;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
 import rx.Subscription;
 
-public class LoginModel extends BaseModel<AuthorizationDTO> {
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.CLIENT_ID_VALUE;
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.GRAND_TYPE_VALUE;
 
-    private ModelListener<AuthorizationDTO> mListener;
+public class LoginModel implements BaseModel {
+
+    private BaseListener mListener;
     private Subscription mSubscription;
-    private LoginPreferences mLoginPreferences;
+    private LoginPreferences mPreferences;
+    private SocialNetworkAPI mNetworkAPI;
 
-    public LoginModel(LoginPreferences loginPreferences, ModelListener<AuthorizationDTO> listener) {
-        mLoginPreferences = loginPreferences;
+    public LoginModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, BaseListener listener) {
+        mNetworkAPI = socialNetworkAPI;
+        mPreferences = loginPreferences;
         this.mListener = listener;
     }
 
-    @Override
-    protected void loadData(Observable<AuthorizationDTO> observable) {
-        mSubscription = observable
+    public void getAccessToken(String login, String password) {
+        Observable<AuthorizationDTO> tokenObservable = NetworkServiceTest.netLogin().loginRequest(GRAND_TYPE_VALUE, CLIENT_ID_VALUE, login, password);
+//        Observable<AuthorizationDTO> observable = mSocialNetworkAPI.loginRequest(QueryProperties.GRAND_TYPE_VALUE, QueryProperties.CLIENT_ID_VALUE, login, password);
+
+        mSubscription = tokenObservable
                 .compose(RxUtil.<AuthorizationDTO>applySchedulers())
                 .subscribe(
                         user -> {
-                            mListener.loadNext(user);
-                            mLoginPreferences.setAccessToken(user.getAccessToken());
+//                            mListener.loadNext(user);
+                            mPreferences.setAccessToken(user.getAccessToken());
                         },
                         throwable -> {
                             unsubscribe();
@@ -35,21 +46,23 @@ public class LoginModel extends BaseModel<AuthorizationDTO> {
                         },
                         () -> {
                             unsubscribe();
-                            mListener.onLoadCompleted();
+                            loadProfileInfo();
                         });
     }
 
-    protected void loadProfileInfo(Observable<ProfileDTO> observable) {
-        mSubscription = observable
+    public void loadProfileInfo() {
+//        Observable<ProfileDTO> observable = NetworkServiceTest.netLogin().loginRequest(GRAND_TYPE_VALUE, CLIENT_ID_VALUE, login, password);
+        Observable<ProfileDTO> profileObservable = NetworkServiceTest.netProfile().getProfileInfo(mPreferences.getAccessToken());
+
+        mSubscription = profileObservable
                 .compose(RxUtil.<ProfileDTO>applySchedulers())
                 .subscribe(
-                        user -> {
-//                            mListener.loadNext(user);
-//                            mLoginPreferences.setAccessToken(user.getAccessToken());
+                        profile -> {
+                            Log.e("Profile", profile.toString());
+                            mPreferences.setUserId(profile.getUser().getId());
                         },
                         throwable -> {
                             unsubscribe();
-                            mListener.loadError(throwable);
                         },
                         () -> {
                             unsubscribe();
@@ -58,7 +71,7 @@ public class LoginModel extends BaseModel<AuthorizationDTO> {
     }
 
     @Override
-    protected void unsubscribe() {
+    public void unsubscribe() {
         if (mSubscription != null && !mSubscription.isUnsubscribed()) {
             mSubscription.unsubscribe();
         }

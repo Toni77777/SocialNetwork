@@ -32,13 +32,13 @@ public interface SocialNetworkAPI {
                                               @Query(USER_PASSWORD) String password);
 
     @GET(POSTS_URL)
-    Observable<WallDTO> getPost(@Query(USER_ID) int userId,
+    Observable<WallDTO> getPost(@Query(USER_ID) long userId,
                                 @Query(OFFSET) int offset,
                                 @Query(LIMIT) int limit,
                                 @Query(ACCESS_TOKEN) String accessToken);
 
     @GET(FRIENDS_URL)
-    Observable<FriendsDTO> getFriends(@Query(USER_ID) int userId,
+    Observable<FriendsDTO> getFriends(@Query(USER_ID) long userId,
                                       @Query(OFFSET) int offset,
                                       @Query(LIMIT) int limit,
                                       @Query(ACCESS_TOKEN) String accessToken);
