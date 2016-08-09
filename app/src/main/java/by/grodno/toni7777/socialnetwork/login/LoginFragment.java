@@ -3,7 +3,6 @@ package by.grodno.toni7777.socialnetwork.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +10,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dd.processbutton.iml.ActionProcessButton;
-import com.hannesdorfmann.mosby.mvp.viewstate.MvpViewStateFragment;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
-import by.grodno.toni7777.socialnetwork.base.BaseActivity;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 
@@ -104,7 +99,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
 
     private boolean isLoggedIn() {
         // TODO check autoriration
-        return false;
+        return true;
     }
 
     @Override
@@ -156,6 +151,10 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
     private void setViewsEnabled(boolean enabled) {
         mLoginView.setEnabled(enabled);
         mPasswordView.setEnabled(enabled);
+        methot(enabled);
+    }
+
+    private void methot(boolean enabled) {
         mRegistrationButton.setEnabled(enabled);
         mForgotPassView.setEnabled(enabled);
     }
