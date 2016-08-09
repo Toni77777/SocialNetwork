@@ -6,19 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    card_view:cardCornerRadius="10dp"
-    card_view:cardElevation="8dp"
-    card_view:cardMaxElevation="8dp"
+    card_view:cardCornerRadius="@dimen/post_card_radius"
+    card_view:cardElevation="@dimen/post_card_elevation"
+    card_view:cardMaxElevation="@dimen/post_card_elevation"
     card_view:cardUseCompatPadding="true"
 >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp"
+        android:paddingBottom="@dimen/post_padding_bottom"
+        android:paddingLeft="@dimen/post_padding_left"
+        android:paddingRight="@dimen/post_padding_right"
+        android:paddingTop="@dimen/post_padding_top"
     >
 
         <ImageView
@@ -53,8 +53,8 @@
 
         <ImageButton
             android:id="@+id/like"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/post_like_dislike"
+            android:layout_height="@dimen/post_like_dislike"
             android:layout_below="@+id/post_text"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
@@ -71,8 +71,8 @@
 
         <ImageButton
             android:id="@+id/dislike"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/post_like_dislike"
+            android:layout_height="@dimen/post_like_dislike"
             android:layout_below="@+id/post_text"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"

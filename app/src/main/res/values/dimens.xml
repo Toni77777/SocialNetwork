@@ -10,7 +10,18 @@
 
     <dimen name="nav_header_avatar_height">80dp</dimen>
     <dimen name="nav_header_avatar_width">80dp</dimen>
+
     <dimen name="post_owner_avatar_width">60dp</dimen>
     <dimen name="post_owner_avatar_height">60dp</dimen>
+    <dimen name="post_card_radius">10dp</dimen>
+    <dimen name="post_card_elevation">8dp</dimen>
+    <dimen name="post_padding_bottom">8dp</dimen>
+    <dimen name="post_padding_top">8dp</dimen>
+    <dimen name="post_padding_left">16dp</dimen>
+    <dimen name="post_padding_right">16dp</dimen>
+    <dimen name="post_marging_end">16dp</dimen>
+    <dimen name="post_marging_start">16dp</dimen>
+    <dimen name="post_image_height">300dp</dimen>
+    <dimen name="post_like_dislike">24dp</dimen>
 
 </resources>
