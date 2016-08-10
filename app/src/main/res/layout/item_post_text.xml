@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/owner_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@id/owner_image"
@@ -41,6 +41,13 @@
             android:textColor="@android:color/black"
             android:textSize="16sp"
         />
+
+        <ImageButton
+            android:id="@+id/post_menu_dot"
+            android:layout_width="@dimen/post_like_dislike"
+            android:layout_height="@dimen/post_like_dislike"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/ic_menu_dot_popup_24dp"/>
 
         <TextView
             android:id="@+id/post_text"

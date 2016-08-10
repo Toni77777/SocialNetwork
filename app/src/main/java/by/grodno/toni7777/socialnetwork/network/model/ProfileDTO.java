@@ -2,6 +2,7 @@ package by.grodno.toni7777.socialnetwork.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
+// Remove this class after response refactor
 public class ProfileDTO {
 
     @SerializedName("entity")

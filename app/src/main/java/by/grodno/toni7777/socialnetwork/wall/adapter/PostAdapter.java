@@ -1,9 +1,12 @@
 package by.grodno.toni7777.socialnetwork.wall.adapter;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -14,6 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 
 import static by.grodno.toni7777.socialnetwork.util.ImageLoad.*;
@@ -24,9 +28,9 @@ import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private final List<PostDTO> mPosts;
-    private static final int FULL = R.layout.item_post_full;
-    private static final int IMAGE = R.layout.item_post_image;
-    private static final int TEXT = R.layout.item_post_text;
+    private static final int FULL = R.id.type_post_full;
+    private static final int IMAGE = R.id.type_post_image;
+    private static final int TEXT = R.id.type_post_text;
 
     public PostAdapter(List<PostDTO> posts) {
         mPosts = posts;
@@ -62,12 +66,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         PostDTO post = mPosts.get(position); // backend return null or " " - is all empty field
-        if ((post.getImage() == null) | (TextUtils.isEmpty(post.getImage().trim()))) {
+        if ((post.getImage() == null) || (TextUtils.isEmpty(post.getImage().trim()))) {
             return TEXT;
-        } else if ((post.getText() == null) | (TextUtils.isEmpty(post.getText().trim()))) {
+        } else if ((post.getText() == null) || (TextUtils.isEmpty(post.getText().trim()))) {
             return IMAGE;
-        } else if (((!TextUtils.isEmpty(post.getImage().trim())) & (!TextUtils.isEmpty(post.getText().trim())))
-                | ((post.getImage() != null) & (post.getText() != null))) {
+        } else if (((!TextUtils.isEmpty(post.getImage().trim())) && (!TextUtils.isEmpty(post.getText().trim())))
+                || ((post.getImage() != null) & (post.getText() != null))) {
             return FULL;
         } else {
             throw new IllegalArgumentException("View type not found");
@@ -88,7 +92,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return mPosts;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    static abstract class ViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
         public ViewHolder(View v) {
             super(v);
         }
@@ -97,28 +101,31 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     static class FullPostViewHolder extends ViewHolder {
 
         @BindView(R.id.owner_image)
-        ImageView ownerAvatar;
+        ImageView mOwnerAvatar;
 
         @BindView(R.id.owner_name)
-        TextView owner;
+        TextView mOwnerFullName;
+
+        @BindView(R.id.post_menu_dot)
+        ImageButton mPopup;
 
         @BindView(R.id.post_image)
-        ImageView postImage;
+        ImageView mPostImage;
 
         @BindView(R.id.post_text)
-        TextView postText;
+        TextView mPostText;
 
         @BindView(R.id.like)
-        ImageButton like;
+        ImageButton mLike;
 
         @BindView(R.id.like_count)
-        TextView likeCount;
+        TextView mLikeCount;
 
         @BindView(R.id.dislike)
-        ImageButton dislike;
+        ImageButton mDislike;
 
         @BindView(R.id.dislike_count)
-        TextView dislikeCount;
+        TextView mDislikeCount;
 
         @NonNull
         public static FullPostViewHolder newInstance(ViewGroup parent) {
@@ -133,12 +140,29 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
-            loadCircleImage(ownerAvatar, ownerDTO.getAvatar());
-            owner.setText(ownerDTO.getFullName());
-            loadImage(postImage, post.getImage());
-            postText.setText(post.getText());
-            likeCount.setText(String.valueOf(post.getLike()));
-            dislikeCount.setText(String.valueOf(post.getDislike()));
+            loadCircleImage(mOwnerAvatar, ownerDTO.getAvatar());
+            mOwnerFullName.setText(ownerDTO.getFullName());
+            loadImage(mPostImage, post.getImage());
+            mPostText.setText(post.getText());
+            mLikeCount.setText(String.valueOf(post.getLike()));
+            mDislikeCount.setText(String.valueOf(post.getDislike()));
+        }
+
+        @OnClick(R.id.post_menu_dot)
+        void showPopup() {
+            PopupMenu popupMenu = new PopupMenu(mPopup.getContext(), mPopup);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.inflate(R.menu.post_popup_menu);
+            popupMenu.show();
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            if (item.getItemId() == R.id.post_remove_item) {
+                // TODO Event to View and Request to Server
+
+            }
+            return false;
         }
     }
 
@@ -146,25 +170,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     static class ImagePostViewHolder extends ViewHolder {
 
         @BindView(R.id.owner_image)
-        ImageView ownerAvatar;
+        ImageView mOwnerAvatar;
 
         @BindView(R.id.owner_name)
-        TextView owner;
+        TextView mOwnerFullName;
+
+        @BindView(R.id.post_menu_dot)
+        ImageButton mPopup;
 
         @BindView(R.id.post_image)
-        ImageView postImage;
+        ImageView mPostImage;
 
         @BindView(R.id.like)
-        ImageButton like;
+        ImageButton mLike;
 
         @BindView(R.id.like_count)
-        TextView likeCount;
+        TextView mLikeCount;
 
         @BindView(R.id.dislike)
-        ImageButton dislike;
+        ImageButton mDislike;
 
         @BindView(R.id.dislike_count)
-        TextView dislikeCount;
+        TextView mDislikeCount;
 
         @NonNull
         public static ImagePostViewHolder newInstance(ViewGroup parent) {
@@ -179,11 +206,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
-            loadCircleImage(ownerAvatar, ownerDTO.getAvatar());
-            owner.setText(ownerDTO.getFullName());
-            loadImage(postImage, post.getImage());
-            likeCount.setText(String.valueOf(post.getLike()));
-            dislikeCount.setText(String.valueOf(post.getDislike()));
+            loadCircleImage(mOwnerAvatar, ownerDTO.getAvatar());
+            mOwnerFullName.setText(ownerDTO.getFullName());
+            loadImage(mPostImage, post.getImage());
+            mLikeCount.setText(String.valueOf(post.getLike()));
+            mDislikeCount.setText(String.valueOf(post.getDislike()));
+        }
+
+        @OnClick(R.id.post_menu_dot)
+        void showPopup() {
+            PopupMenu popupMenu = new PopupMenu(mPopup.getContext(), mPopup);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.inflate(R.menu.post_popup_menu);
+            popupMenu.show();
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            if (item.getItemId() == R.id.post_remove_item) {
+                // TODO Event to View and Request to Server
+
+            }
+            return false;
         }
 
     }
@@ -191,25 +235,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     static class TextPostViewHolder extends ViewHolder {
 
         @BindView(R.id.owner_image)
-        ImageView ownerAvatar;
+        ImageView mOwnerAvatar;
 
         @BindView(R.id.owner_name)
-        TextView owner;
+        TextView mOwnerFullName;
+
+        @BindView(R.id.post_menu_dot)
+        ImageButton mPopup;
 
         @BindView(R.id.post_text)
-        TextView postText;
+        TextView mPostText;
 
         @BindView(R.id.like)
-        ImageButton like;
+        ImageButton mLike;
 
         @BindView(R.id.like_count)
-        TextView likeCount;
+        TextView mLikeCount;
 
         @BindView(R.id.dislike)
-        ImageButton dislike;
+        ImageButton mDislike;
 
         @BindView(R.id.dislike_count)
-        TextView dislikeCount;
+        TextView mDislikeCount;
 
         @NonNull
         public static TextPostViewHolder newInstance(ViewGroup parent) {
@@ -224,11 +271,27 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
-            loadCircleImage(ownerAvatar, ownerDTO.getAvatar());
-            owner.setText(ownerDTO.getFullName());
-            postText.setText(post.getText());
-            likeCount.setText(String.valueOf(post.getLike()));
-            dislikeCount.setText(String.valueOf(post.getDislike()));
+            loadCircleImage(mOwnerAvatar, ownerDTO.getAvatar());
+            mOwnerFullName.setText(ownerDTO.getFullName());
+            mPostText.setText(post.getText());
+            mLikeCount.setText(String.valueOf(post.getLike()));
+            mDislikeCount.setText(String.valueOf(post.getDislike()));
+        }
+
+        @OnClick(R.id.post_menu_dot)
+        void showPopup() {
+            PopupMenu popupMenu = new PopupMenu(mPopup.getContext(), mPopup);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.inflate(R.menu.post_popup_menu);
+            popupMenu.show();
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            if (item.getItemId() == R.id.post_remove_item) {
+                // TODO Event to View and Request to Server
+            }
+            return false;
         }
     }
 
