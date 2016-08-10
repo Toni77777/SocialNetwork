@@ -2,9 +2,10 @@ package by.grodno.toni7777.socialnetwork.network;
 
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
+import by.grodno.toni7777.socialnetwork.network.model.PostRemoveDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
-import by.grodno.toni7777.socialnetwork.network.model.UserDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -45,4 +46,8 @@ public interface SocialNetworkAPI {
 
     @GET(PROFILE_URL)
     Observable<ProfileDTO> getProfileInfo(@Query(ACCESS_TOKEN) String accessToken);
+
+    @DELETE(POSTS_URL)
+    Observable<PostRemoveDTO> removePost(@Query("postId") Long postId,
+                                         @Query(ACCESS_TOKEN) String accessToken);
 }

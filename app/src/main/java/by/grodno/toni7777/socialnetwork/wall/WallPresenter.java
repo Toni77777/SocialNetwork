@@ -33,6 +33,10 @@ public class WallPresenter extends MvpBasePresenter<WallView>
         mModel.loadPosts(offset);
     }
 
+    public void removePost(long posId) {
+        mModel.removePost(posId);
+    }
+
     @Override
     public void onLoadCompleted() {
         if (isViewAttached()) {

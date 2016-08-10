@@ -8,6 +8,7 @@ import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
+import by.grodno.toni7777.socialnetwork.network.model.PostRemoveDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 
 import by.grodno.toni7777.socialnetwork.test.NetworkServiceTest;
@@ -32,9 +33,6 @@ public class WallModel implements BaseModel {
     }
 
     public void loadPosts(int offset) {
-        Log.e("Profile", "FullName = " + mPreferences.getUserFullName());
-        Log.e("Profile", "Avatar = " + mPreferences.getUserAvatar());
-        Log.e("Profile", "Token = " + mPreferences.getAccessToken());
         Observable<WallDTO> postsObservable = NetworkServiceTest.netWall().getPost(mPreferences.getUserId(), offset, LIMIT, mPreferences.getAccessToken());
 //        Observable<WallDTO> observable = mSocialNetworkAPI.getPost(1, offset, LIMIT);
 
@@ -60,6 +58,27 @@ public class WallModel implements BaseModel {
 
     private void saveInCache(WallDTO wallDTO) {
         // TODO Put in cache to do next step
+    }
+
+    public void removePost(long postId) {
+        Log.e("Post", "Model " + postId);
+        Observable<PostRemoveDTO> postsObservable = NetworkServiceTest.netWall().removePost(postId, mPreferences.getAccessToken());
+
+        unsubscribe();
+        mSubscription = postsObservable
+                .compose(RxUtil.<PostRemoveDTO>applySchedulers())
+                .subscribe(
+                        post -> {
+                            Log.e("Remove", post.toString());
+                        },
+                        throwable -> {
+                            unsubscribe();
+                            Log.e("Remove", throwable.toString());
+                        },
+                        () -> {
+                            unsubscribe();
+                        }
+                );
     }
 
 

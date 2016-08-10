@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ import by.grodno.toni7777.socialnetwork.R;
 
 import static by.grodno.toni7777.socialnetwork.util.ImageLoad.*;
 
+import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
 import by.grodno.toni7777.socialnetwork.network.model.OwnerDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 
@@ -83,6 +85,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return mPosts.size();
     }
 
+    public void clear() {
+        mPosts.clear();
+    }
+
     public void update(List<PostDTO> newPosts) {
         mPosts.addAll(newPosts);
         notifyDataSetChanged();
@@ -127,6 +133,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         @BindView(R.id.dislike_count)
         TextView mDislikeCount;
 
+        private long mPostId;
+
         @NonNull
         public static FullPostViewHolder newInstance(ViewGroup parent) {
             return new FullPostViewHolder(LayoutInflater.from(parent.getContext())
@@ -146,6 +154,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mPostText.setText(post.getText());
             mLikeCount.setText(String.valueOf(post.getLike()));
             mDislikeCount.setText(String.valueOf(post.getDislike()));
+            mPostId = post.getPostId();
         }
 
         @OnClick(R.id.post_menu_dot)
@@ -159,8 +168,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             if (item.getItemId() == R.id.post_remove_item) {
-                // TODO Event to View and Request to Server
-
+                EventBus.getDefault().post(new PostEvent(mPostId));
             }
             return false;
         }
@@ -193,6 +201,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         @BindView(R.id.dislike_count)
         TextView mDislikeCount;
 
+        private long mPostId;
+
         @NonNull
         public static ImagePostViewHolder newInstance(ViewGroup parent) {
             return new ImagePostViewHolder(LayoutInflater.from(parent.getContext())
@@ -211,6 +221,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             loadImage(mPostImage, post.getImage());
             mLikeCount.setText(String.valueOf(post.getLike()));
             mDislikeCount.setText(String.valueOf(post.getDislike()));
+            mPostId = post.getPostId();
         }
 
         @OnClick(R.id.post_menu_dot)
@@ -224,8 +235,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             if (item.getItemId() == R.id.post_remove_item) {
-                // TODO Event to View and Request to Server
-
+                EventBus.getDefault().post(new PostEvent(mPostId));
             }
             return false;
         }
@@ -258,6 +268,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         @BindView(R.id.dislike_count)
         TextView mDislikeCount;
 
+        private long mPostId;
+
         @NonNull
         public static TextPostViewHolder newInstance(ViewGroup parent) {
             return new TextPostViewHolder(LayoutInflater.from(parent.getContext())
@@ -276,6 +288,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mPostText.setText(post.getText());
             mLikeCount.setText(String.valueOf(post.getLike()));
             mDislikeCount.setText(String.valueOf(post.getDislike()));
+            mPostId = post.getPostId();
         }
 
         @OnClick(R.id.post_menu_dot)
@@ -289,7 +302,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             if (item.getItemId() == R.id.post_remove_item) {
-                // TODO Event to View and Request to Server
+                EventBus.getDefault().post(new PostEvent(mPostId));
             }
             return false;
         }
