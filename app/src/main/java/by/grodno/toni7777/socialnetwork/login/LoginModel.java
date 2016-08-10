@@ -36,9 +36,8 @@ public class LoginModel implements BaseModel {
         mSubscription = tokenObservable
                 .compose(RxUtil.<AuthorizationDTO>applySchedulers())
                 .subscribe(
-                        user -> {
-//                            mListener.loadNext(user);
-                            mPreferences.setAccessToken(user.getAccessToken());
+                        authorization -> {
+                            mPreferences.setAccessToken(authorization.getAccessToken());
                         },
                         throwable -> {
                             unsubscribe();
@@ -60,6 +59,8 @@ public class LoginModel implements BaseModel {
                         profile -> {
                             Log.e("Profile", profile.toString());
                             mPreferences.setUserId(profile.getUser().getId());
+                            mPreferences.setUserAvatar(profile.getUser().getAvatar());
+                            mPreferences.setUserFullName(profile.getUser().getName(), profile.getUser().getSurname());
                         },
                         throwable -> {
                             unsubscribe();

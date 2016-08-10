@@ -1,5 +1,7 @@
 package by.grodno.toni7777.socialnetwork.wall;
 
+import android.util.Log;
+
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
@@ -30,6 +32,9 @@ public class WallModel implements BaseModel {
     }
 
     public void loadPosts(int offset) {
+        Log.e("Profile", "FullName = " + mPreferences.getUserFullName());
+        Log.e("Profile", "Avatar = " + mPreferences.getUserAvatar());
+        Log.e("Profile", "Token = " + mPreferences.getAccessToken());
         Observable<WallDTO> postsObservable = NetworkServiceTest.netWall().getPost(mPreferences.getUserId(), offset, LIMIT, mPreferences.getAccessToken());
 //        Observable<WallDTO> observable = mSocialNetworkAPI.getPost(1, offset, LIMIT);
 

@@ -25,6 +25,7 @@ import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
 import by.grodno.toni7777.socialnetwork.registration.RegistrationActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
+import by.grodno.toni7777.socialnetwork.util.LoginUtil;
 import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
 
@@ -57,8 +58,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-
-        if (isLoggedIn()) {
+        if (LoginUtil.isLogined(getContext())) {
             getContext().startActivity(new Intent(getContext(), WallActivity.class));
             getActivity().finish();
         }
@@ -72,8 +72,6 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-//        ((SocialNetworkApp) getContext().getApplicationContext()).getNetworkComponent().inject(this);
-//        ((SocialNetworkApp) getContext().getApplicationContext()).getPreferencesComponent().inject(this);
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         mLoginView.setText(BuildConfig.LOGIN);
@@ -97,11 +95,6 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPres
     @OnClick(R.id.forgot_password)
     void restorePassword() {
         // TODO start restore activity
-    }
-
-    private boolean isLoggedIn() {
-        // TODO check autoriration
-        return false;
     }
 
     @Override
