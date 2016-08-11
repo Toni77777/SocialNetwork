@@ -19,6 +19,7 @@ public final class QueryProperties {
     public static final String OFFSET = "offset";
     public static final String LIMIT = "limit";
     public static final String ACCESS_TOKEN = "access_token";
+    public static final String POST_ID = "postId";
 
 
     public static final String HEADER_AUTORIZATION = "Authorization";

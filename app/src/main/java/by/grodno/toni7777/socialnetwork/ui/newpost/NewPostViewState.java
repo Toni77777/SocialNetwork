@@ -1,16 +1,16 @@
-package by.grodno.toni7777.socialnetwork.ui.login;
+package by.grodno.toni7777.socialnetwork.ui.newpost;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
-public class LoginViewState implements ViewState<LoginMVP.LoginView> {
+public class NewPostViewState implements ViewState<NewPostMVP.NewPostView> {
 
-    private static final int STATE_SHOW_LOGIN_FORM = 0;
-    private static final int STATE_SHOW_LOADING = 1;
-    private static final int STATE_SHOW_ERROR = 2;
+    final int STATE_SHOW_LOGIN_FORM = 0;
+    final int STATE_SHOW_LOADING = 1;
+    final int STATE_SHOW_ERROR = 2;
 
     int state = STATE_SHOW_LOGIN_FORM;
 
-    public void setShowLoginForm() {
+    public void setShowPostForm() {
         state = STATE_SHOW_LOGIN_FORM;
     }
 
@@ -23,7 +23,7 @@ public class LoginViewState implements ViewState<LoginMVP.LoginView> {
     }
 
     @Override
-    public void apply(LoginMVP.LoginView view, boolean retained) {
+    public void apply(NewPostMVP.NewPostView view, boolean retained) {
         switch (state) {
             case STATE_SHOW_LOADING:
                 view.showLoading();
@@ -34,8 +34,9 @@ public class LoginViewState implements ViewState<LoginMVP.LoginView> {
                 break;
 
             case STATE_SHOW_LOGIN_FORM:
-                view.showLoginForm();
+                view.showPostForm();
                 break;
         }
     }
+
 }

@@ -2,9 +2,11 @@ package by.grodno.toni7777.socialnetwork.network;
 
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
-import by.grodno.toni7777.socialnetwork.network.model.PostRemoveDTO;
+import by.grodno.toni7777.socialnetwork.network.model.NewPostDTO;
+import by.grodno.toni7777.socialnetwork.network.model.PostResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -17,6 +19,7 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.FRIENDS_U
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.GRAND_TYPE;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.LIMIT;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.OFFSET;
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.POST_ID;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_ID;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_NAME;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_PASSWORD;
@@ -48,6 +51,16 @@ public interface SocialNetworkAPI {
     Observable<ProfileDTO> getProfileInfo(@Query(ACCESS_TOKEN) String accessToken);
 
     @DELETE(POSTS_URL)
-    Observable<PostRemoveDTO> removePost(@Query("postId") Long postId,
-                                         @Query(ACCESS_TOKEN) String accessToken);
+    Observable<PostResponseDTO> removePost(@Query(POST_ID) Long postId,
+                                           @Query(ACCESS_TOKEN) String accessToken);
+
+    @POST(POSTS_URL)
+    Observable<PostResponseDTO> sendNewPost(@Body NewPostDTO newPost,
+                                            @Query(ACCESS_TOKEN) String accessToken);
+
+    /*
+    idTo : userToID
+    fkImage : "sdsd"
+    text: "sdsd"
+     */
 }

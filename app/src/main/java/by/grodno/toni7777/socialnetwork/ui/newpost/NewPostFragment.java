@@ -1,8 +1,8 @@
 package by.grodno.toni7777.socialnetwork.ui.newpost;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,19 +10,38 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import by.grodno.toni7777.socialnetwork.R;
+import com.hannesdorfmann.mosby.mvp.viewstate.MvpViewStateFragment;
+import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
-public class NewPostFragment extends Fragment {
+import javax.inject.Inject;
+
+import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
+
+public class NewPostFragment extends MvpViewStateFragment<NewPostMVP.NewPostView, NewPostPresenter>
+        implements NewPostMVP.NewPostView {
+
+    @Inject
+    NewPostPresenter mPresenter;
+
+    private ProgressDialog mProgressDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        initProgressDialog();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_post_new, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -33,13 +52,56 @@ public class NewPostFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.new_post_item) {
+            presenter.sendNewPost("My firs post to wall from app", null);
+//            mProgressDialog.show();
             return true;
         } else if (id == R.id.clear_image_item) {
+            mProgressDialog.dismiss();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initProgressDialog() {
+        mProgressDialog = new ProgressDialog(getContext());
+        mProgressDialog.setMessage("Send post to server");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
+    }
+
+    @Override
+    public NewPostPresenter createPresenter() {
+        return mPresenter;
+    }
+
+    @Override
+    public ViewState createViewState() {
+        return new NewPostViewState();
+    }
+
+    @Override
+    public void onNewViewStateInstance() {
+        showPostForm();
+    }
+
+    @Override
+    public void showPostForm() {
+
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void sendSuccess() {
+
     }
 }

@@ -1,17 +1,14 @@
 package by.grodno.toni7777.socialnetwork.ui.wall;
 
-import android.util.Log;
-
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
-import by.grodno.toni7777.socialnetwork.network.model.PostRemoveDTO;
+import by.grodno.toni7777.socialnetwork.network.model.PostResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 
-import by.grodno.toni7777.socialnetwork.test.NetworkServiceTest;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
@@ -60,11 +57,11 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
     }
 
     public void removePost(long postId) {
-        Observable<PostRemoveDTO> postsObservable = mNetworkAPI.removePost(postId, mPreferences.getAccessToken());
+        Observable<PostResponseDTO> postsObservable = mNetworkAPI.removePost(postId, mPreferences.getAccessToken());
 
         unsubscribe();
         mSubscription = postsObservable
-                .compose(RxUtil.<PostRemoveDTO>applySchedulers())
+                .compose(RxUtil.<PostResponseDTO>applySchedulers())
                 .subscribe(
                         post -> {
                         },
