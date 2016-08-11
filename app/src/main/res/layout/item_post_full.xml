@@ -40,12 +40,12 @@
             android:textSize="16sp"
         />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/post_menu_dot"
             android:layout_width="@dimen/post_like_dislike"
             android:layout_height="@dimen/post_like_dislike"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/ic_menu_dot_popup_24dp"/>
+            android:src="@drawable/ic_menu_dot_popup_24dp"/>
 
         <ImageView
             android:id="@+id/post_image"
@@ -63,14 +63,14 @@
             android:layout_marginStart="@dimen/post_image_margin_top"
             android:textSize="18sp"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/like"
-            android:layout_width="@dimen/post_like_dislike"
-            android:layout_height="@dimen/post_like_dislike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/post_text"
             android:layout_marginStart="@dimen/post_image_margin_top"
             android:layout_marginTop="@dimen/post_image_margin_top"
-            android:background="@drawable/ic_like_default"/>
+            android:src="@drawable/ic_like_default"/>
 
         <TextView
             android:id="@+id/like_count"
@@ -81,15 +81,15 @@
             android:layout_marginTop="@dimen/post_image_margin_top"
             android:layout_toEndOf="@id/like"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/dislike"
-            android:layout_width="@dimen/post_like_dislike"
-            android:layout_height="@dimen/post_like_dislike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/post_text"
             android:layout_marginStart="@dimen/post_marging_start"
             android:layout_marginTop="@dimen/post_image_margin_top"
-            android:layout_toEndOf="@id/like_count"
-            android:background="@drawable/ic_dislike_default"/>
+            android:src="@drawable/ic_dislike_default"
+            android:layout_toEndOf="@id/like_count"/>
 
         <TextView
             android:id="@+id/dislike_count"

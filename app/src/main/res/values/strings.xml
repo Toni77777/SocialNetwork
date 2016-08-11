@@ -32,6 +32,7 @@
     <string name="activity_label_wall">Wall</string>
     <string name="activity_label_registration">Registration</string>
     <string name="activity_label_friends">Friends</string>
+    <string name="activity_label_new_post">New Post</string>
 
     <string name="nav_item_profile">Profile</string>
     <string name="nav_item_wall">Wall</string>

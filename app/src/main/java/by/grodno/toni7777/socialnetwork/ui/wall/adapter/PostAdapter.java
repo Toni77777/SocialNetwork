@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -113,7 +112,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView mOwnerFullName;
 
         @BindView(R.id.post_menu_dot)
-        ImageButton mPopup;
+        ImageView mPopup;
 
         @BindView(R.id.post_image)
         ImageView mPostImage;
@@ -122,13 +121,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView mPostText;
 
         @BindView(R.id.like)
-        ImageButton mLike;
+        ImageView mLike;
 
         @BindView(R.id.like_count)
         TextView mLikeCount;
 
         @BindView(R.id.dislike)
-        ImageButton mDislike;
+        ImageView mDislike;
 
         @BindView(R.id.dislike_count)
         TextView mDislikeCount;
@@ -161,7 +160,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         void showPopup() {
             PopupMenu popupMenu = new PopupMenu(mPopup.getContext(), mPopup);
             popupMenu.setOnMenuItemClickListener(this);
-            popupMenu.inflate(R.menu.post_popup_menu);
+            popupMenu.inflate(R.menu.menu_post_popup);
             popupMenu.show();
         }
 
@@ -184,19 +183,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView mOwnerFullName;
 
         @BindView(R.id.post_menu_dot)
-        ImageButton mPopup;
+        ImageView mPopup;
 
         @BindView(R.id.post_image)
         ImageView mPostImage;
 
         @BindView(R.id.like)
-        ImageButton mLike;
+        ImageView mLike;
 
         @BindView(R.id.like_count)
         TextView mLikeCount;
 
         @BindView(R.id.dislike)
-        ImageButton mDislike;
+        ImageView mDislike;
 
         @BindView(R.id.dislike_count)
         TextView mDislikeCount;
@@ -228,7 +227,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         void showPopup() {
             PopupMenu popupMenu = new PopupMenu(mPopup.getContext(), mPopup);
             popupMenu.setOnMenuItemClickListener(this);
-            popupMenu.inflate(R.menu.post_popup_menu);
+            popupMenu.inflate(R.menu.menu_post_popup);
             popupMenu.show();
         }
 
@@ -251,19 +250,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView mOwnerFullName;
 
         @BindView(R.id.post_menu_dot)
-        ImageButton mPopup;
+        ImageView mPopup;
 
         @BindView(R.id.post_text)
         TextView mPostText;
 
         @BindView(R.id.like)
-        ImageButton mLike;
+        ImageView mLike;
 
         @BindView(R.id.like_count)
         TextView mLikeCount;
 
         @BindView(R.id.dislike)
-        ImageButton mDislike;
+        ImageView mDislike;
 
         @BindView(R.id.dislike_count)
         TextView mDislikeCount;
@@ -295,7 +294,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         void showPopup() {
             PopupMenu popupMenu = new PopupMenu(mPopup.getContext(), mPopup);
             popupMenu.setOnMenuItemClickListener(this);
-            popupMenu.inflate(R.menu.post_popup_menu);
+            popupMenu.inflate(R.menu.menu_post_popup);
             popupMenu.show();
         }
 

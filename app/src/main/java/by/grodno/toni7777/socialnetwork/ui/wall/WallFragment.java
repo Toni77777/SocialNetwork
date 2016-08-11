@@ -1,5 +1,6 @@
 package by.grodno.toni7777.socialnetwork.ui.wall;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -27,6 +28,7 @@ import by.grodno.toni7777.socialnetwork.base.BaseEventViewStateFragment;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
+import by.grodno.toni7777.socialnetwork.ui.newpost.NewPostActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.adapter.PostAdapter;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.START_LOAD;
@@ -123,6 +125,11 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
     @Subscribe
     public void removePost(PostEvent event) {
         presenter.removePost(event.getPostId());
+    }
+
+    @OnClick(R.id.new_post_fab)
+    void newPost() {
+        startActivity(new Intent(getContext(), NewPostActivity.class));
     }
 
 }

@@ -8,4 +8,6 @@
     <color name="navTextColor">#FFFFFF</color>
     <color name="progressPaginationColor">#AA000000</color>
 
+    <color name="newPostBottomColor">#dfdee6</color>
+
 </resources>

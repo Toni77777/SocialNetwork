@@ -24,6 +24,8 @@
     <string name="activity_label_wall">Стена</string>
     <string name="activity_label_registration">Регистрация</string>
     <string name="activity_label_friends">Друзья</string>
+    <string name="activity_label_new_post">Новый пост</string>
+
 
     <string name="nav_item_profile">Профиль</string>
     <string name="nav_item_wall">Стена</string>
