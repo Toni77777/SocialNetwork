@@ -49,6 +49,7 @@ apt {
     arguments {
         eventBusIndex "com.example.myapp.MyEventBusIndex"
     }
+}
 
 def supportLibraryVersion = '24.1.1'
 def retrofitVersion = '2.0.1'
@@ -59,6 +60,8 @@ def mosbyVersion = '2.0.1'
 def processButtonVersion = '1.0.0'
 def rxAndroidVersion = '1.1.0'
 def annotationJSRVersion = '1.0'
+def eventBusVersion = '3.0.0'
+def eventBusAPVersion = '3.0.1'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -87,8 +90,8 @@ dependencies {
 
     compile "com.github.dmytrodanylyk.android-process-button:library:$processButtonVersion"
 
-    compile 'org.greenrobot:eventbus:3.0.0'
-    apt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+    compile "org.greenrobot:eventbus:$eventBusVersion"
+    apt "org.greenrobot:eventbus-annotation-processor:$eventBusAPVersion"
 }
 
-}
+
