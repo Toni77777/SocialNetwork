@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.wall.adapter;
+package by.grodno.toni7777.socialnetwork.ui.wall.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;

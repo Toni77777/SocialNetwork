@@ -18,9 +18,9 @@ import android.widget.TextView;
 import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.LoginActivity;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.ui.wall.WallActivity;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
-import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
 public class DrawerActivity extends ToolbarActivity implements NavigationView.OnNavigationItemSelectedListener {
 

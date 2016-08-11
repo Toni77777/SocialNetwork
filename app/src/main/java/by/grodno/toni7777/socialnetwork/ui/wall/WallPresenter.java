@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.wall;
+package by.grodno.toni7777.socialnetwork.ui.wall;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
@@ -13,8 +13,8 @@ import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
-public class WallPresenter extends MvpBasePresenter<WallView>
-        implements ModelListener<List<PostDTO>>, MvpPresenter<WallView>, LoadPagination {
+public class WallPresenter extends MvpBasePresenter<WallMVP.WallView>
+        implements ModelListener<List<PostDTO>>, MvpPresenter<WallMVP.WallView>, WallMVP.WallPresenter {
 
     private final WallModel mModel;
     private boolean mForceRefresh;

@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.registration.fragment;
+package by.grodno.toni7777.socialnetwork.ui.registration.fragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,8 +19,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
-import by.grodno.toni7777.socialnetwork.registration.DatePickerFragment;
-import by.grodno.toni7777.socialnetwork.registration.ErrorTextWatcher;
+import by.grodno.toni7777.socialnetwork.ui.registration.DatePickerFragment;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_DATE_PICKER;
 import static by.grodno.toni7777.socialnetwork.util.Util.hasKeySparseIntArray;

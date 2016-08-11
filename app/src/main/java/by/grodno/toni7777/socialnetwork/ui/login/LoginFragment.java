@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.login;
+package by.grodno.toni7777.socialnetwork.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,14 +23,14 @@ import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 
 import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
-import by.grodno.toni7777.socialnetwork.registration.RegistrationActivity;
+import by.grodno.toni7777.socialnetwork.ui.registration.RegistrationActivity;
+import by.grodno.toni7777.socialnetwork.ui.wall.WallActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.LoginUtil;
-import by.grodno.toni7777.socialnetwork.wall.WallActivity;
 
 
-public class LoginFragment extends BaseMvpViewStateFragment<LoginView, LoginPresenter>
-        implements LoginView {
+public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.LoginView, LoginPresenter>
+        implements LoginMVP.LoginView {
 
     @BindView(R.id.login)
     EditText mLoginView;

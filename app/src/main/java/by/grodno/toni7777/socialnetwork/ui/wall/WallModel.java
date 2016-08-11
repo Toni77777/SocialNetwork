@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.wall;
+package by.grodno.toni7777.socialnetwork.ui.wall;
 
 import android.util.Log;
 
@@ -19,7 +19,7 @@ import rx.Subscription;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.LIMIT;
 
-public class WallModel implements BaseModel {
+public class WallModel implements BaseModel, WallMVP.WallModel {
 
     private ModelListener<List<PostDTO>> mListener;
     private Subscription mSubscription;

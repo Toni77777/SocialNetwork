@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.registration;
+package by.grodno.toni7777.socialnetwork.ui.registration;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentManager;
 
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.ToolbarActivity;
-import by.grodno.toni7777.socialnetwork.registration.fragment.ContactFragment;
-import by.grodno.toni7777.socialnetwork.registration.fragment.InfoFragment;
-import by.grodno.toni7777.socialnetwork.registration.fragment.LoginFragment;
+import by.grodno.toni7777.socialnetwork.ui.registration.fragment.ContactFragment;
+import by.grodno.toni7777.socialnetwork.ui.registration.fragment.InfoFragment;
+import by.grodno.toni7777.socialnetwork.ui.registration.fragment.LoginFragment;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_PROFILE;
 

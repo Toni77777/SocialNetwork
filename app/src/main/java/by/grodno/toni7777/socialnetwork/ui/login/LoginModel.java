@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.login;
+package by.grodno.toni7777.socialnetwork.ui.login;
 
 import android.util.Log;
 
@@ -16,7 +16,7 @@ import rx.Subscription;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.CLIENT_ID_VALUE;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.GRAND_TYPE_VALUE;
 
-public class LoginModel implements BaseModel {
+public class LoginModel implements BaseModel, LoginMVP.LoginModel {
 
     private BaseListener mListener;
     private Subscription mSubscription;
@@ -29,6 +29,7 @@ public class LoginModel implements BaseModel {
         this.mListener = listener;
     }
 
+    @Override
     public void getAccessToken(String login, String password) {
         Observable<AuthorizationDTO> tokenObservable = NetworkServiceTest.netLogin().loginRequest(GRAND_TYPE_VALUE, CLIENT_ID_VALUE, login, password);
 //        Observable<AuthorizationDTO> observable = mSocialNetworkAPI.loginRequest(QueryProperties.GRAND_TYPE_VALUE, QueryProperties.CLIENT_ID_VALUE, login, password);
@@ -49,6 +50,7 @@ public class LoginModel implements BaseModel {
                         });
     }
 
+    @Override
     public void loadProfileInfo() {
 //        Observable<ProfileDTO> observable = NetworkServiceTest.netLogin().loginRequest(GRAND_TYPE_VALUE, CLIENT_ID_VALUE, login, password);
         Observable<ProfileDTO> profileObservable = NetworkServiceTest.netProfile().getProfileInfo(mPreferences.getAccessToken());

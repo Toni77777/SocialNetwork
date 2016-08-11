@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.registration.fragment;
+package by.grodno.toni7777.socialnetwork.ui.registration.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +12,7 @@ import android.widget.ViewSwitcher;
 import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
-import by.grodno.toni7777.socialnetwork.registration.Profile;
+import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_PROFILE;
 import static by.grodno.toni7777.socialnetwork.util.Util.inNotEmptySparseIntArray;

@@ -20,11 +20,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".wall.WallActivity"
+            android:name=".ui.wall.WallActivity"
             android:label="@string/activity_label_wall">
         </activity>
         <activity
-            android:name=".registration.RegistrationActivity"
+            android:name=".ui.registration.RegistrationActivity"
             android:label="@string/activity_label_registration">
         </activity>
 

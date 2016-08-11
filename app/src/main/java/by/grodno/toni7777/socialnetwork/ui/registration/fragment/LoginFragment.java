@@ -1,10 +1,9 @@
-package by.grodno.toni7777.socialnetwork.registration.fragment;
+package by.grodno.toni7777.socialnetwork.ui.registration.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.text.Editable;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
-import by.grodno.toni7777.socialnetwork.registration.ErrorTextWatcher;
 
 public class LoginFragment extends TabFragment {
 

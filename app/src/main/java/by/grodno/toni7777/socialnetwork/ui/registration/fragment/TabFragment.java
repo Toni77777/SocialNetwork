@@ -1,11 +1,11 @@
-package by.grodno.toni7777.socialnetwork.registration.fragment;
+package by.grodno.toni7777.socialnetwork.ui.registration.fragment;
 
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.util.SparseIntArray;
 
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
-import by.grodno.toni7777.socialnetwork.registration.ErrorTextWatcher;
+import by.grodno.toni7777.socialnetwork.ui.registration.ErrorTextWatcher;
 
 public abstract class TabFragment extends BaseFragment {
 

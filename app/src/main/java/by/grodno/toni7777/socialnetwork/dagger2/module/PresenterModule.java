@@ -2,10 +2,10 @@ package by.grodno.toni7777.socialnetwork.dagger2.module;
 
 
 import by.grodno.toni7777.socialnetwork.dagger2.scope.PresenterScope;
-import by.grodno.toni7777.socialnetwork.login.LoginPresenter;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.ui.login.LoginPresenter;
+import by.grodno.toni7777.socialnetwork.ui.wall.WallPresenter;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
-import by.grodno.toni7777.socialnetwork.wall.WallPresenter;
 import dagger.Module;
 import dagger.Provides;
 

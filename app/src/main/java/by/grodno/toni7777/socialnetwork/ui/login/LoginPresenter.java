@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.login;
+package by.grodno.toni7777.socialnetwork.ui.login;
 
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
@@ -11,8 +11,8 @@ import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
-public class LoginPresenter extends MvpBasePresenter<LoginView>
-        implements BaseListener, MvpPresenter<LoginView> {
+public class LoginPresenter extends MvpBasePresenter<LoginMVP.LoginView>
+        implements BaseListener, MvpPresenter<LoginMVP.LoginView>, LoginMVP.LoginPresenter {
 
     private LoginModel mModel;
 
@@ -21,6 +21,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView>
         mModel = new LoginModel(socialNetworkAPI, loginPreferences, this);
     }
 
+    @Override
     public void authorization(String login, String password) {
         if (isViewAttached()) {
             getView().showLoading();

@@ -1,11 +1,10 @@
-package by.grodno.toni7777.socialnetwork.wall;
+package by.grodno.toni7777.socialnetwork.ui.wall;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
@@ -26,17 +24,15 @@ import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventViewStateFragment;
-import by.grodno.toni7777.socialnetwork.base.BaseViewStateFragment;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
+import by.grodno.toni7777.socialnetwork.ui.wall.adapter.PostAdapter;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.START_LOAD;
 
-import by.grodno.toni7777.socialnetwork.wall.adapter.PostAdapter;
-
-public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout, List<PostDTO>, WallView, WallPresenter>
-        implements WallView, SwipeRefreshLayout.OnRefreshListener {
+public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout, List<PostDTO>, WallMVP.WallView, WallPresenter>
+        implements WallMVP.WallView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.posts_recycler)
     RecyclerView mPostsRecycler;
@@ -73,7 +69,7 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
     }
 
     @Override
-    public LceViewState<List<PostDTO>, WallView> createViewState() {
+    public LceViewState<List<PostDTO>, WallMVP.WallView> createViewState() {
         setRetainInstance(true);
         return new RetainingLceViewState<>();
     }
@@ -123,10 +119,10 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
         mProgressPaginView.setVisibility(View.GONE);
     }
 
+    @Override
     @Subscribe
     public void removePost(PostEvent event) {
         presenter.removePost(event.getPostId());
     }
-
 
 }

@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.wall;
+package by.grodno.toni7777.socialnetwork.ui.wall;
 
 import android.os.Bundle;
 

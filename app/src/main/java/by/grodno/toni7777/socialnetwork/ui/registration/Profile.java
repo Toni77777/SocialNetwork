@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.registration;
+package by.grodno.toni7777.socialnetwork.ui.registration;
 
 import android.os.Parcel;
 import android.os.Parcelable;
