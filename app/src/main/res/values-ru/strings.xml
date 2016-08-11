@@ -24,6 +24,8 @@
     <string name="activity_label_wall">Стена</string>
     <string name="activity_label_registration">Регистрация</string>
     <string name="activity_label_friends">Друзья</string>
+    <string name="activity_label_new_post">Новый пост</string>
+
 
     <string name="nav_item_profile">Профиль</string>
     <string name="nav_item_wall">Стена</string>
@@ -31,9 +33,12 @@
     <string name="nav_item_message">Сообщения</string>
     <string name="nav_item_groups">Группы</string>
     <string name="nav_item_settings">Настройки</string>
-    <string name="nav_menu_authorization">Авторизация</string>
-    <string name="nav_item_sing_in">Вход</string>
     <string name="nav_item_logout">Выйти</string>
     <string name="error_autorization">Bad username or password</string>
+
+    <string name="post_item_remove">Удалить</string>
+    <string name="login_button_success">Success</string>
+    <string name="login_button_error">Error</string>
+    <string name="login_button_progress">Loading</string>
 
 </resources>

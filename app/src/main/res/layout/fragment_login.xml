@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin" tools:context=".LoginActivity">
 
     <LinearLayout
-        android:id="@+id/loginForm"
+        android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -40,29 +40,27 @@
             android:id="@+id/sing_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="200dp"
+            android:minWidth="@dimen/login_button_min_width"
             android:text="@string/authorization_log_in"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
             custom:pb_colorComplete="@color/green_complete"
             custom:pb_colorError="@color/red_error"
             custom:pb_colorNormal="@color/blue_normal"
             custom:pb_colorPressed="@color/blue_pressed"
             custom:pb_colorProgress="@color/purple_progress"
-            custom:pb_textComplete="Success"
-            custom:pb_textError="Error"
-            custom:pb_textProgress="Loading"/>
+            custom:pb_textComplete="@string/login_button_success"
+            custom:pb_textError="@string/login_button_error"
+            custom:pb_textProgress="@string/login_button_progress"/>
 
         <com.dd.processbutton.iml.ActionProcessButton
             android:id="@+id/sing_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:minWidth="200dp"
+            android:layout_marginBottom="@dimen/post_padding_top"
+            android:layout_marginTop="@dimen/post_padding_top"
+            android:minWidth="@dimen/login_button_min_width"
             android:text="@string/authorization_sing_up"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
             custom:pb_colorPressed="@color/blue_pressed"
         />
 
@@ -70,8 +68,8 @@
             android:id="@+id/forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginBottom="@dimen/post_image_margin_top"
+            android:layout_marginTop="@dimen/post_image_margin_top"
             android:text="@string/authorization_forgot_password"
         />
 
@@ -80,11 +78,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="@dimen/post_marging_start"
+            android:layout_marginTop="@dimen/post_image_margin_top"
             android:text="@string/error_autorization"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="14sp"
             android:visibility="gone"
         />
 

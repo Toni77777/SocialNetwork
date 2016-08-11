@@ -13,5 +13,9 @@
         <item name="android:minHeight">?actionBarSize</item>
     </style>
 
+    <style name="NewPostTheme" parent="AppTheme">
+        <item name="android:homeAsUpIndicator">@drawable/ic_close_post_24dp</item>
+    </style>
+
 
 </resources>

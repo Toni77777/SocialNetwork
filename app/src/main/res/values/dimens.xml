@@ -6,4 +6,24 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="progress_padding">4dp</dimen>
+
+    <dimen name="nav_header_avatar_height">80dp</dimen>
+    <dimen name="nav_header_avatar_width">80dp</dimen>
+
+    <dimen name="post_owner_avatar_width">60dp</dimen>
+    <dimen name="post_owner_avatar_height">60dp</dimen>
+    <dimen name="post_card_radius">10dp</dimen>
+    <dimen name="post_card_elevation">8dp</dimen>
+    <dimen name="post_padding_bottom">8dp</dimen>
+    <dimen name="post_padding_top">8dp</dimen>
+    <dimen name="post_padding_left">16dp</dimen>
+    <dimen name="post_padding_right">16dp</dimen>
+    <dimen name="post_marging_end">16dp</dimen>
+    <dimen name="post_marging_start">16dp</dimen>
+    <dimen name="post_image_height">300dp</dimen>
+    <dimen name="post_like_dislike">24dp</dimen>
+    <dimen name="post_image_margin_top">4dp</dimen>
+    <dimen name="login_button_min_width">200dp</dimen>
+
 </resources>
