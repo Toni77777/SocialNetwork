@@ -11,17 +11,18 @@ import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
+import by.grodno.toni7777.socialnetwork.ui.wall.listener.RemovePostListener;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 public class WallPresenter extends MvpBasePresenter<WallMVP.WallView>
-        implements ModelListener<List<PostDTO>>, MvpPresenter<WallMVP.WallView>, WallMVP.WallPresenter {
+        implements ModelListener<List<PostDTO>>, MvpPresenter<WallMVP.WallView>, WallMVP.WallPresenter, RemovePostListener {
 
     private final WallModel mModel;
     private boolean mForceRefresh;
 
     @Inject
     public WallPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
-        mModel = new WallModel(socialNetworkAPI, loginPreferences, this);
+        mModel = new WallModel(socialNetworkAPI, loginPreferences, this, this);
     }
 
     @Override
@@ -55,6 +56,20 @@ public class WallPresenter extends MvpBasePresenter<WallMVP.WallView>
     public void loadError(Throwable e) {
         if (isViewAttached()) {
             getView().showError(e, mForceRefresh);
+        }
+    }
+
+    @Override
+    public void onRemoveCompleted(long removedPostId) {
+        if (isViewAttached()) {
+            getView().removePostAfterDeleteServer(removedPostId);
+        }
+    }
+
+    @Override
+    public void removeGetError(Throwable e) {
+        if (isViewAttached()) {
+            getView().showError(e, false);
         }
     }
 }

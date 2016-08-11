@@ -127,6 +127,11 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
         presenter.removePost(event.getPostId());
     }
 
+    @Override
+    public void removePostAfterDeleteServer(long removedPostId) {
+        mPostAdapter.deleteRemovedPost(removedPostId);
+    }
+
     @OnClick(R.id.new_post_fab)
     void newPost() {
         startActivity(new Intent(getContext(), NewPostActivity.class));

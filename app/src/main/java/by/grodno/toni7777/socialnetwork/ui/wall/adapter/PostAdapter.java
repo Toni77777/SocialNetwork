@@ -97,6 +97,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return mPosts;
     }
 
+    public void deleteRemovedPost(long postId) {
+        for (PostDTO post : mPosts) {
+            if (post.getPostId() == postId) {
+                int index = mPosts.indexOf(post);
+                mPosts.remove(post);
+                notifyItemRemoved(index);
+            }
+        }
+    }
+
     static abstract class ViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
         public ViewHolder(View v) {
             super(v);

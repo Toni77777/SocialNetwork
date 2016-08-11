@@ -9,6 +9,7 @@ import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PostResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 
+import by.grodno.toni7777.socialnetwork.ui.wall.listener.RemovePostListener;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
@@ -22,11 +23,14 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
     private Subscription mSubscription;
     private LoginPreferences mPreferences;
     private SocialNetworkAPI mNetworkAPI;
+    private RemovePostListener mRemoveListener;
 
-    public WallModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, ModelListener<List<PostDTO>> listener) {
+    public WallModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences,
+                     ModelListener<List<PostDTO>> listener, RemovePostListener removeListener) {
         mNetworkAPI = socialNetworkAPI;
         mPreferences = loginPreferences;
-        this.mListener = listener;
+        mListener = listener;
+        mRemoveListener = removeListener;
     }
 
     public void loadPosts(int offset) {
@@ -63,10 +67,14 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
         mSubscription = postsObservable
                 .compose(RxUtil.<PostResponseDTO>applySchedulers())
                 .subscribe(
-                        post -> {
+                        response -> {
+                            if (response.isSuccess()) {
+                                mRemoveListener.onRemoveCompleted(postId);
+                            }
                         },
                         throwable -> {
                             unsubscribe();
+                            mRemoveListener.removeGetError(throwable);
                         },
                         () -> {
                             unsubscribe();

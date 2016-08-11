@@ -22,6 +22,8 @@ public interface WallMVP {
 
         void removePost(PostEvent event);
 
+        void removePostAfterDeleteServer(long removedPost);
+
     }
 
     interface WallPresenter extends LoadPagination {
