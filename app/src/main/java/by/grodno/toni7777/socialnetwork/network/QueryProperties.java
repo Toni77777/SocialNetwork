@@ -20,6 +20,10 @@ public final class QueryProperties {
     public static final String LIMIT = "limit";
     public static final String ACCESS_TOKEN = "access_token";
 
+
+    public static final String HEADER_AUTORIZATION = "Authorization";
+    public static final String HEADER_AUTORIZATION_VALUE = "Basic cGFzc3dvcmRDbGllbnQ6MG00NWJ4cDRyMg==";
+
     private QueryProperties() {
     }
 }

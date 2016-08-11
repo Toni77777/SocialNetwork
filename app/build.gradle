@@ -21,7 +21,7 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "BASE_URL", "\"https://sjc2016vs4.fwd.wf/\""
+            buildConfigField "String", "BASE_URL", "\"https://sjc2016vs5.fwd.wf/\""
         }
 
         release {

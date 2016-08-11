@@ -4,24 +4,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ab362abe">
+>
 
-    <Button
+    <ButtonResour
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:background="#be2a2a"
+        android:layout_gravity="end"
         android:text="@string/register_navigation_next"
-        android:textColor="#FFFFFF"/>
+        android:textColor="@color/navTextColor"/>
 
     <Button
         android:id="@+id/complete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="#2abea3"
         android:text="@string/register_navigation_create_account"
-        android:textColor="#FFFFFF"/>
+        android:textColor="@color/navTextColor"/>
 
 </ViewSwitcher>

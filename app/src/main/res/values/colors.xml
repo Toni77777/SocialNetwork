@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#009688</color>
+
+    <color name="postIconColor">#716969</color>
+    <color name="navTextColor">#FFFFFF</color>
+    <color name="progressPaginationColor">#AA000000</color>
+
 </resources>

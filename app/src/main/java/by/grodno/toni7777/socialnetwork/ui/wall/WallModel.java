@@ -33,8 +33,7 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
     }
 
     public void loadPosts(int offset) {
-        Observable<WallDTO> postsObservable = NetworkServiceTest.netWall().getPost(mPreferences.getUserId(), offset, LIMIT, mPreferences.getAccessToken());
-//        Observable<WallDTO> observable = mSocialNetworkAPI.getPost(1, offset, LIMIT);
+        Observable<WallDTO> postsObservable = mNetworkAPI.getPost(mPreferences.getUserId(), offset, LIMIT, mPreferences.getAccessToken());
 
         unsubscribe();
         mSubscription = postsObservable
@@ -61,19 +60,16 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
     }
 
     public void removePost(long postId) {
-        Log.e("Post", "Model " + postId);
-        Observable<PostRemoveDTO> postsObservable = NetworkServiceTest.netWall().removePost(postId, mPreferences.getAccessToken());
+        Observable<PostRemoveDTO> postsObservable = mNetworkAPI.removePost(postId, mPreferences.getAccessToken());
 
         unsubscribe();
         mSubscription = postsObservable
                 .compose(RxUtil.<PostRemoveDTO>applySchedulers())
                 .subscribe(
                         post -> {
-                            Log.e("Remove", post.toString());
                         },
                         throwable -> {
                             unsubscribe();
-                            Log.e("Remove", throwable.toString());
                         },
                         () -> {
                             unsubscribe();

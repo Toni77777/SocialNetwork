@@ -35,5 +35,8 @@
     <string name="error_autorization">Bad username or password</string>
 
     <string name="post_item_remove">Удалить</string>
+    <string name="login_button_success">Success</string>
+    <string name="login_button_error">Error</string>
+    <string name="login_button_progress">Loading</string>
 
 </resources>
