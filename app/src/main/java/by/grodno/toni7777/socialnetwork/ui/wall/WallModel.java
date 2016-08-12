@@ -2,6 +2,7 @@ package by.grodno.toni7777.socialnetwork.ui.wall;
 
 import java.util.List;
 
+import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
@@ -23,11 +24,13 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
     private Subscription mSubscription;
     private LoginPreferences mPreferences;
     private SocialNetworkAPI mNetworkAPI;
+    private DatabaseDAOImp mDatabaseDAO;
     private RemovePostListener mRemoveListener;
 
-    public WallModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences,
+    public WallModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, DatabaseDAOImp databaseDAO,
                      ModelListener<List<PostDTO>> listener, RemovePostListener removeListener) {
         mNetworkAPI = socialNetworkAPI;
+        mDatabaseDAO = databaseDAO;
         mPreferences = loginPreferences;
         mListener = listener;
         mRemoveListener = removeListener;

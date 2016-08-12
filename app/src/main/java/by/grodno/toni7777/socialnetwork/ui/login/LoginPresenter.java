@@ -6,6 +6,7 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 
 import javax.inject.Inject;
 
+import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
@@ -17,8 +18,8 @@ public class LoginPresenter extends MvpBasePresenter<LoginMVP.LoginView>
     private LoginModel mModel;
 
     @Inject
-    public LoginPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
-        mModel = new LoginModel(socialNetworkAPI, loginPreferences, this);
+    public LoginPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, DatabaseDAOImp databaseDAO) {
+        mModel = new LoginModel(socialNetworkAPI, loginPreferences, databaseDAO, this);
     }
 
     @Override

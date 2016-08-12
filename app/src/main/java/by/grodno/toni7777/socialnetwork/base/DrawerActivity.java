@@ -18,6 +18,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.LoginActivity;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.ui.profile.ProfileActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallActivity;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
@@ -74,6 +75,8 @@ public class DrawerActivity extends ToolbarActivity implements NavigationView.On
             mLoginPreferences.clearUserLoginInformation();
             startSectionActivity(LoginActivity.class);
             finish();
+        } else if (id == R.id.nav_profile) {
+            startSectionActivity(ProfileActivity.class);
         }
         return true;
     }

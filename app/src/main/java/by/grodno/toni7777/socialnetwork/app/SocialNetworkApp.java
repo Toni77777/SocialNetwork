@@ -12,6 +12,8 @@ import by.grodno.toni7777.socialnetwork.dagger2.component.NetworkComponent;
 import by.grodno.toni7777.socialnetwork.dagger2.component.PresenterComponent;
 import by.grodno.toni7777.socialnetwork.dagger2.module.NetworkModule;
 import by.grodno.toni7777.socialnetwork.dagger2.module.PresenterModule;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class SocialNetworkApp extends Application {
 
@@ -21,6 +23,12 @@ public class SocialNetworkApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        RealmConfiguration realmConfiguration = new RealmConfiguration
+                .Builder(this)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
 
         EventBus.builder()
                 .addIndex(new SocialNetworkAppEventBusIndex())

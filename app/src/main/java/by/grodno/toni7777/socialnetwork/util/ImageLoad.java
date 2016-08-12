@@ -14,7 +14,7 @@ import by.grodno.toni7777.socialnetwork.R;
 public final class ImageLoad {
 
     public static void loadImage(ImageView image, String url) {
-        Glide.with(image.getContext()).load(url)
+        Glide.with(image.getContext())
                 .load(url)
                 .placeholder(R.drawable.circle)
                 .error(R.drawable.circle)

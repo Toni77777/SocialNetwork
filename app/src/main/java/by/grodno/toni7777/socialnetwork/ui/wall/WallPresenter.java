@@ -8,6 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import by.grodno.toni7777.socialnetwork.base.LoadPagination;
+import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
@@ -21,8 +22,8 @@ public class WallPresenter extends MvpBasePresenter<WallMVP.WallView>
     private boolean mForceRefresh;
 
     @Inject
-    public WallPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
-        mModel = new WallModel(socialNetworkAPI, loginPreferences, this, this);
+    public WallPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, DatabaseDAOImp databaseDAO) {
+        mModel = new WallModel(socialNetworkAPI, loginPreferences, databaseDAO, this, this);
     }
 
     @Override

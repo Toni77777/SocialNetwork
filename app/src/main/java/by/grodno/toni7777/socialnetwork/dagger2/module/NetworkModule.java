@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.*;
 
+import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import dagger.Module;
@@ -65,6 +66,12 @@ public class NetworkModule {
     @Singleton
     LoginPreferences providesSharedPreferences() {
         return new LoginPreferences(mContext);
+    }
+
+    @Provides
+    @Singleton
+    DatabaseDAOImp providesDatabaseDAO() {
+        return new DatabaseDAOImp();
     }
 
 }
