@@ -45,19 +45,6 @@ public class ProfileFragment extends Fragment {
         ImageLoad.loadImage(mAvatarView, "http://maximum-hr.ru/img/164.jpg");
     }
 
-    /*
-     CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
-        mImageView = (ImageView) collapsingToolbarLayout.findViewById(R.id.bgheader);
-
-        collapsingToolbarLayout.setTitle("My title");
-        collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.colorTitle));
-        collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.colorTitle));
-        collapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(this, R.color.colorPrimary));
-
-        Glide.with(mImageView.getContext())
-                .load(url)
-                .into(mImageView);
-     */
 
 
 }
