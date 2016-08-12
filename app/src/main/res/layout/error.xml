@@ -5,10 +5,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:drawablePadding="16dp"
+    android:drawablePadding="@dimen/post_padding_left"
     android:gravity="center"
-    android:padding="16dp"
-    android:text="An error has occurred! click here to retry"
-    android:textColor="#656565"
+    android:padding="@dimen/post_padding_left"
+    android:text="@string/error_click_retry"
+    android:textColor="@color/postIconColor"
     android:textSize="20sp"/>
 

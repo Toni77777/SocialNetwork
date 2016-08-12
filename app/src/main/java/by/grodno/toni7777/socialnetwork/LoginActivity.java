@@ -3,7 +3,7 @@ package by.grodno.toni7777.socialnetwork;
 import android.os.Bundle;
 
 import by.grodno.toni7777.socialnetwork.base.BaseActivity;
-import by.grodno.toni7777.socialnetwork.login.LoginFragment;
+import by.grodno.toni7777.socialnetwork.ui.login.LoginFragment;
 
 public class LoginActivity extends BaseActivity {
 

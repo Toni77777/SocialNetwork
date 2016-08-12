@@ -15,12 +15,36 @@ public class NetworkServiceTest {
 
     public static SocialNetworkAPI netWall() {
 
+        String s = "Basic cGFzc3dvcmRDbGllbnQ6MG00NWJ4cDRyMg==";
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(chain -> {
+                    Request original = chain.request();
+
+                    Request.Builder requestBuilder = original.newBuilder()
+                            .header("Authorization", s)
+                            .method(original.method(), original.body());
+
+
+                    Request request = requestBuilder.build();
+                    return chain.proceed(request);
+                })
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://private-5b721-wallposts.apiary-mock.com")
+//                .baseUrl("http://private-bc396-authorisation.apiary-mock.com")
+                .baseUrl("https://sjc2016vs5.fwd.wf")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(new OkHttpClient.Builder().build())
+                .client(client)
+//                .client(new OkHttpClient.Builder().build())
                 .build();
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://private-5b721-wallposts.apiary-mock.com")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .client(new OkHttpClient.Builder().build())
+//                .build();
 
         return retrofit.create(SocialNetworkAPI.class);
     }
@@ -57,7 +81,37 @@ public class NetworkServiceTest {
 
         Retrofit retrofit = new Retrofit.Builder()
 //                .baseUrl("http://private-bc396-authorisation.apiary-mock.com")
-                .baseUrl("https://sjc2016vs4.fwd.wf")
+                .baseUrl("https://sjc2016vs5.fwd.wf")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(client)
+//                .client(new OkHttpClient.Builder().build())
+                .build();
+
+        return retrofit.create(SocialNetworkAPI.class);
+    }
+
+    public static SocialNetworkAPI netProfile() {
+
+        String s = "Basic cGFzc3dvcmRDbGllbnQ6MG00NWJ4cDRyMg==";
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(chain -> {
+                    Request original = chain.request();
+
+                    Request.Builder requestBuilder = original.newBuilder()
+                            .header("Authorization", s)
+                            .method(original.method(), original.body());
+
+
+                    Request request = requestBuilder.build();
+                    return chain.proceed(request);
+                })
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://private-bc396-authorisation.apiary-mock.com")
+                .baseUrl("https://sjc2016vs5.fwd.wf")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(client)

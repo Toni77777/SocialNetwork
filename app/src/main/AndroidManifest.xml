@@ -20,14 +20,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".wall.WallActivity"
+            android:name=".ui.wall.WallActivity"
             android:label="@string/activity_label_wall">
         </activity>
         <activity
-            android:name=".registration.RegistrationActivity"
+            android:name=".ui.registration.RegistrationActivity"
             android:label="@string/activity_label_registration">
         </activity>
-
+        <activity
+            android:name=".ui.newpost.NewPostActivity"
+            android:label="@string/activity_label_new_post"
+            android:parentActivityName=".ui.wall.WallActivity"
+            android:theme="@style/NewPostTheme"
+            android:windowSoftInputMode="stateVisible|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.wall.WallActivity"/>
+        </activity>
+        <activity android:name=".ui.profile.ProfileActivity">
+        </activity>
     </application>
 
 </manifest>

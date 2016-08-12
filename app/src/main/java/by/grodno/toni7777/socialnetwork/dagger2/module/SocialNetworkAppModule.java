@@ -2,7 +2,6 @@ package by.grodno.toni7777.socialnetwork.dagger2.module;
 
 import android.app.Application;
 
-import javax.inject.Singleton;
 
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import dagger.Module;

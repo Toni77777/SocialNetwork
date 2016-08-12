@@ -37,15 +37,10 @@
         android:title="@string/nav_item_settings"
     />
 
-    <item android:title="@string/nav_menu_authorization">
-        <menu>
-            <item
-                android:id="@+id/nav_sing_in"
-                android:title="@string/nav_item_sing_in"/>
-            <item
-                android:id="@+id/nav_logout"
-                android:title="@string/nav_item_logout"/>
-        </menu>
-    </item>
+    <group android:id="@+id/nav_authorization">
+        <item
+            android:id="@+id/nav_logout"
+            android:title="@string/nav_item_logout"/>
+    </group>
 
 </menu>

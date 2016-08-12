@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class PostDTO {
 
+    @SerializedName("id")
+    private long mPostId;
+
     @SerializedName("owner")
     private OwnerDTO mOwner;
 
@@ -22,12 +25,21 @@ public class PostDTO {
     public PostDTO() {
     }
 
-    public PostDTO(OwnerDTO owner, String image, String text, int like, int dislike) {
+    public PostDTO(long postId, OwnerDTO owner, String image, String text, int like, int dislike) {
+        mPostId = postId;
         mOwner = owner;
         mImage = image;
         mText = text;
         mLike = like;
         mDislike = dislike;
+    }
+
+    public long getPostId() {
+        return mPostId;
+    }
+
+    public void setPostId(long postId) {
+        mPostId = postId;
     }
 
     public OwnerDTO getOwner() {
@@ -77,6 +89,7 @@ public class PostDTO {
 
         PostDTO postDTO = (PostDTO) o;
 
+        if (mPostId != postDTO.mPostId) return false;
         if (mLike != postDTO.mLike) return false;
         if (mDislike != postDTO.mDislike) return false;
         if (mOwner != null ? !mOwner.equals(postDTO.mOwner) : postDTO.mOwner != null) return false;
@@ -87,7 +100,8 @@ public class PostDTO {
 
     @Override
     public int hashCode() {
-        int result = mOwner != null ? mOwner.hashCode() : 0;
+        int result = (int) (mPostId ^ (mPostId >>> 32));
+        result = 31 * result + (mOwner != null ? mOwner.hashCode() : 0);
         result = 31 * result + (mImage != null ? mImage.hashCode() : 0);
         result = 31 * result + (mText != null ? mText.hashCode() : 0);
         result = 31 * result + mLike;
@@ -98,7 +112,8 @@ public class PostDTO {
     @Override
     public String toString() {
         return "PostDTO{" +
-                "mOwner=" + mOwner +
+                "mPostId=" + mPostId +
+                ", mOwner=" + mOwner +
                 ", mImage='" + mImage + '\'' +
                 ", mText='" + mText + '\'' +
                 ", mLike=" + mLike +

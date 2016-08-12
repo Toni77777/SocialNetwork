@@ -17,6 +17,15 @@ public final class Constants {
     public static final int ACTION_BUTTON_PROGRESS = 25;
     public static final int ACTION_BUTTON_FINISH = 100;
 
+    public static final String LOGIN_PREFERENCES = "saveAccessToken";
+    public static final String TOKEN_PREFERENCES = "accessToken";
+    public static final String USER_ID_PREFERENCES = "userId";
+    public static final String USER_AVATAR_PREFERENCES = "userAvatar";
+    public static final String USER_FULL_NAME_PREFERENCES = "userFullName";
+
+    public static final String EMPTY_STRING = "";
+    public static final long EMPTY_USER_ID = -1;
+
     private Constants() {
     }
 }

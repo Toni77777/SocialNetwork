@@ -6,31 +6,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    card_view:cardCornerRadius="10dp"
-    card_view:cardElevation="8dp"
-    card_view:cardMaxElevation="8dp"
+    card_view:cardCornerRadius="@dimen/post_card_radius"
+    card_view:cardElevation="@dimen/post_card_elevation"
+    card_view:cardMaxElevation="@dimen/post_card_elevation"
     card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp">
+        android:paddingBottom="@dimen/post_padding_bottom"
+        android:paddingLeft="@dimen/post_padding_left"
+        android:paddingRight="@dimen/post_padding_right"
+        android:paddingTop="@dimen/post_padding_top">
 
         <ImageView
             android:id="@+id/owner_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/post_owner_avatar_width"
+            android:layout_height="@dimen/post_owner_avatar_height"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/post_marging_end"
         />
 
         <TextView
             android:id="@+id/owner_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@id/owner_image"
@@ -41,56 +41,63 @@
         />
 
         <ImageView
+            android:id="@+id/post_menu_dot"
+            android:layout_width="@dimen/post_like_dislike"
+            android:layout_height="@dimen/post_like_dislike"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_menu_dot_popup_24dp"/>
+
+        <ImageView
             android:id="@+id/post_image"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="@dimen/post_image_height"
             android:layout_below="@+id/owner_image"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="@dimen/post_marging_end"/>
 
         <TextView
             android:id="@+id/post_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/post_image"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="@dimen/post_image_margin_top"
             android:textSize="18sp"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/like"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/post_text"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/ic_like_default"/>
+            android:layout_marginStart="@dimen/post_image_margin_top"
+            android:layout_marginTop="@dimen/post_image_margin_top"
+            android:src="@drawable/ic_like_default"/>
 
         <TextView
             android:id="@+id/like_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/post_text"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/post_marging_start"
+            android:layout_marginTop="@dimen/post_image_margin_top"
             android:layout_toEndOf="@id/like"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/dislike"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/post_text"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_toEndOf="@id/like_count"
-            android:background="@drawable/ic_dislike_default"/>
+            android:layout_marginStart="@dimen/post_marging_start"
+            android:layout_marginTop="@dimen/post_image_margin_top"
+            android:src="@drawable/ic_dislike_default"
+            android:layout_toEndOf="@id/like_count"/>
 
         <TextView
             android:id="@+id/dislike_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/post_text"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/post_marging_start"
+            android:layout_marginTop="@dimen/post_image_margin_top"
             android:layout_toEndOf="@id/dislike"/>
 
     </RelativeLayout>
