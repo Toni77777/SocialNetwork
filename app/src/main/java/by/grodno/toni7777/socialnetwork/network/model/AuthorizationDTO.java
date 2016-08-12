@@ -7,9 +7,6 @@ public class AuthorizationDTO {
     @SerializedName("access_token")
     private String mAccessToken;
 
-    public AuthorizationDTO() {
-    }
-
     public String getAccessToken() {
         return mAccessToken;
     }

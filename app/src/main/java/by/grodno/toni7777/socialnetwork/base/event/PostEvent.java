@@ -2,7 +2,7 @@ package by.grodno.toni7777.socialnetwork.base.event;
 
 public class PostEvent {
 
-    private long mPostId;
+    private final long mPostId;
 
     public PostEvent(long postId) {
         mPostId = postId;

@@ -4,10 +4,10 @@ import io.realm.Realm;
 import io.realm.RealmModel;
 import io.realm.RealmResults;
 
-public class RealmDAOImp implements RealmDAO {
+public class DatabaseDAOImp implements DatabaseDAO {
 
     @Override
-    public <E extends RealmModel> E copyToRealmOrUpdate(Realm realm, final E object) {
+    public <E extends RealmModel> E copyToDatabaseOrUpdate(Realm realm, final E object) {
         realm.executeTransactionAsync(realm1 -> realm1.copyToRealmOrUpdate(object));
         return object;
     }

@@ -58,9 +58,4 @@ public interface SocialNetworkAPI {
     Observable<PostResponseDTO> sendNewPost(@Body NewPostDTO newPost,
                                             @Query(ACCESS_TOKEN) String accessToken);
 
-    /*
-    idTo : userToID
-    fkImage : "sdsd"
-    text: "sdsd"
-     */
 }

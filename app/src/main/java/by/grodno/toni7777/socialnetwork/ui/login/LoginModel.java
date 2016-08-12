@@ -1,5 +1,6 @@
 package by.grodno.toni7777.socialnetwork.ui.login;
 
+
 import android.util.Log;
 
 import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
@@ -7,7 +8,6 @@ import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
-import by.grodno.toni7777.socialnetwork.test.NetworkServiceTest;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
@@ -42,6 +42,7 @@ public class LoginModel implements BaseModel, LoginMVP.LoginModel {
                         throwable -> {
                             unsubscribe();
                             mListener.loadError(throwable);
+                            Log.e("Error", "Login error" + throwable.toString());
                         },
                         () -> {
                             unsubscribe();

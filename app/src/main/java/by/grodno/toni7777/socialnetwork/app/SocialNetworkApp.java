@@ -2,11 +2,10 @@ package by.grodno.toni7777.socialnetwork.app;
 
 import android.app.Application;
 
-import com.example.myapp.MyEventBusIndex;
-
 import org.greenrobot.eventbus.EventBus;
 
 import by.grodno.toni7777.socialnetwork.BuildConfig;
+import by.grodno.toni7777.socialnetwork.SocialNetworkAppEventBusIndex;
 import by.grodno.toni7777.socialnetwork.dagger2.component.DaggerNetworkComponent;
 import by.grodno.toni7777.socialnetwork.dagger2.component.DaggerPresenterComponent;
 import by.grodno.toni7777.socialnetwork.dagger2.component.NetworkComponent;
@@ -24,11 +23,11 @@ public class SocialNetworkApp extends Application {
         super.onCreate();
 
         EventBus.builder()
-                .addIndex(new MyEventBusIndex())
+                .addIndex(new SocialNetworkAppEventBusIndex())
                 .installDefaultEventBus();
 
         mNetworkComponent = DaggerNetworkComponent.builder()
-                .networkModule(new NetworkModule(BuildConfig.BASE_URL, getBaseContext()))
+                .networkModule(new NetworkModule(BuildConfig.BASE_URL, this))
                 .build();
 
         mPresenterComponent = DaggerPresenterComponent.builder()

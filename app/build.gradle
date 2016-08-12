@@ -47,7 +47,7 @@ android {
 
 apt {
     arguments {
-        eventBusIndex "com.example.myapp.MyEventBusIndex"
+        eventBusIndex "by.grodno.toni7777.socialnetwork.SocialNetworkAppEventBusIndex"
     }
 }
 
