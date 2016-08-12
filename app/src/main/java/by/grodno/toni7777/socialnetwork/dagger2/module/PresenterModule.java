@@ -5,6 +5,7 @@ import by.grodno.toni7777.socialnetwork.dagger2.scope.PresenterScope;
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.ui.login.LoginPresenter;
+import by.grodno.toni7777.socialnetwork.ui.profile.ProfilePresenter;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallPresenter;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import dagger.Module;
@@ -23,5 +24,11 @@ public class PresenterModule {
     @Provides
     public LoginPresenter provideLoginPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, DatabaseDAOImp databaseDAO) {
         return new LoginPresenter(socialNetworkAPI, loginPreferences, databaseDAO);
+    }
+
+    @PresenterScope
+    @Provides
+    public ProfilePresenter provideProfilePresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, DatabaseDAOImp databaseDAO) {
+        return new ProfilePresenter(socialNetworkAPI, loginPreferences, databaseDAO);
     }
 }

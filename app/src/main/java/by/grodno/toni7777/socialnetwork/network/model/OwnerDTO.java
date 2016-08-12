@@ -13,7 +13,7 @@ public class OwnerDTO {
     @SerializedName("avatar")
     private String mAvatar;
 
-    private String fullName;
+    private String mFullName;
 
     public OwnerDTO() {
     }
@@ -43,10 +43,10 @@ public class OwnerDTO {
     }
 
     public String getFullName() {
-        if (fullName == null) {
-            fullName = mName + " " + mSurname;
+        if (mFullName == null) {
+            mFullName = mName + " " + mSurname;
         }
-        return fullName;
+        return mFullName;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class OwnerDTO {
                 "mName='" + mName + '\'' +
                 ", mSurname='" + mSurname + '\'' +
                 ", mAvatar='" + mAvatar + '\'' +
-                ", fullName='" + fullName + '\'' +
+                ", fullName='" + mFullName + '\'' +
                 '}';
     }
 }
