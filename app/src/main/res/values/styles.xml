@@ -13,6 +13,11 @@
         <item name="android:minHeight">?actionBarSize</item>
     </style>
 
+    <style name="Widget.Toolbar.Collapsing" parent="Widget.AppCompat.Toolbar">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
     <style name="NewPostTheme" parent="AppTheme">
         <item name="android:homeAsUpIndicator">@drawable/ic_close_post_24dp</item>
     </style>

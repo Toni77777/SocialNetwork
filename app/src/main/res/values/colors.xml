@@ -9,5 +9,6 @@
     <color name="progressPaginationColor">#AA000000</color>
 
     <color name="newPostBottomColor">#dfdee6</color>
+    <color name="toolbar_title">#ffffff</color>
 
 </resources>

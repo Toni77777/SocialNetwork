@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="4dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="First Name"
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:id="@+id/edit_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_name"
+                android:layout_alignParentEnd="true"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:src="@drawable/ic_edit_profile_24dp"/>
+
+            <TextView
+                android:id="@+id/profile_surname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_name"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="SurName"
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:id="@+id/edit_profile_surname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_surname"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/profile_name"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:src="@drawable/ic_edit_profile_24dp"/>
+
+            <TextView
+                android:id="@+id/profile_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_surname"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="Sex"
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:id="@+id/edit_profile_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_sex"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/profile_surname"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:src="@drawable/ic_edit_profile_24dp"/>
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:id="@+id/profile_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="City"
+                android:textSize="20sp"
+            />
+
+            <ImageView
+                android:id="@+id/edit_profile_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_city"
+                android:layout_alignParentEnd="true"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:src="@drawable/ic_edit_profile_24dp"/>
+
+            <TextView
+                android:id="@+id/profile_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_city"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="About"
+                android:textSize="20sp"
+            />
+
+            <ImageView
+                android:id="@+id/edit_profile_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_about"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/profile_city"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:src="@drawable/ic_edit_profile_24dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/profile_mobile_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:text="Mobile number"
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:id="@+id/edit_profile_mobile_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_mobile_number"
+                android:layout_alignParentEnd="true"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:src="@drawable/ic_edit_profile_24dp"/>
+
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_mobile_number"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="email"
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:id="@+id/edit_profile_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_email"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/profile_mobile_number"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:src="@drawable/ic_edit_profile_24dp"/>
+
+            <TextView
+                android:id="@+id/profile_skype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_email"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="Skype"
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:id="@+id/edit_profile_skype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_skype"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/profile_email"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:src="@drawable/ic_edit_profile_24dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
