@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -123,6 +122,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         @BindView(R.id.owner_name)
         TextView mOwnerFullNameView;
 
+        @BindView(R.id.post_date)
+        TextView mDateView;
+
         @BindView(R.id.post_menu_dot)
         ImageView mPopupView;
 
@@ -160,6 +162,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
             loadCircleImage(mOwnerAvatarView, ownerDTO.getAvatar());
+            mDateView.setText(post.getDate());
             mOwnerFullNameView.setText(ownerDTO.getFullName());
             loadImage(mPostImageView, post.getImage());
             mPostTextView.setText(post.getText());
@@ -193,6 +196,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         @BindView(R.id.owner_name)
         TextView mOwnerFullNameView;
+
+        @BindView(R.id.post_date)
+        TextView mDateView;
 
         @BindView(R.id.post_menu_dot)
         ImageView mPopupView;
@@ -228,6 +234,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
             loadCircleImage(mOwnerAvatarView, ownerDTO.getAvatar());
+            mDateView.setText(post.getDate());
             mOwnerFullNameView.setText(ownerDTO.getFullName());
             loadImage(mPostImageView, post.getImage());
             mLikeCountView.setText(String.valueOf(post.getLike()));

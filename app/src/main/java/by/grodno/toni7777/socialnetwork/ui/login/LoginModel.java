@@ -62,9 +62,9 @@ public class LoginModel implements BaseModel, LoginMVP.LoginModel {
         Observable<ProfileDTO> profileObservable = mNetworkAPI.getProfileInfo(mPreferences.getAccessToken());
 
         mSubscription = profileObservable
-                .compose(RxUtil.<ProfileDTO>applySchedulers())
                 .map(ConverterDTOtoDSO::converteDTOtoDSO)
                 .doOnNext(profileDSO -> mDatabaseDAO.copyToDatabaseOrUpdate(Realm.getDefaultInstance(), profileDSO))
+                .compose(RxUtil.<ProfileDSO>applySchedulers())
                 .subscribe(
                         profile -> {
                             mPreferences.setUserId(profile.getId());

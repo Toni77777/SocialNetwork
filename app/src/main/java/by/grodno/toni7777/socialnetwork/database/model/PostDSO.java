@@ -1,19 +1,21 @@
-package by.grodno.toni7777.socialnetwork.ui.model;
+package by.grodno.toni7777.socialnetwork.database.model;
 
-public class PostDVO {
+import io.realm.RealmObject;
+
+public class PostDSO extends RealmObject {
 
     private long mPostId;
-    private OwnerDVO mOwner;
+    private OwnerDSO mOwner;
     private String mImage;
     private String mDate;
     private String mText;
     private int mLike;
     private int mDislike;
 
-    public PostDVO() {
+    public PostDSO() {
     }
 
-    public PostDVO(long postId, OwnerDVO owner, String image, String date, String text, int like, int dislike) {
+    public PostDSO(long postId, OwnerDSO owner, String image, String date, String text, int like, int dislike) {
         mPostId = postId;
         mOwner = owner;
         mImage = image;
@@ -31,11 +33,11 @@ public class PostDVO {
         mPostId = postId;
     }
 
-    public OwnerDVO getOwner() {
+    public OwnerDSO getOwner() {
         return mOwner;
     }
 
-    public void setOwner(OwnerDVO owner) {
+    public void setOwner(OwnerDSO owner) {
         mOwner = owner;
     }
 
@@ -84,15 +86,15 @@ public class PostDVO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PostDVO postDVO = (PostDVO) o;
+        PostDSO postDSO = (PostDSO) o;
 
-        if (mPostId != postDVO.mPostId) return false;
-        if (mLike != postDVO.mLike) return false;
-        if (mDislike != postDVO.mDislike) return false;
-        if (mOwner != null ? !mOwner.equals(postDVO.mOwner) : postDVO.mOwner != null) return false;
-        if (mImage != null ? !mImage.equals(postDVO.mImage) : postDVO.mImage != null) return false;
-        if (mDate != null ? !mDate.equals(postDVO.mDate) : postDVO.mDate != null) return false;
-        return mText != null ? mText.equals(postDVO.mText) : postDVO.mText == null;
+        if (mPostId != postDSO.mPostId) return false;
+        if (mLike != postDSO.mLike) return false;
+        if (mDislike != postDSO.mDislike) return false;
+        if (mOwner != null ? !mOwner.equals(postDSO.mOwner) : postDSO.mOwner != null) return false;
+        if (mImage != null ? !mImage.equals(postDSO.mImage) : postDSO.mImage != null) return false;
+        if (mDate != null ? !mDate.equals(postDSO.mDate) : postDSO.mDate != null) return false;
+        return mText != null ? mText.equals(postDSO.mText) : postDSO.mText == null;
 
     }
 
@@ -110,7 +112,7 @@ public class PostDVO {
 
     @Override
     public String toString() {
-        return "PostDVO{" +
+        return "PostDSO{" +
                 "mPostId=" + mPostId +
                 ", mOwner=" + mOwner +
                 ", mImage='" + mImage + '\'' +
