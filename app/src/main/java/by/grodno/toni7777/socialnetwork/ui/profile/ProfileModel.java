@@ -1,13 +1,12 @@
 package by.grodno.toni7777.socialnetwork.ui.profile;
 
+import java.util.concurrent.TimeUnit;
+
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
-import by.grodno.toni7777.socialnetwork.database.model.ContactProfileDSO;
 import by.grodno.toni7777.socialnetwork.database.model.ProfileDSO;
-import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
-import by.grodno.toni7777.socialnetwork.network.model.UserDTO;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.ui.profile.listener.ProfileListener;
 import by.grodno.toni7777.socialnetwork.util.ConverterDSOtoDVO;
@@ -38,12 +37,12 @@ public class ProfileModel implements BaseModel, ProfileMVP.ProfileModel {
         Observable<ProfileDTO> profileObservable = mNetworkAPI.getProfileInfo(mPreferences.getAccessToken());
 
         mSubscription = profileObservable
-                .compose(RxUtil.<ProfileDTO>applySchedulers())
+                .delay(5, TimeUnit.SECONDS)
                 .map(ConverterDTOtoDSO::converteDTOtoDSO)
+                .compose(RxUtil.<ProfileDSO>applySchedulers())
                 .doOnNext(profileDSO -> mDatabaseDAO.copyToDatabaseOrUpdate(Realm.getDefaultInstance(), profileDSO))
                 .subscribe(
                         profile -> {
-                            readProfileFromDB();
                         },
                         throwable -> {
                             unsubscribe();
@@ -51,6 +50,7 @@ public class ProfileModel implements BaseModel, ProfileMVP.ProfileModel {
                         },
                         () -> {
                             unsubscribe();
+                            readProfileFromDB();
                         });
     }
 

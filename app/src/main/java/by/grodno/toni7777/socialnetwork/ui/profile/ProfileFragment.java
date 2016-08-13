@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
@@ -53,6 +54,9 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
 
     private ImageView mAvatarView;
     private CollapsingToolbarLayout mCollapsingView;
+
+    @BindView(R.id.profile_layout)
+    LinearLayout mLinearLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,11 +123,19 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
     @Override
     public void showLoading() {
         ((ProfileViewState) viewState).setShowLoading();
+//        mLinearLayout.setVisibility(View.GONE);
+
+        /*
+         setViewsEnabled(true);
+        mAuthorizationButton.setProgress(Constants.ACTION_BUTTON_START);
+        mErrorView.setVisibility(View.VISIBLE);
+         */
 
     }
 
     @Override
     public void getProfileSuccess(ProfileDVO profile) {
+//        mLinearLayout.setVisibility(View.VISIBLE);
         bindProfileInfo(profile);
     }
 }

@@ -37,7 +37,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.wall.WallActivity"/>
         </activity>
-        <activity android:name=".ui.profile.ProfileActivity">
+        <activity android:name=".ui.profile.ProfileActivity"
+                  android:label="@string/activity_label_profile"
+        >
         </activity>
     </application>
 
