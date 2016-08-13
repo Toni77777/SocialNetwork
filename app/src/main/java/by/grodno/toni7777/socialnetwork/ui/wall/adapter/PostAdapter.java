@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -117,31 +118,31 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     static class FullPostViewHolder extends ViewHolder {
 
         @BindView(R.id.owner_image)
-        ImageView mOwnerAvatar;
+        ImageView mOwnerAvatarView;
 
         @BindView(R.id.owner_name)
-        TextView mOwnerFullName;
+        TextView mOwnerFullNameView;
 
         @BindView(R.id.post_menu_dot)
-        ImageView mPopup;
+        ImageView mPopupView;
 
         @BindView(R.id.post_image)
-        ImageView mPostImage;
+        ImageView mPostImageView;
 
         @BindView(R.id.post_text)
-        TextView mPostText;
+        TextView mPostTextView;
 
         @BindView(R.id.like)
-        ImageView mLike;
+        ImageView mLikeView;
 
         @BindView(R.id.like_count)
-        TextView mLikeCount;
+        TextView mLikeCountView;
 
         @BindView(R.id.dislike)
-        ImageView mDislike;
+        ImageView mDislikeView;
 
         @BindView(R.id.dislike_count)
-        TextView mDislikeCount;
+        TextView mDislikeCountView;
 
         private long mPostId;
 
@@ -158,18 +159,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
-            loadCircleImage(mOwnerAvatar, ownerDTO.getAvatar());
-            mOwnerFullName.setText(ownerDTO.getFullName());
-            loadImage(mPostImage, post.getImage());
-            mPostText.setText(post.getText());
-            mLikeCount.setText(String.valueOf(post.getLike()));
-            mDislikeCount.setText(String.valueOf(post.getDislike()));
+            loadCircleImage(mOwnerAvatarView, ownerDTO.getAvatar());
+            mOwnerFullNameView.setText(ownerDTO.getFullName());
+            loadImage(mPostImageView, post.getImage());
+            mPostTextView.setText(post.getText());
+            mLikeCountView.setText(String.valueOf(post.getLike()));
+            mDislikeCountView.setText(String.valueOf(post.getDislike()));
             mPostId = post.getPostId();
         }
 
         @OnClick(R.id.post_menu_dot)
         void showPopup() {
-            PopupMenu popupMenu = new PopupMenu(mPopup.getContext(), mPopup);
+            PopupMenu popupMenu = new PopupMenu(mPopupView.getContext(), mPopupView);
             popupMenu.setOnMenuItemClickListener(this);
             popupMenu.inflate(R.menu.menu_post_popup);
             popupMenu.show();
@@ -188,28 +189,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     static class ImagePostViewHolder extends ViewHolder {
 
         @BindView(R.id.owner_image)
-        ImageView mOwnerAvatar;
+        ImageView mOwnerAvatarView;
 
         @BindView(R.id.owner_name)
-        TextView mOwnerFullName;
+        TextView mOwnerFullNameView;
 
         @BindView(R.id.post_menu_dot)
-        ImageView mPopup;
+        ImageView mPopupView;
 
         @BindView(R.id.post_image)
-        ImageView mPostImage;
+        ImageView mPostImageView;
 
         @BindView(R.id.like)
-        ImageView mLike;
+        ImageView mLikeView;
 
         @BindView(R.id.like_count)
-        TextView mLikeCount;
+        TextView mLikeCountView;
 
         @BindView(R.id.dislike)
-        ImageView mDislike;
+        ImageView mDislikeView;
 
         @BindView(R.id.dislike_count)
-        TextView mDislikeCount;
+        TextView mDislikeCountView;
 
         private long mPostId;
 
@@ -226,17 +227,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
-            loadCircleImage(mOwnerAvatar, ownerDTO.getAvatar());
-            mOwnerFullName.setText(ownerDTO.getFullName());
-            loadImage(mPostImage, post.getImage());
-            mLikeCount.setText(String.valueOf(post.getLike()));
-            mDislikeCount.setText(String.valueOf(post.getDislike()));
+            loadCircleImage(mOwnerAvatarView, ownerDTO.getAvatar());
+            mOwnerFullNameView.setText(ownerDTO.getFullName());
+            loadImage(mPostImageView, post.getImage());
+            mLikeCountView.setText(String.valueOf(post.getLike()));
+            mDislikeCountView.setText(String.valueOf(post.getDislike()));
             mPostId = post.getPostId();
         }
 
         @OnClick(R.id.post_menu_dot)
         void showPopup() {
-            PopupMenu popupMenu = new PopupMenu(mPopup.getContext(), mPopup);
+            PopupMenu popupMenu = new PopupMenu(mPopupView.getContext(), mPopupView);
             popupMenu.setOnMenuItemClickListener(this);
             popupMenu.inflate(R.menu.menu_post_popup);
             popupMenu.show();
@@ -255,28 +256,31 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     static class TextPostViewHolder extends ViewHolder {
 
         @BindView(R.id.owner_image)
-        ImageView mOwnerAvatar;
+        ImageView mOwnerAvatarView;
 
         @BindView(R.id.owner_name)
-        TextView mOwnerFullName;
+        TextView mOwnerFullNameView;
+
+        @BindView(R.id.post_date)
+        TextView mDateView;
 
         @BindView(R.id.post_menu_dot)
-        ImageView mPopup;
+        ImageView mPopupView;
 
         @BindView(R.id.post_text)
-        TextView mPostText;
+        TextView mPostTextView;
 
         @BindView(R.id.like)
-        ImageView mLike;
+        ImageView mLikeView;
 
         @BindView(R.id.like_count)
-        TextView mLikeCount;
+        TextView mLikeCountView;
 
         @BindView(R.id.dislike)
-        ImageView mDislike;
+        ImageView mDislikeView;
 
         @BindView(R.id.dislike_count)
-        TextView mDislikeCount;
+        TextView mDislikeCountView;
 
         private long mPostId;
 
@@ -293,17 +297,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         void bind(PostDTO post) {
             OwnerDTO ownerDTO = post.getOwner();
-            loadCircleImage(mOwnerAvatar, ownerDTO.getAvatar());
-            mOwnerFullName.setText(ownerDTO.getFullName());
-            mPostText.setText(post.getText());
-            mLikeCount.setText(String.valueOf(post.getLike()));
-            mDislikeCount.setText(String.valueOf(post.getDislike()));
+            loadCircleImage(mOwnerAvatarView, ownerDTO.getAvatar());
+            mOwnerFullNameView.setText(ownerDTO.getFullName());
+            mDateView.setText(post.getDate());
+            mPostTextView.setText(post.getText());
+            mLikeCountView.setText(String.valueOf(post.getLike()));
+            mDislikeCountView.setText(String.valueOf(post.getDislike()));
             mPostId = post.getPostId();
         }
 
         @OnClick(R.id.post_menu_dot)
         void showPopup() {
-            PopupMenu popupMenu = new PopupMenu(mPopup.getContext(), mPopup);
+            PopupMenu popupMenu = new PopupMenu(mPopupView.getContext(), mPopupView);
             popupMenu.setOnMenuItemClickListener(this);
             popupMenu.inflate(R.menu.menu_post_popup);
             popupMenu.show();

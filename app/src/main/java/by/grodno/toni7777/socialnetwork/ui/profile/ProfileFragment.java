@@ -132,8 +132,8 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
     @Override
     public void showLoading() {
         ((ProfileViewState) viewState).setShowLoading();
+        mProfileView.setVisibility(View.GONE);
         mLoadView.setVisibility(View.VISIBLE);
-        mErrorView.setVisibility(View.VISIBLE);
     }
 
     @Override

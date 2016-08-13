@@ -36,7 +36,6 @@ public class NewPostModel implements BaseModel, NewPostMVP.NewPostModel {
                             if (response.isSuccess()) {
                                 mListener.onLoadCompleted();
                             }
-
                             Log.e("Post", "Success" + response.toString());
                         },
                         throwable -> {

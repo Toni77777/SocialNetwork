@@ -9,17 +9,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.MvpViewStateFragment;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
+import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
 
-public class NewPostFragment extends MvpViewStateFragment<NewPostMVP.NewPostView, NewPostPresenter>
+public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPostView, NewPostPresenter>
         implements NewPostMVP.NewPostView {
+
+    @BindView(R.id.new_post_text)
+    EditText mTextPostView;
 
     @Inject
     NewPostPresenter mPresenter;
@@ -53,7 +59,7 @@ public class NewPostFragment extends MvpViewStateFragment<NewPostMVP.NewPostView
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.new_post_item) {
-            presenter.sendNewPost("My firs post to wall from app", null);
+            presenter.sendNewPost(mTextPostView.getText().toString(), null);
 //            mProgressDialog.show();
             return true;
         } else if (id == R.id.clear_image_item) {
