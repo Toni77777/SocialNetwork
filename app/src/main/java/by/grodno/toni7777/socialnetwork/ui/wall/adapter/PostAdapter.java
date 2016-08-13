@@ -103,6 +103,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 int index = mPosts.indexOf(post);
                 mPosts.remove(post);
                 notifyItemRemoved(index);
+                return;
             }
         }
     }

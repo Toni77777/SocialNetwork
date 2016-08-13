@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
@@ -41,7 +41,7 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
     TextView mAboutView;
 
     @BindView(R.id.profile_mobile_number)
-    TextView mMobileNumbrView;
+    TextView mMobileNumberView;
 
     @BindView(R.id.profile_email)
     TextView mEmailView;
@@ -49,14 +49,21 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
     @BindView(R.id.profile_skype)
     TextView mSkypeView;
 
+    @BindView(R.id.progress)
+    ProgressBar mLoadView;
+
+    @BindView(R.id.error)
+    TextView mErrorView;
+
+    @BindView(R.id.profile_layout)
+    View mProfileView;
+
     @Inject
     ProfilePresenter mPresenter;
 
     private ImageView mAvatarView;
     private CollapsingToolbarLayout mCollapsingView;
 
-    @BindView(R.id.profile_layout)
-    LinearLayout mLinearLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,7 +102,7 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
         mSexView.setText(String.valueOf(profile.getSex()));
         mCityView.setText(profile.getCity());
         mAboutView.setText(profile.getAbout());
-        mMobileNumbrView.setText(String.valueOf(profile.getMobile()));
+        mMobileNumberView.setText(String.valueOf(profile.getMobile()));
         mEmailView.setText(profile.getEmail());
         mSkypeView.setText(profile.getSkype());
     }
@@ -118,24 +125,21 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
     @Override
     public void showError() {
         ((ProfileViewState) viewState).setShowError();
+        mProfileView.setVisibility(View.GONE);
+        mErrorView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showLoading() {
         ((ProfileViewState) viewState).setShowLoading();
-//        mLinearLayout.setVisibility(View.GONE);
-
-        /*
-         setViewsEnabled(true);
-        mAuthorizationButton.setProgress(Constants.ACTION_BUTTON_START);
+        mLoadView.setVisibility(View.VISIBLE);
         mErrorView.setVisibility(View.VISIBLE);
-         */
-
     }
 
     @Override
     public void getProfileSuccess(ProfileDVO profile) {
-//        mLinearLayout.setVisibility(View.VISIBLE);
+        mLoadView.setVisibility(View.GONE);
+        mProfileView.setVisibility(View.VISIBLE);
         bindProfileInfo(profile);
     }
 }

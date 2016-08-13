@@ -1,5 +1,7 @@
 package by.grodno.toni7777.socialnetwork.ui.wall;
 
+import android.util.Log;
+
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
@@ -78,6 +80,10 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
                         throwable -> {
                             unsubscribe();
                             mRemoveListener.removeGetError(throwable);
+                            Log.e("Error", throwable.toString());
+//                            Log.e("Error", throwable.getMessage());
+//                            Log.e("Error", throwable.getLocalizedMessage());
+//                            Log.e("Error", throwable.getStackTrace().toString());
                         },
                         () -> {
                             unsubscribe();
