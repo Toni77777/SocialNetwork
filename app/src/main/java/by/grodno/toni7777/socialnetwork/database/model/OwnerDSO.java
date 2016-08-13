@@ -11,6 +11,12 @@ public class OwnerDSO extends RealmObject {
     public OwnerDSO() {
     }
 
+    public OwnerDSO(String name, String surname, String avatar) {
+        mName = name;
+        mSurname = surname;
+        mAvatar = avatar;
+    }
+
     public String getName() {
         return mName;
     }

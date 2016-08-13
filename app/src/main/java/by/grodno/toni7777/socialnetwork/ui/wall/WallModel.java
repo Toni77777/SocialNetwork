@@ -17,6 +17,7 @@ import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
 import rx.Subscription;
+import rx.functions.Func1;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.LIMIT;
 
@@ -43,7 +44,14 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
 
         unsubscribe();
         mSubscription = postsObservable
-                .doOnNext(this::saveInCache)
+//                .map(new Func1<WallDTO, Object>() {
+//
+//                    @Override
+//                    public Object call(WallDTO wallDTO) {
+//                        return null;
+//                    }
+//                })
+//                .doOnNext(this::saveInCache)
                 .compose(RxUtil.<WallDTO>applySchedulers())
                 .subscribe(
                         wallDTO -> {
@@ -63,6 +71,12 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
 
     private void saveInCache(WallDTO wallDTO) {
         // TODO Put in cache to do next step
+    }
+
+    public void readPostsFromDB(int offset) {
+//        ProfileDSO profileDSO = mDatabaseDAO.findFirst(Realm.getDefaultInstance(), ProfileDSO.class);
+//        ProfileDVO profileView = ConverterDSOtoDVO.converteDTOtoDSO(profileDSO);
+//        mListener.onLoadCompleted(profileView);
     }
 
     public void removePost(long postId) {
