@@ -8,20 +8,45 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.hannesdorfmann.mosby.mvp.viewstate.MvpViewStateFragment;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
+import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
+import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
-public class ProfileFragment extends MvpViewStateFragment<ProfileMVP.ProfileView, ProfilePresenter>
+public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.ProfileView, ProfilePresenter>
         implements ProfileMVP.ProfileView {
+
+    @BindView(R.id.profile_name)
+    TextView mNameView;
+
+    @BindView(R.id.profile_surname)
+    TextView mSurnameVew;
+
+    @BindView(R.id.profile_sex)
+    TextView mSexView;
+
+    @BindView(R.id.profile_city)
+    TextView mCityView;
+
+    @BindView(R.id.profile_about)
+    TextView mAboutView;
+
+    @BindView(R.id.profile_mobile_number)
+    TextView mMobileNumbrView;
+
+    @BindView(R.id.profile_email)
+    TextView mEmailView;
+
+    @BindView(R.id.profile_skype)
+    TextView mSkypeView;
 
     @Inject
     ProfilePresenter mPresenter;
@@ -52,7 +77,7 @@ public class ProfileFragment extends MvpViewStateFragment<ProfileMVP.ProfileView
         super.onViewCreated(view, savedInstanceState);
         mPresenter.getProfileInfo();
         mCollapsingView = (CollapsingToolbarLayout) getActivity().findViewById(R.id.collapse_toolbar);
-        mAvatarView = ButterKnife.findById(mCollapsingView, R.id.profile_avatar);
+        mAvatarView = (ImageView) mCollapsingView.findViewById(R.id.profile_avatar);
         mCollapsingView.setExpandedTitleColor(ContextCompat.getColor(getContext(), R.color.toolbar_title));
         mCollapsingView.setCollapsedTitleTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_title));
         mCollapsingView.setContentScrimColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
@@ -61,6 +86,14 @@ public class ProfileFragment extends MvpViewStateFragment<ProfileMVP.ProfileView
     private void bindProfileInfo(ProfileDVO profile) {
         mCollapsingView.setTitle(profile.getFullName());
         ImageLoad.loadImage(mAvatarView, profile.getAvatar());
+        mNameView.setText(profile.getName());
+        mSurnameVew.setText(profile.getSurname());
+        mSexView.setText(String.valueOf(profile.getSex()));
+        mCityView.setText(profile.getCity());
+        mAboutView.setText(profile.getAbout());
+        mMobileNumbrView.setText(String.valueOf(profile.getMobile()));
+        mEmailView.setText(profile.getEmail());
+        mSkypeView.setText(profile.getSkype());
     }
 
     @Override

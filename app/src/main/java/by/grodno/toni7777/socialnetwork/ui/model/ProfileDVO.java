@@ -5,6 +5,7 @@ public class ProfileDVO {
     private long mId;
     private String mName;
     private String mSurname;
+    private int mSex;
     private String mBirthday;
     private String mAvatar;
     private String mCity;
@@ -17,10 +18,11 @@ public class ProfileDVO {
     public ProfileDVO() {
     }
 
-    public ProfileDVO(long id, String name, String surname, String birthday, String avatar, String city, String about, int mobile, String skype, String email) {
+    public ProfileDVO(long id, String name, String surname, int sex, String birthday, String avatar, String city, String about, int mobile, String skype, String email) {
         mId = id;
         mName = name;
         mSurname = surname;
+        mSex = sex;
         mBirthday = birthday;
         mAvatar = avatar;
         mCity = city;
@@ -28,6 +30,14 @@ public class ProfileDVO {
         mMobile = mobile;
         mSkype = skype;
         mEmail = email;
+    }
+
+    public int getSex() {
+        return mSex;
+    }
+
+    public void setSex(int sex) {
+        mSex = sex;
     }
 
     public String getFullName() {

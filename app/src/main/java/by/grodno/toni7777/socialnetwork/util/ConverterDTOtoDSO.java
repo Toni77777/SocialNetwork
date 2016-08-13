@@ -10,7 +10,7 @@ public final class ConverterDTOtoDSO {
     public static ProfileDSO converteDTOtoDSO(ProfileDTO sourceDTO) {
         UserDTO user = sourceDTO.getUser();
         return new ProfileDSO(user.getId(), user.getName(), user.getSurname(),
-                user.getBirthday(), user.getAvatar(), user.getCity(), user.getAbout(),
+                user.getSex(), user.getBirthday(), user.getAvatar(), user.getCity(), user.getAbout(),
                 new ContactProfileDSO(user.getContact().getMobile(), user.getContact().getSkype(),
                         user.getContact().getEmail()));
     }

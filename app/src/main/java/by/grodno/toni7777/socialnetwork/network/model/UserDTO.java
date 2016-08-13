@@ -16,6 +16,9 @@ public class UserDTO {
     @SerializedName("birthday")
     private String mBirthday;
 
+    @SerializedName("sex")
+    private int mSex;
+
     @SerializedName("avatar")
     private String mAvatar;
 
@@ -28,11 +31,15 @@ public class UserDTO {
     @SerializedName("contactUser")
     private ContactUserDTO mContact;
 
-    public UserDTO(long id, String name, String surname, String birthday, String avatar, String city, String about, ContactUserDTO contact) {
+    public UserDTO() {
+    }
+
+    public UserDTO(long id, String name, String surname, String birthday, int sex, String avatar, String city, String about, ContactUserDTO contact) {
         mId = id;
         mName = name;
         mSurname = surname;
         mBirthday = birthday;
+        mSex = sex;
         mAvatar = avatar;
         mCity = city;
         mAbout = about;
@@ -69,6 +76,14 @@ public class UserDTO {
 
     public void setBirthday(String birthday) {
         mBirthday = birthday;
+    }
+
+    public int getSex() {
+        return mSex;
+    }
+
+    public void setSex(int sex) {
+        mSex = sex;
     }
 
     public String getAvatar() {
@@ -111,6 +126,7 @@ public class UserDTO {
         UserDTO userDTO = (UserDTO) o;
 
         if (mId != userDTO.mId) return false;
+        if (mSex != userDTO.mSex) return false;
         if (mName != null ? !mName.equals(userDTO.mName) : userDTO.mName != null) return false;
         if (mSurname != null ? !mSurname.equals(userDTO.mSurname) : userDTO.mSurname != null)
             return false;
@@ -130,6 +146,7 @@ public class UserDTO {
         result = 31 * result + (mName != null ? mName.hashCode() : 0);
         result = 31 * result + (mSurname != null ? mSurname.hashCode() : 0);
         result = 31 * result + (mBirthday != null ? mBirthday.hashCode() : 0);
+        result = 31 * result + mSex;
         result = 31 * result + (mAvatar != null ? mAvatar.hashCode() : 0);
         result = 31 * result + (mCity != null ? mCity.hashCode() : 0);
         result = 31 * result + (mAbout != null ? mAbout.hashCode() : 0);
@@ -144,6 +161,7 @@ public class UserDTO {
                 ", mName='" + mName + '\'' +
                 ", mSurname='" + mSurname + '\'' +
                 ", mBirthday='" + mBirthday + '\'' +
+                ", mSex=" + mSex +
                 ", mAvatar='" + mAvatar + '\'' +
                 ", mCity='" + mCity + '\'' +
                 ", mAbout='" + mAbout + '\'' +
