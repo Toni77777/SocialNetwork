@@ -28,6 +28,7 @@
     <string name="registration_city">City</string>
 
     <string name="progress_wait">Please wait, loading more</string>
+    <string name="progress_dialog_message">Publication post</string>
 
     <string name="activity_label_wall">Wall</string>
     <string name="activity_label_registration">Registration</string>
@@ -48,5 +49,7 @@
     <string name="login_button_success">Success</string>
     <string name="login_button_error">Error</string>
     <string name="login_button_progress">Loading</string>
+    <string name="post_upload_item">Upload post</string>
+    <string name="post_clear_image_item">Удалить изображение</string>
 
 </resources>

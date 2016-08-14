@@ -2,31 +2,43 @@ package by.grodno.toni7777.socialnetwork.ui.newpost;
 
 import android.util.Log;
 
+import java.io.File;
+
 import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.network.model.ImageResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.NewPostDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PostResponseDTO;
+import by.grodno.toni7777.socialnetwork.ui.newpost.listener.UploadListener;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import rx.Observable;
 import rx.Subscription;
 
 public class NewPostModel implements BaseModel, NewPostMVP.NewPostModel {
 
     private BaseListener mListener;
+    private UploadListener mUploadListener;
     private Subscription mSubscription;
     private LoginPreferences mPreferences;
     private SocialNetworkAPI mNetworkAPI;
 
-    public NewPostModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, BaseListener listener) {
+    public NewPostModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences,
+                        BaseListener listener, UploadListener uploadListener) {
         mNetworkAPI = socialNetworkAPI;
         mPreferences = loginPreferences;
-        this.mListener = listener;
+        mListener = listener;
+        mUploadListener = uploadListener;
     }
 
     @Override
     public void sendPostToServer(String textPost, Long imageId) {
+        Log.e("Start", "Sent post to server");
+        unsubscribe();
         NewPostDTO newPost = new NewPostDTO(mPreferences.getUserId(), imageId, textPost);
         Observable<PostResponseDTO> tokenObservable = mNetworkAPI.sendNewPost(newPost, mPreferences.getAccessToken());
         mSubscription = tokenObservable
@@ -47,6 +59,30 @@ public class NewPostModel implements BaseModel, NewPostMVP.NewPostModel {
                             unsubscribe();
                         });
 
+    }
+
+    @Override
+    public void uploadPostImage(File file) {
+        Log.e("Response", "StartLoad Image Id");
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), reqFile);
+        RequestBody name = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
+        Observable<ImageResponseDTO> tokenObservable = mNetworkAPI.uploadImageToServer(body, name, mPreferences.getAccessToken());
+        mSubscription = tokenObservable
+                .compose(RxUtil.<ImageResponseDTO>applySchedulers())
+                .subscribe(
+                        response -> {
+                            mUploadListener.onUploadImage(response.getImageId());
+                        },
+                        throwable -> {
+                            unsubscribe();
+                            mUploadListener.uploadError(throwable);
+                            mListener.loadError(throwable);
+                        },
+                        () -> {
+                            unsubscribe();
+                        });
     }
 
     @Override

@@ -20,6 +20,7 @@
     <string name="registration_city">Город</string>
 
     <string name="progress_wait">Пожалуйста подождите, идет загрузка</string>
+    <string name="progress_dialog_message">Публикация поста</string>
 
     <string name="activity_label_wall">Стена</string>
     <string name="activity_label_registration">Регистрация</string>
@@ -41,5 +42,7 @@
     <string name="login_button_success">Success</string>
     <string name="login_button_error">Error</string>
     <string name="login_button_progress">Loading</string>
+    <string name="post_upload_item">Отправить пост</string>
+    <string name="post_clear_iamge_item">Clear photo</string>
 
 </resources>

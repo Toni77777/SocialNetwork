@@ -25,23 +25,20 @@ public class NewPostPresenter extends MvpBasePresenter<NewPostMVP.NewPostView>
 
     @Override
     public void sendNewPost(String textPost, Long imageId) {
+        if (imageId == null) {
+            if (isViewAttached()) {
+                getView().showLoading();
+            }
+        }
         mModel.sendPostToServer(textPost, imageId);
     }
 
     @Override
     public void sendImagePost(File file) {
+        if (isViewAttached()) {
+            getView().showLoading();
+        }
         mModel.uploadPostImage(file);
-    }
-
-
-    @Override
-    public void onLoadCompleted() {
-
-    }
-
-    @Override
-    public void loadError(Throwable e) {
-
     }
 
     @Override
@@ -52,7 +49,20 @@ public class NewPostPresenter extends MvpBasePresenter<NewPostMVP.NewPostView>
     }
 
     @Override
+    public void loadError(Throwable e) {
+
+    }
+
+
+    @Override
     public void uploadError(Throwable e) {
 
+    }
+
+    @Override
+    public void onLoadCompleted() {
+        if (isViewAttached()) {
+            getView().publishSuccess();
+        }
     }
 }

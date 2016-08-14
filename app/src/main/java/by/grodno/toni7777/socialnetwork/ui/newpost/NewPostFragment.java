@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
 import java.io.File;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -73,11 +72,17 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPost
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.new_post_item) {
-            File file = FileUtils.getAbsolutePathFile(getContext(), mFileName);
-            presenter.sendImagePost(file);
+            if (mFileName != null) {
+                File file = FileUtils.getAbsolutePathFile(getContext(), mFileName);
+                presenter.sendImagePost(file);
+            } else {
+                presenter.sendNewPost(mTextPostView.getText().toString(), null);
+            }
+
             return true;
         } else if (id == R.id.clear_image_item) {
-            mProgressDialog.dismiss();
+            mImagePostView.setImageResource(0);
+            mFileName = null;
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -85,7 +90,7 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPost
 
     private void initProgressDialog() {
         mProgressDialog = new ProgressDialog(getContext());
-        mProgressDialog.setMessage("Send post to server");
+        mProgressDialog.setMessage(getString(R.string.progress_dialog_message));
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.setCancelable(false);
     }
@@ -112,17 +117,19 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPost
 
     @Override
     public void showError() {
+        mProgressDialog.dismiss();
 
     }
 
     @Override
     public void showLoading() {
-
+        mProgressDialog.show();
     }
 
     @Override
-    public void sendSuccess() {
-
+    public void publishSuccess() {
+        mProgressDialog.dismiss();
+        getActivity().finish();
     }
 
     @Override
@@ -130,10 +137,10 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPost
         if (CAMERA_REQUEST == requestCode && (data != null) && resultCode == Activity.RESULT_OK) {
             Bundle bundle = data.getExtras();
             if (bundle != null) {
-                Bitmap bp = (Bitmap) bundle.get(DATA_KEY);
-                mFileName = FileUtils.writeFileStorage(getContext(), bp);
-                Bitmap bitmap = FileUtils.readFileStorage(getContext(), mFileName);
-                mImagePostView.setImageBitmap(bitmap);
+                Bitmap bitmap = (Bitmap) bundle.get(DATA_KEY);
+                mFileName = FileUtils.writeFileStorage(getContext(), bitmap);
+                Bitmap image = FileUtils.readFileStorage(getContext(), mFileName);
+                mImagePostView.setImageBitmap(image);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

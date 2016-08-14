@@ -24,7 +24,7 @@ public interface NewPostMVP {
 
         void onImagePostUploaded(Long imageId);
 
-        void sendSuccess();
+        void publishSuccess();
 
     }
 
