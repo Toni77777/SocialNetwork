@@ -14,12 +14,14 @@ public final class QueryProperties {
     public static final String POSTS_URL = "/users/posts";
     public static final String FRIENDS_URL = "/friends";
     public static final String PROFILE_URL = "/users/profile";
+    public static final String FILE_URL = "/files";
 
     public static final String USER_ID = "userId";
     public static final String OFFSET = "offset";
     public static final String LIMIT = "limit";
     public static final String ACCESS_TOKEN = "access_token";
     public static final String POST_ID = "postId";
+    public static final String FILE_NAME = "name";
 
 
     public static final String HEADER_AUTORIZATION = "Authorization";

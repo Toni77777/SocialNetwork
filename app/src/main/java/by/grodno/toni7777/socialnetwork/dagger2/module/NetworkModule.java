@@ -2,6 +2,8 @@ package by.grodno.toni7777.socialnetwork.dagger2.module;
 
 import android.content.Context;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Singleton;
 
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.*;
@@ -32,6 +34,7 @@ public class NetworkModule {
     @Singleton
     OkHttpClient provideOkHttpClient() {
         return new OkHttpClient.Builder()
+                .connectTimeout(40, TimeUnit.SECONDS)
                 .addInterceptor(chain -> {
                     Request original = chain.request();
 

@@ -45,6 +45,7 @@ public class LoginModel implements BaseModel, LoginMVP.LoginModel {
                 .subscribe(
                         authorization -> {
                             mPreferences.setAccessToken(authorization.getAccessToken());
+                            Log.e("Token", authorization.getAccessToken().toString());
                         },
                         throwable -> {
                             unsubscribe();
