@@ -1,5 +1,7 @@
 package by.grodno.toni7777.socialnetwork.ui.newpost;
 
+import android.graphics.Bitmap;
+
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 
@@ -22,6 +24,10 @@ public class NewPostPresenter extends MvpBasePresenter<NewPostMVP.NewPostView>
     @Override
     public void sendNewPost(String textPost, Long imageId) {
         mModel.sendPostToServer(textPost, imageId);
+    }
+
+    public void sendImagePost(Bitmap bitmap) {
+        mModel.uploadPostImage(bitmap);
     }
 
 
