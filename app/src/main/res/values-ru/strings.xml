@@ -27,6 +27,7 @@
     <string name="activity_label_friends">Друзья</string>
     <string name="activity_label_new_post">Новый пост</string>
     <string name="activity_label_profile">Профиль</string>
+    <string name="activity_label_settings">Настройки</string>
 
 
     <string name="nav_item_profile">Профиль</string>
@@ -44,5 +45,7 @@
     <string name="login_button_progress">Loading</string>
     <string name="post_upload_item">Отправить пост</string>
     <string name="post_clear_iamge_item">Clear photo</string>
+    <string name="preference_version_name_title">Версия приложения</string>
+    <string name="preference_build_number_title">Номер сборки</string>
 
 </resources>

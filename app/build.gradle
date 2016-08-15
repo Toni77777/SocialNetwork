@@ -34,7 +34,7 @@ android {
 
     productFlavors {
         lollipop {
-            versionName "1.0-lollipop"
+            versionName "0.0.1.-lollipop"
             minSdkVersion 21
         }
     }

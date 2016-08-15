@@ -50,13 +50,17 @@ public class NewPostPresenter extends MvpBasePresenter<NewPostMVP.NewPostView>
 
     @Override
     public void loadError(Throwable e) {
-
+        if (isViewAttached()) {
+            getView().showError();
+        }
     }
 
 
     @Override
     public void uploadError(Throwable e) {
-
+        if (isViewAttached()) {
+            getView().showError();
+        }
     }
 
     @Override
