@@ -90,7 +90,7 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
         mAvatarView = (ImageView) mCollapsingView.findViewById(R.id.profile_avatar);
         mCollapsingView.setExpandedTitleColor(ContextCompat.getColor(getContext(), R.color.toolbar_title));
         mCollapsingView.setCollapsedTitleTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_title));
-        mCollapsingView.setContentScrimColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+        mCollapsingView.setContentScrimColor(ContextCompat.getColor(getContext(), R.color.primary));
     }
 
     private void bindProfileInfo(ProfileDVO profile) {
