@@ -9,7 +9,7 @@ import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
-import by.grodno.toni7777.socialnetwork.network.model.PostResponseDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 
 import by.grodno.toni7777.socialnetwork.ui.wall.listener.RemovePostListener;
@@ -17,7 +17,6 @@ import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
 import rx.Subscription;
-import rx.functions.Func1;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.LIMIT;
 
@@ -80,11 +79,11 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
     }
 
     public void removePost(long postId) {
-        Observable<PostResponseDTO> postsObservable = mNetworkAPI.removePost(postId, mPreferences.getAccessToken());
+        Observable<ResponseDTO> postsObservable = mNetworkAPI.removePost(postId, mPreferences.getAccessToken());
 
         unsubscribe();
         mSubscription = postsObservable
-                .compose(RxUtil.<PostResponseDTO>applySchedulers())
+                .compose(RxUtil.<ResponseDTO>applySchedulers())
                 .subscribe(
                         response -> {
                             if (response.isSuccess()) {

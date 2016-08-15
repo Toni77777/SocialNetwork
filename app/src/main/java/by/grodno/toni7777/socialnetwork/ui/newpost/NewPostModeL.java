@@ -9,7 +9,7 @@ import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.ImageResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.NewPostDTO;
-import by.grodno.toni7777.socialnetwork.network.model.PostResponseDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.ui.newpost.listener.UploadListener;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
@@ -40,9 +40,9 @@ public class NewPostModel implements BaseModel, NewPostMVP.NewPostModel {
         Log.e("Start", "Sent post to server");
         unsubscribe();
         NewPostDTO newPost = new NewPostDTO(mPreferences.getUserId(), imageId, textPost);
-        Observable<PostResponseDTO> tokenObservable = mNetworkAPI.sendNewPost(newPost, mPreferences.getAccessToken());
+        Observable<ResponseDTO> tokenObservable = mNetworkAPI.sendNewPost(newPost, mPreferences.getAccessToken());
         mSubscription = tokenObservable
-                .compose(RxUtil.<PostResponseDTO>applySchedulers())
+                .compose(RxUtil.<ResponseDTO>applySchedulers())
                 .subscribe(
                         response -> {
                             if (response.isSuccess()) {

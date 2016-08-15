@@ -15,6 +15,7 @@ public final class QueryProperties {
     public static final String FRIENDS_URL = "/friends";
     public static final String PROFILE_URL = "/users/profile";
     public static final String FILE_URL = "/files";
+    public static final String REGISTRATION_URL = "/users";
 
     public static final String USER_ID = "userId";
     public static final String OFFSET = "offset";

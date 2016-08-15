@@ -1,26 +1,23 @@
 package by.grodno.toni7777.socialnetwork.network;
 
-import android.graphics.Bitmap;
-
-import java.io.File;
 import java.util.Map;
 
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ImageResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.NewPostDTO;
-import by.grodno.toni7777.socialnetwork.network.model.PostResponseDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -39,6 +36,7 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.LOGIN_URL
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.POSTS_URL;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.PROFILE_URL;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.FILE_NAME;
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.REGISTRATION_URL;
 
 public interface SocialNetworkAPI {
 
@@ -64,12 +62,12 @@ public interface SocialNetworkAPI {
     Observable<ProfileDTO> getProfileInfo(@Query(ACCESS_TOKEN) String accessToken);
 
     @DELETE(POSTS_URL)
-    Observable<PostResponseDTO> removePost(@Query(POST_ID) Long postId,
-                                           @Query(ACCESS_TOKEN) String accessToken);
+    Observable<ResponseDTO> removePost(@Query(POST_ID) Long postId,
+                                       @Query(ACCESS_TOKEN) String accessToken);
 
     @POST(POSTS_URL)
-    Observable<PostResponseDTO> sendNewPost(@Body NewPostDTO newPost,
-                                            @Query(ACCESS_TOKEN) String accessToken);
+    Observable<ResponseDTO> sendNewPost(@Body NewPostDTO newPost,
+                                        @Query(ACCESS_TOKEN) String accessToken);
 
     @Multipart
     @POST(FILE_URL)
@@ -77,23 +75,8 @@ public interface SocialNetworkAPI {
                                                      @Part(FILE_NAME) RequestBody name,
                                                      @Query(ACCESS_TOKEN) String accessToken);
 
-// @Multipart
-//    @POST(FILE_URL)
-//    Observable<ImageResponseDTO> uploadImageToServer(@Part("file") Bitmap bitmap,
-//                                                     @Part(FILE_NAME) String name,
-//                                                     @Query(ACCESS_TOKEN) String accessToken);
 
-
-    //(@Part MultipartBody.Part image, @Part("name") RequestBody name);
-//
-//    @Multipart
-//    @POST("/")
-//    Call<ResponseBody> postImage(@Part MultipartBody.Part image, @Part("name") RequestBody name);
-//}
-//    @Multipart
-//    @POST(FILE_URL)
-//    Observable<ImageResponseDTO> uploadImageToServer(@PartMap Map<String, RequestBody> params,
-//                                                     @Query(ACCESS_TOKEN) String accessToken);
-
+    @POST(REGISTRATION_URL)
+    Observable<ResponseDTO> registration(@FieldMap Map<String, String> registrationParams);
 
 }
