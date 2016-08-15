@@ -51,7 +51,7 @@
     <string name="login_button_error">Error</string>
     <string name="login_button_progress">Loading</string>
     <string name="post_upload_item">Upload post</string>
-    <string name="post_clear_image_item">Удалить изображение</string>
+    <string name="post_clear_image_item">Clear picture</string>
     <string name="preference_version_name">version name</string>
     <string name="preference_build_number">build number</string>
     <string name="preference_version_name_title">Build version</string>

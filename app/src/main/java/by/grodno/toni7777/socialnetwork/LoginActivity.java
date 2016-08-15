@@ -2,6 +2,8 @@ package by.grodno.toni7777.socialnetwork;
 
 import android.os.Bundle;
 
+import java.util.IllegalFormatCodePointException;
+
 import by.grodno.toni7777.socialnetwork.base.BaseActivity;
 import by.grodno.toni7777.socialnetwork.ui.login.LoginFragment;
 
