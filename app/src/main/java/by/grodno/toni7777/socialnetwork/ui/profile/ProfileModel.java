@@ -37,10 +37,9 @@ public class ProfileModel implements BaseModel, ProfileMVP.ProfileModel {
         Observable<ProfileDTO> profileObservable = mNetworkAPI.getProfileInfo(mPreferences.getAccessToken());
 
         mSubscription = profileObservable
-                .delay(5, TimeUnit.SECONDS)
                 .map(ConverterDTOtoDSO::converteDTOtoDSO)
-                .compose(RxUtil.<ProfileDSO>applySchedulers())
                 .doOnNext(profileDSO -> mDatabaseDAO.copyToDatabaseOrUpdate(Realm.getDefaultInstance(), profileDSO))
+                .compose(RxUtil.<ProfileDSO>applySchedulers())
                 .subscribe(
                         profile -> {
                         },

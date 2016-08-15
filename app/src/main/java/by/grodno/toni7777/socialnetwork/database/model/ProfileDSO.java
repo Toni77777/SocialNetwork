@@ -6,6 +6,7 @@ import io.realm.annotations.PrimaryKey;
 public class ProfileDSO extends RealmObject {
 
     @PrimaryKey
+    private int key = 1;
     private long mId;
     private String mName;
     private String mSurname;
