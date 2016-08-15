@@ -49,14 +49,11 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
     @BindView(R.id.profile_skype)
     TextView mSkypeView;
 
-    @BindView(R.id.progress)
-    ProgressBar mLoadView;
-
     @BindView(R.id.error)
     TextView mErrorView;
 
-    @BindView(R.id.profile_layout)
-    View mProfileView;
+    private ProgressBar mLoadView;
+    private View mProfileView;
 
     @Inject
     ProfilePresenter mPresenter;
@@ -74,6 +71,8 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mLoadView = (ProgressBar) getActivity().findViewById(R.id.progress);
+        mProfileView = (View) getActivity().findViewById(R.id.main_content);
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
