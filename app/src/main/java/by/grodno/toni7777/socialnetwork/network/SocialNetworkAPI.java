@@ -13,8 +13,11 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -78,5 +81,17 @@ public interface SocialNetworkAPI {
 
     @POST(REGISTRATION_URL)
     Observable<ResponseDTO> registration(@FieldMap Map<String, String> registrationParams);
+
+    @FormUrlEncoded
+    @Headers("Content-Type: application/json")
+    @POST(REGISTRATION_URL)
+    Observable<ResponseDTO> registration1(
+            @Field("name") String name,
+            @Field("lastName") String surname,
+            @Field("login") String login,
+            @Field("password") String password,
+            @Field("email") String email,
+            @Field("sex") String sex,
+            @Field("bday") String bornDate);
 
 }

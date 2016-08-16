@@ -1,5 +1,10 @@
 package by.grodno.toni7777.socialnetwork.ui.registration.fragment;
 
+import android.util.Log;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
@@ -22,7 +27,9 @@ public class ContactModel implements BaseModel, ContactMVP.ContactModel {
 
     @Override
     public void registration(Profile profile) {
-        Observable<ResponseDTO> registrationObservable = mNetworkAPI.registration(null);
+
+        Observable<ResponseDTO> registrationObservable = mNetworkAPI.registration1("anton", "anton", "anton", "anton", "anton@gmail.com",
+                "1", "15/4/1900");
 
         mSubscription = registrationObservable
                 .compose(RxUtil.<ResponseDTO>applySchedulers())
@@ -35,6 +42,7 @@ public class ContactModel implements BaseModel, ContactMVP.ContactModel {
                         throwable -> {
                             unsubscribe();
                             mListener.loadError(throwable);
+                            Log.e("Error", "Error autorization" + throwable.toString());
                         },
                         () -> {
                             unsubscribe();

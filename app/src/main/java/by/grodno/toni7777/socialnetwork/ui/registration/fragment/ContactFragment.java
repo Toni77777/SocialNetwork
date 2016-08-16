@@ -18,6 +18,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseMvpTabFragment;
 import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
 
@@ -82,6 +83,7 @@ public class ContactFragment extends BaseMvpTabFragment<ContactMVP.ContactView, 
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         mNavigationView.showNext();
         resetErrorAfterChange(mPhoneView, mSkypeView, mCityView);
@@ -103,13 +105,13 @@ public class ContactFragment extends BaseMvpTabFragment<ContactMVP.ContactView, 
         if (inNotEmptySparseIntArray(errors)) {
             showErrors(errors);
         } else {
-            mContactView.setVisibility(View.GONE);
-            mProgressView.setVisibility(View.VISIBLE);
-            // request registration
-            mProfile.setTelephone(phone);// need int
-            mProfile.setSkype(skype);
-            mProfile.setCity(city);
-            presenter.registration(mProfile);
+//            mContactView.setVisibility(View.GONE);
+//            mProgressView.setVisibility(View.VISIBLE);
+//            // request registration
+//            mProfile.setTelephone(phone);// need int
+//            mProfile.setSkype(skype);
+//            mProfile.setCity(city);
+//            presenter.registration(mProfile);
         }
     }
 
@@ -120,27 +122,28 @@ public class ContactFragment extends BaseMvpTabFragment<ContactMVP.ContactView, 
 
     @Override
     public ViewState createViewState() {
-        return null;
+        return new ContactViewState();
     }
 
     @Override
     public void onNewViewStateInstance() {
-
+        showContactForm();
     }
 
     @Override
     public void showContactForm() {
-
+        mContactView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showError() {
-
+        mContactView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showLoading() {
-
+        mContactView.setVisibility(View.GONE);
+        mProgressView.setVisibility(View.VISIBLE);
     }
 
     @Override
