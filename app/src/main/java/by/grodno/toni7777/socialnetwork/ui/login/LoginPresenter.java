@@ -15,7 +15,7 @@ import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 public class LoginPresenter extends MvpBasePresenter<LoginMVP.LoginView>
         implements BaseListener, MvpPresenter<LoginMVP.LoginView>, LoginMVP.LoginPresenter {
 
-    private LoginModel mModel;
+    private final LoginModel mModel;
 
     @Inject
     public LoginPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, DatabaseDAOImp databaseDAO) {

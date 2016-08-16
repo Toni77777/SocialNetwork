@@ -11,6 +11,7 @@ import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
 import by.grodno.toni7777.socialnetwork.network.model.UserDTO;
+import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDSO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import io.realm.Realm;
@@ -44,6 +45,7 @@ public class LoginModel implements BaseModel, LoginMVP.LoginModel {
                 .subscribe(
                         authorization -> {
                             mPreferences.setAccessToken(authorization.getAccessToken());
+                            Log.e("Token", authorization.getAccessToken().toString());
                         },
                         throwable -> {
                             unsubscribe();
@@ -61,15 +63,9 @@ public class LoginModel implements BaseModel, LoginMVP.LoginModel {
         Observable<ProfileDTO> profileObservable = mNetworkAPI.getProfileInfo(mPreferences.getAccessToken());
 
         mSubscription = profileObservable
-                .compose(RxUtil.<ProfileDTO>applySchedulers())
-                .map(source -> {
-                    UserDTO user = source.getUser();
-                    return new ProfileDSO(user.getId(), user.getName(), user.getSurname(),
-                            user.getBirthday(), user.getAvatar(), user.getCity(), user.getAbout(),
-                            new ContactProfileDSO(user.getContact().getMobile(), user.getContact().getSkype(),
-                                    user.getContact().getEmail()));
-                })
+                .map(ConverterDTOtoDSO::converteDTOtoDSO)
                 .doOnNext(profileDSO -> mDatabaseDAO.copyToDatabaseOrUpdate(Realm.getDefaultInstance(), profileDSO))
+                .compose(RxUtil.<ProfileDSO>applySchedulers())
                 .subscribe(
                         profile -> {
                             mPreferences.setUserId(profile.getId());

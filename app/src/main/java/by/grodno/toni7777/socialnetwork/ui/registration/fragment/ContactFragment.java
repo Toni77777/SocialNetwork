@@ -3,22 +3,32 @@ package by.grodno.toni7777.socialnetwork.ui.registration.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.ViewSwitcher;
+
+import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
+import by.grodno.toni7777.socialnetwork.base.BaseMvpTabFragment;
 import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_PROFILE;
 import static by.grodno.toni7777.socialnetwork.util.Util.inNotEmptySparseIntArray;
 import static by.grodno.toni7777.socialnetwork.util.Validation.validateContact;
 
-public class ContactFragment extends TabFragment {
+
+public class ContactFragment extends BaseMvpTabFragment<ContactMVP.ContactView, ContactPresenter>
+        implements ContactMVP.ContactView {
 
     @BindView(R.id.phone_layout)
     TextInputLayout mPhoneView;
@@ -31,6 +41,15 @@ public class ContactFragment extends TabFragment {
 
     @BindView(R.id.navigation_switcher)
     ViewSwitcher mNavigationView;
+
+    @BindView(R.id.progress)
+    ProgressBar mProgressView;
+
+    @BindView(R.id.contact_layout)
+    View mContactView;
+
+    @Inject
+    ContactPresenter mPresenter;
 
     private Profile mProfile;
     private static final String STATE_PROFILE = "profile";
@@ -52,12 +71,19 @@ public class ContactFragment extends TabFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
+            container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tab_contact, container, false);
     }
 
     @Override
+    public ContactPresenter createPresenter() {
+        return mPresenter;
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         mNavigationView.showNext();
         resetErrorAfterChange(mPhoneView, mSkypeView, mCityView);
@@ -79,12 +105,49 @@ public class ContactFragment extends TabFragment {
         if (inNotEmptySparseIntArray(errors)) {
             showErrors(errors);
         } else {
-            // request registration
+//            mContactView.setVisibility(View.GONE);
+//            mProgressView.setVisibility(View.VISIBLE);
+//            // request registration
+//            mProfile.setTelephone(phone);// need int
+//            mProfile.setSkype(skype);
+//            mProfile.setCity(city);
+//            presenter.registration(mProfile);
         }
     }
 
     @Override
     public void showErrors(SparseIntArray errors) {
 
+    }
+
+    @Override
+    public ViewState createViewState() {
+        return new ContactViewState();
+    }
+
+    @Override
+    public void onNewViewStateInstance() {
+        showContactForm();
+    }
+
+    @Override
+    public void showContactForm() {
+        mContactView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showError() {
+        mContactView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showLoading() {
+        mContactView.setVisibility(View.GONE);
+        mProgressView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void registrationSuccess() {
+        Log.e("TAG", "Registration");
     }
 }

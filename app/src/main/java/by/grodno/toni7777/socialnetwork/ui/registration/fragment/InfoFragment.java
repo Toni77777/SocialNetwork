@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.base.TabFragment;
 import by.grodno.toni7777.socialnetwork.ui.registration.DatePickerFragment;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_DATE_PICKER;

@@ -6,9 +6,11 @@ import io.realm.annotations.PrimaryKey;
 public class ProfileDSO extends RealmObject {
 
     @PrimaryKey
+    private int key = 1;
     private long mId;
     private String mName;
     private String mSurname;
+    private int mSex;
     private String mBirthday;
     private String mAvatar;
     private String mCity;
@@ -18,10 +20,11 @@ public class ProfileDSO extends RealmObject {
     public ProfileDSO() {
     }
 
-    public ProfileDSO(long id, String name, String surname, String birthday, String avatar, String city, String about, ContactProfileDSO contact) {
+    public ProfileDSO(long id, String name, String surname, int sex, String birthday, String avatar, String city, String about, ContactProfileDSO contact) {
         mId = id;
         mName = name;
         mSurname = surname;
+        mSex = sex;
         mBirthday = birthday;
         mAvatar = avatar;
         mCity = city;
@@ -51,6 +54,14 @@ public class ProfileDSO extends RealmObject {
 
     public void setSurname(String surname) {
         mSurname = surname;
+    }
+
+    public int getSex() {
+        return mSex;
+    }
+
+    public void setSex(int sex) {
+        mSex = sex;
     }
 
     public String getBirthday() {
@@ -101,6 +112,7 @@ public class ProfileDSO extends RealmObject {
         ProfileDSO that = (ProfileDSO) o;
 
         if (mId != that.mId) return false;
+        if (mSex != that.mSex) return false;
         if (mName != null ? !mName.equals(that.mName) : that.mName != null) return false;
         if (mSurname != null ? !mSurname.equals(that.mSurname) : that.mSurname != null)
             return false;
@@ -118,6 +130,7 @@ public class ProfileDSO extends RealmObject {
         int result = (int) (mId ^ (mId >>> 32));
         result = 31 * result + (mName != null ? mName.hashCode() : 0);
         result = 31 * result + (mSurname != null ? mSurname.hashCode() : 0);
+        result = 31 * result + mSex;
         result = 31 * result + (mBirthday != null ? mBirthday.hashCode() : 0);
         result = 31 * result + (mAvatar != null ? mAvatar.hashCode() : 0);
         result = 31 * result + (mCity != null ? mCity.hashCode() : 0);
@@ -132,6 +145,7 @@ public class ProfileDSO extends RealmObject {
                 "mId=" + mId +
                 ", mName='" + mName + '\'' +
                 ", mSurname='" + mSurname + '\'' +
+                ", mSex=" + mSex +
                 ", mBirthday='" + mBirthday + '\'' +
                 ", mAvatar='" + mAvatar + '\'' +
                 ", mCity='" + mCity + '\'' +

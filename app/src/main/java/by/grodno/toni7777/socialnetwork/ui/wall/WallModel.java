@@ -1,5 +1,7 @@
 package by.grodno.toni7777.socialnetwork.ui.wall;
 
+import android.util.Log;
+
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
@@ -7,7 +9,7 @@ import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
-import by.grodno.toni7777.socialnetwork.network.model.PostResponseDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 
 import by.grodno.toni7777.socialnetwork.ui.wall.listener.RemovePostListener;
@@ -41,7 +43,14 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
 
         unsubscribe();
         mSubscription = postsObservable
-                .doOnNext(this::saveInCache)
+//                .map(new Func1<WallDTO, Object>() {
+//
+//                    @Override
+//                    public Object call(WallDTO wallDTO) {
+//                        return null;
+//                    }
+//                })
+//                .doOnNext(this::saveInCache)
                 .compose(RxUtil.<WallDTO>applySchedulers())
                 .subscribe(
                         wallDTO -> {
@@ -63,12 +72,18 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
         // TODO Put in cache to do next step
     }
 
+    public void readPostsFromDB(int offset) {
+//        ProfileDSO profileDSO = mDatabaseDAO.findFirst(Realm.getDefaultInstance(), ProfileDSO.class);
+//        ProfileDVO profileView = ConverterDSOtoDVO.converteDTOtoDSO(profileDSO);
+//        mListener.onLoadCompleted(profileView);
+    }
+
     public void removePost(long postId) {
-        Observable<PostResponseDTO> postsObservable = mNetworkAPI.removePost(postId, mPreferences.getAccessToken());
+        Observable<ResponseDTO> postsObservable = mNetworkAPI.removePost(postId, mPreferences.getAccessToken());
 
         unsubscribe();
         mSubscription = postsObservable
-                .compose(RxUtil.<PostResponseDTO>applySchedulers())
+                .compose(RxUtil.<ResponseDTO>applySchedulers())
                 .subscribe(
                         response -> {
                             if (response.isSuccess()) {
@@ -78,6 +93,10 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
                         throwable -> {
                             unsubscribe();
                             mRemoveListener.removeGetError(throwable);
+                            Log.e("Error", throwable.toString());
+//                            Log.e("Error", throwable.getMessage());
+//                            Log.e("Error", throwable.getLocalizedMessage());
+//                            Log.e("Error", throwable.getStackTrace().toString());
                         },
                         () -> {
                             unsubscribe();

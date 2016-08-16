@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".app.SocialNetworkApp"
@@ -11,7 +13,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/BaseTheme">
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -37,8 +39,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.wall.WallActivity"/>
         </activity>
-        <activity android:name=".ui.profile.ProfileActivity">
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:label="@string/activity_label_profile">
         </activity>
+        <activity android:name=".ui.settings.SettingsActivity"
+                  android:label="@string/activity_label_settings">
+        </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="17ab9477201e77021e8493a8afa0dee20111d054" />
     </application>
 
 </manifest>

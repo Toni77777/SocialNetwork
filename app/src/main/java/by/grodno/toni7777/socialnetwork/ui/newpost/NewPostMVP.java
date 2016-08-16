@@ -2,11 +2,15 @@ package by.grodno.toni7777.socialnetwork.ui.newpost;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
+import java.io.File;
+
 public interface NewPostMVP {
 
     interface NewPostModel {
 
         void sendPostToServer(String textPost, Long imageId);
+
+        void uploadPostImage(File file);
 
     }
 
@@ -18,12 +22,15 @@ public interface NewPostMVP {
 
         void showLoading();
 
-        void sendSuccess();
+        void onImagePostUploaded(Long imageId);
 
+        void publishSuccess();
 
     }
 
     interface NewPostPresenter {
+
+        void sendImagePost(File file);
 
         void sendNewPost(String textPost, Long imageId);
     }

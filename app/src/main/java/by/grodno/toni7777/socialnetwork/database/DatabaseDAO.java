@@ -13,4 +13,6 @@ public interface DatabaseDAO {
     <E extends RealmModel> RealmResults<E> readAll(Realm realm, Class clazz);
 
     <E extends RealmModel> E findFirst(Realm realm, Class clazz);
+
+    <E extends RealmModel> E findLast(Realm realm, Class clazz);
 }

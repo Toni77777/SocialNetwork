@@ -2,7 +2,7 @@ package by.grodno.toni7777.socialnetwork.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PostResponseDTO {
+public class ResponseDTO {
 
     @SerializedName("entity")
     private boolean mSuccess;
@@ -17,7 +17,7 @@ public class PostResponseDTO {
 
     @Override
     public String toString() {
-        return "PostResponseDTO{" +
+        return "ResponseDTO{" +
                 "mSuccess=" + mSuccess +
                 '}';
     }

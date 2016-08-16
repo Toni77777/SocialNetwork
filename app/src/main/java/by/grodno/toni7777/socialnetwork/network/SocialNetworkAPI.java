@@ -1,20 +1,32 @@
 package by.grodno.toni7777.socialnetwork.network;
 
+import java.util.Map;
+
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ImageResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.NewPostDTO;
-import by.grodno.toni7777.socialnetwork.network.model.PostResponseDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.ACCESS_TOKEN;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.CLIENT_ID;
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.FILE_URL;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.FRIENDS_URL;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.GRAND_TYPE;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.LIMIT;
@@ -26,6 +38,8 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_PASS
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.LOGIN_URL;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.POSTS_URL;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.PROFILE_URL;
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.FILE_NAME;
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.REGISTRATION_URL;
 
 public interface SocialNetworkAPI {
 
@@ -51,11 +65,33 @@ public interface SocialNetworkAPI {
     Observable<ProfileDTO> getProfileInfo(@Query(ACCESS_TOKEN) String accessToken);
 
     @DELETE(POSTS_URL)
-    Observable<PostResponseDTO> removePost(@Query(POST_ID) Long postId,
-                                           @Query(ACCESS_TOKEN) String accessToken);
+    Observable<ResponseDTO> removePost(@Query(POST_ID) Long postId,
+                                       @Query(ACCESS_TOKEN) String accessToken);
 
     @POST(POSTS_URL)
-    Observable<PostResponseDTO> sendNewPost(@Body NewPostDTO newPost,
-                                            @Query(ACCESS_TOKEN) String accessToken);
+    Observable<ResponseDTO> sendNewPost(@Body NewPostDTO newPost,
+                                        @Query(ACCESS_TOKEN) String accessToken);
+
+    @Multipart
+    @POST(FILE_URL)
+    Observable<ImageResponseDTO> uploadImageToServer(@Part MultipartBody.Part image,
+                                                     @Part(FILE_NAME) RequestBody name,
+                                                     @Query(ACCESS_TOKEN) String accessToken);
+
+
+    @POST(REGISTRATION_URL)
+    Observable<ResponseDTO> registration(@FieldMap Map<String, String> registrationParams);
+
+    @FormUrlEncoded
+    @Headers("Content-Type: application/json")
+    @POST(REGISTRATION_URL)
+    Observable<ResponseDTO> registration1(
+            @Field("name") String name,
+            @Field("lastName") String surname,
+            @Field("login") String login,
+            @Field("password") String password,
+            @Field("email") String email,
+            @Field("sex") String sex,
+            @Field("bday") String bornDate);
 
 }

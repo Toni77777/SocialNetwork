@@ -1,9 +1,12 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item> 
+        <item name="colorPrimaryDark">@color/primary_dark</item> 
+        <item name="colorControlHighlight">@color/accent_translucent</item> 
+        <item name="colorAccent">@color/accent</item>
+        <item name="selectableItemBackground">@drawable/selectable_item_background</item>
+        <item name="android:selectableItemBackground">@drawable/selectable_item_background</item>
     </style>
 
     <style name="Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
@@ -13,9 +16,27 @@
         <item name="android:minHeight">?actionBarSize</item>
     </style>
 
-    <style name="NewPostTheme" parent="AppTheme">
+    <style name="Widget.Toolbar.Collapsing" parent="Widget.AppCompat.Toolbar">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="NewPostTheme" parent="BaseTheme">
         <item name="android:homeAsUpIndicator">@drawable/ic_close_post_24dp</item>
     </style>
+
+
+    <style name="FabStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:src">@drawable/ic_add_photo_post_24dp</item>
+        <item name="borderWidth">0dp</item>
+        <item name="elevation">6dp</item>
+        <item name="pressedTranslationZ">12dp</item>
+        <item name="rippleColor">@android:color/white</item>
+    </style>
+
 
 
 </resources>

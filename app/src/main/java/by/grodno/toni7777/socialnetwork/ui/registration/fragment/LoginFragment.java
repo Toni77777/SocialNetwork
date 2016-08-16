@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.base.TabFragment;
 
 public class LoginFragment extends TabFragment {
 

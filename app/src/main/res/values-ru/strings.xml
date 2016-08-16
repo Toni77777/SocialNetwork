@@ -20,11 +20,14 @@
     <string name="registration_city">Город</string>
 
     <string name="progress_wait">Пожалуйста подождите, идет загрузка</string>
+    <string name="progress_dialog_message">Публикация поста</string>
 
     <string name="activity_label_wall">Стена</string>
     <string name="activity_label_registration">Регистрация</string>
     <string name="activity_label_friends">Друзья</string>
     <string name="activity_label_new_post">Новый пост</string>
+    <string name="activity_label_profile">Профиль</string>
+    <string name="activity_label_settings">Настройки</string>
 
 
     <string name="nav_item_profile">Профиль</string>
@@ -40,5 +43,20 @@
     <string name="login_button_success">Success</string>
     <string name="login_button_error">Error</string>
     <string name="login_button_progress">Loading</string>
+    <string name="post_upload_item">Отправить пост</string>
+    <string name="preference_version_name_title">Версия приложения</string>
+    <string name="preference_build_number_title">Номер сборки</string>
+    <string name="preference_version_name">version name</string>
+    <string name="preference_build_number">build number</string>
+
+    <string name="tab_title_contact">Контакт</string>
+    <string name="tab_title_info">Инфо</string>
+    <string name="tab_title_login">Логин</string>
+    <string name="tab_error_message">Ошибка</string>
+    <string name="error_field_empty">Поле не может быть пустым</string>
+    <string name="error_field_max">Превышена максимальная длина</string>
+    <string name="error_field_format">Неправильный формат</string>
+    <string name="error_click_retry">Ошибка! нажмите чтобы повторить</string>
+    <string name="post_clear_image_item">Удалить изображение</string>
 
 </resources>

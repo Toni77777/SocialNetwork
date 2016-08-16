@@ -13,6 +13,9 @@ public class PostDTO {
     @SerializedName("image")
     private String mImage;
 
+    @SerializedName("date")
+    private String mDate;
+
     @SerializedName("text")
     private String mText;
 
@@ -25,10 +28,11 @@ public class PostDTO {
     public PostDTO() {
     }
 
-    public PostDTO(long postId, OwnerDTO owner, String image, String text, int like, int dislike) {
+    public PostDTO(long postId, OwnerDTO owner, String image, String date, String text, int like, int dislike) {
         mPostId = postId;
         mOwner = owner;
         mImage = image;
+        mDate = date;
         mText = text;
         mLike = like;
         mDislike = dislike;
@@ -58,6 +62,14 @@ public class PostDTO {
         mImage = image;
     }
 
+    public String getDate() {
+        return mDate;
+    }
+
+    public void setDate(String date) {
+        mDate = date;
+    }
+
     public String getText() {
         return mText;
     }
@@ -83,38 +95,12 @@ public class PostDTO {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PostDTO postDTO = (PostDTO) o;
-
-        if (mPostId != postDTO.mPostId) return false;
-        if (mLike != postDTO.mLike) return false;
-        if (mDislike != postDTO.mDislike) return false;
-        if (mOwner != null ? !mOwner.equals(postDTO.mOwner) : postDTO.mOwner != null) return false;
-        if (mImage != null ? !mImage.equals(postDTO.mImage) : postDTO.mImage != null) return false;
-        return mText != null ? mText.equals(postDTO.mText) : postDTO.mText == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (mPostId ^ (mPostId >>> 32));
-        result = 31 * result + (mOwner != null ? mOwner.hashCode() : 0);
-        result = 31 * result + (mImage != null ? mImage.hashCode() : 0);
-        result = 31 * result + (mText != null ? mText.hashCode() : 0);
-        result = 31 * result + mLike;
-        result = 31 * result + mDislike;
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "PostDTO{" +
                 "mPostId=" + mPostId +
                 ", mOwner=" + mOwner +
                 ", mImage='" + mImage + '\'' +
+                ", mDate='" + mDate + '\'' +
                 ", mText='" + mText + '\'' +
                 ", mLike=" + mLike +
                 ", mDislike=" + mDislike +
