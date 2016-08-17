@@ -11,10 +11,11 @@ import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
+import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 public class FriendsPresenter extends MvpBasePresenter<FriendsMVP.FriendsView>
-        implements ModelListener<List<FriendDTO>>, MvpPresenter<FriendsMVP.FriendsView>, FriendsMVP.FriendsPresenter {
+        implements ModelListener<List<FriendDVO>>, MvpPresenter<FriendsMVP.FriendsView>, FriendsMVP.FriendsPresenter {
 
     private final FriendsModel mModel;
     private boolean mForceRefresh;
@@ -34,7 +35,7 @@ public class FriendsPresenter extends MvpBasePresenter<FriendsMVP.FriendsView>
     }
 
     @Override
-    public void loadNext(List<FriendDTO> data) {
+    public void loadNext(List<FriendDVO> data) {
         if (isViewAttached()) {
             getView().setData(data);
         }

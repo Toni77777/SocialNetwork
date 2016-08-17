@@ -6,6 +6,7 @@ import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
+import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
 
 public interface FriendsMVP {
 
@@ -14,7 +15,7 @@ public interface FriendsMVP {
         void loadFriends(int offset);
     }
 
-    interface FriendsView extends MvpLceView<List<FriendDTO>> {
+    interface FriendsView extends MvpLceView<List<FriendDVO>> {
 
     }
 

@@ -9,20 +9,23 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
-import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
-import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
+import by.grodno.toni7777.socialnetwork.base.event.FriendEvent;
+import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendViewHolder> {
 
-    private List<FriendDTO> mFriends;
+    private List<FriendDVO> mFriends;
 
-    public FriendsAdapter(List<FriendDTO> friends) {
+    public FriendsAdapter(List<FriendDVO> friends) {
         mFriends = friends;
     }
 
@@ -33,7 +36,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendVi
 
     @Override
     public void onBindViewHolder(FriendViewHolder holder, int position) {
-        FriendDTO friend = mFriends.get(position);
+        FriendDVO friend = mFriends.get(position);
         holder.bind(friend);
     }
 
@@ -46,35 +49,39 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendVi
         mFriends.clear();
     }
 
-    public void update(List<FriendDTO> friends) {
+    public void update(List<FriendDVO> friends) {
         mFriends.addAll(friends);
         notifyDataSetChanged();
     }
 
-    public List<FriendDTO> getFriends() {
+    public List<FriendDVO> getFriends() {
         return mFriends;
     }
 
     static class FriendViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.friend_avatar)
-        ImageView mAvatar;
+        ImageView mAvatarView;
 
         @BindView(R.id.friend_name)
-        TextView mName;
+        TextView mNameView;
 
         @BindView(R.id.friend_online)
-        CheckBox mOnline;
+        CheckBox mOnlineView;
+
+        private long mId;
 
         public FriendViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
 
-        void bind(FriendDTO friend) {
-            ImageLoad.loadCircleImage(mAvatar, friend.getAvatar());
-            mName.setText(friend.getName() + " " + friend.getSurname());
-            mOnline.setChecked(true);
+        // Need server responce online/unonline
+        void bind(FriendDVO friend) {
+            ImageLoad.loadCircleImage(mAvatarView, friend.getAvatar());
+            mNameView.setText(friend.getFullName());
+            mOnlineView.setChecked(true);
+            mId = friend.getId();
 //            if (friend.isOnline()) {
 //                mOnline.setChecked(true);
 //            } else {
@@ -86,6 +93,11 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendVi
         public static FriendViewHolder newInstance(ViewGroup parent) {
             return new FriendViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_friend, parent, false));
+        }
+
+        @OnClick(R.id.friend_layout)
+        void friendClick() {
+            EventBus.getDefault().post(new FriendEvent(mId));
         }
     }
 

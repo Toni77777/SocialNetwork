@@ -8,6 +8,9 @@ import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
+import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
+import by.grodno.toni7777.socialnetwork.ui.model.FriendsDVO;
+import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
@@ -17,13 +20,13 @@ import static by.grodno.toni7777.socialnetwork.util.Constants.LIMIT;
 
 public class FriendsModel implements BaseModel, FriendsMVP.FriendsModel {
 
-    private ModelListener<List<FriendDTO>> mListener;
+    private ModelListener<List<FriendDVO>> mListener;
     private Subscription mSubscription;
     private LoginPreferences mPreferences;
     private SocialNetworkAPI mNetworkAPI;
     private DatabaseDAOImp mDatabaseDAO;
 
-    public FriendsModel(ModelListener<List<FriendDTO>> listener, LoginPreferences preferences, SocialNetworkAPI networkAPI, DatabaseDAOImp databaseDAO) {
+    public FriendsModel(ModelListener<List<FriendDVO>> listener, LoginPreferences preferences, SocialNetworkAPI networkAPI, DatabaseDAOImp databaseDAO) {
         mListener = listener;
         mPreferences = preferences;
         mNetworkAPI = networkAPI;
@@ -36,15 +39,8 @@ public class FriendsModel implements BaseModel, FriendsMVP.FriendsModel {
 
         unsubscribe();
         mSubscription = postsObservable
-//                .map(new Func1<WallDTO, Object>() {
-//
-//                    @Override
-//                    public Object call(WallDTO wallDTO) {
-//                        return null;
-//                    }
-//                })
-//                .doOnNext(this::saveInCache)
-                .compose(RxUtil.<FriendsDTO>applySchedulers())
+                .map(ConverterDTOtoDVO::converteDTOtoDSO)
+                .compose(RxUtil.<FriendsDVO>applySchedulers())
                 .subscribe(
                         friends -> {
                             mListener.loadNext(friends.getFriends());
