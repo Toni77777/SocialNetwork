@@ -78,20 +78,7 @@ public interface SocialNetworkAPI {
                                                      @Part(FILE_NAME) RequestBody name,
                                                      @Query(ACCESS_TOKEN) String accessToken);
 
-
     @POST(REGISTRATION_URL)
-    Observable<ResponseDTO> registration(@FieldMap Map<String, String> registrationParams);
-
-    @FormUrlEncoded
-    @Headers("Content-Type: application/json")
-    @POST(REGISTRATION_URL)
-    Observable<ResponseDTO> registration1(
-            @Field("name") String name,
-            @Field("lastName") String surname,
-            @Field("login") String login,
-            @Field("password") String password,
-            @Field("email") String email,
-            @Field("sex") String sex,
-            @Field("bday") String bornDate);
+    Observable<ResponseDTO> registration(@Body RequestBody params);
 
 }

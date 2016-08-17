@@ -111,7 +111,7 @@ public class ContactFragment extends BaseMvpTabFragment<ContactMVP.ContactView, 
 //            mProfile.setTelephone(phone);// need int
 //            mProfile.setSkype(skype);
 //            mProfile.setCity(city);
-//            presenter.registration(mProfile);
+            presenter.registration(mProfile);
         }
     }
 
@@ -137,6 +137,7 @@ public class ContactFragment extends BaseMvpTabFragment<ContactMVP.ContactView, 
 
     @Override
     public void showError() {
+        mProgressView.setVisibility(View.GONE);
         mContactView.setVisibility(View.VISIBLE);
     }
 

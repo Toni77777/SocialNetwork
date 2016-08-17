@@ -58,5 +58,6 @@
     <string name="error_field_format">Неправильный формат</string>
     <string name="error_click_retry">Ошибка! нажмите чтобы повторить</string>
     <string name="post_clear_image_item">Удалить изображение</string>
+    <string name="friend_search_item">Поиск людей</string>
 
 </resources>

@@ -1,25 +1,17 @@
-package by.grodno.toni7777.socialnetwork.network.model;
+package by.grodno.toni7777.socialnetwork.ui.model;
 
-import com.google.gson.annotations.SerializedName;
+public class FriendDVO {
 
-public class FriendDTO {
-
-    @SerializedName("name")
     private String mName;
-
-    @SerializedName("lastName")
     private String mSurname;
-
-    @SerializedName("id")
     private long mId;
-
-    @SerializedName("avatar")
     private String mAvatar;
+    private String mFullName;
 
-    public FriendDTO() {
+    public FriendDVO() {
     }
 
-    public FriendDTO(String name, String surname, long id, String avatar) {
+    public FriendDVO(String name, String surname, long id, String avatar) {
         mName = name;
         mSurname = surname;
         mId = id;
@@ -58,18 +50,25 @@ public class FriendDTO {
         mAvatar = avatar;
     }
 
+    public String getFullName() {
+        if (mFullName == null) {
+            mFullName = mName + " " + mSurname;
+        }
+        return mFullName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FriendDTO friendDTO = (FriendDTO) o;
+        FriendDVO friendDVO = (FriendDVO) o;
 
-        if (mId != friendDTO.mId) return false;
-        if (mName != null ? !mName.equals(friendDTO.mName) : friendDTO.mName != null) return false;
-        if (mSurname != null ? !mSurname.equals(friendDTO.mSurname) : friendDTO.mSurname != null)
+        if (mId != friendDVO.mId) return false;
+        if (mName != null ? !mName.equals(friendDVO.mName) : friendDVO.mName != null) return false;
+        if (mSurname != null ? !mSurname.equals(friendDVO.mSurname) : friendDVO.mSurname != null)
             return false;
-        return mAvatar != null ? mAvatar.equals(friendDTO.mAvatar) : friendDTO.mAvatar == null;
+        return mAvatar != null ? mAvatar.equals(friendDVO.mAvatar) : friendDVO.mAvatar == null;
 
     }
 
@@ -84,7 +83,7 @@ public class FriendDTO {
 
     @Override
     public String toString() {
-        return "FriendDTO{" +
+        return "FriendDVO{" +
                 "mName='" + mName + '\'' +
                 ", mSurname='" + mSurname + '\'' +
                 ", mId=" + mId +

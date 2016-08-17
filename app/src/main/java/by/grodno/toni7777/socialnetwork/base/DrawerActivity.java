@@ -18,6 +18,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.LoginActivity;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.ui.people.FriendsActivity;
 import by.grodno.toni7777.socialnetwork.ui.profile.ProfileActivity;
 import by.grodno.toni7777.socialnetwork.ui.settings.SettingsActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallActivity;
@@ -72,7 +73,7 @@ public class DrawerActivity extends ToolbarActivity implements NavigationView.On
         if (id == R.id.nav_wall) {
             startSectionActivity(WallActivity.class);
         } else if (id == R.id.nav_friends) {
-//            startSectionActivity(FriendsActivity.class);
+            startSectionActivity(FriendsActivity.class);
         } else if (id == R.id.nav_logout) {
             mLoginPreferences.clearUserLoginInformation();
             startSectionActivity(LoginActivity.class);
