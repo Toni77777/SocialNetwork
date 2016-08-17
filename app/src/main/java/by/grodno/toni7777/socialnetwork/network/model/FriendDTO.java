@@ -7,7 +7,7 @@ public class FriendDTO {
     @SerializedName("name")
     private String mName;
 
-    @SerializedName("surname")
+    @SerializedName("lastName")
     private String mSurname;
 
     @SerializedName("id")
