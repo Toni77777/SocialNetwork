@@ -152,9 +152,9 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPost
         startActivityForResult(intent, CAMERA_REQUEST);
     }
 
-    public void onImagePostUploaded(Long imageId) {
-        Log.e("Post", "Fragment onImagePostUploaded(Long imageId) Id = " + imageId);
-        presenter.sendNewPost(mTextPostView.getText().toString(), imageId);
+    public void onImagePostUploaded(String imageURL) {
+        Log.e("Post", "Fragment onImagePostUploaded(Long imageId) Id = " + imageURL);
+        presenter.sendNewPost(mTextPostView.getText().toString(), imageURL);
     }
 
     private static final int CAMERA_REQUEST = 0;

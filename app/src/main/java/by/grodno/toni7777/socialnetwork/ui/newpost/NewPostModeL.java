@@ -36,10 +36,10 @@ public class NewPostModel implements BaseModel, NewPostMVP.NewPostModel {
     }
 
     @Override
-    public void sendPostToServer(String textPost, Long imageId) {
+    public void sendPostToServer(String textPost, String imageURL) {
         Log.e("Start", "Sent post to server");
         unsubscribe();
-        NewPostDTO newPost = new NewPostDTO(mPreferences.getUserId(), imageId, textPost);
+        NewPostDTO newPost = new NewPostDTO(mPreferences.getUserId(), imageURL, textPost);
         Observable<ResponseDTO> tokenObservable = mNetworkAPI.sendNewPost(newPost, mPreferences.getAccessToken());
         mSubscription = tokenObservable
                 .compose(RxUtil.<ResponseDTO>applySchedulers())
@@ -73,7 +73,7 @@ public class NewPostModel implements BaseModel, NewPostMVP.NewPostModel {
                 .compose(RxUtil.<ImageResponseDTO>applySchedulers())
                 .subscribe(
                         response -> {
-                            mUploadListener.onUploadImage(response.getImageId());
+                            mUploadListener.onUploadImage(response.getImageURL());
                         },
                         throwable -> {
                             unsubscribe();

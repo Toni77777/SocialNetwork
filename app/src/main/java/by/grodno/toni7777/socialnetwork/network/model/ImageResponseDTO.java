@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName;
 public class ImageResponseDTO {
 
     @SerializedName("entity")
-    private Long mImageId;
+    private String mImageURL;
 
-    public Long getImageId() {
-        return mImageId;
+    public String getImageURL() {
+        return mImageURL;
     }
 
-    public void setImageId(Long imageId) {
-        mImageId = imageId;
+    public void setImageId(String imageURL) {
+        mImageURL = imageURL;
     }
 }

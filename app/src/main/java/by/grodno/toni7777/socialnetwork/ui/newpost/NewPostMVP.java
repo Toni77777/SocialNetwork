@@ -8,7 +8,7 @@ public interface NewPostMVP {
 
     interface NewPostModel {
 
-        void sendPostToServer(String textPost, Long imageId);
+        void sendPostToServer(String textPost, String imageURL);
 
         void uploadPostImage(File file);
 
@@ -22,7 +22,7 @@ public interface NewPostMVP {
 
         void showLoading();
 
-        void onImagePostUploaded(Long imageId);
+        void onImagePostUploaded(String imageURL);
 
         void publishSuccess();
 
@@ -32,6 +32,6 @@ public interface NewPostMVP {
 
         void sendImagePost(File file);
 
-        void sendNewPost(String textPost, Long imageId);
+        void sendNewPost(String textPost, String imageURL);
     }
 }

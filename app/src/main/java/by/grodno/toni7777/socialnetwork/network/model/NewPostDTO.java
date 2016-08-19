@@ -7,8 +7,8 @@ public class NewPostDTO {
     @SerializedName("idTo")
     private long mToUserId;
 
-    @SerializedName("fkImage")
-    private Long mImageId;
+    @SerializedName("urlImage")
+    private String mImageURL;
 
     @SerializedName("text")
     private String mText;
@@ -16,9 +16,9 @@ public class NewPostDTO {
     public NewPostDTO() {
     }
 
-    public NewPostDTO(long toUserId, Long imageId, String text) {
+    public NewPostDTO(long toUserId, String imageURL, String text) {
         mToUserId = toUserId;
-        mImageId = imageId;
+        mImageURL = imageURL;
         mText = text;
     }
 
@@ -30,19 +30,19 @@ public class NewPostDTO {
         mToUserId = toUserId;
     }
 
-    public Long getImageId() {
-        return mImageId;
-    }
-
-    public void setImageId(Long imageId) {
-        mImageId = imageId;
-    }
-
     public String getText() {
         return mText;
     }
 
     public void setText(String text) {
         mText = text;
+    }
+
+    public String getImageURL() {
+        return mImageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        mImageURL = imageURL;
     }
 }
