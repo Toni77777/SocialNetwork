@@ -16,6 +16,7 @@ public final class QueryProperties {
     public static final String PROFILE_URL = "/users/profile";
     public static final String FILE_URL = "/files";
     public static final String REGISTRATION_URL = "/users";
+    public static final String PERSONS_FIND_URL = "/users/find";
 
     public static final String USER_ID = "userId";
     public static final String OFFSET = "offset";
@@ -23,6 +24,7 @@ public final class QueryProperties {
     public static final String ACCESS_TOKEN = "access_token";
     public static final String POST_ID = "postId";
     public static final String FILE_NAME = "name";
+    public static final String FULL_NAME = "fullName";
 
 
     public static final String HEADER_AUTORIZATION = "Authorization";

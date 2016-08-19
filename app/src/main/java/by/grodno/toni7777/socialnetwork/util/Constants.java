@@ -23,7 +23,7 @@ public final class Constants {
     public static final String USER_AVATAR_PREFERENCES = "userAvatar";
     public static final String USER_FULL_NAME_PREFERENCES = "userFullName";
 
-    public static final String EMPTY_STRING = "";
+    public static final String EMPTY_STRING = " ";
     public static final long EMPTY_USER_ID = -1;
 
     private Constants() {

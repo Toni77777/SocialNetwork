@@ -6,6 +6,7 @@ import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.ui.login.LoginPresenter;
 import by.grodno.toni7777.socialnetwork.ui.people.FriendsPresenter;
+import by.grodno.toni7777.socialnetwork.ui.people.persons.PersonsPresenter;
 import by.grodno.toni7777.socialnetwork.ui.profile.ProfilePresenter;
 import by.grodno.toni7777.socialnetwork.ui.registration.fragment.ContactPresenter;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallPresenter;
@@ -44,5 +45,11 @@ public class PresenterModule {
     @Provides
     public FriendsPresenter provideFriendsPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, DatabaseDAOImp databaseDAO) {
         return new FriendsPresenter(socialNetworkAPI, loginPreferences, databaseDAO);
+    }
+
+    @PresenterScope
+    @Provides
+    public PersonsPresenter providePersonsPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
+        return new PersonsPresenter(socialNetworkAPI, loginPreferences);
     }
 }

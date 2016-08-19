@@ -29,7 +29,6 @@ import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.FriendEvent;
-import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
 import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
 import by.grodno.toni7777.socialnetwork.ui.people.adapter.FriendsAdapter;
 import by.grodno.toni7777.socialnetwork.ui.people.persons.PersonsFragment;
@@ -86,8 +85,11 @@ public class FriendsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
         if (id == R.id.persons_search_item) {
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content, new PersonsFragment())
+                    .addToBackStack(null)
                     .commit();
             return true;
+        } else if (id == R.id.persons_back) {
+            // TODO: 8/18/16  Back last fragment
         }
 
         return true;
