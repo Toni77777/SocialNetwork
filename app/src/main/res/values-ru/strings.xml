@@ -29,6 +29,8 @@
     <string name="activity_label_profile">Профиль</string>
     <string name="activity_label_settings">Настройки</string>
     <string name="activity_label_groups">Группы</string>
+    <string name="activity_label_persons">Поиск людей</string>
+    <string name="activity_label_search_groups">Поиск групп</string>
 
 
     <string name="nav_item_profile">Профиль</string>

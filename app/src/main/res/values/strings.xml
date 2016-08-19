@@ -37,6 +37,8 @@
     <string name="activity_label_profile">Profile</string>
     <string name="activity_label_settings">Settings</string>
     <string name="activity_label_groups">Groups</string>
+    <string name="activity_label_persons">Search people</string>
+    <string name="activity_label_search_groups">Search groups</string>
 
     <string name="nav_item_profile">Profile</string>
     <string name="nav_item_wall">Wall</string>

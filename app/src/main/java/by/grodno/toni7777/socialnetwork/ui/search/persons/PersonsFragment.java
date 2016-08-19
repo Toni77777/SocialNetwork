@@ -86,6 +86,7 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
         return mPersonsPresenter;
     }
 
+    //
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO navigation

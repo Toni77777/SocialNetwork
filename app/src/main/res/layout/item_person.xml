@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/person_avatar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/friend_avatar_width"
+        android:layout_height="@dimen/friend_avatar_height"
     />
 
     <TextView
@@ -20,9 +20,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:layout_weight="1"
-        android:text="Friend Name"/>
+        />
 
     <include
         layout="@layout/switcher_add_friend"

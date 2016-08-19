@@ -7,7 +7,6 @@ import java.util.List;
 import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.base.event.GroupEvent;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
-import by.grodno.toni7777.socialnetwork.network.model.GroupsDTO;
 
 public interface GroupsMVP {
 
@@ -18,7 +17,7 @@ public interface GroupsMVP {
 
     interface View extends MvpLceView<List<GroupDTO>> {
 
-         void openGroup(GroupEvent event);
+        void openGroup(GroupEvent event);
 
     }
 

@@ -26,8 +26,10 @@
     <dimen name="post_image_margin_top">4dp</dimen>
     <dimen name="login_button_min_width">200dp</dimen>
     <dimen name="profile_app_bar_layout_height">256dp</dimen>
-    <dimen name="friend_avatar_width">40dp</dimen>
-    <dimen name="friend_avatar_height">40dp</dimen>
+    <dimen name="friend_avatar_width">60dp</dimen>
+    <dimen name="friend_avatar_height">60dp</dimen>
+    <dimen name="group_image_width">60dp</dimen>
+    <dimen name="group_image_height">60dp</dimen>
     <dimen name="friend_margin_horizontal">4dp</dimen>
     <dimen name="weight_dimen">0dp</dimen>
 

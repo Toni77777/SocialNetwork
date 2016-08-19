@@ -74,7 +74,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
         void bind(GroupDTO group) {
             ImageLoad.loadCircleImage(mAvatarView, group.getImage());
             mNameView.setText(group.getName());
-            mMembersView.setText("Members" + String.valueOf(group.getMember()));
+            mMembersView.setText("Members " + String.valueOf(group.getMember()));
             mId = group.getGroupId();
 
         }

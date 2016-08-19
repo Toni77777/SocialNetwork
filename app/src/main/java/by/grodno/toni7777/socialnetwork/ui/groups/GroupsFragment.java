@@ -1,5 +1,6 @@
 package by.grodno.toni7777.socialnetwork.ui.groups;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -31,6 +32,7 @@ import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.GroupEvent;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
 import by.grodno.toni7777.socialnetwork.ui.groups.adapter.GroupsAdapter;
+import by.grodno.toni7777.socialnetwork.ui.search.groups.SearchGroupsActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 
 public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, List<GroupDTO>, GroupsMVP.View, GroupsPresenter>
@@ -72,7 +74,7 @@ public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, L
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_friends, menu);
+        inflater.inflate(R.menu.menu_groups, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -80,12 +82,10 @@ public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, L
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-//        if (id == R.id.persons_search_item) {
-//            getActivity().startActivity(new Intent(getContext(), PersonsActivity.class));
-//            return true;
-//        } else if (id == R.id.persons_back) {
-//            // TODO: 8/18/16  Back last fragment
-//        }
+        if (id == R.id.groups_search_item) {
+            getActivity().startActivity(new Intent(getContext(), SearchGroupsActivity.class));
+            return true;
+        }
 
         return true;
     }
