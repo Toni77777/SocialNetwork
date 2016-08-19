@@ -52,8 +52,19 @@
             android:name="io.fabric.ApiKey"
             android:value="17ab9477201e77021e8493a8afa0dee20111d054"/>
 
-        <activity android:name=".ui.people.FriendsActivity"
-                  android:label="@string/activity_label_friends">
+        <activity
+            android:name=".ui.friends.FriendsActivity"
+            android:label="@string/activity_label_friends">
+        </activity>
+        <activity
+            android:name=".ui.search.persons.PersonsActivity"
+            android:parentActivityName=".ui.friends.FriendsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.friends.FriendsActivity"/>
+        </activity>
+        <activity android:name=".ui.groups.GroupsActivity"
+                  android:label="@string/activity_label_groups">
         </activity>
     </application>
 

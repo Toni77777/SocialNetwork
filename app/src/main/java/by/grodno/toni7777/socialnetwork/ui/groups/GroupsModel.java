@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.ui.people;
+package by.grodno.toni7777.socialnetwork.ui.groups;
 
 import java.util.List;
 
@@ -6,27 +6,23 @@ import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
-import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
-import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
-import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
-import by.grodno.toni7777.socialnetwork.ui.model.FriendsDVO;
-import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDVO;
+import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
+import by.grodno.toni7777.socialnetwork.network.model.GroupsDTO;
+import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
 import rx.Subscription;
 
-import static by.grodno.toni7777.socialnetwork.util.Constants.LIMIT;
+public class GroupsModel implements BaseModel, GroupsMVP.Model {
 
-public class FriendsModel implements BaseModel, FriendsMVP.FriendsModel {
-
-    private ModelListener<List<FriendDVO>> mListener;
+    private ModelListener<List<GroupDTO>> mListener;
     private Subscription mSubscription;
     private LoginPreferences mPreferences;
     private SocialNetworkAPI mNetworkAPI;
     private DatabaseDAOImp mDatabaseDAO;
 
-    public FriendsModel(ModelListener<List<FriendDVO>> listener, LoginPreferences preferences, SocialNetworkAPI networkAPI, DatabaseDAOImp databaseDAO) {
+    public GroupsModel(ModelListener<List<GroupDTO>> listener, LoginPreferences preferences, SocialNetworkAPI networkAPI, DatabaseDAOImp databaseDAO) {
         mListener = listener;
         mPreferences = preferences;
         mNetworkAPI = networkAPI;
@@ -34,16 +30,14 @@ public class FriendsModel implements BaseModel, FriendsMVP.FriendsModel {
     }
 
     @Override
-    public void loadFriends(int offset) {
-        Observable<FriendsDTO> postsObservable = mNetworkAPI.getFriends(mPreferences.getUserId(), offset, LIMIT, mPreferences.getAccessToken());
-
+    public void loadGroups(int offset) {
+        Observable<GroupsDTO> postsObservable = mNetworkAPI.getGroups(mPreferences.getUserId(), offset, Constants.LIMIT, mPreferences.getAccessToken());
         unsubscribe();
         mSubscription = postsObservable
-                .map(ConverterDTOtoDVO::converteDTOtoDSO)
-                .compose(RxUtil.<FriendsDVO>applySchedulers())
+                .compose(RxUtil.<GroupsDTO>applySchedulers())
                 .subscribe(
-                        friends -> {
-                            mListener.loadNext(friends.getFriends());
+                        groups -> {
+                            mListener.loadNext(groups.getGroups());
                         },
                         throwable -> {
                             unsubscribe();
@@ -62,5 +56,4 @@ public class FriendsModel implements BaseModel, FriendsMVP.FriendsModel {
             mSubscription.unsubscribe();
         }
     }
-
 }

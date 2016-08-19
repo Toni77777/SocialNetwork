@@ -17,6 +17,7 @@ public final class QueryProperties {
     public static final String FILE_URL = "/files";
     public static final String REGISTRATION_URL = "/users";
     public static final String PERSONS_FIND_URL = "/users/find";
+    public static final String GROUPS_URL = "/groups";
 
     public static final String USER_ID = "userId";
     public static final String OFFSET = "offset";

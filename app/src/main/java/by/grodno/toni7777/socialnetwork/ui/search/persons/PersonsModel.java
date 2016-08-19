@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.ui.people.persons;
+package by.grodno.toni7777.socialnetwork.ui.search.persons;
 
 import java.util.List;
 
@@ -8,16 +8,10 @@ import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PersonsDTO;
 
-import static by.grodno.toni7777.socialnetwork.util.Constants.LIMIT;
-
-import by.grodno.toni7777.socialnetwork.ui.model.PersonDVO;
-import by.grodno.toni7777.socialnetwork.ui.model.PersonsDVO;
-import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
 import rx.Subscription;
-import rx.functions.Func1;
 
 public class PersonsModel implements BaseModel, PersonsMVP.PersonsModel {
 

@@ -1,5 +1,6 @@
-package by.grodno.toni7777.socialnetwork.ui.people;
+package by.grodno.toni7777.socialnetwork.ui.friends;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -30,8 +31,8 @@ import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.FriendEvent;
 import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
-import by.grodno.toni7777.socialnetwork.ui.people.adapter.FriendsAdapter;
-import by.grodno.toni7777.socialnetwork.ui.people.persons.PersonsFragment;
+import by.grodno.toni7777.socialnetwork.ui.friends.adapter.FriendsAdapter;
+import by.grodno.toni7777.socialnetwork.ui.search.persons.PersonsActivity;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.START_LOAD;
 
@@ -83,10 +84,7 @@ public class FriendsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
         int id = item.getItemId();
 
         if (id == R.id.persons_search_item) {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content, new PersonsFragment())
-                    .addToBackStack(null)
-                    .commit();
+            getActivity().startActivity(new Intent(getContext(), PersonsActivity.class));
             return true;
         } else if (id == R.id.persons_back) {
             // TODO: 8/18/16  Back last fragment

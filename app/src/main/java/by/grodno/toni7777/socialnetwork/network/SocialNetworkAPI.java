@@ -4,6 +4,7 @@ import java.util.Map;
 
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
+import by.grodno.toni7777.socialnetwork.network.model.GroupsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ImageResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.NewPostDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PersonsDTO;
@@ -25,24 +26,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.ACCESS_TOKEN;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.CLIENT_ID;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.FILE_URL;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.FRIENDS_URL;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.FULL_NAME;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.GRAND_TYPE;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.LIMIT;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.OFFSET;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.POST_ID;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_ID;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_NAME;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.USER_PASSWORD;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.LOGIN_URL;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.POSTS_URL;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.PROFILE_URL;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.FILE_NAME;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.REGISTRATION_URL;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.PERSONS_FIND_URL;
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.*;
 
 public interface SocialNetworkAPI {
 
@@ -89,6 +73,12 @@ public interface SocialNetworkAPI {
                                        @Query(OFFSET) int offset,
                                        @Query(LIMIT) int limit,
                                        @Query(ACCESS_TOKEN) String accessToken);
+
+    @GET(GROUPS_URL)
+    Observable<GroupsDTO> getGroups(@Query(USER_ID) long userId,
+                                    @Query(OFFSET) int offset,
+                                    @Query(LIMIT) int limit,
+                                    @Query(ACCESS_TOKEN) String accessToken);
 
     // /musics
     // param userId, offset, limit, token

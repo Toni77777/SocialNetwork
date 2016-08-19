@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.ui.people.persons;
+package by.grodno.toni7777.socialnetwork.ui.search.persons;
 
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 

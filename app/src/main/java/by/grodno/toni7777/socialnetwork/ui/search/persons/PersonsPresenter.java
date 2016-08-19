@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.ui.people;
+package by.grodno.toni7777.socialnetwork.ui.search.persons;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
@@ -7,35 +7,34 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
-import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
-import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
+import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
-public class FriendsPresenter extends MvpBasePresenter<FriendsMVP.FriendsView>
-        implements ModelListener<List<FriendDVO>>, MvpPresenter<FriendsMVP.FriendsView>, FriendsMVP.FriendsPresenter {
+public class PersonsPresenter extends MvpBasePresenter<PersonsMVP.PersonsView>
+        implements ModelListener<List<PersonDTO>>, MvpPresenter<PersonsMVP.PersonsView>, PersonsMVP.PersonsPresenter {
 
-    private final FriendsModel mModel;
+    private final PersonsModel mModel;
     private boolean mForceRefresh;
 
     @Inject
-    public FriendsPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, DatabaseDAOImp databaseDAO) {
-        mModel = new FriendsModel(this, loginPreferences, socialNetworkAPI, databaseDAO);
+    public PersonsPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
+        mModel = new PersonsModel(this, loginPreferences, socialNetworkAPI);
     }
 
+
     @Override
-    public void loadDataWithOffset(boolean forceRefresh, int offset) {
+    public void loadDataWithOffset(String fullNameSearch, boolean forceRefresh, int offset) {
         if (isViewAttached()) {
             getView().showLoading(forceRefresh);
         }
         mForceRefresh = forceRefresh;
-        mModel.loadFriends(offset);
+        mModel.findPersons(fullNameSearch, offset);
     }
 
     @Override
-    public void loadNext(List<FriendDVO> data) {
+    public void loadNext(List<PersonDTO> data) {
         if (isViewAttached()) {
             getView().setData(data);
         }
@@ -54,4 +53,5 @@ public class FriendsPresenter extends MvpBasePresenter<FriendsMVP.FriendsView>
             getView().showError(e, mForceRefresh);
         }
     }
+
 }

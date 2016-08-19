@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.ui.people;
+package by.grodno.toni7777.socialnetwork.ui.friends;
 
 import android.os.Bundle;
 

@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.ui.people.adapter;
+package by.grodno.toni7777.socialnetwork.ui.search.persons.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

@@ -1,11 +1,10 @@
-package by.grodno.toni7777.socialnetwork.ui.people.persons;
+package by.grodno.toni7777.socialnetwork.ui.groups;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,25 +27,25 @@ import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
-import by.grodno.toni7777.socialnetwork.base.event.PersonEvent;
-import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
-import by.grodno.toni7777.socialnetwork.ui.people.adapter.PersonsAdapter;
+import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
+import by.grodno.toni7777.socialnetwork.base.event.GroupEvent;
+import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
+import by.grodno.toni7777.socialnetwork.ui.groups.adapter.GroupsAdapter;
+import by.grodno.toni7777.socialnetwork.util.Constants;
 
-import static by.grodno.toni7777.socialnetwork.util.Constants.START_LOAD;
+public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, List<GroupDTO>, GroupsMVP.View, GroupsPresenter>
+        implements GroupsMVP.View, SwipeRefreshLayout.OnRefreshListener {
 
-public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, List<PersonDTO>, PersonsMVP.PersonsView, PersonsPresenter>
-        implements PersonsMVP.PersonsView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
-
-    @BindView(R.id.persons_recycler)
-    RecyclerView mPersonsRecycler;
+    @BindView(R.id.groups_recycler)
+    RecyclerView mGroupsRecycler;
 
     @BindView(R.id.progress_pagination_view)
     ProgressBar mProgressPaginView;
 
     @Inject
-    PersonsPresenter mPersonsPresenter;
+    GroupsPresenter mGroupsPresenter;
 
-    private PersonsAdapter mPersonsAdapter;
+    private GroupsAdapter mGroupsAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_persons, container, false);
+        return inflater.inflate(R.layout.fragment_groups, container, false);
     }
 
     @Override
@@ -64,57 +63,48 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         contentView.setOnRefreshListener(this);
-        mPersonsAdapter = new PersonsAdapter(new ArrayList<>());
+        mGroupsAdapter = new GroupsAdapter(new ArrayList<>());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mPersonsRecycler.setAdapter(mPersonsAdapter);
-        mPersonsRecycler.setLayoutManager(linearLayoutManager);
-//        mPersonsRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, presenter));
+        mGroupsRecycler.setAdapter(mGroupsAdapter);
+        mGroupsRecycler.setLayoutManager(linearLayoutManager);
+        mGroupsRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, presenter));
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_persons, menu);
-        SearchView searchPeople = (SearchView) menu.findItem(R.id.persons_search).getActionView();
-        searchPeople.onActionViewExpanded();
-        searchPeople.setOnQueryTextListener(this);
-        searchPeople.setIconified(false);
+        inflater.inflate(R.menu.menu_friends, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
-    public PersonsPresenter createPresenter() {
-        return mPersonsPresenter;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO navigation
+        int id = item.getItemId();
+
+//        if (id == R.id.persons_search_item) {
+//            getActivity().startActivity(new Intent(getContext(), PersonsActivity.class));
+//            return true;
+//        } else if (id == R.id.persons_back) {
+//            // TODO: 8/18/16  Back last fragment
+//        }
+
         return true;
     }
 
     @Override
-    public boolean onQueryTextSubmit(String query) {
-        mPersonsAdapter.clear();
-        presenter.loadDataWithOffset(query, true, START_LOAD);
-        return false;
+    public void onRefresh() {
+        mGroupsAdapter.clear();
+        loadData(true);
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        mPersonsAdapter.clear();
-        presenter.loadDataWithOffset(newText, true, START_LOAD);
-        return false;
-    }
-
-    @Override
-    public LceViewState<List<PersonDTO>, PersonsMVP.PersonsView> createViewState() {
+    public LceViewState<List<GroupDTO>, GroupsMVP.View> createViewState() {
         setRetainInstance(true);
         return new RetainingLceViewState<>();
     }
 
     @Override
-    public List<PersonDTO> getData() {
-        return mPersonsAdapter.getPersons();
+    public List<GroupDTO> getData() {
+        return mGroupsAdapter.getGroups();
     }
 
     @Override
@@ -123,21 +113,19 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     }
 
     @Override
-    public void setData(List<PersonDTO> data) {
+    public GroupsPresenter createPresenter() {
+        return mGroupsPresenter;
+    }
+
+    @Override
+    public void setData(List<GroupDTO> data) {
         contentView.setRefreshing(false);
-        mPersonsAdapter.update(data);
+        mGroupsAdapter.update(data);
     }
 
     @Override
     public void loadData(boolean pullToRefresh) {
-//        presenter.loadDataWithOffset(" ", pullToRefresh, START_LOAD);
-    }
-
-    @Override
-    public void onRefresh() {
-        mPersonsAdapter.clear();
-        presenter.loadDataWithOffset("", true, START_LOAD);
-
+        presenter.loadDataWithOffset(pullToRefresh, Constants.START_LOAD);
     }
 
     @Override
@@ -155,8 +143,7 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     }
 
     @Subscribe
-    public void addPersonToFriend(PersonEvent event) {
-        // TODO open friend wall
+    public void openGroup(GroupEvent event) {
+
     }
 }
-
