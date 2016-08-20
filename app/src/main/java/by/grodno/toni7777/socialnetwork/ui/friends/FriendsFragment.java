@@ -82,14 +82,10 @@ public class FriendsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.persons_search_item) {
             getActivity().startActivity(new Intent(getContext(), PersonsActivity.class));
             return true;
-        } else if (id == R.id.persons_back) {
-            // TODO: 8/18/16  Back last fragment
         }
-
         return true;
     }
 

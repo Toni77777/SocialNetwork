@@ -1,6 +1,5 @@
 package by.grodno.toni7777.socialnetwork.network;
 
-import java.util.Map;
 
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
@@ -15,11 +14,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -79,6 +74,12 @@ public interface SocialNetworkAPI {
                                     @Query(OFFSET) int offset,
                                     @Query(LIMIT) int limit,
                                     @Query(ACCESS_TOKEN) String accessToken);
+
+    @GET(GROUPS_FIND_URL)
+    Observable<GroupsDTO> findGroups(@Query(GROUP_NAME) String nameGroup,
+                                     @Query(OFFSET) int offset,
+                                     @Query(LIMIT) int limit,
+                                     @Query(ACCESS_TOKEN) String accessToken);
 
     // /musics
     // param userId, offset, limit, token

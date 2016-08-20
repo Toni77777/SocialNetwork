@@ -8,6 +8,7 @@ import by.grodno.toni7777.socialnetwork.ui.newpost.NewPostFragment;
 import by.grodno.toni7777.socialnetwork.ui.friends.FriendsFragment;
 import by.grodno.toni7777.socialnetwork.ui.profile.ProfileFragment;
 import by.grodno.toni7777.socialnetwork.ui.registration.fragment.ContactFragment;
+import by.grodno.toni7777.socialnetwork.ui.search.groups.SearchGroupsFragment;
 import by.grodno.toni7777.socialnetwork.ui.search.persons.PersonsFragment;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallFragment;
 import dagger.Component;
@@ -31,5 +32,7 @@ public interface PresenterComponent {
     void inject(PersonsFragment fragment);
 
     void inject(GroupsFragment fragment);
+
+    void inject(SearchGroupsFragment fragment);
 
 }
