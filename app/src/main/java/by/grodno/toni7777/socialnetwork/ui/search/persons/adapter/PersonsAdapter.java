@@ -23,23 +23,48 @@ import by.grodno.toni7777.socialnetwork.base.event.PersonEvent;
 import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
-public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.PersonViewHolder> {
+public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHolder> {
 
     private List<PersonDTO> mPersons;
+    private static final int FRIEND = R.id.type_people_friend;
+    private static final int PERSON = R.id.type_post_image;
 
     public PersonsAdapter(List<PersonDTO> persons) {
         mPersons = persons;
     }
 
     @Override
-    public PersonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return PersonViewHolder.newInstance(parent);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == FRIEND) {
+            return FriendViewHolder.newInstance(parent);
+        } else if (viewType == PERSON) {
+            return PersonViewHolder.newInstance(parent);
+        } else {
+            throw new IllegalArgumentException("Unknown view type " + viewType);
+        }
     }
 
     @Override
-    public void onBindViewHolder(PersonViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        int viewType = holder.getItemViewType();
         PersonDTO person = mPersons.get(position);
-        holder.bind(person);
+        if (viewType == PERSON) {
+            ((PersonViewHolder) holder).bind(person);
+        } else if (viewType == FRIEND) {
+            ((FriendViewHolder) holder).bind(person);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        PersonDTO person = mPersons.get(position);
+        if (person.getFriend() == 1) {
+            return FRIEND;
+        } else if (person.getFriend() == 0) {
+            return PERSON;
+        } else {
+            throw new IllegalArgumentException("View type not found");
+        }
     }
 
     @Override
@@ -60,7 +85,13 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.PersonVi
         return mPersons;
     }
 
-    static class PersonViewHolder extends RecyclerView.ViewHolder {
+    static abstract class ViewHolder extends RecyclerView.ViewHolder {
+        public ViewHolder(View v) {
+            super(v);
+        }
+    }
+
+    static class PersonViewHolder extends ViewHolder {
 
         @BindView(R.id.person_avatar)
         ImageView mAvatar;
@@ -93,7 +124,7 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.PersonVi
         @NonNull
         public static PersonViewHolder newInstance(ViewGroup parent) {
             return new PersonViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_person, parent, false));
+                    .inflate(R.layout.item_search_person, parent, false));
         }
 
         @OnClick(R.id.person_add_friend)
@@ -101,6 +132,31 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.PersonVi
             mAddFriend.setVisibility(View.GONE);
             mProgress.setVisibility(View.VISIBLE);
             EventBus.getDefault().post(new PersonEvent(mId));
+        }
+    }
+
+    static class FriendViewHolder extends ViewHolder {
+
+        @BindView(R.id.search_friend_avatar)
+        ImageView mAvatarView;
+
+        @BindView(R.id.search_friend_name)
+        TextView mNameView;
+
+        public FriendViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+
+        void bind(PersonDTO person) {
+            ImageLoad.loadCircleImage(mAvatarView, person.getAvatar());
+            mNameView.setText(person.getName() + " " + person.getSurname());
+        }
+
+        @NonNull
+        public static FriendViewHolder newInstance(ViewGroup parent) {
+            return new FriendViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_search_friend, parent, false));
         }
     }
 }

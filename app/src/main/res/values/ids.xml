@@ -3,4 +3,6 @@
     <item name="type_post_full" type="id"/>
     <item name="type_post_text" type="id"/>
     <item name="type_post_image" type="id"/>
+    <item name="type_people_friend" type="id"/>
+    <item name="type_people_person" type="id"/>
 </resources>

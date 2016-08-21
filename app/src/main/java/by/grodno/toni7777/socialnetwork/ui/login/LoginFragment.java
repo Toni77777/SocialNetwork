@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
@@ -167,13 +165,9 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.LoginView, 
 
     @Subscribe
     public void registrationSuccess(RegistrationEvent event) {
-//        Toast.makeText(getContext(), "Welcome " + event.getNameUser() + " registration success ", Toast.LENGTH_LONG).show();
-
-
-        Snackbar snackbar = Snackbar.make(mForgotPassView, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null);
-        snackbar.setDuration(5000); // 8 секунд
-        snackbar.show();
+        Snackbar.make(mForgotPassView, "Welcome " + event.getNameUser() + " registration success ", Snackbar.LENGTH_LONG)
+                .setDuration(5000)
+                .show();
     }
 
 }
