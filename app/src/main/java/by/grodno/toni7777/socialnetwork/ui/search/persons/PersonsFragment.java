@@ -131,13 +131,13 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
 
     @Override
     public void loadData(boolean pullToRefresh) {
-//        presenter.loadDataWithOffset(" ", pullToRefresh, START_LOAD);
+        presenter.loadDataWithOffset(" ", pullToRefresh, START_LOAD);
     }
 
     @Override
     public void onRefresh() {
         mPersonsAdapter.clear();
-        presenter.loadDataWithOffset("", true, START_LOAD);
+        loadData(true);
 
     }
 
@@ -153,6 +153,12 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
         super.showError(e, pullToRefresh);
         contentView.setRefreshing(false);
         mProgressPaginView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showLoading(boolean pullToRefresh) {
+        super.showLoading(pullToRefresh);
+
     }
 
     @Subscribe

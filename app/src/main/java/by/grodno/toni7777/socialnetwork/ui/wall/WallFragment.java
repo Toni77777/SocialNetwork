@@ -76,11 +76,6 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
         return new RetainingLceViewState<>();
     }
 
-    @OnClick(R.id.new_post_fab)
-    void createNewPost() {
-        //TODO Start activity to create new post and upload to server
-    }
-
     @Override
     public List<PostDTO> getData() {
         return mPostAdapter.getPosts();
