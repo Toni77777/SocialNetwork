@@ -5,4 +5,6 @@
     <item name="type_post_image" type="id"/>
     <item name="type_people_friend" type="id"/>
     <item name="type_people_person" type="id"/>
+    <item name="type_groups_favorite" type="id"/>
+    <item name="type_groups_simple" type="id"/>
 </resources>
