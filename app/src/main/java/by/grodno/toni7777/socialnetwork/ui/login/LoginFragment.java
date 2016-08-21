@@ -3,14 +3,20 @@ package by.grodno.toni7777.socialnetwork.ui.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 
@@ -23,6 +29,7 @@ import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 
 import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
+import by.grodno.toni7777.socialnetwork.base.event.RegistrationEvent;
 import by.grodno.toni7777.socialnetwork.ui.registration.RegistrationActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
@@ -63,6 +70,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.LoginView, 
             getContext().startActivity(new Intent(getContext(), WallActivity.class));
             getActivity().finish();
         }
+        EventBus.getDefault().register(this);
     }
 
     @Nullable
@@ -149,6 +157,23 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.LoginView, 
         mPasswordView.setEnabled(enabled);
         mRegistrationButton.setEnabled(enabled);
         mForgotPassView.setEnabled(enabled);
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe
+    public void registrationSuccess(RegistrationEvent event) {
+//        Toast.makeText(getContext(), "Welcome " + event.getNameUser() + " registration success ", Toast.LENGTH_LONG).show();
+
+
+        Snackbar snackbar = Snackbar.make(mForgotPassView, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        snackbar.setDuration(5000); // 8 секунд
+        snackbar.show();
     }
 
 }

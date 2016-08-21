@@ -87,8 +87,8 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
     }
 
     @Override
-    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return "Error"; //TODO need check error for show
+    protected String getErrorMessage(Throwable throwable, boolean pullToRefresh) {
+        return throwable.toString(); //TODO need check error for show
     }
 
     @Override
