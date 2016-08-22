@@ -10,7 +10,6 @@ import by.grodno.toni7777.socialnetwork.network.model.PersonsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
-import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -88,8 +87,8 @@ public interface SocialNetworkAPI {
     Observable<ResponseDTO> addPersonToFriend(@Query(USER_ID) Long userId,
                                               @Query(ACCESS_TOKEN) String accessToken);
 
-    @Headers("Content-Type: application/json")
-    @POST(GROUPS_URL + "/{id}")
+    @Headers(HEADER_CONTENT_TYPE_APP_JSON)
+    @POST(FAVORITE_GROUP_URL)
     Observable<ResponseDTO> addGroupToFavorite(@Path(ID) Long groupId,
                                                @Query(ACCESS_TOKEN) String accessToken);
 

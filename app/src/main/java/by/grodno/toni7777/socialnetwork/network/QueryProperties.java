@@ -36,6 +36,8 @@ public final class QueryProperties {
     public static final String HEADER_AUTORIZATION = "Authorization";
     public static final String HEADER_AUTORIZATION_VALUE = "Basic cGFzc3dvcmRDbGllbnQ6MG00NWJ4cDRyMg==";
 
+    public static final String HEADER_CONTENT_TYPE_APP_JSON = "Content-Type: application/json";
+
     private QueryProperties() {
     }
 }
