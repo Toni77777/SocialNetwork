@@ -85,6 +85,27 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
         return mPersons;
     }
 
+    public void updateNewFriend(Long userId) {
+        for (PersonDTO person : mPersons) {
+            if (person.getId() == userId) {
+                int index = mPersons.indexOf(person);
+                person.setFriend(1);
+                notifyItemChanged(index);
+                return;
+            }
+        }
+    }
+
+    public String getNewFriendName(Long userId) {
+        for (PersonDTO person : mPersons) {
+            if (person.getId() == userId) {
+                return person.getName() + " " + person.getSurname();
+            }
+        }
+
+        throw new IllegalArgumentException("New Friend  not found from Person adapter");
+    }
+
     static abstract class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(View v) {
             super(v);

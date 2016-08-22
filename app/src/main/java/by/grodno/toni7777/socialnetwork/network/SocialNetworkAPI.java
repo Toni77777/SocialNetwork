@@ -81,6 +81,10 @@ public interface SocialNetworkAPI {
                                      @Query(LIMIT) int limit,
                                      @Query(ACCESS_TOKEN) String accessToken);
 
+    @POST(FRIENDS_URL)
+    Observable<ResponseDTO> addPersonToFriend(@Query(USER_ID) Long userId,
+                                              @Query(ACCESS_TOKEN) String accessToken);
+
     // /musics
     // param userId, offset, limit, token
 

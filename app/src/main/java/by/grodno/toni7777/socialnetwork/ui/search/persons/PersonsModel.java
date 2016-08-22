@@ -8,6 +8,8 @@ import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PersonsDTO;
 
+import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
+import by.grodno.toni7777.socialnetwork.ui.search.persons.listener.FriendListener;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
@@ -16,14 +18,16 @@ import rx.Subscription;
 public class PersonsModel implements BaseModel, PersonsMVP.PersonsModel {
 
     private ModelListener<List<PersonDTO>> mListener;
+    private FriendListener mFriendListener;
     private Subscription mSubscription;
     private LoginPreferences mPreferences;
     private SocialNetworkAPI mNetworkAPI;
 
-    public PersonsModel(ModelListener<List<PersonDTO>> listener, LoginPreferences preferences, SocialNetworkAPI networkAPI) {
+    public PersonsModel(ModelListener<List<PersonDTO>> listener, LoginPreferences preferences, SocialNetworkAPI networkAPI, FriendListener friendListener) {
         mListener = listener;
         mPreferences = preferences;
         mNetworkAPI = networkAPI;
+        mFriendListener = friendListener;
     }
 
     @Override
@@ -44,6 +48,29 @@ public class PersonsModel implements BaseModel, PersonsMVP.PersonsModel {
                         () -> {
                             unsubscribe();
                             mListener.onLoadCompleted();
+                        }
+                );
+    }
+
+    @Override
+    public void addPersonToFriend(Long userId) {
+        Observable<ResponseDTO> postsObservable = mNetworkAPI.addPersonToFriend(userId, mPreferences.getAccessToken());
+
+        unsubscribe();
+        mSubscription = postsObservable
+                .compose(RxUtil.<ResponseDTO>applySchedulers())
+                .subscribe(
+                        response -> {
+                            if (response.isSuccess()) {
+                                mFriendListener.addNewFriendCompleted(userId);
+                            }
+                        },
+                        throwable -> {
+                            unsubscribe();
+                            mFriendListener.addNewFriendError(throwable);
+                        },
+                        () -> {
+                            unsubscribe();
                         }
                 );
     }

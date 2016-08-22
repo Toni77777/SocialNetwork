@@ -2,10 +2,12 @@ package by.grodno.toni7777.socialnetwork.ui.search.persons;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -163,7 +165,19 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
 
     @Subscribe
     public void addPersonToFriend(PersonEvent event) {
-        // TODO open friend wall
+        presenter.addPersonToFriend(event.getFriendId());
+    }
+
+    @Override
+    public void addNewFriendSuccess(long userId) {
+        Log.e("PersonFragment", "PersonFragment add new Friend with id = " + userId);
+        String fullName = mPersonsAdapter.getNewFriendName(userId);
+        mPersonsAdapter.updateNewFriend(userId);
+
+        Snackbar.make(mPersonsRecycler, fullName + " add to friend ", Snackbar.LENGTH_LONG)
+                .setDuration(3000)
+                .show();
+
     }
 }
 
