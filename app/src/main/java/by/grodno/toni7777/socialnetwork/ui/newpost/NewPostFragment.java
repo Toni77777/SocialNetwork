@@ -18,6 +18,8 @@ import android.widget.ImageView;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 
 import javax.inject.Inject;
@@ -27,6 +29,7 @@ import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
+import by.grodno.toni7777.socialnetwork.base.event.PostPublishSuccess;
 import by.grodno.toni7777.socialnetwork.util.FileUtils;
 
 public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPostView, NewPostPresenter>
@@ -129,6 +132,7 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPost
     @Override
     public void publishSuccess() {
         mProgressDialog.dismiss();
+        EventBus.getDefault().post(new PostPublishSuccess());
         getActivity().finish();
     }
 

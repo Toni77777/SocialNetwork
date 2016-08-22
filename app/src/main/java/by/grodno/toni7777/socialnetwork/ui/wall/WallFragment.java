@@ -3,6 +3,7 @@ package by.grodno.toni7777.socialnetwork.ui.wall;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
@@ -27,6 +29,8 @@ import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventViewStateFragment;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
+import by.grodno.toni7777.socialnetwork.base.event.PostPublishSuccess;
+import by.grodno.toni7777.socialnetwork.base.event.RegistrationEvent;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.ui.newpost.NewPostActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.adapter.PostAdapter;
@@ -130,6 +134,12 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
     @OnClick(R.id.new_post_fab)
     void newPost() {
         startActivity(new Intent(getContext(), NewPostActivity.class));
+    }
+
+    @Subscribe
+    public void newPostPublishSuccess(PostPublishSuccess event) {
+        mPostAdapter.clear();
+        loadData(true);
     }
 
 }
