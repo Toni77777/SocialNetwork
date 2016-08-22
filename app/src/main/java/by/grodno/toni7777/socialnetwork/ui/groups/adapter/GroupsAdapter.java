@@ -2,17 +2,22 @@ package by.grodno.toni7777.socialnetwork.ui.groups.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.base.event.GroupEvent;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
@@ -85,9 +90,9 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
                     .inflate(R.layout.item_group, parent, false));
         }
 
-//        @OnClick(R.id.friend_layout)
-//        void friendClick() {
-//            EventBus.getDefault().post(new FriendEvent(mId));
-//        }
+        @OnClick(R.id.group_layout)
+        void openGroup() {
+            EventBus.getDefault().post(new GroupEvent(mId));
+        }
     }
 }

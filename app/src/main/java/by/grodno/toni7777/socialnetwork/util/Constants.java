@@ -4,6 +4,7 @@ public final class Constants {
 
     public static final String SHARE_PROFILE = "share_profile";
     public static final String SHARE_DATE_PICKER = "share_date";
+    public static final String SHARE_GROUP_ID = "share_group_id";
 
     public static final String PLACEHOLDER = "/";
 
