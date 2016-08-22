@@ -45,7 +45,7 @@
     </LinearLayout>
 
     <include
-        layout="@layout/switcher_add_friend"
+        layout="@layout/switcher_add_favorite_group"
         android:layout_width="@dimen/weight_dimen"
         android:layout_height="wrap_content"
         android:layout_gravity="right"

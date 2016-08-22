@@ -31,7 +31,7 @@ public class GroupsModel implements BaseModel, GroupsMVP.Model {
 
     @Override
     public void loadGroups(int offset) {
-        Observable<GroupsDTO> postsObservable = mNetworkAPI.getGroups(mPreferences.getUserId(), offset, Constants.LIMIT, mPreferences.getAccessToken());
+        Observable<GroupsDTO> postsObservable = mNetworkAPI.getGroups(mPreferences.getUserId(), offset, 20, mPreferences.getAccessToken());
         unsubscribe();
         mSubscription = postsObservable
                 .compose(RxUtil.<GroupsDTO>applySchedulers())

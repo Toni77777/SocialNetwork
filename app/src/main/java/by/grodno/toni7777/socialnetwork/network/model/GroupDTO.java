@@ -69,10 +69,6 @@ public class GroupDTO {
         return mMember;
     }
 
-    public void setMember(int member) {
-        mMember = member;
-    }
-
     public int getOwner() {
         return mOwner;
     }

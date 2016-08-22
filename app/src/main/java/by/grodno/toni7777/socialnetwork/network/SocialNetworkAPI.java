@@ -10,14 +10,17 @@ import by.grodno.toni7777.socialnetwork.network.model.PersonsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
+import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -84,6 +87,11 @@ public interface SocialNetworkAPI {
     @POST(FRIENDS_URL)
     Observable<ResponseDTO> addPersonToFriend(@Query(USER_ID) Long userId,
                                               @Query(ACCESS_TOKEN) String accessToken);
+
+    @Headers("Content-Type: application/json")
+    @POST(GROUPS_URL + "/{id}")
+    Observable<ResponseDTO> addGroupToFavorite(@Path(ID) Long groupId,
+                                               @Query(ACCESS_TOKEN) String accessToken);
 
     // /musics
     // param userId, offset, limit, token

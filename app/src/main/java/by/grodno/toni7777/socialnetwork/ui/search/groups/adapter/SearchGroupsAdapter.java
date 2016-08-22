@@ -11,11 +11,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.base.event.SearchGroupEvent;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
@@ -81,6 +85,26 @@ public class SearchGroupsAdapter extends RecyclerView.Adapter<SearchGroupsAdapte
         return mGroups;
     }
 
+    public void updateNewFavoriteGroup(Long groupId) {
+        for (GroupDTO group : mGroups) {
+            if (group.getGroupId() == groupId) {
+                int index = mGroups.indexOf(group);
+                group.setMembers(1);
+                notifyItemChanged(index);
+                return;
+            }
+        }
+    }
+
+    public String getNewFavoriteName(Long groupId) {
+        for (GroupDTO group : mGroups) {
+            if (group.getGroupId() == groupId) {
+                return group.getName();
+            }
+        }
+        throw new IllegalArgumentException("New Friend  not found from Person adapter");
+    }
+
     static abstract class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(View v) {
             super(v);
@@ -126,15 +150,15 @@ public class SearchGroupsAdapter extends RecyclerView.Adapter<SearchGroupsAdapte
 
         @BindView(R.id.search_simple_group_members)
         TextView mMembersView;
-//
-//        @BindView(R.id.friend_progress)
-//        ProgressBar mProgress;
-//
-//        @BindView(R.id.person_add_friend)
-//        ImageButton mAddFriend;
-//
-//        @BindView(R.id.add_switcher)
-//        ViewSwitcher mAddSwitcher;
+        //
+        @BindView(R.id.favorite_progress)
+        ProgressBar mProgress;
+
+        @BindView(R.id.group_add_favorite)
+        ImageButton mAddFavorite;
+
+        @BindView(R.id.add_switcher)
+        ViewSwitcher mAddSwitcher;
 
         private long mId;
 
@@ -157,9 +181,11 @@ public class SearchGroupsAdapter extends RecyclerView.Adapter<SearchGroupsAdapte
                     .inflate(R.layout.item_search_group_simple, parent, false));
         }
 
-//        @OnClick(R.id.friend_layout)
-//        void friendClick() {
-//            EventBus.getDefault().post(new FriendEvent(mId));
-//        }
+        @OnClick(R.id.group_add_favorite)
+        void addNewFavorite() {
+            mAddFavorite.setVisibility(View.GONE);
+            mProgress.setVisibility(View.VISIBLE);
+            EventBus.getDefault().post(new SearchGroupEvent(mId));
+        }
     }
 }

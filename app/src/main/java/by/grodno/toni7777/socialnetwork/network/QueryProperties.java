@@ -18,6 +18,7 @@ public final class QueryProperties {
     public static final String REGISTRATION_URL = "/users";
     public static final String PERSONS_FIND_URL = "/users/find";
     public static final String GROUPS_URL = "/groups";
+    public static final String FAVORITE_GROUP_URL = "/groups/{id}";
     public static final String GROUPS_FIND_URL = "/groups/find";
 
     public static final String USER_ID = "userId";
@@ -28,6 +29,8 @@ public final class QueryProperties {
     public static final String FILE_NAME = "name";
     public static final String FULL_NAME = "fullName";
     public static final String GROUP_NAME = "name";
+    public static final String GROUP_ID = "groupId";
+    public static final String ID = "id";
 
 
     public static final String HEADER_AUTORIZATION = "Authorization";

@@ -10,17 +10,18 @@ import javax.inject.Inject;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
+import by.grodno.toni7777.socialnetwork.ui.search.groups.listener.FavoriteListener;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 public class SearchGroupsPresenter extends MvpBasePresenter<SearchGroupsMVP.View>
-        implements ModelListener<List<GroupDTO>>, MvpPresenter<SearchGroupsMVP.View>, SearchGroupsMVP.Presenter {
+        implements ModelListener<List<GroupDTO>>, FavoriteListener, MvpPresenter<SearchGroupsMVP.View>, SearchGroupsMVP.Presenter {
 
     private final SearchGroupsModel mModel;
     private boolean mForceRefresh;
 
     @Inject
     public SearchGroupsPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
-        mModel = new SearchGroupsModel(this, loginPreferences, socialNetworkAPI);
+        mModel = new SearchGroupsModel(this, loginPreferences, socialNetworkAPI, this);
     }
 
     @Override
@@ -30,6 +31,11 @@ public class SearchGroupsPresenter extends MvpBasePresenter<SearchGroupsMVP.View
         }
         mForceRefresh = forceRefresh;
         mModel.findGroups(nameGroup, offset);
+    }
+
+    @Override
+    public void addGroupToFavorite(Long groupId) {
+        mModel.addGroupToFavorite(groupId);
     }
 
     @Override
@@ -50,6 +56,20 @@ public class SearchGroupsPresenter extends MvpBasePresenter<SearchGroupsMVP.View
     public void loadError(Throwable e) {
         if (isViewAttached()) {
             getView().showError(e, mForceRefresh);
+        }
+    }
+
+    @Override
+    public void addGroupToFavoriteCompleted(Long groupId) {
+        if (isViewAttached()) {
+            getView().addGroupToFavoriteSuccess(groupId);
+        }
+    }
+
+    @Override
+    public void addGroupToFavoriteError(Throwable e) {
+        if (isViewAttached()) {
+            getView().showError(e, false);
         }
     }
 }
