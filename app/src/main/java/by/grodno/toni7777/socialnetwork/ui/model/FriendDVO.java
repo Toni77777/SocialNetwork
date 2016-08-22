@@ -7,15 +7,25 @@ public class FriendDVO {
     private long mId;
     private String mAvatar;
     private String mFullName;
+    private boolean mOnline;
 
     public FriendDVO() {
     }
 
-    public FriendDVO(String name, String surname, long id, String avatar) {
+    public FriendDVO(String name, String surname, long id, String avatar, boolean online) {
         mName = name;
         mSurname = surname;
         mId = id;
         mAvatar = avatar;
+        mOnline = online;
+    }
+
+    public boolean isOnline() {
+        return mOnline;
+    }
+
+    public void setOnline(boolean online) {
+        mOnline = online;
     }
 
     public String getName() {

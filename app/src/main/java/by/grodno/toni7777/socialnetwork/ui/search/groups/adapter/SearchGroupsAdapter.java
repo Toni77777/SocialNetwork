@@ -58,12 +58,10 @@ public class SearchGroupsAdapter extends RecyclerView.Adapter<SearchGroupsAdapte
     @Override
     public int getItemViewType(int position) {
         GroupDTO group = mGroups.get(position);
-        if (group.getMember() == 1) {
+        if (group.isMember()) {
             return FAVORITE;
-        } else if (group.getMember() == 0) {
-            return SIMPLE;
         } else {
-            throw new IllegalArgumentException("View type not found");
+            return SIMPLE;
         }
     }
 
@@ -89,7 +87,7 @@ public class SearchGroupsAdapter extends RecyclerView.Adapter<SearchGroupsAdapte
         for (GroupDTO group : mGroups) {
             if (group.getGroupId() == groupId) {
                 int index = mGroups.indexOf(group);
-                group.setMembers(1);
+                group.setMember(true);
                 notifyItemChanged(index);
                 return;
             }
@@ -130,7 +128,7 @@ public class SearchGroupsAdapter extends RecyclerView.Adapter<SearchGroupsAdapte
         void bind(GroupDTO group) {
             ImageLoad.loadCircleImage(mAvatarView, group.getImage());
             mNameView.setText(group.getName());
-            mMembersView.setText("Members " + String.valueOf(group.getMember()));
+            mMembersView.setText("Members " + String.valueOf(group.getMembers()));
         }
 
         @NonNull
@@ -170,7 +168,7 @@ public class SearchGroupsAdapter extends RecyclerView.Adapter<SearchGroupsAdapte
         void bind(GroupDTO group) {
             ImageLoad.loadCircleImage(mAvatarView, group.getImage());
             mNameView.setText(group.getName());
-            mMembersView.setText("Members " + String.valueOf(group.getMember()));
+            mMembersView.setText("Members " + String.valueOf(group.getMembers()));
             mId = group.getGroupId();
 
         }

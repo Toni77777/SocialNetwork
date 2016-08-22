@@ -82,11 +82,11 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendVi
             mNameView.setText(friend.getFullName());
             mOnlineView.setChecked(true);
             mId = friend.getId();
-//            if (friend.isOnline()) {
-//                mOnline.setChecked(true);
-//            } else {
-//                mOnline.setChecked(false);
-//            }
+            if (friend.isOnline()) {
+                mOnlineView.setChecked(true);
+            } else {
+                mOnlineView.setChecked(false);
+            }
         }
 
         @NonNull

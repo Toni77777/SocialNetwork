@@ -16,14 +16,26 @@ public class FriendDTO {
     @SerializedName("avatar")
     private String mAvatar;
 
+    @SerializedName("online")
+    private boolean mOnline;
+
     public FriendDTO() {
     }
 
-    public FriendDTO(String name, String surname, long id, String avatar) {
+    public FriendDTO(String name, String surname, long id, String avatar, boolean online) {
         mName = name;
         mSurname = surname;
         mId = id;
         mAvatar = avatar;
+        mOnline = online;
+    }
+
+    public boolean isOnline() {
+        return mOnline;
+    }
+
+    public void setOnline(boolean online) {
+        mOnline = online;
     }
 
     public String getName() {

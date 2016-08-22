@@ -19,11 +19,11 @@ public class GroupDTO {
     @SerializedName("description")
     private String mDescription;
 
-    @SerializedName("isMember")
-    private int mMember;
+    @SerializedName("member")
+    private boolean mMember;
 
-    @SerializedName("isOwner")
-    private int mOwner;
+    @SerializedName("owner")
+    private boolean mOwner;
 
     public long getGroupId() {
         return mGroupId;
@@ -65,15 +65,19 @@ public class GroupDTO {
         mDescription = description;
     }
 
-    public int getMember() {
+    public boolean isMember() {
         return mMember;
     }
 
-    public int getOwner() {
+    public void setMember(boolean member) {
+        mMember = member;
+    }
+
+    public boolean isOwner() {
         return mOwner;
     }
 
-    public void setOwner(int owner) {
+    public void setOwner(boolean owner) {
         mOwner = owner;
     }
 
@@ -102,8 +106,8 @@ public class GroupDTO {
         result = 31 * result + (int) (mMembers ^ (mMembers >>> 32));
         result = 31 * result + (mImage != null ? mImage.hashCode() : 0);
         result = 31 * result + (mDescription != null ? mDescription.hashCode() : 0);
-        result = 31 * result + mMember;
-        result = 31 * result + mOwner;
+        result = 31 * result + (mMember ? 1 : 0);
+        result = 31 * result + (mOwner ? 1 : 0);
         return result;
     }
 

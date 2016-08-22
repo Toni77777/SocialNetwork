@@ -16,7 +16,7 @@ public final class ConverterDTOtoDVO {
 
     public static FriendDVO converteDTOtoDSO(FriendDTO sourceDTO) {
         return new FriendDVO(sourceDTO.getName(), sourceDTO.getSurname(), sourceDTO.getId(),
-                sourceDTO.getAvatar());
+                sourceDTO.getAvatar(), sourceDTO.isOnline());
     }
 
     public static FriendsDVO converteDTOtoDSO(FriendsDTO sourceDTO) {
