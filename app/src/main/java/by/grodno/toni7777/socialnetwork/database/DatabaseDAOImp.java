@@ -1,11 +1,12 @@
 package by.grodno.toni7777.socialnetwork.database;
 
-import android.util.Log;
+import java.util.List;
 
-import by.grodno.toni7777.socialnetwork.database.model.ProfileDSO;
+import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
+import by.grodno.toni7777.socialnetwork.database.model.WallDSO;
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmModel;
-import io.realm.RealmObject;
 import io.realm.RealmResults;
 
 public class DatabaseDAOImp implements DatabaseDAO {
@@ -25,7 +26,6 @@ public class DatabaseDAOImp implements DatabaseDAO {
     public <E extends RealmModel> RealmResults<E> readAll(Realm realm, Class clazz) {
         RealmResults<E> result = realm.where(clazz)
                 .findAll();
-
         return (RealmResults<E>) result;
     }
 
@@ -41,4 +41,12 @@ public class DatabaseDAOImp implements DatabaseDAO {
         return result.last();
     }
 
+    @Override
+    public void updateWall(Realm realm, RealmList<PostDSO> newPosts) {
+        realm.executeTransaction(realm1 -> {
+            List<PostDSO> posts = realm1.copyToRealm(newPosts);
+            WallDSO wall = realm1.where(WallDSO.class).equalTo("key", 2).findFirst();
+            wall.getPostDSO().addAll(posts);
+        });
+    }
 }

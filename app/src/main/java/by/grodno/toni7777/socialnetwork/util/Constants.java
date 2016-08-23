@@ -12,7 +12,7 @@ public final class Constants {
 
     public static final int START_LOAD = 0;
 
-    public static final int LIMIT = 4;
+    public static final int SMALL_LIMIT = 4;
 
     public static final int ACTION_BUTTON_START = 0;
     public static final int ACTION_BUTTON_PROGRESS = 25;

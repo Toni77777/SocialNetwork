@@ -15,7 +15,7 @@ import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
 import rx.Subscription;
 
-import static by.grodno.toni7777.socialnetwork.util.Constants.LIMIT;
+import static by.grodno.toni7777.socialnetwork.util.Constants.SMALL_LIMIT;
 
 public class FriendsModel implements BaseModel, FriendsMVP.FriendsModel {
 
@@ -34,7 +34,7 @@ public class FriendsModel implements BaseModel, FriendsMVP.FriendsModel {
 
     @Override
     public void loadFriends(int offset) {
-        Observable<FriendsDTO> postsObservable = mNetworkAPI.getFriends(mPreferences.getUserId(), offset, LIMIT, mPreferences.getAccessToken());
+        Observable<FriendsDTO> postsObservable = mNetworkAPI.getFriends(mPreferences.getUserId(), offset, SMALL_LIMIT, mPreferences.getAccessToken());
 
         unsubscribe();
         mSubscription = postsObservable
