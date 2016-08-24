@@ -25,15 +25,17 @@ import static by.grodno.toni7777.socialnetwork.util.ImageLoad.*;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
 import by.grodno.toni7777.socialnetwork.network.model.OwnerDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
+import by.grodno.toni7777.socialnetwork.ui.model.OwnerDVO;
+import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
-    private final List<PostDTO> mPosts;
+    private final List<PostDVO> mPosts;
     private static final int FULL = R.id.type_post_full;
     private static final int IMAGE = R.id.type_post_image;
     private static final int TEXT = R.id.type_post_text;
 
-    public PostAdapter(List<PostDTO> posts) {
+    public PostAdapter(List<PostDVO> posts) {
         mPosts = posts;
     }
 
@@ -53,7 +55,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         int viewType = holder.getItemViewType();
-        PostDTO post = mPosts.get(position);
+        PostDVO post = mPosts.get(position);
 
         if (viewType == FULL) {
             ((FullPostViewHolder) holder).bind(post);
@@ -66,7 +68,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        PostDTO post = mPosts.get(position); // backend return null or " " - is all empty field
+        PostDVO post = mPosts.get(position); // backend return null or " " - is all empty field
         if ((post.getImage() == null) || (TextUtils.isEmpty(post.getImage().trim()))) {
             return TEXT;
         } else if ((post.getText() == null) || (TextUtils.isEmpty(post.getText().trim()))) {
@@ -88,17 +90,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         mPosts.clear();
     }
 
-    public void update(List<PostDTO> newPosts) {
+    public void update(List<PostDVO> newPosts) {
         mPosts.addAll(newPosts);
         notifyDataSetChanged();
     }
 
-    public List<PostDTO> getPosts() {
+    public List<PostDVO> getPosts() {
         return mPosts;
     }
 
     public void deleteRemovedPost(long postId) {
-        for (PostDTO post : mPosts) {
+        for (PostDVO post : mPosts) {
             if (post.getPostId() == postId) {
                 int index = mPosts.indexOf(post);
                 mPosts.remove(post);
@@ -159,11 +161,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             ButterKnife.bind(this, view);
         }
 
-        void bind(PostDTO post) {
-            OwnerDTO ownerDTO = post.getOwner();
-            loadCircleImage(mOwnerAvatarView, ownerDTO.getAvatar());
+        void bind(PostDVO post) {
+            OwnerDVO ownerDVO = post.getOwner();
+            loadCircleImage(mOwnerAvatarView, ownerDVO.getAvatar());
             mDateView.setText(post.getDate());
-            mOwnerFullNameView.setText(ownerDTO.getFullName());
+            mOwnerFullNameView.setText(ownerDVO.getFullName());
             loadImage(mPostImageView, post.getImage());
             mPostTextView.setText(post.getText());
             mLikeCountView.setText(String.valueOf(post.getLike()));
@@ -231,11 +233,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             ButterKnife.bind(this, view);
         }
 
-        void bind(PostDTO post) {
-            OwnerDTO ownerDTO = post.getOwner();
-            loadCircleImage(mOwnerAvatarView, ownerDTO.getAvatar());
+        void bind(PostDVO post) {
+            OwnerDVO ownerDVO = post.getOwner();
+            loadCircleImage(mOwnerAvatarView, ownerDVO.getAvatar());
             mDateView.setText(post.getDate());
-            mOwnerFullNameView.setText(ownerDTO.getFullName());
+            mOwnerFullNameView.setText(ownerDVO.getFullName());
             loadImage(mPostImageView, post.getImage());
             mLikeCountView.setText(String.valueOf(post.getLike()));
             mDislikeCountView.setText(String.valueOf(post.getDislike()));
@@ -302,10 +304,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             ButterKnife.bind(this, view);
         }
 
-        void bind(PostDTO post) {
-            OwnerDTO ownerDTO = post.getOwner();
-            loadCircleImage(mOwnerAvatarView, ownerDTO.getAvatar());
-            mOwnerFullNameView.setText(ownerDTO.getFullName());
+        void bind(PostDVO post) {
+            OwnerDVO ownerDVO = post.getOwner();
+            loadCircleImage(mOwnerAvatarView, ownerDVO.getAvatar());
+            mOwnerFullNameView.setText(ownerDVO.getFullName());
             mDateView.setText(post.getDate());
             mPostTextView.setText(post.getText());
             mLikeCountView.setText(String.valueOf(post.getLike()));

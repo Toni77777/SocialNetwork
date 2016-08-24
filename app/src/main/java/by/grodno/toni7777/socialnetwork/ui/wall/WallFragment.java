@@ -30,13 +30,14 @@ import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
 import by.grodno.toni7777.socialnetwork.base.event.PostPublishSuccess;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
+import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.newpost.NewPostActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.adapter.PostAdapter;
 import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.START_LOAD;
 
-public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout, List<PostDTO>, WallMVP.WallView, WallPresenter>
+public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout, List<PostDVO>, WallMVP.WallView, WallPresenter>
         implements WallMVP.WallView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.posts_recycler)
@@ -74,13 +75,13 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
     }
 
     @Override
-    public LceViewState<List<PostDTO>, WallMVP.WallView> createViewState() {
+    public LceViewState<List<PostDVO>, WallMVP.WallView> createViewState() {
         setRetainInstance(true);
         return new RetainingLceViewState<>();
     }
 
     @Override
-    public List<PostDTO> getData() {
+    public List<PostDVO> getData() {
         return mPostAdapter.getPosts();
     }
 
@@ -90,7 +91,7 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
     }
 
     @Override
-    public void setData(List<PostDTO> data) {
+    public void setData(List<PostDVO> data) {
         contentView.setRefreshing(false);
         mPostAdapter.update(data);
     }

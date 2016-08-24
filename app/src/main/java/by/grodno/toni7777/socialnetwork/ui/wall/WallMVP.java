@@ -6,7 +6,7 @@ import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
-import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
+import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 
 public interface WallMVP {
 
@@ -18,7 +18,7 @@ public interface WallMVP {
 
     }
 
-    interface WallView extends MvpLceView<List<PostDTO>> {
+    interface WallView extends MvpLceView<List<PostDVO>> {
 
         void removePost(PostEvent event);
 

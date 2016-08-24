@@ -11,15 +11,16 @@ import by.grodno.toni7777.socialnetwork.database.model.WallDSO;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
-import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 
+import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.wall.listener.RemovePostListener;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SMALL_LIMIT;
 
 import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDSO;
+import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import io.realm.Realm;
@@ -31,7 +32,7 @@ import rx.Subscription;
 
 public class WallModel implements BaseModel, WallMVP.WallModel {
 
-    private ModelListener<List<PostDTO>> mListener;
+    private ModelListener<List<PostDVO>> mListener;
     private Subscription mSubscription;
     private LoginPreferences mPreferences;
     private SocialNetworkAPI mNetworkAPI;
@@ -39,7 +40,7 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
     private RemovePostListener mRemoveListener;
 
     public WallModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, DatabaseDAOImp databaseDAO,
-                     ModelListener<List<PostDTO>> listener, RemovePostListener removeListener) {
+                     ModelListener<List<PostDVO>> listener, RemovePostListener removeListener) {
         mNetworkAPI = socialNetworkAPI;
         mDatabaseDAO = databaseDAO;
         mPreferences = loginPreferences;
@@ -93,15 +94,12 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
             if (posts == null) {
                 throw new IllegalArgumentException("Posts from database null");
             }
-            List<PostDTO> readData = Test.converter(posts);
-            List<PostDTO> result = new ArrayList<>();
+            List<PostDVO> readData = ConverterDTOtoDVO.converteDSOtoDVO(posts);
+            List<PostDVO> result = new ArrayList<>();
             int size = readData.size();
             if (size >= offset + 4) {
                 result = readData.subList(offset, offset + 4);
             }
-            Log.e("Size", "Read list size = " + readData.size());
-            Log.e("Size", "Offset = " + offset);
-            Log.e("Read", "Posts read " + readData.toString());
             mListener.loadNext(result);
             mListener.onLoadCompleted();
         }
