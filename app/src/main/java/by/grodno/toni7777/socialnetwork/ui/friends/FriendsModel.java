@@ -54,13 +54,11 @@ public class FriendsModel implements BaseModel, FriendsMVP.Model {
                 .compose(RxUtil.<FriendsDSO>applySchedulers())
                 .subscribe(
                         friends -> {
-                            Log.e("Response", friends.toString());
-                            Log.e("Response", "Response friend size =" + friends.getFriendsDSO().size());
                         },
                         throwable -> {
                             unsubscribe();
                             readFriendsFromDB(offset);
-//                            mListener.loadError(throwable);
+                            mListener.loadError(throwable);
                         },
                         () -> {
                             unsubscribe();

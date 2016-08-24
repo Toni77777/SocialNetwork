@@ -58,7 +58,6 @@ public class WallModel implements BaseModel, WallMVP.Model {
                 .compose(RxUtil.<WallDSO>applySchedulers())
                 .subscribe(
                         wall -> {
-                            Log.e("Response", "Wall size = " + wall.getPostDSO().size());
                         },
                         throwable -> {
                             unsubscribe();
