@@ -62,7 +62,7 @@ public class WallModel implements BaseModel, WallMVP.WallModel {
                         throwable -> {
                             unsubscribe();
                             readPostsFromDB(offset);
-//                            mListener.loadError(throwable);
+                            mListener.loadError(throwable);
                         },
                         () -> {
                             unsubscribe();

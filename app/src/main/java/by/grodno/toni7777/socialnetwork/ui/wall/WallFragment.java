@@ -3,6 +3,7 @@ package by.grodno.toni7777.socialnetwork.ui.wall;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +32,7 @@ import by.grodno.toni7777.socialnetwork.base.event.PostPublishSuccess;
 import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.ui.newpost.NewPostActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.adapter.PostAdapter;
+import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.START_LOAD;
 
@@ -83,11 +85,6 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
     }
 
     @Override
-    protected String getErrorMessage(Throwable throwable, boolean pullToRefresh) {
-        return throwable.toString(); //TODO need check error for show
-    }
-
-    @Override
     public WallPresenter createPresenter() {
         return mWallPresenter;
     }
@@ -111,10 +108,11 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
     }
 
     @Override
-    public void showError(Throwable e, boolean pullToRefresh) {
-        super.showError(e, pullToRefresh);
+    public void showError(Throwable throwable, boolean pullToRefresh) {
         contentView.setRefreshing(false);
         mProgressPaginView.setVisibility(View.GONE);
+        Snackbar.make(mPostsRecycler, ErrorHanding.getErrorMessage(throwable, getContext()), Snackbar.LENGTH_SHORT)
+                .show();
     }
 
     @Override

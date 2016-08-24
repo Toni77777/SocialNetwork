@@ -21,4 +21,9 @@ public abstract class BaseEventViewStateFragment<CV extends View, M, V extends M
         EventBus.getDefault().unregister(this);
         super.onDestroyView();
     }
+
+    @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        return null;
+    }
 }
