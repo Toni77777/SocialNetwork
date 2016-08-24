@@ -8,7 +8,9 @@ import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
 import by.grodno.toni7777.socialnetwork.network.model.GroupsDTO;
-import by.grodno.toni7777.socialnetwork.util.Constants;
+
+import static by.grodno.toni7777.socialnetwork.util.Constants.MEDIUM_LIMIT;
+
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
@@ -31,7 +33,7 @@ public class GroupsModel implements BaseModel, GroupsMVP.Model {
 
     @Override
     public void loadGroups(int offset) {
-        Observable<GroupsDTO> postsObservable = mNetworkAPI.getGroups(mPreferences.getUserId(), offset, 4, mPreferences.getAccessToken());
+        Observable<GroupsDTO> postsObservable = mNetworkAPI.getGroups(mPreferences.getUserId(), offset, MEDIUM_LIMIT, mPreferences.getAccessToken());
         unsubscribe();
         mSubscription = postsObservable
                 .compose(RxUtil.<GroupsDTO>applySchedulers())

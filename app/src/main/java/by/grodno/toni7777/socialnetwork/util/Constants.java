@@ -13,6 +13,7 @@ public final class Constants {
     public static final int START_LOAD = 0;
 
     public static final int SMALL_LIMIT = 4;
+    public static final int MEDIUM_LIMIT = 10;
 
     public static final int ACTION_BUTTON_START = 0;
     public static final int ACTION_BUTTON_PROGRESS = 25;
@@ -23,6 +24,8 @@ public final class Constants {
     public static final String USER_ID_PREFERENCES = "userId";
     public static final String USER_AVATAR_PREFERENCES = "userAvatar";
     public static final String USER_FULL_NAME_PREFERENCES = "userFullName";
+
+    public static final int TIMEOUT = 40;
 
     public static final String EMPTY_STRING = " ";
     public static final long EMPTY_USER_ID = -1;

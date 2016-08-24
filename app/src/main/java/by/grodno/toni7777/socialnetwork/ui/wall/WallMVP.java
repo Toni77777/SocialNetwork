@@ -6,15 +6,20 @@ import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
+import by.grodno.toni7777.socialnetwork.database.model.WallDSO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 
-public interface WallMVP {
+public final class WallMVP {
 
     interface Model {
 
         void loadPosts(int offset);
 
         void removePost(long postId);
+
+        void saveInCache(WallDSO responseWall, int offset);
+
+        void readPostsFromDB(int offset);
 
     }
 
@@ -30,5 +35,8 @@ public interface WallMVP {
 
         void removePost(long posId);
 
+    }
+
+    private WallMVP() {
     }
 }

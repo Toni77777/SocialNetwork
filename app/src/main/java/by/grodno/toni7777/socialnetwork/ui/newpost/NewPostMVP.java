@@ -4,7 +4,7 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 
 import java.io.File;
 
-public interface NewPostMVP {
+public final class NewPostMVP {
 
     interface Model {
 
@@ -33,5 +33,8 @@ public interface NewPostMVP {
         void sendImagePost(File file);
 
         void sendNewPost(String textPost, String imageURL);
+    }
+
+    private NewPostMVP() {
     }
 }

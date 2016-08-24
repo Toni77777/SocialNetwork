@@ -3,6 +3,7 @@ package by.grodno.toni7777.socialnetwork.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.grodno.toni7777.socialnetwork.database.model.FriendDSO;
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;

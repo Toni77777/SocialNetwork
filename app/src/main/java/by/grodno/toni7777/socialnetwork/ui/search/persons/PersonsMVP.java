@@ -7,7 +7,7 @@ import java.util.List;
 import by.grodno.toni7777.socialnetwork.base.event.PersonEvent;
 import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
 
-public interface PersonsMVP {
+public final class PersonsMVP {
 
     interface Model {
 
@@ -29,5 +29,8 @@ public interface PersonsMVP {
 
         void addPersonToFriend(Long userId);
 
+    }
+
+    private PersonsMVP() {
     }
 }

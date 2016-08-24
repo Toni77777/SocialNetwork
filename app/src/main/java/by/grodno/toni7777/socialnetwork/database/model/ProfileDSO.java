@@ -1,12 +1,13 @@
 package by.grodno.toni7777.socialnetwork.database.model;
 
+import by.grodno.toni7777.socialnetwork.database.Keys;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class ProfileDSO extends RealmObject {
 
     @PrimaryKey
-    private int key = 1;
+    private int key = Keys.PROFILE_KEY;
     private long mId;
     private String mName;
     private String mSurname;

@@ -7,7 +7,7 @@ import java.util.List;
 import by.grodno.toni7777.socialnetwork.base.event.SearchGroupEvent;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
 
-public interface SearchGroupsMVP {
+public final class SearchGroupsMVP {
 
     interface Model {
 
@@ -30,5 +30,8 @@ public interface SearchGroupsMVP {
 
         void addGroupToFavorite(Long groupId);
 
+    }
+
+    private SearchGroupsMVP() {
     }
 }

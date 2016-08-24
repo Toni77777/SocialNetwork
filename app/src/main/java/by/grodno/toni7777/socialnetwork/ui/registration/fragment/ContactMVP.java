@@ -4,7 +4,7 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 
 import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
 
-public interface ContactMVP {
+public final class ContactMVP {
 
     interface Model {
 
@@ -28,5 +28,8 @@ public interface ContactMVP {
 
         void registration(Profile profile);
 
+    }
+
+    private ContactMVP() {
     }
 }

@@ -2,7 +2,7 @@ package by.grodno.toni7777.socialnetwork.ui.login;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
-public interface LoginMVP {
+public final class LoginMVP {
 
     interface Model {
 
@@ -29,5 +29,8 @@ public interface LoginMVP {
 
         void authorization(String login, String password);
 
+    }
+
+    private LoginMVP() {
     }
 }

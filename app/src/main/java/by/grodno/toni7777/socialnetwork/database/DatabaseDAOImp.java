@@ -2,12 +2,16 @@ package by.grodno.toni7777.socialnetwork.database;
 
 import java.util.List;
 
+import by.grodno.toni7777.socialnetwork.database.model.FriendDSO;
+import by.grodno.toni7777.socialnetwork.database.model.FriendsDSO;
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
 import by.grodno.toni7777.socialnetwork.database.model.WallDSO;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmModel;
 import io.realm.RealmResults;
+
+import static by.grodno.toni7777.socialnetwork.database.Keys.*;
 
 public class DatabaseDAOImp implements DatabaseDAO {
 
@@ -45,8 +49,17 @@ public class DatabaseDAOImp implements DatabaseDAO {
     public void updateWall(Realm realm, RealmList<PostDSO> newPosts) {
         realm.executeTransaction(realm1 -> {
             List<PostDSO> posts = realm1.copyToRealm(newPosts);
-            WallDSO wall = realm1.where(WallDSO.class).equalTo("key", 2).findFirst();
+            WallDSO wall = realm1.where(WallDSO.class).equalTo(FIELD_KEY, WALL_KEY).findFirst();
             wall.getPostDSO().addAll(posts);
+        });
+    }
+
+    @Override
+    public void updateFriends(Realm realm, RealmList<FriendDSO> newFriends) {
+        realm.executeTransaction(realm1 -> {
+            List<FriendDSO> saveNewFriends = realm1.copyToRealm(newFriends);
+            FriendsDSO friends = realm1.where(FriendsDSO.class).equalTo(FIELD_KEY, FRIENDS_KEY).findFirst();
+            friends.getFriendsDSO().addAll(saveNewFriends);
         });
     }
 }

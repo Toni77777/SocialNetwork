@@ -5,7 +5,7 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 
 
-public interface ProfileMVP {
+public final class ProfileMVP {
 
     interface Model {
 
@@ -29,5 +29,8 @@ public interface ProfileMVP {
 
         void getProfileInfo();
 
+    }
+
+    private ProfileMVP() {
     }
 }

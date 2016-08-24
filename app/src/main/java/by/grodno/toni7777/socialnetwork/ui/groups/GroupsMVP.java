@@ -8,7 +8,7 @@ import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.base.event.GroupEvent;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
 
-public interface GroupsMVP {
+public final class GroupsMVP {
 
     interface Model {
 
@@ -23,5 +23,8 @@ public interface GroupsMVP {
 
     interface Presenter extends LoadPagination {
 
+    }
+
+    private GroupsMVP() {
     }
 }

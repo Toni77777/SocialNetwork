@@ -58,7 +58,7 @@ public class WallModel implements BaseModel, WallMVP.Model {
                 .compose(RxUtil.<WallDSO>applySchedulers())
                 .subscribe(
                         wall -> {
-                            Log.e("Wall", "Response: Wall size = " + wall.getPostDSO().size() + " Wall posts = " + wall.getPostDSO());
+                            Log.e("Response", "Wall size = " + wall.getPostDSO().size());
                         },
                         throwable -> {
                             unsubscribe();
@@ -72,7 +72,8 @@ public class WallModel implements BaseModel, WallMVP.Model {
                 );
     }
 
-    private void saveInCache(WallDSO responseWall, int offset) {
+    @Override
+    public void saveInCache(WallDSO responseWall, int offset) {
         RealmResults<WallDSO> walls = mDatabaseDAO.readAll(Realm.getDefaultInstance(), WallDSO.class);
         if (walls.size() == 0) { // have not wall object from DB
             mDatabaseDAO.copyToDatabaseOrUpdate(Realm.getDefaultInstance(), responseWall);
@@ -84,7 +85,8 @@ public class WallModel implements BaseModel, WallMVP.Model {
         }
     }
 
-    private void readPostsFromDB(int offset) {
+    @Override
+    public void readPostsFromDB(int offset) {
         WallDSO wallDSO = mDatabaseDAO.findFirst(Realm.getDefaultInstance(), WallDSO.class);
 
         if (wallDSO == null) {
@@ -97,8 +99,10 @@ public class WallModel implements BaseModel, WallMVP.Model {
             List<PostDVO> readData = ConverterDTOtoDVO.converteDSOtoDVO(posts);
             List<PostDVO> result = new ArrayList<>();
             int size = readData.size();
-            if (size >= offset + 4) {
-                result = readData.subList(offset, offset + 4);
+            if (size >= (offset + SMALL_LIMIT - 1)) {
+                result = readData.subList(offset, offset + SMALL_LIMIT - 1);
+            } else {
+                result = readData.subList(offset, size);
             }
             mListener.loadNext(result);
             mListener.onLoadCompleted();

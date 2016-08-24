@@ -1,5 +1,6 @@
 package by.grodno.toni7777.socialnetwork.database.model;
 
+import by.grodno.toni7777.socialnetwork.database.Keys;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -7,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
 public class WallDSO extends RealmObject {
 
     @PrimaryKey
-    private int key = 2;
+    private int key = Keys.WALL_KEY;
     private RealmList<PostDSO> mPostDSO;
 
     public WallDSO() {
