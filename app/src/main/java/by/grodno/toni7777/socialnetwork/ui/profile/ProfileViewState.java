@@ -2,7 +2,7 @@ package by.grodno.toni7777.socialnetwork.ui.profile;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
-public class ProfileViewState implements ViewState<ProfileMVP.ProfileView> {
+public class ProfileViewState implements ViewState<ProfileMVP.View> {
 
     private static final int STATE_SHOW_PROFILE_FORM = 4;
     private static final int STATE_SHOW_LOADING = 5;
@@ -23,7 +23,7 @@ public class ProfileViewState implements ViewState<ProfileMVP.ProfileView> {
     }
 
     @Override
-    public void apply(ProfileMVP.ProfileView view, boolean retained) {
+    public void apply(ProfileMVP.View view, boolean retained) {
         switch (state) {
             case STATE_SHOW_LOADING:
                 view.showLoading();

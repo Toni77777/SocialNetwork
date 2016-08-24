@@ -17,7 +17,7 @@ import rx.Subscription;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SMALL_LIMIT;
 
-public class FriendsModel implements BaseModel, FriendsMVP.FriendsModel {
+public class FriendsModel implements BaseModel, FriendsMVP.Model {
 
     private ModelListener<List<FriendDVO>> mListener;
     private Subscription mSubscription;

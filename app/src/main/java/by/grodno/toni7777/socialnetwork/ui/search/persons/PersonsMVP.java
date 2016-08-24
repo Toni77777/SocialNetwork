@@ -9,21 +9,21 @@ import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
 
 public interface PersonsMVP {
 
-    interface PersonsModel {
+    interface Model {
 
         void findPersons(String fullNameSearch, int offset);
 
         void addPersonToFriend(Long userId);
     }
 
-    interface PersonsView extends MvpLceView<List<PersonDTO>> {
+    interface View extends MvpLceView<List<PersonDTO>> {
 
         void addPersonToFriend(PersonEvent event);
 
         void addNewFriendSuccess(long userId);
     }
 
-    interface PersonsPresenter {
+    interface Presenter {
 
         void loadDataWithOffset(String fullNameSearch, boolean forceRefresh, int offset);
 

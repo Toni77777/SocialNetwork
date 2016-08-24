@@ -6,7 +6,7 @@ import java.io.File;
 
 public interface NewPostMVP {
 
-    interface NewPostModel {
+    interface Model {
 
         void sendPostToServer(String textPost, String imageURL);
 
@@ -14,7 +14,7 @@ public interface NewPostMVP {
 
     }
 
-    interface NewPostView extends MvpView {
+    interface View extends MvpView {
 
         void showPostForm();
 
@@ -28,7 +28,7 @@ public interface NewPostMVP {
 
     }
 
-    interface NewPostPresenter {
+    interface Presenter {
 
         void sendImagePost(File file);
 

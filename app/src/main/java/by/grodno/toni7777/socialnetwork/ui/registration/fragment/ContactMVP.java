@@ -6,13 +6,13 @@ import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
 
 public interface ContactMVP {
 
-    interface ContactModel {
+    interface Model {
 
         void registration(Profile profile);
 
     }
 
-    interface ContactView extends MvpView {
+    interface View extends MvpView {
 
         void showContactForm();
 
@@ -24,7 +24,7 @@ public interface ContactMVP {
 
     }
 
-    interface ContactPresenter {
+    interface Presenter {
 
         void registration(Profile profile);
 

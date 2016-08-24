@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,10 +24,10 @@ import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendViewHolder> {
 
-    private List<FriendDVO> mFriends;
+    private final List<FriendDVO> mFriends;
 
     public FriendsAdapter(List<FriendDVO> friends) {
-        mFriends = friends;
+        mFriends = new ArrayList<>(friends);
     }
 
     @Override

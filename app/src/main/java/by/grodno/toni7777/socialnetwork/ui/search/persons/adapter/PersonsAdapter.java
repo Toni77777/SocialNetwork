@@ -13,6 +13,7 @@ import android.widget.ViewSwitcher;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,12 +26,12 @@ import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
 public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHolder> {
 
-    private List<PersonDTO> mPersons;
+    private final List<PersonDTO> mPersons;
     private static final int FRIEND = R.id.type_people_friend;
     private static final int PERSON = R.id.type_post_image;
 
     public PersonsAdapter(List<PersonDTO> persons) {
-        mPersons = persons;
+        mPersons =new ArrayList<>(persons);
     }
 
     @Override

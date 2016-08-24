@@ -3,10 +3,8 @@ package by.grodno.toni7777.socialnetwork.ui.registration.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.ViewSwitcher;
@@ -35,8 +33,8 @@ import by.grodno.toni7777.socialnetwork.base.BaseMvpTabFragment;
 import by.grodno.toni7777.socialnetwork.base.event.RegistrationEvent;
 import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
 
-public class ContactFragment extends BaseMvpTabFragment<ContactMVP.ContactView, ContactPresenter>
-        implements ContactMVP.ContactView {
+public class ContactFragment extends BaseMvpTabFragment<ContactMVP.View, ContactPresenter>
+        implements ContactMVP.View {
 
     @BindView(R.id.login_layout)
     TextInputLayout mLoginView;
@@ -57,7 +55,7 @@ public class ContactFragment extends BaseMvpTabFragment<ContactMVP.ContactView, 
     ProgressBar mProgressView;
 
     @BindView(R.id.contact_layout)
-    View mContactView;
+    android.view.View mContactView;
 
     @Inject
     ContactPresenter mPresenter;
@@ -82,12 +80,12 @@ public class ContactFragment extends BaseMvpTabFragment<ContactMVP.ContactView, 
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public android.view.View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tab_login, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(android.view.View view, @Nullable Bundle savedInstanceState) {
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         resetErrorAfterChange(mLoginView, mPasswordView, mConfirmPassView, mMailView);
@@ -144,21 +142,21 @@ public class ContactFragment extends BaseMvpTabFragment<ContactMVP.ContactView, 
     @Override
     public void showContactForm() {
         ((ContactViewState) viewState).setShowLoginForm();
-        mContactView.setVisibility(View.VISIBLE);
+        mContactView.setVisibility(android.view.View.VISIBLE);
     }
 
     @Override
     public void showError() {
         ((ContactViewState) viewState).setShowError();
-        mProgressView.setVisibility(View.GONE);
-        mContactView.setVisibility(View.VISIBLE);
+        mProgressView.setVisibility(android.view.View.GONE);
+        mContactView.setVisibility(android.view.View.VISIBLE);
     }
 
     @Override
     public void showLoading() {
         ((ContactViewState) viewState).setShowLoading();
-        mContactView.setVisibility(View.GONE);
-        mProgressView.setVisibility(View.VISIBLE);
+        mContactView.setVisibility(android.view.View.GONE);
+        mProgressView.setVisibility(android.view.View.VISIBLE);
     }
 
     @Override

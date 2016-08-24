@@ -13,8 +13,8 @@ import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
 import by.grodno.toni7777.socialnetwork.ui.search.persons.listener.FriendListener;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
-public class PersonsPresenter extends MvpBasePresenter<PersonsMVP.PersonsView>
-        implements ModelListener<List<PersonDTO>>, FriendListener, MvpPresenter<PersonsMVP.PersonsView>, PersonsMVP.PersonsPresenter {
+public class PersonsPresenter extends MvpBasePresenter<PersonsMVP.View>
+        implements ModelListener<List<PersonDTO>>, FriendListener, MvpPresenter<PersonsMVP.View>, PersonsMVP.Presenter {
 
     private final PersonsModel mModel;
     private boolean mForceRefresh;

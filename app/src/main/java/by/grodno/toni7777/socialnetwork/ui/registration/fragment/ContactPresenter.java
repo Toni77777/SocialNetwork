@@ -10,8 +10,8 @@ import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
 
 
-public class ContactPresenter extends MvpBasePresenter<ContactMVP.ContactView>
-        implements MvpPresenter<ContactMVP.ContactView>, ContactMVP.ContactPresenter, BaseListener {
+public class ContactPresenter extends MvpBasePresenter<ContactMVP.View>
+        implements MvpPresenter<ContactMVP.View>, ContactMVP.Presenter, BaseListener {
 
     private final ContactModel mModel;
 

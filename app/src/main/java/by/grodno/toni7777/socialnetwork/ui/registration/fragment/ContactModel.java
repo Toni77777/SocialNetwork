@@ -17,7 +17,7 @@ import okhttp3.RequestBody;
 import rx.Observable;
 import rx.Subscription;
 
-public class ContactModel implements BaseModel, ContactMVP.ContactModel {
+public class ContactModel implements BaseModel, ContactMVP.Model {
 
     private BaseListener mListener;
     private Subscription mSubscription;
@@ -48,6 +48,7 @@ public class ContactModel implements BaseModel, ContactMVP.ContactModel {
                 .compose(RxUtil.<ResponseDTO>applySchedulers())
                 .subscribe(
                         response -> {
+                            Log.e("Login", response.toString());
                             if (response.isSuccess()) {
                                 mListener.onLoadCompleted();
                             }
@@ -56,6 +57,8 @@ public class ContactModel implements BaseModel, ContactMVP.ContactModel {
                             unsubscribe();
                             mListener.loadError(throwable);
                             Log.e("Error", "Error autorization" + throwable.toString());
+                            Log.e("Error", "Error autorization" + throwable.getMessage());
+                            Log.e("Error", "Error autorization" + throwable.getLocalizedMessage());
                         },
                         () -> {
                             unsubscribe();

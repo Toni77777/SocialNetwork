@@ -7,13 +7,13 @@ import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 
 public interface ProfileMVP {
 
-    interface ProfileModel {
+    interface Model {
 
         void loadProfileInfo();
 
     }
 
-    interface ProfileView extends MvpView {
+    interface View extends MvpView {
 
         void showProfileForm();
 
@@ -25,7 +25,7 @@ public interface ProfileMVP {
 
     }
 
-    interface ProfilePresenter {
+    interface Presenter {
 
         void getProfileInfo();
 

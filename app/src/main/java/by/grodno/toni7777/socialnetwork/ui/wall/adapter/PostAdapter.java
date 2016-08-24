@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,7 +37,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private static final int TEXT = R.id.type_post_text;
 
     public PostAdapter(List<PostDVO> posts) {
-        mPosts = posts;
+        mPosts = new ArrayList<>(posts);
     }
 
     @Override

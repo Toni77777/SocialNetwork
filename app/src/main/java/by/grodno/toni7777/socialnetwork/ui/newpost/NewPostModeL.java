@@ -19,7 +19,7 @@ import okhttp3.RequestBody;
 import rx.Observable;
 import rx.Subscription;
 
-public class NewPostModel implements BaseModel, NewPostMVP.NewPostModel {
+public class NewPostModel implements BaseModel, NewPostMVP.Model {
 
     private BaseListener mListener;
     private UploadListener mUploadListener;

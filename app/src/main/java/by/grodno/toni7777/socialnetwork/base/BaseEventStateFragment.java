@@ -11,13 +11,13 @@ public abstract class BaseEventStateFragment<CV extends View, M, V extends MvpLc
 
     @Override
     public void onStart() {
-        EventBus.getDefault().register(this);
         super.onStart();
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onStop() {
-        EventBus.getDefault().unregister(this);
         super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }

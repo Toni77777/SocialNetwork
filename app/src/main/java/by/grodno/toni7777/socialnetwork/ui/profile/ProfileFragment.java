@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -22,8 +21,8 @@ import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
-public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.ProfileView, ProfilePresenter>
-        implements ProfileMVP.ProfileView {
+public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.View, ProfilePresenter>
+        implements ProfileMVP.View {
 
     @BindView(R.id.profile_name)
     TextView mNameView;
@@ -53,7 +52,7 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
     TextView mErrorView;
 
     private ProgressBar mLoadView;
-    private View mProfileView;
+    private android.view.View mProfileView;
 
     @Inject
     ProfilePresenter mPresenter;
@@ -70,9 +69,9 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public android.view.View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mLoadView = (ProgressBar) getActivity().findViewById(R.id.progress);
-        mProfileView = (View) getActivity().findViewById(R.id.main_content);
+        mProfileView = (android.view.View) getActivity().findViewById(R.id.main_content);
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
@@ -82,7 +81,7 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(android.view.View view, @Nullable Bundle savedInstanceState) {
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         mPresenter.getProfileInfo();
@@ -124,21 +123,21 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.Profile
     @Override
     public void showError() {
         ((ProfileViewState) viewState).setShowError();
-        mProfileView.setVisibility(View.GONE);
-        mErrorView.setVisibility(View.VISIBLE);
+        mProfileView.setVisibility(android.view.View.GONE);
+        mErrorView.setVisibility(android.view.View.VISIBLE);
     }
 
     @Override
     public void showLoading() {
         ((ProfileViewState) viewState).setShowLoading();
-        mProfileView.setVisibility(View.GONE);
-        mLoadView.setVisibility(View.VISIBLE);
+        mProfileView.setVisibility(android.view.View.GONE);
+        mLoadView.setVisibility(android.view.View.VISIBLE);
     }
 
     @Override
     public void getProfileSuccess(ProfileDVO profile) {
-        mLoadView.setVisibility(View.GONE);
-        mProfileView.setVisibility(View.VISIBLE);
+        mLoadView.setVisibility(android.view.View.GONE);
+        mProfileView.setVisibility(android.view.View.VISIBLE);
         bindProfileInfo(profile);
     }
 }

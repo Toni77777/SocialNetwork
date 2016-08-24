@@ -13,6 +13,7 @@ import android.widget.ViewSwitcher;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,12 +26,12 @@ import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
 public class SearchGroupsAdapter extends RecyclerView.Adapter<SearchGroupsAdapter.ViewHolder> {
 
-    private List<GroupDTO> mGroups;
+    private final List<GroupDTO> mGroups;
     private static final int FAVORITE = R.id.type_groups_favorite;
     private static final int SIMPLE = R.id.type_groups_simple;
 
     public SearchGroupsAdapter(List<GroupDTO> groups) {
-        mGroups = groups;
+        mGroups = new ArrayList<>(groups);
     }
 
     @Override

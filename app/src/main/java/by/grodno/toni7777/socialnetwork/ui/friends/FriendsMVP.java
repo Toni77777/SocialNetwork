@@ -9,16 +9,16 @@ import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
 
 public interface FriendsMVP {
 
-    interface FriendsModel {
+    interface Model {
 
         void loadFriends(int offset);
     }
 
-    interface FriendsView extends MvpLceView<List<FriendDVO>> {
+    interface View extends MvpLceView<List<FriendDVO>> {
 
     }
 
-    interface FriendsPresenter extends LoadPagination {
+    interface Presenter extends LoadPagination {
 
     }
 }

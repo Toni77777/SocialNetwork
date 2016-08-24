@@ -2,7 +2,7 @@ package by.grodno.toni7777.socialnetwork.ui.registration.fragment;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
-public class ContactViewState implements ViewState<ContactMVP.ContactView> {
+public class ContactViewState implements ViewState<ContactMVP.View> {
 
     private static final int STATE_SHOW_CONTACT_FORM = 0;
     private static final int STATE_SHOW_LOADING = 1;
@@ -23,7 +23,7 @@ public class ContactViewState implements ViewState<ContactMVP.ContactView> {
     }
 
     @Override
-    public void apply(ContactMVP.ContactView view, boolean retained) {
+    public void apply(ContactMVP.View view, boolean retained) {
         switch (state) {
             case STATE_SHOW_LOADING:
                 view.showLoading();

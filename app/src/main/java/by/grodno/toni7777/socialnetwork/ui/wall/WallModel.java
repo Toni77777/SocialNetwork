@@ -30,7 +30,7 @@ import rx.Observable;
 import rx.Subscription;
 
 
-public class WallModel implements BaseModel, WallMVP.WallModel {
+public class WallModel implements BaseModel, WallMVP.Model {
 
     private ModelListener<List<PostDVO>> mListener;
     private Subscription mSubscription;

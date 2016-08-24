@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
@@ -36,8 +35,8 @@ import by.grodno.toni7777.socialnetwork.ui.search.persons.adapter.PersonsAdapter
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.START_LOAD;
 
-public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, List<PersonDTO>, PersonsMVP.PersonsView, PersonsPresenter>
-        implements PersonsMVP.PersonsView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
+public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, List<PersonDTO>, PersonsMVP.View, PersonsPresenter>
+        implements PersonsMVP.View, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
     @BindView(R.id.persons_recycler)
     RecyclerView mPersonsRecycler;
@@ -57,12 +56,12 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public android.view.View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_persons, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(android.view.View view, @Nullable Bundle savedInstanceState) {
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         contentView.setOnRefreshListener(this);
@@ -110,7 +109,7 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     }
 
     @Override
-    public LceViewState<List<PersonDTO>, PersonsMVP.PersonsView> createViewState() {
+    public LceViewState<List<PersonDTO>, PersonsMVP.View> createViewState() {
         setRetainInstance(true);
         return new RetainingLceViewState<>();
     }
@@ -147,14 +146,14 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     public void showContent() {
         super.showContent();
         contentView.setRefreshing(false);
-        mProgressPaginView.setVisibility(View.GONE);
+        mProgressPaginView.setVisibility(android.view.View.GONE);
     }
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
         super.showError(e, pullToRefresh);
         contentView.setRefreshing(false);
-        mProgressPaginView.setVisibility(View.GONE);
+        mProgressPaginView.setVisibility(android.view.View.GONE);
     }
 
     @Override

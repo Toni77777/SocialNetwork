@@ -15,7 +15,7 @@ import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
 import rx.Subscription;
 
-public class PersonsModel implements BaseModel, PersonsMVP.PersonsModel {
+public class PersonsModel implements BaseModel, PersonsMVP.Model {
 
     private ModelListener<List<PersonDTO>> mListener;
     private FriendListener mFriendListener;

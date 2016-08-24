@@ -10,7 +10,7 @@ import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 
 public interface WallMVP {
 
-    interface WallModel {
+    interface Model {
 
         void loadPosts(int offset);
 
@@ -18,7 +18,7 @@ public interface WallMVP {
 
     }
 
-    interface WallView extends MvpLceView<List<PostDVO>> {
+    interface View extends MvpLceView<List<PostDVO>> {
 
         void removePost(PostEvent event);
 
@@ -26,7 +26,7 @@ public interface WallMVP {
 
     }
 
-    interface WallPresenter extends LoadPagination {
+    interface Presenter extends LoadPagination {
 
         void removePost(long posId);
 

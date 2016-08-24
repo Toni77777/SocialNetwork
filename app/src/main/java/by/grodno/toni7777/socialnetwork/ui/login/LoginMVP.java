@@ -4,7 +4,7 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 
 public interface LoginMVP {
 
-    interface LoginModel {
+    interface Model {
 
         void getAccessToken(String login, String password);
 
@@ -13,7 +13,7 @@ public interface LoginMVP {
 
     }
 
-    interface LoginView extends MvpView {
+    interface View extends MvpView {
 
         void showLoginForm();
 
@@ -25,7 +25,7 @@ public interface LoginMVP {
 
     }
 
-    interface LoginPresenter {
+    interface Presenter {
 
         void authorization(String login, String password);
 

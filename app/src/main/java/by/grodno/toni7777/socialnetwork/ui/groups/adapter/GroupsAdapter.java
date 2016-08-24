@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,10 +24,10 @@ import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
 public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewHolder> {
 
-    private List<GroupDTO> mGroups;
+    private final List<GroupDTO> mGroups;
 
     public GroupsAdapter(List<GroupDTO> groups) {
-        mGroups = groups;
+        mGroups = new ArrayList<>(groups);
     }
 
     @Override
