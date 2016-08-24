@@ -34,10 +34,10 @@ public class FriendsModel implements BaseModel, FriendsMVP.Model {
 
     @Override
     public void loadFriends(int offset) {
-        Observable<FriendsDTO> postsObservable = mNetworkAPI.getFriends(mPreferences.getUserId(), offset, SMALL_LIMIT, mPreferences.getAccessToken());
+        Observable<FriendsDTO> friendObservable = mNetworkAPI.getFriends(mPreferences.getUserId(), offset, SMALL_LIMIT, mPreferences.getAccessToken());
 
         unsubscribe();
-        mSubscription = postsObservable
+        mSubscription = friendObservable
                 .map(ConverterDTOtoDVO::converteDTOtoDSO)
                 .compose(RxUtil.<FriendsDVO>applySchedulers())
                 .subscribe(

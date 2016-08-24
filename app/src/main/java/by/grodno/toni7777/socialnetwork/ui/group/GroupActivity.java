@@ -14,15 +14,15 @@ public class GroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
-        long groupId = getIntent().getLongExtra(Constants.SHARE_GROUP_ID, -1);
-        Fragment groupFragment = new GroupsFragment();
-        Bundle idBundle = new Bundle();
-        idBundle.putLong(Constants.SHARE_GROUP_ID, groupId);
-        groupFragment.setArguments(idBundle);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.content, groupFragment)
-                    .commit();
-        }
+//        long groupId = getIntent().getLongExtra(Constants.SHARE_GROUP_ID, -1);
+//        Fragment groupFragment = new GroupsFragment();
+//        Bundle idBundle = new Bundle();
+//        idBundle.putLong(Constants.SHARE_GROUP_ID, groupId);
+//        groupFragment.setArguments(idBundle);
+//        if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.content, groupFragment)
+//                    .commit();
+//        }
     }
 }
