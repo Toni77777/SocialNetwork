@@ -5,15 +5,15 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 
 
-public interface ProfileMVP {
+public final class ProfileMVP {
 
-    interface ProfileModel {
+    interface Model {
 
         void loadProfileInfo();
 
     }
 
-    interface ProfileView extends MvpView {
+    interface View extends MvpView {
 
         void showProfileForm();
 
@@ -25,9 +25,12 @@ public interface ProfileMVP {
 
     }
 
-    interface ProfilePresenter {
+    interface Presenter {
 
         void getProfileInfo();
 
+    }
+
+    private ProfileMVP() {
     }
 }

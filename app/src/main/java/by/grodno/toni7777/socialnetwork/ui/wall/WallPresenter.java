@@ -7,16 +7,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
-import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
+import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.wall.listener.RemovePostListener;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
-public class WallPresenter extends MvpBasePresenter<WallMVP.WallView>
-        implements ModelListener<List<PostDTO>>, MvpPresenter<WallMVP.WallView>, WallMVP.WallPresenter, RemovePostListener {
+public class WallPresenter extends MvpBasePresenter<WallMVP.View>
+        implements ModelListener<List<PostDVO>>, MvpPresenter<WallMVP.View>, WallMVP.Presenter, RemovePostListener {
 
     private final WallModel mModel;
     private boolean mForceRefresh;
@@ -47,7 +46,7 @@ public class WallPresenter extends MvpBasePresenter<WallMVP.WallView>
     }
 
     @Override
-    public void loadNext(List<PostDTO> post) {
+    public void loadNext(List<PostDVO> post) {
         if (isViewAttached()) {
             getView().setData(post);
         }

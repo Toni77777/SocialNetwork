@@ -9,8 +9,8 @@ import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.ui.profile.listener.ProfileListener;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
-public class ProfilePresenter extends MvpBasePresenter<ProfileMVP.ProfileView>
-        implements ProfileListener, MvpPresenter<ProfileMVP.ProfileView>, ProfileMVP.ProfilePresenter {
+public class ProfilePresenter extends MvpBasePresenter<ProfileMVP.View>
+        implements ProfileListener, MvpPresenter<ProfileMVP.View>, ProfileMVP.Presenter {
 
     private final ProfileModel mModel;
 

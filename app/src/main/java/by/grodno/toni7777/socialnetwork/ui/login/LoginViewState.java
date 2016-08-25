@@ -2,7 +2,7 @@ package by.grodno.toni7777.socialnetwork.ui.login;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
-public class LoginViewState implements ViewState<LoginMVP.LoginView> {
+public class LoginViewState implements ViewState<LoginMVP.View> {
 
     private static final int STATE_SHOW_LOGIN_FORM = 0;
     private static final int STATE_SHOW_LOADING = 1;
@@ -23,7 +23,7 @@ public class LoginViewState implements ViewState<LoginMVP.LoginView> {
     }
 
     @Override
-    public void apply(LoginMVP.LoginView view, boolean retained) {
+    public void apply(LoginMVP.View view, boolean retained) {
         switch (state) {
             case STATE_SHOW_LOADING:
                 view.showLoading();

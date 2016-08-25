@@ -1,9 +1,12 @@
 package by.grodno.toni7777.socialnetwork.database.model;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class PostDSO extends RealmObject {
 
+    @PrimaryKey
+    private String mKey;
     private long mPostId;
     private OwnerDSO mOwner;
     private String mImage;
@@ -15,7 +18,8 @@ public class PostDSO extends RealmObject {
     public PostDSO() {
     }
 
-    public PostDSO(long postId, OwnerDSO owner, String image, String date, String text, int like, int dislike) {
+    public PostDSO(String key, long postId, OwnerDSO owner, String image, String date, String text, int like, int dislike) {
+        mKey = key;
         mPostId = postId;
         mOwner = owner;
         mImage = image;

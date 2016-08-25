@@ -3,14 +3,17 @@ package by.grodno.toni7777.socialnetwork.ui.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 
@@ -23,14 +26,15 @@ import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 
 import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
+import by.grodno.toni7777.socialnetwork.base.event.RegistrationEvent;
 import by.grodno.toni7777.socialnetwork.ui.registration.RegistrationActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.LoginUtil;
 
 
-public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.LoginView, LoginPresenter>
-        implements LoginMVP.LoginView {
+public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.View, LoginPresenter>
+        implements LoginMVP.View {
 
     @BindView(R.id.login)
     EditText mLoginView;
@@ -63,16 +67,17 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.LoginView, 
             getContext().startActivity(new Intent(getContext(), WallActivity.class));
             getActivity().finish();
         }
+        EventBus.getDefault().register(this);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public android.view.View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(android.view.View view, @Nullable Bundle savedInstanceState) {
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         mLoginView.setText(BuildConfig.LOGIN);
@@ -90,7 +95,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.LoginView, 
     @OnClick(R.id.sing_up)
     void singUn() {
         getContext().startActivity(new Intent(getContext(), RegistrationActivity.class));
-        mErrorView.setVisibility(View.GONE);
+        mErrorView.setVisibility(android.view.View.GONE);
     }
 
     @OnClick(R.id.forgot_password)
@@ -103,14 +108,14 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.LoginView, 
         ((LoginViewState) viewState).setShowError();
         setViewsEnabled(true);
         mAuthorizationButton.setProgress(Constants.ACTION_BUTTON_START);
-        mErrorView.setVisibility(View.VISIBLE);
+        mErrorView.setVisibility(android.view.View.VISIBLE);
     }
 
     @Override
     public void showLoading() {
         ((LoginViewState) viewState).setShowLoading();
         setViewsEnabled(false);
-        mErrorView.setVisibility(View.GONE);
+        mErrorView.setVisibility(android.view.View.GONE);
         mAuthorizationButton.setProgress(ACTION_BUTTON_PROGRESS);
     }
 
@@ -139,7 +144,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.LoginView, 
     @Override
     public void showLoginForm() {
         ((LoginViewState) viewState).setShowLoginForm();
-        mErrorView.setVisibility(View.GONE);
+        mErrorView.setVisibility(android.view.View.GONE);
         setViewsEnabled(true);
         mAuthorizationButton.setProgress(ACTION_BUTTON_START);
     }
@@ -149,6 +154,19 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.LoginView, 
         mPasswordView.setEnabled(enabled);
         mRegistrationButton.setEnabled(enabled);
         mForgotPassView.setEnabled(enabled);
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe
+    public void registrationSuccess(RegistrationEvent event) {
+        Snackbar.make(mForgotPassView, "Welcome " + event.getNameUser() + " registration success ", Snackbar.LENGTH_LONG)
+                .setDuration(5000)
+                .show();
     }
 
 }

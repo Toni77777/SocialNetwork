@@ -8,12 +8,11 @@ import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.ToolbarActivity;
 import by.grodno.toni7777.socialnetwork.ui.registration.fragment.ContactFragment;
 import by.grodno.toni7777.socialnetwork.ui.registration.fragment.InfoFragment;
-import by.grodno.toni7777.socialnetwork.ui.registration.fragment.LoginFragment;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SHARE_PROFILE;
 
 public class RegistrationActivity extends ToolbarActivity
-        implements InfoFragment.OnInfoPass, LoginFragment.OnLoginPass {
+        implements InfoFragment.OnInfoPass {
 
     private FragmentManager mFragmentManager;
     private Profile mProfile;
@@ -51,17 +50,6 @@ public class RegistrationActivity extends ToolbarActivity
         mProfile.setSurname(surname);
         mProfile.setSex(sex);
         mProfile.setDateBirth(dateBirth);
-        mFragmentManager.beginTransaction()
-                .replace(R.id.content, new LoginFragment())
-                .commit();
-    }
-
-
-    @Override
-    public void onLoginPass(String login, String password, String email) {
-        mProfile.setLogin(login);
-        mProfile.setPassword(password);
-        mProfile.setEmail(email);
 
         Fragment contactFragment = new ContactFragment();
         Bundle profile = new Bundle();
@@ -71,6 +59,22 @@ public class RegistrationActivity extends ToolbarActivity
         mFragmentManager.beginTransaction()
                 .replace(R.id.content, contactFragment)
                 .commit();
-
     }
+
+//    @Override
+//    public void onLoginPass(String login, String password, String email) {
+//        mProfile.setLogin(login);
+//        mProfile.setPassword(password);
+//        mProfile.setEmail(email);
+//
+//        Fragment contactFragment = new ContactFragmentЕ();
+//        Bundle profile = new Bundle();
+//        profile.putParcelable(SHARE_PROFILE, mProfile);
+//        contactFragment.setArguments(profile);
+//
+//        mFragmentManager.beginTransaction()
+//                .replace(R.id.content, contactFragment)
+//                .commit();
+//
+//    }
 }

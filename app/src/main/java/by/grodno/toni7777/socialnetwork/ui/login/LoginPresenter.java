@@ -12,8 +12,8 @@ import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
-public class LoginPresenter extends MvpBasePresenter<LoginMVP.LoginView>
-        implements BaseListener, MvpPresenter<LoginMVP.LoginView>, LoginMVP.LoginPresenter {
+public class LoginPresenter extends MvpBasePresenter<LoginMVP.View>
+        implements BaseListener, MvpPresenter<LoginMVP.View>, LoginMVP.Presenter {
 
     private final LoginModel mModel;
 

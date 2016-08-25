@@ -1,7 +1,5 @@
 package by.grodno.toni7777.socialnetwork.ui.profile;
 
-import java.util.concurrent.TimeUnit;
-
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.database.model.ProfileDSO;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
@@ -17,7 +15,7 @@ import io.realm.Realm;
 import rx.Observable;
 import rx.Subscription;
 
-public class ProfileModel implements BaseModel, ProfileMVP.ProfileModel {
+public class ProfileModel implements BaseModel, ProfileMVP.Model {
 
     private ProfileListener mListener;
     private Subscription mSubscription;

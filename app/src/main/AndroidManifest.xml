@@ -43,13 +43,33 @@
             android:name=".ui.profile.ProfileActivity"
             android:label="@string/activity_label_profile">
         </activity>
-        <activity android:name=".ui.settings.SettingsActivity"
-                  android:label="@string/activity_label_settings">
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:label="@string/activity_label_settings">
         </activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="17ab9477201e77021e8493a8afa0dee20111d054" />
+            android:value="17ab9477201e77021e8493a8afa0dee20111d054"/>
+
+        <activity
+            android:name=".ui.friends.FriendsActivity"
+            android:label="@string/activity_label_friends">
+        </activity>
+        <activity
+            android:name=".ui.search.persons.PersonsActivity"
+            android:label="@string/activity_label_persons">
+        </activity>
+        <activity
+            android:name=".ui.groups.GroupsActivity"
+            android:label="@string/activity_label_groups">
+        </activity>
+        <activity
+            android:name=".ui.search.groups.SearchGroupsActivity"
+            android:label="@string/activity_label_search_groups">
+        </activity>
+        <activity android:name=".ui.group.GroupActivity">
+        </activity>
     </application>
 
 </manifest>

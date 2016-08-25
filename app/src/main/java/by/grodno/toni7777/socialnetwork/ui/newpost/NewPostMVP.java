@@ -4,17 +4,17 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 
 import java.io.File;
 
-public interface NewPostMVP {
+public final class NewPostMVP {
 
-    interface NewPostModel {
+    interface Model {
 
-        void sendPostToServer(String textPost, Long imageId);
+        void sendPostToServer(String textPost, String imageURL);
 
         void uploadPostImage(File file);
 
     }
 
-    interface NewPostView extends MvpView {
+    interface View extends MvpView {
 
         void showPostForm();
 
@@ -22,16 +22,19 @@ public interface NewPostMVP {
 
         void showLoading();
 
-        void onImagePostUploaded(Long imageId);
+        void onImagePostUploaded(String imageURL);
 
         void publishSuccess();
 
     }
 
-    interface NewPostPresenter {
+    interface Presenter {
 
         void sendImagePost(File file);
 
-        void sendNewPost(String textPost, Long imageId);
+        void sendNewPost(String textPost, String imageURL);
+    }
+
+    private NewPostMVP() {
     }
 }

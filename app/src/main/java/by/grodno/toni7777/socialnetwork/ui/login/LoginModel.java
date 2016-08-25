@@ -3,14 +3,12 @@ package by.grodno.toni7777.socialnetwork.ui.login;
 import android.util.Log;
 
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
-import by.grodno.toni7777.socialnetwork.database.model.ContactProfileDSO;
 import by.grodno.toni7777.socialnetwork.database.model.ProfileDSO;
 import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
-import by.grodno.toni7777.socialnetwork.network.model.UserDTO;
 import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDSO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
@@ -21,7 +19,7 @@ import rx.Subscription;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.CLIENT_ID_VALUE;
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.GRAND_TYPE_VALUE;
 
-public class LoginModel implements BaseModel, LoginMVP.LoginModel {
+public class LoginModel implements BaseModel, LoginMVP.Model {
 
     private BaseListener mListener;
     private Subscription mSubscription;

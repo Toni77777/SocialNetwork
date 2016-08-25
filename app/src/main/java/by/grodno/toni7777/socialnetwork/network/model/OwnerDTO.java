@@ -18,6 +18,12 @@ public class OwnerDTO {
     public OwnerDTO() {
     }
 
+    public OwnerDTO(String name, String surname, String avatar) {
+        mName = name;
+        mSurname = surname;
+        mAvatar = avatar;
+    }
+
     public String getAvatar() {
         return mAvatar;
     }

@@ -11,12 +11,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 
@@ -27,10 +28,11 @@ import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
+import by.grodno.toni7777.socialnetwork.base.event.PostPublishSuccess;
 import by.grodno.toni7777.socialnetwork.util.FileUtils;
 
-public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPostView, NewPostPresenter>
-        implements NewPostMVP.NewPostView {
+public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, NewPostPresenter>
+        implements NewPostMVP.View {
 
     @BindView(R.id.new_post_text)
     EditText mTextPostView;
@@ -53,12 +55,12 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPost
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public android.view.View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_post_new, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(android.view.View view, @Nullable Bundle savedInstanceState) {
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
     }
@@ -129,6 +131,7 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPost
     @Override
     public void publishSuccess() {
         mProgressDialog.dismiss();
+        EventBus.getDefault().post(new PostPublishSuccess());
         getActivity().finish();
     }
 
@@ -152,9 +155,9 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.NewPost
         startActivityForResult(intent, CAMERA_REQUEST);
     }
 
-    public void onImagePostUploaded(Long imageId) {
-        Log.e("Post", "Fragment onImagePostUploaded(Long imageId) Id = " + imageId);
-        presenter.sendNewPost(mTextPostView.getText().toString(), imageId);
+    public void onImagePostUploaded(String imageURL) {
+        Log.e("Post", "Fragment onImagePostUploaded(Long imageId) Id = " + imageURL);
+        presenter.sendNewPost(mTextPostView.getText().toString(), imageURL);
     }
 
     private static final int CAMERA_REQUEST = 0;

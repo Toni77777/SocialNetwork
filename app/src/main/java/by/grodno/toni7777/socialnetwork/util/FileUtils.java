@@ -12,12 +12,6 @@ import java.io.IOException;
 
 public class FileUtils {
 
-//    private Context mContext;
-//
-//    public FileUtils(Context context) {
-//        mContext = context;
-//    }
-
     public static String writeFileStorage(Context context, Bitmap image) {
         String fileName = Long.toString(System.currentTimeMillis()) + ".png";
         FileOutputStream outputStream = null;
@@ -29,6 +23,7 @@ public class FileUtils {
         } finally {
             if (outputStream != null) {
                 try {
+                    outputStream.flush();
                     outputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();

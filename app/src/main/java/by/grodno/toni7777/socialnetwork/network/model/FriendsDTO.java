@@ -6,19 +6,11 @@ import java.util.List;
 
 public class FriendsDTO {
 
-    @SerializedName("friends")
+    @SerializedName("entity")
     private List<FriendDTO> mFriends;
 
-    @SerializedName("numbers")
-    private long mNumbers;
-
-    public FriendsDTO() {
-    }
-
-    public FriendsDTO(List<FriendDTO> friends, long numbers) {
-        mFriends = friends;
-        mNumbers = numbers;
-    }
+    @SerializedName("metadata")
+    private MetadataDTO mMetadata;
 
     public List<FriendDTO> getFriends() {
         return mFriends;
@@ -28,12 +20,12 @@ public class FriendsDTO {
         mFriends = friends;
     }
 
-    public long getNumbers() {
-        return mNumbers;
+    public MetadataDTO getMetadata() {
+        return mMetadata;
     }
 
-    public void setNumbers(long numbers) {
-        mNumbers = numbers;
+    public void setMetadata(MetadataDTO metadata) {
+        mMetadata = metadata;
     }
 
     @Override
@@ -43,15 +35,16 @@ public class FriendsDTO {
 
         FriendsDTO that = (FriendsDTO) o;
 
-        if (mNumbers != that.mNumbers) return false;
-        return mFriends != null ? mFriends.equals(that.mFriends) : that.mFriends == null;
+        if (mFriends != null ? !mFriends.equals(that.mFriends) : that.mFriends != null)
+            return false;
+        return mMetadata != null ? mMetadata.equals(that.mMetadata) : that.mMetadata == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = mFriends != null ? mFriends.hashCode() : 0;
-        result = 31 * result + (int) (mNumbers ^ (mNumbers >>> 32));
+        result = 31 * result + (mMetadata != null ? mMetadata.hashCode() : 0);
         return result;
     }
 
@@ -59,7 +52,7 @@ public class FriendsDTO {
     public String toString() {
         return "FriendsDTO{" +
                 "mFriends=" + mFriends +
-                ", mNumbers=" + mNumbers +
+                ", mMetadata=" + mMetadata +
                 '}';
     }
 }

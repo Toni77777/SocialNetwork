@@ -10,6 +10,7 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.*;
 
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import dagger.Module;
 import dagger.Provides;
@@ -34,7 +35,7 @@ public class NetworkModule {
     @Singleton
     OkHttpClient provideOkHttpClient() {
         return new OkHttpClient.Builder()
-                .connectTimeout(40, TimeUnit.SECONDS)
+                .connectTimeout(Constants.TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(chain -> {
                     Request original = chain.request();
 

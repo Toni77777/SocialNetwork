@@ -2,6 +2,8 @@ package by.grodno.toni7777.socialnetwork.ui.registration.fragment;
 
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,10 +13,11 @@ import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
+import okhttp3.RequestBody;
 import rx.Observable;
 import rx.Subscription;
 
-public class ContactModel implements BaseModel, ContactMVP.ContactModel {
+public class ContactModel implements BaseModel, ContactMVP.Model {
 
     private BaseListener mListener;
     private Subscription mSubscription;
@@ -28,13 +31,24 @@ public class ContactModel implements BaseModel, ContactMVP.ContactModel {
     @Override
     public void registration(Profile profile) {
 
-        Observable<ResponseDTO> registrationObservable = mNetworkAPI.registration1("anton", "anton", "anton", "anton", "anton@gmail.com",
-                "1", "15/4/1900");
+        Map<String, String> map = new HashMap<>();
+        map.put("name", profile.getName());
+        map.put("lastName", profile.getSurname());
+        map.put("login", profile.getLogin());
+        map.put("password", profile.getPassword());
+        map.put("email", profile.getSex());
+//        map.put("sex", profile.getSex());
+        map.put("sex", "1");
+        map.put("bday", profile.getDateBirth());
+
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(map)).toString());
+        Observable<ResponseDTO> registrationObservable = mNetworkAPI.registration(body);
 
         mSubscription = registrationObservable
                 .compose(RxUtil.<ResponseDTO>applySchedulers())
                 .subscribe(
                         response -> {
+                            Log.e("Login", response.toString());
                             if (response.isSuccess()) {
                                 mListener.onLoadCompleted();
                             }
@@ -43,6 +57,8 @@ public class ContactModel implements BaseModel, ContactMVP.ContactModel {
                             unsubscribe();
                             mListener.loadError(throwable);
                             Log.e("Error", "Error autorization" + throwable.toString());
+                            Log.e("Error", "Error autorization" + throwable.getMessage());
+                            Log.e("Error", "Error autorization" + throwable.getLocalizedMessage());
                         },
                         () -> {
                             unsubscribe();

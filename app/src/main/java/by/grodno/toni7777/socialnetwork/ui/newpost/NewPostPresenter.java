@@ -13,8 +13,8 @@ import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.ui.newpost.listener.UploadListener;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
-public class NewPostPresenter extends MvpBasePresenter<NewPostMVP.NewPostView>
-        implements BaseListener, UploadListener, MvpPresenter<NewPostMVP.NewPostView>, NewPostMVP.NewPostPresenter {
+public class NewPostPresenter extends MvpBasePresenter<NewPostMVP.View>
+        implements BaseListener, UploadListener, MvpPresenter<NewPostMVP.View>, NewPostMVP.Presenter {
 
     private NewPostModel mModel;
 
@@ -24,13 +24,13 @@ public class NewPostPresenter extends MvpBasePresenter<NewPostMVP.NewPostView>
     }
 
     @Override
-    public void sendNewPost(String textPost, Long imageId) {
-        if (imageId == null) {
+    public void sendNewPost(String textPost, String imageURL) {
+        if (imageURL == null) {
             if (isViewAttached()) {
                 getView().showLoading();
             }
         }
-        mModel.sendPostToServer(textPost, imageId);
+        mModel.sendPostToServer(textPost, imageURL);
     }
 
     @Override
@@ -42,9 +42,9 @@ public class NewPostPresenter extends MvpBasePresenter<NewPostMVP.NewPostView>
     }
 
     @Override
-    public void onUploadImage(Long imageId) {
+    public void onUploadImage(String imageURL) {
         if (isViewAttached()) {
-            getView().onImagePostUploaded(imageId);
+            getView().onImagePostUploaded(imageURL);
         }
     }
 

@@ -18,12 +18,13 @@ import android.widget.TextView;
 import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.LoginActivity;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.ui.groups.GroupsActivity;
+import by.grodno.toni7777.socialnetwork.ui.friends.FriendsActivity;
 import by.grodno.toni7777.socialnetwork.ui.profile.ProfileActivity;
 import by.grodno.toni7777.socialnetwork.ui.settings.SettingsActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallActivity;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
-import io.realm.Realm;
 
 public class DrawerActivity extends ToolbarActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -72,7 +73,7 @@ public class DrawerActivity extends ToolbarActivity implements NavigationView.On
         if (id == R.id.nav_wall) {
             startSectionActivity(WallActivity.class);
         } else if (id == R.id.nav_friends) {
-//            startSectionActivity(FriendsActivity.class);
+            startSectionActivity(FriendsActivity.class);
         } else if (id == R.id.nav_logout) {
             mLoginPreferences.clearUserLoginInformation();
             startSectionActivity(LoginActivity.class);
@@ -81,6 +82,8 @@ public class DrawerActivity extends ToolbarActivity implements NavigationView.On
             startSectionActivity(ProfileActivity.class);
         } else if (id == R.id.nav_settings) {
             startSectionActivity(SettingsActivity.class);
+        } else if (id == R.id.nav_groups) {
+            startSectionActivity(GroupsActivity.class);
         }
         return true;
     }

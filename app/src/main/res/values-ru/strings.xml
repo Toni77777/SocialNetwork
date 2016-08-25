@@ -28,6 +28,9 @@
     <string name="activity_label_new_post">Новый пост</string>
     <string name="activity_label_profile">Профиль</string>
     <string name="activity_label_settings">Настройки</string>
+    <string name="activity_label_groups">Группы</string>
+    <string name="activity_label_persons">Поиск людей</string>
+    <string name="activity_label_search_groups">Поиск групп</string>
 
 
     <string name="nav_item_profile">Профиль</string>
@@ -58,5 +61,6 @@
     <string name="error_field_format">Неправильный формат</string>
     <string name="error_click_retry">Ошибка! нажмите чтобы повторить</string>
     <string name="post_clear_image_item">Удалить изображение</string>
+    <string name="friend_search_item">Поиск людей</string>
 
 </resources>

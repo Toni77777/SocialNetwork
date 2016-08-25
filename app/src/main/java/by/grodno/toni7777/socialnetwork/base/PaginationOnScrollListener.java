@@ -2,6 +2,7 @@ package by.grodno.toni7777.socialnetwork.base;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 public class PaginationOnScrollListener extends RecyclerView.OnScrollListener {
@@ -20,14 +21,12 @@ public class PaginationOnScrollListener extends RecyclerView.OnScrollListener {
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        if (dy > 0) {
-            int visibleItems = mLinearLayoutManager.getChildCount();
-            int totalItems = mLinearLayoutManager.getItemCount();
-            int pastVisibleItems = mLinearLayoutManager.findFirstVisibleItemPosition();
-            if ((visibleItems + pastVisibleItems) >= totalItems) {
-                mProgressView.setVisibility(View.VISIBLE);
-                mListener.loadDataWithOffset(true, totalItems);
-            }
+        int visibleItems = mLinearLayoutManager.getChildCount();
+        int totalItems = mLinearLayoutManager.getItemCount();
+        int pastVisibleItems = mLinearLayoutManager.findFirstVisibleItemPosition();
+        if ((visibleItems + pastVisibleItems) >= totalItems) {
+            mProgressView.setVisibility(View.VISIBLE);
+            mListener.loadDataWithOffset(true, totalItems);
         }
     }
 }
