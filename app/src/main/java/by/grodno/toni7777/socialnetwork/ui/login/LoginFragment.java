@@ -1,15 +1,23 @@
 package by.grodno.toni7777.socialnetwork.ui.login;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
 import org.greenrobot.eventbus.EventBus;
@@ -101,6 +109,27 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.View, Login
     @OnClick(R.id.forgot_password)
     void restorePassword() {
         // TODO start restore activity
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.e("Token", " " + token);
+
+//        Intent intent = new Intent(getContext(), WallActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0 /* Request code */, intent,
+//                PendingIntent.FLAG_ONE_SHOT);
+//
+//        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getContext())
+//                .setSmallIcon(R.mipmap.ic_launcher)
+//                .setContentTitle("FCM Message")
+//                .setContentText("Message body")
+//                .setAutoCancel(true)
+//                .setSound(defaultSoundUri)
+//                .setContentIntent(pendingIntent);
+//
+//        NotificationManager notificationManager =
+//                (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
     @Override
