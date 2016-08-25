@@ -20,6 +20,7 @@ public final class QueryProperties {
     public static final String GROUPS_URL = "/groups";
     public static final String FAVORITE_GROUP_URL = "/groups/{id}";
     public static final String GROUPS_FIND_URL = "/groups/find";
+    public static final String NOTIFICATION_URL = "/notifications";
 
     public static final String USER_ID = "userId";
     public static final String OFFSET = "offset";

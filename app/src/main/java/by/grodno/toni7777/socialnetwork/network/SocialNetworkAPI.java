@@ -18,6 +18,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -92,8 +93,10 @@ public interface SocialNetworkAPI {
     Observable<ResponseDTO> addGroupToFavorite(@Path(ID) Long groupId,
                                                @Query(ACCESS_TOKEN) String accessToken);
 
+    @PUT(NOTIFICATION_URL)
+    Observable<ResponseDTO> sentFCMToken(@Body RequestBody params,
+                                         @Query(ACCESS_TOKEN) String accessToken);
+
     // /musics
     // param userId, offset, limit, token
-
-
 }

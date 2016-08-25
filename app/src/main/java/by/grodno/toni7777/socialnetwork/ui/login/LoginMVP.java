@@ -10,6 +10,7 @@ public final class LoginMVP {
 
         void loadProfileInfo();
 
+        void sendNotificationToken();
 
     }
 
