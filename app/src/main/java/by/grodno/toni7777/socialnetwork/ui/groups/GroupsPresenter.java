@@ -11,10 +11,11 @@ import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 public class GroupsPresenter extends MvpBasePresenter<GroupsMVP.View>
-        implements ModelListener<List<GroupDTO>>, MvpPresenter<GroupsMVP.View>, GroupsMVP.Presenter {
+        implements ModelListener<List<GroupDVO>>, MvpPresenter<GroupsMVP.View>, GroupsMVP.Presenter {
 
     private final GroupsModel mModel;
     private boolean mForceRefresh;
@@ -34,7 +35,7 @@ public class GroupsPresenter extends MvpBasePresenter<GroupsMVP.View>
     }
 
     @Override
-    public void loadNext(List<GroupDTO> data) {
+    public void loadNext(List<GroupDVO> data) {
         if (isViewAttached()) {
             getView().setData(data);
         }

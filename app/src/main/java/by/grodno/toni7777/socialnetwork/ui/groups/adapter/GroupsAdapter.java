@@ -2,7 +2,6 @@ package by.grodno.toni7777.socialnetwork.ui.groups.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +18,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.event.GroupEvent;
-import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupDVO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
 public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewHolder> {
 
-    private final List<GroupDTO> mGroups;
+    private final List<GroupDVO> mGroups;
 
-    public GroupsAdapter(List<GroupDTO> groups) {
+    public GroupsAdapter(List<GroupDVO> groups) {
         mGroups = new ArrayList<>(groups);
     }
 
@@ -37,7 +36,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
 
     @Override
     public void onBindViewHolder(GroupViewHolder holder, int position) {
-        GroupDTO groups = mGroups.get(position);
+        GroupDVO groups = mGroups.get(position);
         holder.bind(groups);
     }
 
@@ -50,12 +49,12 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
         mGroups.clear();
     }
 
-    public void update(List<GroupDTO> friends) {
-        mGroups.addAll(friends);
+    public void update(List<GroupDVO> groups) {
+        mGroups.addAll(groups);
         notifyDataSetChanged();
     }
 
-    public List<GroupDTO> getGroups() {
+    public List<GroupDVO> getGroups() {
         return mGroups;
     }
 
@@ -77,7 +76,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
             ButterKnife.bind(this, view);
         }
 
-        void bind(GroupDTO group) {
+        void bind(GroupDVO group) {
             ImageLoad.loadCircleImage(mAvatarView, group.getImage());
             mNameView.setText(group.getName());
             mMembersView.setText("Members " + String.valueOf(group.getMembers()));

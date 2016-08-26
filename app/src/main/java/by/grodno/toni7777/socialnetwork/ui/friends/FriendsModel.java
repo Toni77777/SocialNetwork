@@ -71,13 +71,10 @@ public class FriendsModel implements BaseModel, FriendsMVP.Model {
     public void saveInCache(FriendsDSO responseFriends, int offset) {
         RealmResults<FriendsDSO> friends = mDatabaseDAO.readAll(Realm.getDefaultInstance(), FriendsDSO.class);
         if (friends.size() == 0) { // have not wall object from DB
-            Log.e("Write", "Write 1");
             mDatabaseDAO.copyToDatabaseOrUpdate(Realm.getDefaultInstance(), responseFriends);
         } else if (offset == 0) { // if refresh to new post
             mDatabaseDAO.copyToDatabaseOrUpdate(Realm.getDefaultInstance(), responseFriends);
-            Log.e("Write", "Write 2");
         } else {
-            Log.e("Write", "Write 3");
             RealmList<FriendDSO> response = responseFriends.getFriendsDSO();
             mDatabaseDAO.updateFriends(Realm.getDefaultInstance(), response);
         }
