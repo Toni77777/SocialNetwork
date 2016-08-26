@@ -1,6 +1,7 @@
 package by.grodno.toni7777.socialnetwork.database;
 
 import by.grodno.toni7777.socialnetwork.database.model.FriendDSO;
+import by.grodno.toni7777.socialnetwork.database.model.GroupDSO;
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -22,4 +23,6 @@ public interface DatabaseDAO {
     void updateWall(Realm realm, RealmList<PostDSO> newPosts);
 
     void updateFriends(Realm realm, RealmList<FriendDSO> newFriends);
+
+    void updateGroups(Realm realm, RealmList<GroupDSO> newGroups);
 }

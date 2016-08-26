@@ -11,7 +11,7 @@ public final class Keys {
     public static final int PROFILE_KEY = 1;
     public static final int WALL_KEY = 2;
     public static final int FRIENDS_KEY = 3;
-
+    public static final int GROUPS_KEY = 4;
 
     /**
      * All singleton on Database DSO object must have field key with name "key"

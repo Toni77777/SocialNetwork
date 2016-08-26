@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.database.model.FriendDSO;
+import by.grodno.toni7777.socialnetwork.database.model.GroupDSO;
+import by.grodno.toni7777.socialnetwork.database.model.GroupsDSO;
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
 import by.grodno.toni7777.socialnetwork.database.model.ProfileDSO;
 import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.OwnerDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import io.realm.RealmList;
+import io.realm.internal.Group;
 
 public final class ConverterDSOtoDVO {
 
@@ -40,6 +44,21 @@ public final class ConverterDSOtoDVO {
     private static FriendDVO toFriendDVO(FriendDSO source) {
         return new FriendDVO(source.getName(), source.getSurname(), source.getId(),
                 source.getAvatar(), source.isOnline());
+    }
+
+    public static List<GroupDVO> toGroupDVO(RealmList<GroupDSO> sourseGroups) {
+        List<GroupDVO> groupsDVO = new ArrayList<>();
+        for (int index = 0; index < sourseGroups.size(); index++) {
+            GroupDSO groupDSO = sourseGroups.get(index);
+            GroupDVO groupDVO = toGroupDVO(groupDSO);
+            groupsDVO.add(groupDVO);
+        }
+        return groupsDVO;
+    }
+
+    private static GroupDVO toGroupDVO(GroupDSO source) {
+        return new GroupDVO(source.getGroupId(), source.getName(), source.getMembers(), source.getImage(), source.getDescription(),
+                source.isMember(), source.isOwner());
     }
 
     private ConverterDSOtoDVO() {

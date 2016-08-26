@@ -3,6 +3,7 @@ package by.grodno.toni7777.socialnetwork.ui.groups;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,13 +31,14 @@ import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.GroupEvent;
-import by.grodno.toni7777.socialnetwork.network.model.GroupDTO;
 import by.grodno.toni7777.socialnetwork.ui.group.GroupActivity;
 import by.grodno.toni7777.socialnetwork.ui.groups.adapter.GroupsAdapter;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupDVO;
 import by.grodno.toni7777.socialnetwork.ui.search.groups.SearchGroupsActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
+import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
 
-public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, List<GroupDTO>, GroupsMVP.View, GroupsPresenter>
+public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, List<GroupDVO>, GroupsMVP.View, GroupsPresenter>
         implements GroupsMVP.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.groups_recycler)
@@ -98,13 +100,13 @@ public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, L
     }
 
     @Override
-    public LceViewState<List<GroupDTO>, GroupsMVP.View> createViewState() {
+    public LceViewState<List<GroupDVO>, GroupsMVP.View> createViewState() {
         setRetainInstance(true);
         return new RetainingLceViewState<>();
     }
 
     @Override
-    public List<GroupDTO> getData() {
+    public List<GroupDVO> getData() {
         return mGroupsAdapter.getGroups();
     }
 
@@ -119,7 +121,7 @@ public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, L
     }
 
     @Override
-    public void setData(List<GroupDTO> data) {
+    public void setData(List<GroupDVO> data) {
         contentView.setRefreshing(false);
         mGroupsAdapter.update(data);
     }
@@ -137,10 +139,11 @@ public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, L
     }
 
     @Override
-    public void showError(Throwable e, boolean pullToRefresh) {
-        super.showError(e, pullToRefresh);
+    public void showError(Throwable throwable, boolean pullToRefresh) {
         contentView.setRefreshing(false);
         mProgressPaginView.setVisibility(View.GONE);
+        Snackbar.make(mGroupsRecycler, ErrorHanding.getErrorMessage(throwable, getContext()), Snackbar.LENGTH_SHORT)
+                .show();
     }
 
     @Subscribe

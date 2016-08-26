@@ -4,6 +4,8 @@ import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.database.model.FriendDSO;
 import by.grodno.toni7777.socialnetwork.database.model.FriendsDSO;
+import by.grodno.toni7777.socialnetwork.database.model.GroupDSO;
+import by.grodno.toni7777.socialnetwork.database.model.GroupsDSO;
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
 import by.grodno.toni7777.socialnetwork.database.model.WallDSO;
 import io.realm.Realm;
@@ -60,6 +62,15 @@ public class DatabaseDAOImp implements DatabaseDAO {
             List<FriendDSO> saveNewFriends = realm1.copyToRealm(newFriends);
             FriendsDSO friends = realm1.where(FriendsDSO.class).equalTo(FIELD_KEY, FRIENDS_KEY).findFirst();
             friends.getFriendsDSO().addAll(saveNewFriends);
+        });
+    }
+
+    @Override
+    public void updateGroups(Realm realm, RealmList<GroupDSO> newGroups) {
+        realm.executeTransaction(realm1 -> {
+            List<GroupDSO> saveNewGroups = realm1.copyToRealm(newGroups);
+            GroupsDSO groups = realm1.where(GroupsDSO.class).equalTo(FIELD_KEY, GROUPS_KEY).findFirst();
+            groups.getGroupsDSO().addAll(saveNewGroups);
         });
     }
 }

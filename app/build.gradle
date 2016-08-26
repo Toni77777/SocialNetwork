@@ -54,7 +54,6 @@ android {
 
         debug {
             buildConfigField "String", "BASE_URL", "\"https://sjc2016vs7.fwd.wf/\""
-//            buildConfigField "String", "BASE_URL", "\"https://scntw.herokuapp.com/\""
         }
 
         release {
