@@ -2,17 +2,23 @@ package by.grodno.toni7777.socialnetwork.ui.login;
 
 import android.util.Log;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
+
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.database.model.ProfileDSO;
 import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
+import by.grodno.toni7777.socialnetwork.network.model.NotificationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDSO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import io.realm.Realm;
+import okhttp3.RequestBody;
 import rx.Observable;
 import rx.Subscription;
 
@@ -52,6 +58,29 @@ public class LoginModel implements BaseModel, LoginMVP.Model {
                         },
                         () -> {
                             unsubscribe();
+                            sendNotificationToken();
+                        });
+    }
+
+    @Override
+    public void sendNotificationToken() {
+        Log.e("Send notification", "Send notification");
+        String token = FirebaseInstanceId.getInstance().getToken();
+        NotificationDTO notificationDTO = new NotificationDTO(token);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new Gson().toJson(notificationDTO)));
+        Observable<ResponseDTO> notifTokenObservable = mNetworkAPI.sentFCMToken(body, mPreferences.getAccessToken());
+
+        mSubscription = notifTokenObservable
+                .compose(RxUtil.<ResponseDTO>applySchedulers())
+                .subscribe(
+                        response -> {
+                        },
+                        throwable -> {
+                            unsubscribe();
+                            loadProfileInfo();
+                        },
+                        () -> {
+                            unsubscribe();
                             loadProfileInfo();
                         });
     }
@@ -78,7 +107,6 @@ public class LoginModel implements BaseModel, LoginMVP.Model {
                             mListener.onLoadCompleted();
                         });
     }
-
 
     @Override
     public void unsubscribe() {
