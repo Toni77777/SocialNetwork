@@ -52,11 +52,10 @@ android {
 
         debug {
             buildConfigField "String", "BASE_URL", "\"https://sjc2016vs7.fwd.wf/\""
-//            buildConfigField "String", "BASE_URL", "\"https://scntw.herokuapp.com/\""
         }
 
         release {
-            buildConfigField "String", "BASE_URL", "\"https://scntw.herokuapp.com/\""
+            buildConfigField "String", "BASE_URL", "\"https://sjc2016vs7.fwd.wf/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release

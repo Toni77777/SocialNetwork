@@ -3,6 +3,7 @@ package by.grodno.toni7777.socialnetwork.ui.groups;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +36,7 @@ import by.grodno.toni7777.socialnetwork.ui.groups.adapter.GroupsAdapter;
 import by.grodno.toni7777.socialnetwork.ui.model.GroupDVO;
 import by.grodno.toni7777.socialnetwork.ui.search.groups.SearchGroupsActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
+import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
 
 public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, List<GroupDVO>, GroupsMVP.View, GroupsPresenter>
         implements GroupsMVP.View, SwipeRefreshLayout.OnRefreshListener {
@@ -137,10 +139,11 @@ public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, L
     }
 
     @Override
-    public void showError(Throwable e, boolean pullToRefresh) {
-        super.showError(e, pullToRefresh);
+    public void showError(Throwable throwable, boolean pullToRefresh) {
         contentView.setRefreshing(false);
         mProgressPaginView.setVisibility(View.GONE);
+        Snackbar.make(mGroupsRecycler, ErrorHanding.getErrorMessage(throwable, getContext()), Snackbar.LENGTH_SHORT)
+                .show();
     }
 
     @Subscribe
