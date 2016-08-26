@@ -72,8 +72,8 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.View, Login
         setRetainInstance(true);
         // TODO uncomment and add refresh token method
 //        if (LoginUtil.isLogined(getContext())) {
-//            getContext().startActivity(new Intent(getContext(), WallActivity.class));
-//            getActivity().finish();
+            getContext().startActivity(new Intent(getContext(), WallActivity.class));
+            getActivity().finish();
 //        }
         EventBus.getDefault().register(this);
     }

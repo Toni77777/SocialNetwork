@@ -14,7 +14,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/BaseTheme">
-
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -22,17 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.wall.WallActivity"
             android:label="@string/activity_label_wall">
         </activity>
-
         <activity
             android:name=".ui.registration.RegistrationActivity"
             android:label="@string/activity_label_registration">
         </activity>
-
         <activity
             android:name=".ui.newpost.NewPostActivity"
             android:label="@string/activity_label_new_post"
@@ -47,7 +43,6 @@
             android:name=".ui.profile.ProfileActivity"
             android:label="@string/activity_label_profile">
         </activity>
-
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/activity_label_settings">
@@ -61,12 +56,10 @@
             android:name=".ui.friends.FriendsActivity"
             android:label="@string/activity_label_friends">
         </activity>
-
         <activity
             android:name=".ui.search.persons.PersonsActivity"
             android:label="@string/activity_label_persons">
         </activity>
-
         <activity
             android:name=".ui.groups.GroupsActivity"
             android:label="@string/activity_label_groups">
@@ -80,20 +73,23 @@
         <activity android:name=".ui.group.GroupActivity">
         </activity>
 
-        <service
-            android:name=".push.SONFirebaseMessagingService">
+        <service android:name=".push.SONFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-
-        <service
-            android:name=".push.SONFirebaseInstanceIDService">
+        <service android:name=".push.SONFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
 
+        <activity android:name=".ui.notification.NotificationSettingsActivity"
+                  android:label="@string/activity_label_notification_settings">
+        </activity>
+        <activity android:name=".ui.appinfo.AppInfoActivity"
+                  android:label="@string/activity_label_app_info">
+        </activity>
     </application>
 
 </manifest>

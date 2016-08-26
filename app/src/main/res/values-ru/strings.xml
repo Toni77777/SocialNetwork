@@ -51,6 +51,12 @@
     <string name="preference_build_number_title">Номер сборки</string>
     <string name="preference_version_name">version name</string>
     <string name="preference_build_number">build number</string>
+    <string name="preference_app_info">app info</string>
+    <string name="preference_app_info_title">Информация о приложении</string>
+    <string name="preference_settings_notification">settings notification</string>
+    <string name="preference_settings_notification_title">Настройка уведомлений</string>
+    <string name="preference_build_date">build date</string>
+    <string name="preference_build_date_title">Дата сборки</string>
 
     <string name="tab_title_contact">Контакт</string>
     <string name="tab_title_info">Инфо</string>
@@ -62,5 +68,7 @@
     <string name="error_click_retry">Ошибка! нажмите чтобы повторить</string>
     <string name="post_clear_image_item">Удалить изображение</string>
     <string name="friend_search_item">Поиск людей</string>
+    <string name="activity_label_notification_settings">Настройки уведомлений</string>
+    <string name="activity_label_app_info">Информация о приложении</string>
 
 </resources>
