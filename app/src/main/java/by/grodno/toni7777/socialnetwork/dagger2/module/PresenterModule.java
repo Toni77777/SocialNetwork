@@ -4,6 +4,7 @@ package by.grodno.toni7777.socialnetwork.dagger2.module;
 import by.grodno.toni7777.socialnetwork.dagger2.scope.PresenterScope;
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.ui.group.GroupPresenter;
 import by.grodno.toni7777.socialnetwork.ui.groups.GroupsPresenter;
 import by.grodno.toni7777.socialnetwork.ui.login.LoginPresenter;
 import by.grodno.toni7777.socialnetwork.ui.friends.FriendsPresenter;
@@ -65,6 +66,12 @@ public class PresenterModule {
     @Provides
     public SearchGroupsPresenter provideSearchGroupsPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
         return new SearchGroupsPresenter(socialNetworkAPI, loginPreferences);
+    }
+
+    @PresenterScope
+    @Provides
+    public GroupPresenter provideGroupPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
+        return new GroupPresenter(socialNetworkAPI, loginPreferences);
     }
 
 }
