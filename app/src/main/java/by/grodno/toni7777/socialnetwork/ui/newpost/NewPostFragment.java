@@ -3,8 +3,12 @@ package by.grodno.toni7777.socialnetwork.ui.newpost;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -145,6 +149,20 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
                 Bitmap image = FileUtils.readFileStorage(getContext(), mFileName);
                 mImagePostView.setImageBitmap(image);
             }
+        } else if (GALLERY_REQUEST == requestCode && (data != null) && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContext().getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            mImagePostView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -155,11 +173,22 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
         startActivityForResult(intent, CAMERA_REQUEST);
     }
 
+
+    @OnClick(R.id.open_gallery)
+    void openGallery() {
+        Log.e("Gallery", "Gallery");
+        Intent gallery = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, GALLERY_REQUEST);
+    }
+
+
     public void onImagePostUploaded(String imageURL) {
         Log.e("Post", "Fragment onImagePostUploaded(Long imageId) Id = " + imageURL);
         presenter.sendNewPost(mTextPostView.getText().toString(), imageURL);
     }
 
     private static final int CAMERA_REQUEST = 0;
+    private static int GALLERY_REQUEST = 1;
     private static final String DATA_KEY = "data";
 }
