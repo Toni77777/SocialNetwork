@@ -24,6 +24,8 @@ public final class LoginMVP {
 
         void loginSuccess();
 
+        void showErrors(Throwable throwable);
+
     }
 
     interface Presenter {

@@ -39,6 +39,7 @@ import by.grodno.toni7777.socialnetwork.base.event.RegistrationEvent;
 import by.grodno.toni7777.socialnetwork.ui.registration.RegistrationActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
+import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
 import by.grodno.toni7777.socialnetwork.util.LoginUtil;
 
 
@@ -117,7 +118,13 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.View, Login
         ((LoginViewState) viewState).setShowError();
         setViewsEnabled(true);
         mAuthorizationButton.setProgress(Constants.ACTION_BUTTON_START);
-        mErrorView.setVisibility(android.view.View.VISIBLE);
+
+    }
+
+    @Override
+    public void showErrors(Throwable throwable) {
+        Snackbar.make(mAuthorizationButton, ErrorHanding.getErrorMessage(throwable, getContext()), Snackbar.LENGTH_SHORT)
+                .show();
     }
 
     @Override

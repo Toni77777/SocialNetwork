@@ -41,6 +41,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginMVP.View>
     public void loadError(Throwable error) {
         if (isViewAttached()) {
             getView().showError();
+            getView().showErrors(error);
         }
     }
 }
