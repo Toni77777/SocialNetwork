@@ -3,17 +3,17 @@
 
     <SwitchPreference
         android:defaultValue="true"
-        android:key="pref_sync"
-        android:title="Notification"/>
+        android:key="@string/preference_notification"
+        android:title="@string/preference_notification_title"/>
 
     <SwitchPreference
         android:defaultValue="true"
-        android:key="pref_sync"
-        android:title="Sound"/>
+        android:key="@string/preference_sound"
+        android:title="@string/preference_sound_title"/>
 
     <SwitchPreference
         android:defaultValue="true"
-        android:key="pref_sync"
-        android:title="Vibration"/>
+        android:key="@string/preference_vibration"
+        android:title="@string/preference_vibration_title"/>
 
 </PreferenceScreen>

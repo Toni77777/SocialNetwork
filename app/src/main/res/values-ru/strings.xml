@@ -70,5 +70,11 @@
     <string name="friend_search_item">Поиск людей</string>
     <string name="activity_label_notification_settings">Настройки уведомлений</string>
     <string name="activity_label_app_info">Информация о приложении</string>
+    <string name="preference_vibration">vibration</string>
+    <string name="preference_vibration_title">Вибрация</string>
+    <string name="preference_sound">sound</string>
+    <string name="preference_sound_title">Звук</string>
+    <string name="preference_notification_title">Уведомления</string>
+    <string name="preference_notification">notification</string>
 
 </resources>
