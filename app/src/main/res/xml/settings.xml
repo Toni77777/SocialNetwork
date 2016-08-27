@@ -2,11 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
-        android:key="@string/preference_version_name"
-        android:title="@string/preference_version_name_title"/>
+        android:key="@string/preference_settings_notification"
+        android:title="@string/preference_settings_notification_title"/>
 
     <Preference
-        android:key="@string/preference_build_number"
-        android:title="@string/preference_build_number_title"/>
+        android:key="@string/preference_app_info"
+        android:title="@string/preference_app_info_title"/>
 
 </PreferenceScreen>

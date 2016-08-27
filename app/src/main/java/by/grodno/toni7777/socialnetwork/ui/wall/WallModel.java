@@ -58,11 +58,13 @@ public class WallModel implements BaseModel, WallMVP.Model {
                 .compose(RxUtil.<WallDSO>applySchedulers())
                 .subscribe(
                         wall -> {
+                            Log.e("Wall", wall.toString());
                         },
                         throwable -> {
                             unsubscribe();
                             readPostsFromDB(offset);
                             mListener.loadError(throwable);
+                            Log.e("Wall", "Error " + throwable);
                         },
                         () -> {
                             unsubscribe();
@@ -86,6 +88,7 @@ public class WallModel implements BaseModel, WallMVP.Model {
 
     @Override
     public void readPostsFromDB(int offset) {
+        Log.e("Wall", "Read from db " + offset);
         WallDSO wallDSO = mDatabaseDAO.findFirst(Realm.getDefaultInstance(), WallDSO.class);
 
         if (wallDSO == null) {
