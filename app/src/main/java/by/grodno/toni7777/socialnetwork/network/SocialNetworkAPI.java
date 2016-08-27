@@ -97,6 +97,12 @@ public interface SocialNetworkAPI {
     Observable<ResponseDTO> sentFCMToken(@Body RequestBody params,
                                          @Query(ACCESS_TOKEN) String accessToken);
 
+    @GET(GROUP_POSTS_URL)
+    Observable<WallDTO> getGroupPosts(@Query(GROUP_ID) long groupId,
+                                      @Query(OFFSET) int offset,
+                                      @Query(LIMIT) int limit,
+                                      @Query(ACCESS_TOKEN) String accessToken);
+
     // /musics
     // param userId, offset, limit, token
 }

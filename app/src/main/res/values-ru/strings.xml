@@ -76,5 +76,6 @@
     <string name="preference_sound_title">Звук</string>
     <string name="preference_notification_title">Уведомления</string>
     <string name="preference_notification">notification</string>
+    <string name="activity_label_group">Группа</string>
 
 </resources>

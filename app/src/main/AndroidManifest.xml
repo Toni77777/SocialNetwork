@@ -71,7 +71,8 @@
             android:label="@string/activity_label_search_groups">
         </activity>
 
-        <activity android:name=".ui.group.GroupActivity">
+        <activity android:name=".ui.group.GroupActivity"
+                  android:label="@string/activity_label_group">
         </activity>
 
         <service android:name=".push.SONFirebaseMessagingService">
