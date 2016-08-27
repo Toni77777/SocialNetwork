@@ -32,9 +32,11 @@ import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.FriendEvent;
+import by.grodno.toni7777.socialnetwork.ui.friend.FriendActivity;
 import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
 import by.grodno.toni7777.socialnetwork.ui.friends.adapter.FriendsAdapter;
 import by.grodno.toni7777.socialnetwork.ui.search.persons.PersonsActivity;
+import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.START_LOAD;
@@ -147,6 +149,9 @@ public class FriendsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
 
     @Subscribe
     public void openFriendWall(FriendEvent event) {
+        Intent friendIntent = new Intent(getContext(), FriendActivity.class);
+        friendIntent.putExtra(Constants.SHARE_FRIEND_ID, event.getFriendId());
+        startActivity(friendIntent);
         // TODO open friend wall
     }
 }
