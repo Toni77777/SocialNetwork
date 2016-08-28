@@ -77,5 +77,6 @@
     <string name="preference_notification">notification</string>
     <string name="activity_label_group">Group</string>
     <string name="activity_label_friend">Friend</string>
+    <string name="activity_label_messages">Messages</string>
 
 </resources>

@@ -93,8 +93,12 @@
             android:name=".ui.appinfo.AppInfoActivity"
             android:label="@string/activity_label_app_info">
         </activity>
-        <activity android:name=".ui.friend.FriendActivity"
-                  android:label="@string/activity_label_friend">
+        <activity
+            android:name=".ui.friend.FriendActivity"
+            android:label="@string/activity_label_friend">
+        </activity>
+        <activity android:name=".ui.messages.MessagesActivity"
+                  android:label="@string/activity_label_messages">
         </activity>
     </application>
 
