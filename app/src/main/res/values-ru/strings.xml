@@ -79,5 +79,6 @@
     <string name="activity_label_group">Группа</string>
     <string name="activity_label_friend">Друг</string>
     <string name="activity_label_messages">Сообщения</string>
+    <string name="activity_label_chat">Чат</string>
 
 </resources>

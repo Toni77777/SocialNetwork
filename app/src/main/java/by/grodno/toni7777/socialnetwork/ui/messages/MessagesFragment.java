@@ -1,5 +1,6 @@
 package by.grodno.toni7777.socialnetwork.ui.messages;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,13 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
+import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
 import by.grodno.toni7777.socialnetwork.test.MessagesObject;
+import by.grodno.toni7777.socialnetwork.ui.chat.ChatActivity;
 import by.grodno.toni7777.socialnetwork.ui.messages.adapter.MessagesAdapter;
 
 public class MessagesFragment extends BaseFragment {
@@ -36,6 +42,7 @@ public class MessagesFragment extends BaseFragment {
         mMessagesRecycler.setAdapter(mMessagesAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mMessagesRecycler.setLayoutManager(linearLayoutManager);
+        EventBus.getDefault().register(this);
     }
 
     private List<MessagesObject> createFakeFriend(int count) {
@@ -45,5 +52,18 @@ public class MessagesFragment extends BaseFragment {
             messagesObjects.add(messages);
         }
         return messagesObjects;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void openChat(ChatEvent event) {
+        Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+        startActivity(chatIntent);
     }
 }

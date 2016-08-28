@@ -8,11 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
+import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
 import by.grodno.toni7777.socialnetwork.test.MessagesObject;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
@@ -77,9 +81,9 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                     .inflate(R.layout.item_messages, parent, false));
         }
 
-//        @OnClick(R.id.group_layout)
-//        void openGroup() {
-//            EventBus.getDefault().post(new GroupEvent(mId));
-//        }
+        @OnClick(R.id.message_layout)
+        void openChat() {
+            EventBus.getDefault().post(new ChatEvent());
+        }
     }
 }
