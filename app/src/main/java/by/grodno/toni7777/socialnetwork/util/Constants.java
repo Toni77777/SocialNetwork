@@ -42,6 +42,8 @@ public final class Constants {
 
     public static final long[] NOTIFICATION_VIBRATE = new long[]{1000, 1000, 1000, 1000, 1000};
 
+    public static final int REQUEST_PERMISSION =10;
+
     private Constants() {
     }
 }

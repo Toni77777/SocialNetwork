@@ -1,11 +1,18 @@
 package by.grodno.toni7777.socialnetwork.ui.newpost;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +36,7 @@ import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
 import by.grodno.toni7777.socialnetwork.base.event.PostPublishSuccess;
+import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.FileUtils;
 
 public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, NewPostPresenter>
@@ -45,6 +53,7 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
 
     private String mFileName;
     private ProgressDialog mProgressDialog;
+    private static final String SATE_FILE_NAME = "stateFileName";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +72,21 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
     public void onViewCreated(android.view.View view, @Nullable Bundle savedInstanceState) {
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(SATE_FILE_NAME)) {
+                mFileName = savedInstanceState.getString(SATE_FILE_NAME);
+                if (mFileName != null) {
+                    Bitmap image = FileUtils.readFileStorage(getContext(), mFileName);
+                    mImagePostView.setImageBitmap(image);
+                }
+            }
+        }
+        if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                    Constants.REQUEST_PERMISSION);
+            return;
+        }
     }
 
     @Override
@@ -88,6 +112,12 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(SATE_FILE_NAME, mFileName);
     }
 
     private void initProgressDialog() {
@@ -145,6 +175,24 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
                 Bitmap image = FileUtils.readFileStorage(getContext(), mFileName);
                 mImagePostView.setImageBitmap(image);
             }
+        } else if (GALLERY_REQUEST == requestCode && (data != null) && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContext().getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+            mFileName = FileUtils.writeFileStorage(getContext(), bitmap);
+            Bitmap image = FileUtils.readFileStorage(getContext(), mFileName);
+            mImagePostView.setImageBitmap(image);
+            Log.e("File", "File " + mFileName);
+
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -155,11 +203,22 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
         startActivityForResult(intent, CAMERA_REQUEST);
     }
 
+
+    @OnClick(R.id.open_gallery)
+    void openGallery() {
+        Log.e("Gallery", "Gallery");
+        Intent gallery = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, GALLERY_REQUEST);
+    }
+
+
     public void onImagePostUploaded(String imageURL) {
         Log.e("Post", "Fragment onImagePostUploaded(Long imageId) Id = " + imageURL);
         presenter.sendNewPost(mTextPostView.getText().toString(), imageURL);
     }
 
     private static final int CAMERA_REQUEST = 0;
+    private static int GALLERY_REQUEST = 1;
     private static final String DATA_KEY = "data";
 }
