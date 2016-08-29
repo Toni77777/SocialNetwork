@@ -54,7 +54,6 @@ public class MessagesFragment extends BaseFragment {
         return messagesObjects;
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

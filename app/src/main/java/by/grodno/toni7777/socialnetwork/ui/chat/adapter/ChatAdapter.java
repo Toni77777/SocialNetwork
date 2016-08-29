@@ -55,7 +55,7 @@ public class ChatAdapter extends BaseAdapter {
         }
 
         boolean myMsg = false;
-        if (chatMessage.getSenderId() == 2) {
+        if (chatMessage.getSenderId() == 1) {
             myMsg = true;
         } else {
             myMsg = false;

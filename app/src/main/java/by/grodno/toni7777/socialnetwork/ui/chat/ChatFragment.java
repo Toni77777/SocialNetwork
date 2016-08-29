@@ -42,7 +42,7 @@ public class ChatFragment extends BaseFragment {
 //        Intent intent = getIntent();
 //        String number = intent.getStringExtra("room").trim();
 //        mURI += number;
-        mURI += "38";
+        mURI += "48";
         start();
     }
 
@@ -62,7 +62,7 @@ public class ChatFragment extends BaseFragment {
     void send() {
         String s = mInput.getText().toString();
         Gson gson = new Gson();
-        ChatMessage chatMessage = new ChatMessage(2, s);
+        ChatMessage chatMessage = new ChatMessage(1, s);
         String json = gson.toJson(chatMessage);
         mConnection.sendTextMessage(json);
         mInput.setText(null);
