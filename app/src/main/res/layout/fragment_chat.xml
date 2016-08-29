@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/meLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:singleLine="false"
+            android:text="MySelf"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/friendLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="Friend"
+            android:textSize="20dp"/>
+
+        <ListView
+            android:id="@+id/messages_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/sent_layoutt"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_below="@+id/meLbl"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:transcriptMode="alwaysScroll"/>
+
+        <LinearLayout
+            android:id="@+id/sent_layoutt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/postIconColor"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_message"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="Input text"/>
+
+            <Button
+                android:id="@+id/send_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>
