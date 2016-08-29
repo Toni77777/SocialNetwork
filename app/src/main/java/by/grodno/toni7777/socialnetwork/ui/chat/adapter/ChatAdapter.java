@@ -74,11 +74,11 @@ public class ChatAdapter extends BaseAdapter {
     }
 
     private void setAlignment(ViewHolder holder, boolean isMe) {
-        if (!isMe) {
-            holder.contentWithBG.setBackgroundResource(R.drawable.ic_friend_message_bg);
+        if (isMe) {
+            holder.contentWithBG.setBackgroundResource(R.drawable.ic_my_message_bg);
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
-            layoutParams.gravity = Gravity.RIGHT;
+            layoutParams.gravity = Gravity.LEFT;
             holder.contentWithBG.setLayoutParams(layoutParams);
 
             RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) holder.content.getLayoutParams();
@@ -86,14 +86,14 @@ public class ChatAdapter extends BaseAdapter {
             lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             holder.content.setLayoutParams(lp);
             layoutParams = (LinearLayout.LayoutParams) holder.txtMessage.getLayoutParams();
-            layoutParams.gravity = Gravity.RIGHT;
+            layoutParams.gravity = Gravity.LEFT;
             holder.txtMessage.setLayoutParams(layoutParams);
 
         } else {
-            holder.contentWithBG.setBackgroundResource(R.drawable.ic_my_message_bg);
+            holder.contentWithBG.setBackgroundResource(R.drawable.ic_friend_message_bg);
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
-            layoutParams.gravity = Gravity.LEFT;
+            layoutParams.gravity = Gravity.RIGHT;
             holder.contentWithBG.setLayoutParams(layoutParams);
 
             // not need may be
@@ -103,7 +103,7 @@ public class ChatAdapter extends BaseAdapter {
             holder.content.setLayoutParams(lp);
 
             layoutParams = (LinearLayout.LayoutParams) holder.txtMessage.getLayoutParams();
-            layoutParams.gravity = Gravity.LEFT;
+            layoutParams.gravity = Gravity.RIGHT;
             holder.txtMessage.setLayoutParams(layoutParams);
 
         }

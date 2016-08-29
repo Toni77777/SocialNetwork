@@ -42,7 +42,7 @@ public class ChatFragment extends BaseFragment {
 //        Intent intent = getIntent();
 //        String number = intent.getStringExtra("room").trim();
 //        mURI += number;
-        mURI += "24";
+        mURI += "38";
         start();
     }
 

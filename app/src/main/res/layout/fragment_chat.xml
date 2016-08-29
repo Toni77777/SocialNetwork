@@ -10,24 +10,24 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/meLbl"
+            android:id="@+id/friendLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:singleLine="false"
-            android:text="MySelf"
+            android:text="Friend"
             android:textSize="20dp"/>
 
         <TextView
-            android:id="@+id/friendLabel"
+            android:id="@+id/meLbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:text="Friend"
+            android:text="My"
             android:textSize="20dp"/>
 
         <ListView
