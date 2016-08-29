@@ -3,61 +3,115 @@ package by.grodno.toni7777.socialnetwork.ui.dialogs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.greenrobot.eventbus.EventBus;
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
+
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
-import by.grodno.toni7777.socialnetwork.base.BaseFragment;
+import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
+import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
+import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
-import by.grodno.toni7777.socialnetwork.test.MessagesObject;
+import by.grodno.toni7777.socialnetwork.network.model.DialogDTO;
 import by.grodno.toni7777.socialnetwork.ui.chat.ChatActivity;
 import by.grodno.toni7777.socialnetwork.ui.dialogs.adapter.DialogsAdapter;
+import by.grodno.toni7777.socialnetwork.util.Constants;
+import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
 
-public class DialogsFragment extends BaseFragment {
+public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, List<DialogDTO>, DialogsMVP.View, DialogsPresenter>
+        implements DialogsMVP.View, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.messages_recycler)
-    RecyclerView mMessagesRecycler;
 
-    private DialogsAdapter mMessagesAdapter;
+    @BindView(R.id.dialogs_recycler)
+    RecyclerView mDialogsRecycler;
+
+    @BindView(R.id.progress_pagination_view)
+    View mProgressPaginView;
+
+    @Inject
+    DialogsPresenter mDialogsPresenter;
+
+    private DialogsAdapter mDialogsAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_messages, container, false);
+        return inflater.inflate(R.layout.fragment_dialogs, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
-        mMessagesAdapter = new DialogsAdapter(createFakeFriend(5));
-        mMessagesRecycler.setAdapter(mMessagesAdapter);
+        contentView.setOnRefreshListener(this);
+        mDialogsAdapter = new DialogsAdapter(new ArrayList<>());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mMessagesRecycler.setLayoutManager(linearLayoutManager);
-        EventBus.getDefault().register(this);
-    }
-
-    private List<MessagesObject> createFakeFriend(int count) {
-        List<MessagesObject> messagesObjects = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            MessagesObject messages = new MessagesObject("Name Surname", "http://fotocop.ru/img/picture/Jun/05/b30d097dfb01cc919320330be45e5f6c/norm_3.jpg");
-            messagesObjects.add(messages);
-        }
-        return messagesObjects;
+        mDialogsRecycler.setAdapter(mDialogsAdapter);
+        mDialogsRecycler.setLayoutManager(linearLayoutManager);
+        mDialogsRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, presenter));
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        EventBus.getDefault().unregister(this);
+    public void onRefresh() {
+        mDialogsAdapter.clear();
+        loadData(true);
+    }
+
+    @Override
+    public LceViewState<List<DialogDTO>, DialogsMVP.View> createViewState() {
+        setRetainInstance(true);
+        return new RetainingLceViewState<>();
+    }
+
+    @Override
+    public List<DialogDTO> getData() {
+        return mDialogsAdapter.getDialogs();
+    }
+
+    @Override
+    public DialogsPresenter createPresenter() {
+        return mDialogsPresenter;
+    }
+
+    @Override
+    public void setData(List<DialogDTO> data) {
+        contentView.setRefreshing(false);
+        mDialogsAdapter.update(data);
+    }
+
+    @Override
+    public void loadData(boolean pullToRefresh) {
+        presenter.loadDataWithOffset(pullToRefresh, Constants.START_LOAD);
+    }
+
+    @Override
+    public void showContent() {
+        super.showContent();
+        contentView.setRefreshing(false);
+        mProgressPaginView.setVisibility(android.view.View.GONE);
+    }
+
+    @Override
+    public void showError(Throwable throwable, boolean pullToRefresh) {
+        contentView.setRefreshing(false);
+        mProgressPaginView.setVisibility(android.view.View.GONE);
+        Snackbar.make(mDialogsRecycler, ErrorHanding.getErrorMessage(throwable, getContext()), Snackbar.LENGTH_SHORT)
+                .show();
     }
 
     @Subscribe

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -17,15 +18,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
-import by.grodno.toni7777.socialnetwork.test.MessagesObject;
+import by.grodno.toni7777.socialnetwork.network.model.DialogDTO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
 public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.MessagesViewHolder> {
 
-    private final List<MessagesObject> mMessagesObject;
+    private final List<DialogDTO> mDialogs;
 
-    public DialogsAdapter(List<MessagesObject> messagesObject) {
-        mMessagesObject = messagesObject;
+    public DialogsAdapter(List<DialogDTO> dialogs) {
+        mDialogs = new ArrayList<>(dialogs);
     }
 
     @Override
@@ -35,26 +36,26 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.Messages
 
     @Override
     public void onBindViewHolder(MessagesViewHolder holder, int position) {
-        MessagesObject messages = mMessagesObject.get(position);
-        holder.bind(messages);
+        DialogDTO dialog = mDialogs.get(position);
+        holder.bind(dialog);
     }
 
     @Override
     public int getItemCount() {
-        return mMessagesObject.size();
+        return mDialogs.size();
     }
 
     public void clear() {
-        mMessagesObject.clear();
+        mDialogs.clear();
     }
 
-    public void update(List<MessagesObject> groups) {
-        mMessagesObject.addAll(groups);
+    public void update(List<DialogDTO> dialgos) {
+        mDialogs.addAll(dialgos);
         notifyDataSetChanged();
     }
 
-    public List<MessagesObject> getGroups() {
-        return mMessagesObject;
+    public List<DialogDTO> getDialogs() {
+        return mDialogs;
     }
 
     static class MessagesViewHolder extends RecyclerView.ViewHolder {
@@ -70,9 +71,9 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.Messages
             ButterKnife.bind(this, view);
         }
 
-        void bind(MessagesObject messagesObject) {
-            ImageLoad.loadCircleImage(mAvatarView, messagesObject.getInterlocutorAvatar());
-            mNameView.setText(messagesObject.getInterlocutorName());
+        void bind(DialogDTO dialog) {
+            ImageLoad.loadCircleImage(mAvatarView, dialog.getFriend().getAvatar());
+            mNameView.setText(dialog.getFriend().getName() + " " + dialog.getFriend().getSurname());
         }
 
         @NonNull

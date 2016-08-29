@@ -2,6 +2,7 @@ package by.grodno.toni7777.socialnetwork.network;
 
 
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
+import by.grodno.toni7777.socialnetwork.network.model.DialogsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.GroupsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ImageResponseDTO;
@@ -103,6 +104,10 @@ public interface SocialNetworkAPI {
                                       @Query(LIMIT) int limit,
                                       @Query(ACCESS_TOKEN) String accessToken);
 
+    @GET(DIALOGS_URL)
+    Observable<DialogsDTO> getDialogs(@Query(OFFSET) int offset,
+                                      @Query(LIMIT) int limit,
+                                      @Query(ACCESS_TOKEN) String accessToken);
     // /musics
     // param userId, offset, limit, token
 }
