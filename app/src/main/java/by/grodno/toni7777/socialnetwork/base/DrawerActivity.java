@@ -20,7 +20,7 @@ import by.grodno.toni7777.socialnetwork.LoginActivity;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.ui.groups.GroupsActivity;
 import by.grodno.toni7777.socialnetwork.ui.friends.FriendsActivity;
-import by.grodno.toni7777.socialnetwork.ui.messages.MessagesActivity;
+import by.grodno.toni7777.socialnetwork.ui.dialogs.DialogsActivity;
 import by.grodno.toni7777.socialnetwork.ui.profile.ProfileActivity;
 import by.grodno.toni7777.socialnetwork.ui.settings.SettingsActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallActivity;
@@ -86,7 +86,7 @@ public class DrawerActivity extends ToolbarActivity implements NavigationView.On
         } else if (id == R.id.nav_groups) {
             startSectionActivity(GroupsActivity.class);
         } else if (id == R.id.nav_message) {
-            startSectionActivity(MessagesActivity.class);
+            startSectionActivity(DialogsActivity.class);
         }
         return true;
     }

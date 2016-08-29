@@ -52,20 +52,28 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:background="@color/postIconColor"
+            android:background="@color/message"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/input_message"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:paddingRight="8dp"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:hint="Input text"/>
+                android:maxLength="1"
+                android:hint="Input text"
+                android:padding="4dp"/>
 
-            <Button
+            <ImageView
                 android:id="@+id/send_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="4dp"
+                android:paddingRight="4dp"
+                android:src="@drawable/send_message"
                 android:text="Send"/>
         </LinearLayout>
 

@@ -1,11 +1,11 @@
-package by.grodno.toni7777.socialnetwork.ui.messages;
+package by.grodno.toni7777.socialnetwork.ui.dialogs;
 
 import android.os.Bundle;
 
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.DrawerActivity;
 
-public class MessagesActivity extends DrawerActivity {
+public class DialogsActivity extends DrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,7 +13,7 @@ public class MessagesActivity extends DrawerActivity {
         setContentView(R.layout.activity_drawer);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.content, new MessagesFragment())
+                    .add(R.id.content, new DialogsFragment())
                     .commit();
         }
     }

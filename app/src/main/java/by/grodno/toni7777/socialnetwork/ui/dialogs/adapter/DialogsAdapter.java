@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.ui.messages.adapter;
+package by.grodno.toni7777.socialnetwork.ui.dialogs.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -20,11 +20,11 @@ import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
 import by.grodno.toni7777.socialnetwork.test.MessagesObject;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
-public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessagesViewHolder> {
+public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.MessagesViewHolder> {
 
     private final List<MessagesObject> mMessagesObject;
 
-    public MessagesAdapter(List<MessagesObject> messagesObject) {
+    public DialogsAdapter(List<MessagesObject> messagesObject) {
         mMessagesObject = messagesObject;
     }
 

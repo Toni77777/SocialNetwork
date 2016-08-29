@@ -98,7 +98,7 @@
             android:label="@string/activity_label_friend">
         </activity>
         <activity
-            android:name=".ui.messages.MessagesActivity"
+            android:name=".ui.dialogs.DialogsActivity"
             android:label="@string/activity_label_messages">
         </activity>
         <activity android:name=".ui.chat.ChatActivity"

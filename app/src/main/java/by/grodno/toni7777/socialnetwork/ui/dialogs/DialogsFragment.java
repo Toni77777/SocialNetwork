@@ -1,4 +1,4 @@
-package by.grodno.toni7777.socialnetwork.ui.messages;
+package by.grodno.toni7777.socialnetwork.ui.dialogs;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,14 +21,14 @@ import by.grodno.toni7777.socialnetwork.base.BaseFragment;
 import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
 import by.grodno.toni7777.socialnetwork.test.MessagesObject;
 import by.grodno.toni7777.socialnetwork.ui.chat.ChatActivity;
-import by.grodno.toni7777.socialnetwork.ui.messages.adapter.MessagesAdapter;
+import by.grodno.toni7777.socialnetwork.ui.dialogs.adapter.DialogsAdapter;
 
-public class MessagesFragment extends BaseFragment {
+public class DialogsFragment extends BaseFragment {
 
     @BindView(R.id.messages_recycler)
     RecyclerView mMessagesRecycler;
 
-    private MessagesAdapter mMessagesAdapter;
+    private DialogsAdapter mMessagesAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MessagesFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mMessagesAdapter = new MessagesAdapter(createFakeFriend(5));
+        mMessagesAdapter = new DialogsAdapter(createFakeFriend(5));
         mMessagesRecycler.setAdapter(mMessagesAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mMessagesRecycler.setLayoutManager(linearLayoutManager);
