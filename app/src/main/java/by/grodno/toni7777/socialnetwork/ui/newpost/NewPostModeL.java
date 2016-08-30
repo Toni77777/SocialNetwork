@@ -79,6 +79,7 @@ public class NewPostModel implements BaseModel, NewPostMVP.Model {
                             unsubscribe();
                             mUploadListener.uploadError(throwable);
                             mListener.loadError(throwable);
+                            Log.e("Model", throwable.toString());
                         },
                         () -> {
                             unsubscribe();

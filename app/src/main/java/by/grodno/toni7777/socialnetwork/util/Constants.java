@@ -35,7 +35,9 @@ public final class Constants {
 
     public static final String CONTENT_TYPE_APPLICATION_JSON = "application/json; charset=utf-8";
 
-    public static final int TIMEOUT = 40;
+    public static final int CONNECTION_TIMEOUT = 40;
+    public static final int WRITE_TIMEOUT = 10;
+    public static final int READ_TIMEOUT = 30;
 
     public static final String EMPTY_STRING = " ";
     public static final long EMPTY_USER_ID = -1;

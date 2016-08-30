@@ -191,7 +191,9 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
             mFileName = FileUtils.writeFileStorage(getContext(), bitmap);
             Bitmap image = FileUtils.readFileStorage(getContext(), mFileName);
             mImagePostView.setImageBitmap(image);
-            Log.e("File", "File " + mFileName);
+            // TODO: 8/30/16 server not put image from gallery
+            // TODO: 8/30/16 need more test
+            Log.e("File", "Gallery File " + mFileName);
 
         }
         super.onActivityResult(requestCode, resultCode, data);
