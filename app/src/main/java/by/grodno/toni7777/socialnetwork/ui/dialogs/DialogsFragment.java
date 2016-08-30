@@ -32,6 +32,7 @@ import by.grodno.toni7777.socialnetwork.ui.chat.ChatActivity;
 import by.grodno.toni7777.socialnetwork.ui.dialogs.adapter.DialogsAdapter;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
+import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, List<DialogDTO>, DialogsMVP.View, DialogsPresenter>
         implements DialogsMVP.View, SwipeRefreshLayout.OnRefreshListener {
@@ -116,8 +117,12 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
 
     @Subscribe
     public void openChat(ChatEvent event) {
+        LoginPreferences preferences = new LoginPreferences(getContext());
+        ShareDate shareDate = new ShareDate(event.getChatId(), preferences.getUserId(), preferences.getUserFullName(),
+                preferences.getUserAvatar(), event.getFriendName(), event.getFriendAvatar());
+
         Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-        chatIntent.putExtra(Constants.SHARE_CHAT_ID, event.getChatId());
+        chatIntent.putExtra(Constants.SHARE_CHAT_ID, shareDate);
         startActivity(chatIntent);
     }
 }

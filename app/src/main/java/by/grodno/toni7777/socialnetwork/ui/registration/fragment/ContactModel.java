@@ -4,11 +4,6 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;

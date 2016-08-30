@@ -4,6 +4,7 @@ package by.grodno.toni7777.socialnetwork.push;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -20,6 +21,7 @@ public class SONFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         if (remoteMessage.getNotification() != null) {
             sendNotification(remoteMessage.getNotification());
+            Log.e("Notif", "Notif " + remoteMessage.getNotification());
         }
     }
 
@@ -32,9 +34,9 @@ public class SONFirebaseMessagingService extends FirebaseMessagingService {
 
                 String body = firebaseNotif.getBody();
                 Notification notification = null;
-                if (body.contains(PushPostDTO.message)) {
+                if (body.contains(PushPostDTO.TEXT)) {
                     notification = NotifManager.getPostNotification(getBaseContext(), settings, firebaseNotif);
-                } else if (body.contains(PushMessageDTO.message)) {
+                } else if (body.contains(PushMessageDTO.MESSAGE)) {
                     notification = NotifManager.getMessageNotification(getBaseContext(), settings, firebaseNotif);
                 }
 

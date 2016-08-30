@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class PushPostDTO {
 
-    @SerializedName("text")
+    @SerializedName(TEXT)
     private String mText;
 
     public String getText() {
@@ -38,5 +38,5 @@ public class PushPostDTO {
                 '}';
     }
 
-    public static String message = "text";
+    public static final String TEXT = "text";
 }

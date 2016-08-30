@@ -71,6 +71,8 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
         TextView mLastMessageView;
 
         private long mChatId;
+        private String mNameFriend;
+        private String mAvatarFriend;
 
         public DialogsViewHolder(View view) {
             super(view);
@@ -83,6 +85,8 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
             mNameView.setText(friendDTO.getName() + " " + friendDTO.getSurname());
             mChatId = dialog.getChatId();
             mLastMessageView.setText(dialog.getLastMessage());
+            mNameFriend = friendDTO.getName();
+            mAvatarFriend = friendDTO.getAvatar();
         }
 
         @NonNull
@@ -93,7 +97,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
 
         @OnClick(R.id.dialog_layout)
         void openChat() {
-            EventBus.getDefault().post(new ChatEvent(mChatId));
+            EventBus.getDefault().post(new ChatEvent(mChatId, mNameFriend, mAvatarFriend));
         }
     }
 }

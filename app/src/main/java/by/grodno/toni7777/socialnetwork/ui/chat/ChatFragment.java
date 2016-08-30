@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -19,12 +20,20 @@ import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
 import by.grodno.toni7777.socialnetwork.ui.chat.adapter.ChatAdapter;
+import by.grodno.toni7777.socialnetwork.ui.dialogs.ShareDate;
 import by.grodno.toni7777.socialnetwork.util.Constants;
+import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import de.tavendo.autobahn.WebSocketConnection;
 import de.tavendo.autobahn.WebSocketException;
 import de.tavendo.autobahn.WebSocketHandler;
 
 public class ChatFragment extends BaseFragment {
+
+    @BindView(R.id.friend_name)
+    TextView mFriendName;
+
+    @BindView(R.id.my_name)
+    TextView mMyName;
 
     @BindView(R.id.input_message)
     EditText mInput;
@@ -33,7 +42,7 @@ public class ChatFragment extends BaseFragment {
     ListView mMessagesListView;
 
     private ChatAdapter mChatAdapter;
-
+    private ShareDate mShareDate;
     //    private String mURI = "ws://192.168.7.121:8080/chat/"; // Sasha
     private static String mURI = "ws://192.168.7.116:8080/chat/"; // Masha
     private static final WebSocketConnection mConnection = new WebSocketConnection();
@@ -46,15 +55,22 @@ public class ChatFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             if (bundle.containsKey(Constants.SHARE_CHAT_ID)) {
-                long chatId = bundle.getLong(Constants.SHARE_CHAT_ID);
-                mURI += String.valueOf(chatId);
-                Log.e("Group", "Chat id = " + chatId);
+                ShareDate shareDate = bundle.getParcelable(Constants.SHARE_CHAT_ID);
+                mShareDate = shareDate;
+                mURI += String.valueOf(shareDate.getChatId());
+                LoginPreferences loginPreferences = new LoginPreferences(getContext());
+                String token = loginPreferences.getAccessToken();
+                mURI += "/" + token;
             }
         }
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(STATE_URI)) {
                 mURI = savedInstanceState.getString(STATE_URI);
             }
+        }
+
+        if (!mConnection.isConnected()) {
+            start();
         }
     }
 
@@ -68,6 +84,8 @@ public class ChatFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         mChatAdapter = new ChatAdapter(getActivity(), new ArrayList<>());
         mMessagesListView.setAdapter(mChatAdapter);
+        mFriendName.setText(mShareDate.getNameFriend());
+        mMyName.setText(mShareDate.getFullname());
     }
 
     @OnClick(R.id.send_message)
@@ -91,18 +109,18 @@ public class ChatFragment extends BaseFragment {
         outState.putString(STATE_URI, mURI);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        start();
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        start();
+//    }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mConnection.isConnected()) {
-            mConnection.disconnect();
-        }
+//        if (mConnection.isConnected()) {
+//            mConnection.disconnect();
+//        }
     }
 
     private void start() {

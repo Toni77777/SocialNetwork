@@ -19,5 +19,5 @@ public class PushMessageDTO {
         mMessage = message;
     }
 
-    public static String message = "message";
+    public static final String MESSAGE = "message";
 }

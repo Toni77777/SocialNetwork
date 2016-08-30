@@ -54,11 +54,11 @@ public final class NotifManager {
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0 /* Request code */, intent,
 //                PendingIntent.FLAG_ONE_SHOT);
-
+        String message = new Gson().fromJson(firebaseNotif.getBody(), PushMessageDTO.class).getMessage();
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.avatar_default)
                 .setContentTitle(firebaseNotif.getTitle())
-                .setContentText(new Gson().fromJson(firebaseNotif.getBody(), PushMessageDTO.class).getMessage())
+                .setContentText(message)
                 .setAutoCancel(true)
                 .setLights(Color.YELLOW, NOTIFICATION_TIME_LIGHT_ON, NOTIFICATION_TIME_LIGHT_OFF);
 //                .setContentIntent(pendingIntent);

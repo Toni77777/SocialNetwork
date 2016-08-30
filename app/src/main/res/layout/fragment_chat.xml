@@ -10,18 +10,17 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/friendLabel"
+            android:id="@+id/friend_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:singleLine="false"
             android:text="Friend"
             android:textSize="20dp"/>
 
         <TextView
-            android:id="@+id/meLbl"
+            android:id="@+id/my_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -37,7 +36,7 @@
             android:layout_above="@+id/sent_layoutt"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"
-            android:layout_below="@+id/meLbl"
+            android:layout_below="@+id/my_name"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"
             android:divider="@null"
@@ -71,8 +70,7 @@
                 android:id="@+id/send_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:paddingRight="4dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_send_message_24dp"
                 android:text="Send"/>
         </LinearLayout>
