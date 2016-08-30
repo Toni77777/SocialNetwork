@@ -117,6 +117,7 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     @Subscribe
     public void openChat(ChatEvent event) {
         Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+        chatIntent.putExtra(Constants.SHARE_CHAT_ID, event.getChatId());
         startActivity(chatIntent);
     }
 }

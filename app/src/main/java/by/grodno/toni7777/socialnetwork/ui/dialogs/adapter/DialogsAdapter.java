@@ -22,7 +22,7 @@ import by.grodno.toni7777.socialnetwork.network.model.DialogDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
-public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.MessagesViewHolder> {
+public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsViewHolder> {
 
     private final List<DialogDTO> mDialogs;
 
@@ -31,12 +31,12 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.Messages
     }
 
     @Override
-    public MessagesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return MessagesViewHolder.newInstance(parent);
+    public DialogsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return DialogsViewHolder.newInstance(parent);
     }
 
     @Override
-    public void onBindViewHolder(MessagesViewHolder holder, int position) {
+    public void onBindViewHolder(DialogsViewHolder holder, int position) {
         DialogDTO dialog = mDialogs.get(position);
         holder.bind(dialog);
     }
@@ -59,7 +59,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.Messages
         return mDialogs;
     }
 
-    static class MessagesViewHolder extends RecyclerView.ViewHolder {
+    static class DialogsViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.interlocutor_image)
         ImageView mAvatarView;
@@ -67,7 +67,9 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.Messages
         @BindView(R.id.interlocutor_name)
         TextView mNameView;
 
-        public MessagesViewHolder(View view) {
+        private long mChatId;
+
+        public DialogsViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
@@ -76,17 +78,18 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.Messages
             FriendDTO friendDTO = dialog.getFriends().get(0);
             ImageLoad.loadCircleImage(mAvatarView, friendDTO.getAvatar());
             mNameView.setText(friendDTO.getName() + " " + friendDTO.getSurname());
+            mChatId = dialog.getChatId();
         }
 
         @NonNull
-        public static MessagesViewHolder newInstance(ViewGroup parent) {
-            return new MessagesViewHolder(LayoutInflater.from(parent.getContext())
+        public static DialogsViewHolder newInstance(ViewGroup parent) {
+            return new DialogsViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_messages, parent, false));
         }
 
         @OnClick(R.id.message_layout)
         void openChat() {
-            EventBus.getDefault().post(new ChatEvent());
+            EventBus.getDefault().post(new ChatEvent(mChatId));
         }
     }
 }

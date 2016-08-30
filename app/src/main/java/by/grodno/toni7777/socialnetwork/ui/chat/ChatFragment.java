@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
 import by.grodno.toni7777.socialnetwork.ui.chat.adapter.ChatAdapter;
+import by.grodno.toni7777.socialnetwork.util.Constants;
 import de.tavendo.autobahn.WebSocketConnection;
 import de.tavendo.autobahn.WebSocketException;
 import de.tavendo.autobahn.WebSocketHandler;
@@ -39,10 +40,15 @@ public class ChatFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Intent intent = getIntent();
-//        String number = intent.getStringExtra("room").trim();
-//        mURI += number;
-        mURI += "48";
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            if (bundle.containsKey(Constants.SHARE_CHAT_ID)) {
+                long chatId = bundle.getLong(Constants.SHARE_CHAT_ID);
+                mURI += String.valueOf(chatId);
+                Log.e("Group", "Chat id = " + chatId);
+            }
+        }
         start();
     }
 
