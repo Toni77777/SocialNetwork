@@ -2,6 +2,8 @@ package by.grodno.toni7777.socialnetwork.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class DialogDTO {
 
     @SerializedName("id")
@@ -11,7 +13,7 @@ public class DialogDTO {
     private String mLastMessage;
 
     @SerializedName("reciver")
-    private FriendDTO mFriend;
+    private List<FriendDTO> mFriends;
 
     public long getChatId() {
         return mChatId;
@@ -29,12 +31,12 @@ public class DialogDTO {
         mLastMessage = lastMessage;
     }
 
-    public FriendDTO getFriend() {
-        return mFriend;
+    public List<FriendDTO> getFriends() {
+        return mFriends;
     }
 
-    public void setFriend(FriendDTO friend) {
-        mFriend = friend;
+    public void setFriends(List<FriendDTO> friends) {
+        mFriends = friends;
     }
 
     @Override
@@ -47,7 +49,7 @@ public class DialogDTO {
         if (mChatId != dialogDTO.mChatId) return false;
         if (mLastMessage != null ? !mLastMessage.equals(dialogDTO.mLastMessage) : dialogDTO.mLastMessage != null)
             return false;
-        return mFriend != null ? mFriend.equals(dialogDTO.mFriend) : dialogDTO.mFriend == null;
+        return mFriends != null ? mFriends.equals(dialogDTO.mFriends) : dialogDTO.mFriends == null;
 
     }
 
@@ -55,7 +57,7 @@ public class DialogDTO {
     public int hashCode() {
         int result = (int) (mChatId ^ (mChatId >>> 32));
         result = 31 * result + (mLastMessage != null ? mLastMessage.hashCode() : 0);
-        result = 31 * result + (mFriend != null ? mFriend.hashCode() : 0);
+        result = 31 * result + (mFriends != null ? mFriends.hashCode() : 0);
         return result;
     }
 
@@ -64,7 +66,7 @@ public class DialogDTO {
         return "DialogDTO{" +
                 "mChatId=" + mChatId +
                 ", mLastMessage='" + mLastMessage + '\'' +
-                ", mFriend=" + mFriend +
+                ", mFriends=" + mFriends +
                 '}';
     }
 }

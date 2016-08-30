@@ -19,6 +19,7 @@ import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
 import by.grodno.toni7777.socialnetwork.network.model.DialogDTO;
+import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 
 public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.MessagesViewHolder> {
@@ -72,8 +73,9 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.Messages
         }
 
         void bind(DialogDTO dialog) {
-            ImageLoad.loadCircleImage(mAvatarView, dialog.getFriend().getAvatar());
-            mNameView.setText(dialog.getFriend().getName() + " " + dialog.getFriend().getSurname());
+            FriendDTO friendDTO = dialog.getFriends().get(0);
+            ImageLoad.loadCircleImage(mAvatarView, friendDTO.getAvatar());
+            mNameView.setText(friendDTO.getName() + " " + friendDTO.getSurname());
         }
 
         @NonNull
