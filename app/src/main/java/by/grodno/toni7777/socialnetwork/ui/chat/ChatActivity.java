@@ -27,16 +27,5 @@ public class ChatActivity extends DrawerActivity {
                     .add(R.id.content, chatFragment)
                     .commit();
         }
-
-//        long cahtId = getIntent().getLongExtra(Constants.SHARE_CHAT_ID, -1);
-//        Fragment groupFragment = new ChatFragment();
-//        Bundle idBundle = new Bundle();
-//        idBundle.putLong(Constants.SHARE_CHAT_ID, cahtId);
-//        groupFragment.setArguments(idBundle);
-//        if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.content, groupFragment)
-//                    .commit();
-//        }
     }
 }

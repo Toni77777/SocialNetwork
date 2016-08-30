@@ -60,21 +60,4 @@ public class RegistrationActivity extends ToolbarActivity
                 .replace(R.id.content, contactFragment)
                 .commit();
     }
-
-//    @Override
-//    public void onLoginPass(String login, String password, String email) {
-//        mProfile.setLogin(login);
-//        mProfile.setPassword(password);
-//        mProfile.setEmail(email);
-//
-//        Fragment contactFragment = new ContactFragmentЕ();
-//        Bundle profile = new Bundle();
-//        profile.putParcelable(SHARE_PROFILE, mProfile);
-//        contactFragment.setArguments(profile);
-//
-//        mFragmentManager.beginTransaction()
-//                .replace(R.id.content, contactFragment)
-//                .commit();
-//
-//    }
 }

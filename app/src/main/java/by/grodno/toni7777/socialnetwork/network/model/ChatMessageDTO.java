@@ -1,8 +1,8 @@
-package by.grodno.toni7777.socialnetwork.ui.chat;
+package by.grodno.toni7777.socialnetwork.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ChatMessage {
+public class ChatMessageDTO {
 
     @SerializedName("senderId")
     private int mSenderId;
@@ -10,10 +10,10 @@ public class ChatMessage {
     @SerializedName("message")
     private String mMessage;
 
-    public ChatMessage() {
+    public ChatMessageDTO() {
     }
 
-    public ChatMessage(int senderId, String message) {
+    public ChatMessageDTO(int senderId, String message) {
         mSenderId = senderId;
         mMessage = message;
     }
@@ -39,7 +39,7 @@ public class ChatMessage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ChatMessage that = (ChatMessage) o;
+        ChatMessageDTO that = (ChatMessageDTO) o;
 
         if (mSenderId != that.mSenderId) return false;
         return mMessage != null ? mMessage.equals(that.mMessage) : that.mMessage == null;
@@ -55,7 +55,7 @@ public class ChatMessage {
 
     @Override
     public String toString() {
-        return "ChatMessage{" +
+        return "ChatMessageDTO{" +
                 "mSenderId=" + mSenderId +
                 ", mMessage='" + mMessage + '\'' +
                 '}';

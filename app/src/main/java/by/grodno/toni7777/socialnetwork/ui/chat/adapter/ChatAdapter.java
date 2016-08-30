@@ -13,14 +13,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.R;
-import by.grodno.toni7777.socialnetwork.ui.chat.ChatMessage;
+import by.grodno.toni7777.socialnetwork.network.model.ChatMessageDTO;
 
 public class ChatAdapter extends BaseAdapter {
 
-    private final List<ChatMessage> chatMessages;
+    private final List<ChatMessageDTO> chatMessages;
     private Context context;
 
-    public ChatAdapter(Context context, List<ChatMessage> chatMessages) {
+    public ChatAdapter(Context context, List<ChatMessageDTO> chatMessages) {
         this.context = context;
         this.chatMessages = chatMessages;
     }
@@ -31,7 +31,7 @@ public class ChatAdapter extends BaseAdapter {
     }
 
     @Override
-    public ChatMessage getItem(int position) {
+    public ChatMessageDTO getItem(int position) {
         return chatMessages.get(position);
     }
 
@@ -43,7 +43,7 @@ public class ChatAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        ChatMessage chatMessage = getItem(position);
+        ChatMessageDTO chatMessage = getItem(position);
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
@@ -65,11 +65,11 @@ public class ChatAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void add(ChatMessage message) {
+    public void add(ChatMessageDTO message) {
         chatMessages.add(message);
     }
 
-    public void add(List<ChatMessage> messages) {
+    public void add(List<ChatMessageDTO> messages) {
         chatMessages.addAll(messages);
     }
 

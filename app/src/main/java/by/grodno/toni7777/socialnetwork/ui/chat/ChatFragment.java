@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
+import by.grodno.toni7777.socialnetwork.network.model.ChatMessageDTO;
 import by.grodno.toni7777.socialnetwork.ui.chat.adapter.ChatAdapter;
 import by.grodno.toni7777.socialnetwork.ui.dialogs.ShareDate;
 import by.grodno.toni7777.socialnetwork.util.Constants;
@@ -95,14 +96,14 @@ public class ChatFragment extends BaseFragment {
     void send() {
         String message = mInput.getText().toString();
         if (!TextUtils.isEmpty(message.trim())) {
-            mConnection.sendTextMessage(new Gson().toJson(new ChatMessage(1, message)));
+            mConnection.sendTextMessage(new Gson().toJson(new ChatMessageDTO(1, message)));
             mInput.setText(null);
         } else {
             mInput.setText(null);
         }
     }
 
-    private void update(ChatMessage message) {
+    private void update(ChatMessageDTO message) {
         mChatAdapter.add(message);
         mChatAdapter.notifyDataSetChanged();
         mMessagesListView.setSelection(mMessagesListView.getCount() - 1);
@@ -143,7 +144,7 @@ public class ChatFragment extends BaseFragment {
                     getActivity().runOnUiThread(() -> {
                         Log.e("My content", "Json =" + payload);
                         if (payload.contains("message")) {
-                            ChatMessage chatMessage = new Gson().fromJson(payload, ChatMessage.class);
+                            ChatMessageDTO chatMessage = new Gson().fromJson(payload, ChatMessageDTO.class);
                             update(chatMessage);
                         }
                     });

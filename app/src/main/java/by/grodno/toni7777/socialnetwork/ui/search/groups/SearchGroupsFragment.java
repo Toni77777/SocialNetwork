@@ -159,7 +159,6 @@ public class SearchGroupsFragment extends BaseEventStateFragment<SwipeRefreshLay
     @Subscribe
     public void addGroupToFavorite(SearchGroupEvent event) {
         presenter.addGroupToFavorite(event.getGroupId());
-        // TODO open friend wall
     }
 
     @Override
