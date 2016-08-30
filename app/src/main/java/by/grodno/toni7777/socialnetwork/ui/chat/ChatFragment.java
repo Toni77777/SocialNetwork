@@ -95,10 +95,9 @@ public class ChatFragment extends BaseFragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Gson gson = new Gson();
                             Log.e("My content", "Json =" + payload);
                             if (payload.contains("message")) {
-                                ChatMessage chatMessage = gson.fromJson(payload, ChatMessage.class);
+                                ChatMessage chatMessage =new Gson().fromJson(payload, ChatMessage.class);
                                 update(chatMessage);
                             }
                         }
