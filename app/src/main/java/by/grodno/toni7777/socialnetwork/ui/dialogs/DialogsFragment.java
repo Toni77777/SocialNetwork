@@ -109,7 +109,7 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     @Override
     public void showError(Throwable throwable, boolean pullToRefresh) {
         contentView.setRefreshing(false);
-        mProgressPaginView.setVisibility(android.view.View.GONE);
+        mProgressPaginView.setVisibility(View.GONE);
         Snackbar.make(mDialogsRecycler, ErrorHanding.getErrorMessage(throwable, getContext()), Snackbar.LENGTH_SHORT)
                 .show();
     }

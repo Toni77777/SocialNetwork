@@ -67,6 +67,9 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
         @BindView(R.id.interlocutor_name)
         TextView mNameView;
 
+        @BindView(R.id.last_message)
+        TextView mLastMessageView;
+
         private long mChatId;
 
         public DialogsViewHolder(View view) {
@@ -79,15 +82,16 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
             ImageLoad.loadCircleImage(mAvatarView, friendDTO.getAvatar());
             mNameView.setText(friendDTO.getName() + " " + friendDTO.getSurname());
             mChatId = dialog.getChatId();
+            mLastMessageView.setText(dialog.getLastMessage());
         }
 
         @NonNull
         public static DialogsViewHolder newInstance(ViewGroup parent) {
             return new DialogsViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_messages, parent, false));
+                    .inflate(R.layout.item_dialog, parent, false));
         }
 
-        @OnClick(R.id.message_layout)
+        @OnClick(R.id.dialog_layout)
         void openChat() {
             EventBus.getDefault().post(new ChatEvent(mChatId));
         }
