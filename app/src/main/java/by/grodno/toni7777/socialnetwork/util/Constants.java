@@ -33,6 +33,8 @@ public final class Constants {
     public static final String NOTIFICATION_SOUND_PREFERENCES = "soundNotificationPreferences";
     public static final String NOTIFICATION_VIBRATE_PREFERENCES = "vibrateNotificationPreferences";
 
+    public static final String CONTENT_TYPE_APPLICATION_JSON = "application/json; charset=utf-8";
+
     public static final int TIMEOUT = 40;
 
     public static final String EMPTY_STRING = " ";
@@ -43,7 +45,7 @@ public final class Constants {
 
     public static final long[] NOTIFICATION_VIBRATE = new long[]{1000, 1000, 1000, 1000, 1000};
 
-    public static final int REQUEST_PERMISSION =10;
+    public static final int REQUEST_PERMISSION = 10;
 
     private Constants() {
     }

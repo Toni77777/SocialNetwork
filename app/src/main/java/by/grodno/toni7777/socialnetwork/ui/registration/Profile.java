@@ -3,18 +3,30 @@ package by.grodno.toni7777.socialnetwork.ui.registration;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public final class Profile implements Parcelable {
 
+    @SerializedName("name")
     private String name;
+
+    @SerializedName("lastName")
     private String surname;
+
+    @SerializedName("sex")
     private String sex;
+
+    @SerializedName("bday")
     private String dateBirth;
+
+    @SerializedName("login")
     private String login;
+
+    @SerializedName("password")
     private String password;
+
+    @SerializedName("email")
     private String email;
-    private String skype;
-    private String telephone;
-    private String city;
 
     public Profile() {
     }
@@ -75,30 +87,6 @@ public final class Profile implements Parcelable {
         this.email = email;
     }
 
-    public String getSkype() {
-        return skype;
-    }
-
-    public void setSkype(String skype) {
-        this.skype = skype;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -115,11 +103,7 @@ public final class Profile implements Parcelable {
         if (login != null ? !login.equals(profile.login) : profile.login != null) return false;
         if (password != null ? !password.equals(profile.password) : profile.password != null)
             return false;
-        if (email != null ? !email.equals(profile.email) : profile.email != null) return false;
-        if (skype != null ? !skype.equals(profile.skype) : profile.skype != null) return false;
-        if (telephone != null ? !telephone.equals(profile.telephone) : profile.telephone != null)
-            return false;
-        return city != null ? city.equals(profile.city) : profile.city == null;
+        return email != null ? email.equals(profile.email) : profile.email == null;
 
     }
 
@@ -132,9 +116,6 @@ public final class Profile implements Parcelable {
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (skype != null ? skype.hashCode() : 0);
-        result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
     }
 
@@ -148,9 +129,6 @@ public final class Profile implements Parcelable {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", skype='" + skype + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", city='" + city + '\'' +
                 '}';
     }
 
@@ -168,9 +146,6 @@ public final class Profile implements Parcelable {
         parcel.writeString(login);
         parcel.writeString(password);
         parcel.writeString(email);
-        parcel.writeString(skype);
-        parcel.writeString(telephone);
-        parcel.writeString(city);
     }
 
     protected Profile(Parcel in) {
@@ -181,9 +156,7 @@ public final class Profile implements Parcelable {
         login = in.readString();
         password = in.readString();
         email = in.readString();
-        skype = in.readString();
-        telephone = in.readString();
-        city = in.readString();
+
     }
 
     public static final Creator<Profile> CREATOR = new Creator<Profile>() {

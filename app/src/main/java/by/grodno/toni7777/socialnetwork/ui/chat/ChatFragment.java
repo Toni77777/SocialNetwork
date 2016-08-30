@@ -2,6 +2,7 @@ package by.grodno.toni7777.socialnetwork.ui.chat;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ public class ChatFragment extends BaseFragment {
     //    private String mURI = "ws://192.168.7.121:8080/chat/"; // Sasha
     private static String mURI = "ws://192.168.7.116:8080/chat/"; // Masha
     private static final WebSocketConnection mConnection = new WebSocketConnection();
+    private static final String STATE_URI = "sateURI";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +51,11 @@ public class ChatFragment extends BaseFragment {
                 Log.e("Group", "Chat id = " + chatId);
             }
         }
-        start();
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(STATE_URI)) {
+                mURI = savedInstanceState.getString(STATE_URI);
+            }
+        }
     }
 
     @Override
@@ -66,18 +72,37 @@ public class ChatFragment extends BaseFragment {
 
     @OnClick(R.id.send_message)
     void send() {
-        String s = mInput.getText().toString();
-        Gson gson = new Gson();
-        ChatMessage chatMessage = new ChatMessage(1, s);
-        String json = gson.toJson(chatMessage);
-        mConnection.sendTextMessage(json);
-        mInput.setText(null);
+        String message = mInput.getText().toString();
+        if (!TextUtils.isEmpty(message.trim())) {
+            mConnection.sendTextMessage(new Gson().toJson(new ChatMessage(1, message)));
+            mInput.setText(null);
+        }
     }
 
     private void update(ChatMessage message) {
         mChatAdapter.add(message);
         mChatAdapter.notifyDataSetChanged();
         mMessagesListView.setSelection(mMessagesListView.getCount() - 1);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_URI, mURI);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mConnection.isConnected()) {
+            mConnection.disconnect();
+        }
     }
 
     private void start() {
@@ -92,14 +117,11 @@ public class ChatFragment extends BaseFragment {
 
                 @Override
                 public void onTextMessage(final String payload) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Log.e("My content", "Json =" + payload);
-                            if (payload.contains("message")) {
-                                ChatMessage chatMessage =new Gson().fromJson(payload, ChatMessage.class);
-                                update(chatMessage);
-                            }
+                    getActivity().runOnUiThread(() -> {
+                        Log.e("My content", "Json =" + payload);
+                        if (payload.contains("message")) {
+                            ChatMessage chatMessage = new Gson().fromJson(payload, ChatMessage.class);
+                            update(chatMessage);
                         }
                     });
                     Log.e("Socet", "Got echo: " + payload);
