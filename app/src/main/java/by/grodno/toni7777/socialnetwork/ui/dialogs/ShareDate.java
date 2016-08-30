@@ -121,23 +121,17 @@ public class ShareDate implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(mChatId);
         parcel.writeLong(mId);
         parcel.writeString(mFullname);
         parcel.writeString(mAvatar);
         parcel.writeString(mNameFriend);
         parcel.writeString(mFriendAvatar);
 
-        /*
-         private long mId;
-    private String mFullname;
-    private String mAvatar;
-    private String mNameFriend;
-    private String mFriendAvatar;
-
-         */
     }
 
     protected ShareDate(Parcel in) {
+        mChatId = in.readLong();
         mId = in.readLong();
         mFullname = in.readString();
         mAvatar = in.readString();

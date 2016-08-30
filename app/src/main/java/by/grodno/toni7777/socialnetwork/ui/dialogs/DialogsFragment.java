@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,13 +118,15 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     }
 
     @Subscribe
-    public void openChat(ChatIdEvent event) {
-//        LoginPreferences preferences = new LoginPreferences(getContext());
-//        ShareDate shareDate = new ShareDate(event.getChatId(), preferences.getUserId(), preferences.getUserFullName(),
-//                preferences.getUserAvatar(), event.getFriendName(), event.getFriendAvatar());
-
+    public void openChat(ChatEvent event) {
+        Log.e("TAG", "Dialogs fragment " + event.getChatId());
+        LoginPreferences preferences = new LoginPreferences(getContext());
+        ShareDate shareDate = new ShareDate(event.getChatId(), preferences.getUserId(), preferences.getUserFullName(),
+                preferences.getUserAvatar(), event.getFriendName(), event.getFriendAvatar());
         Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-        chatIntent.putExtra(Constants.SHARE_CHAT_ID, event.getChatId());
+        chatIntent.putExtra(Constants.SHARE_CHAT_ID, shareDate);
+//        Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+//        chatIntent.putExtra(Constants.SHARE_CHAT_ID, event.getChatId());
 //        chatIntent.putLon(Constants.SHARE_CHAT_ID, shareDate);
         startActivity(chatIntent);
     }

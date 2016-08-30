@@ -98,8 +98,8 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
 
         @OnClick(R.id.dialog_layout)
         void openChat() {
-//            EventBus.getDefault().post(new ChatEvent(mChatId, mNameFriend, mAvatarFriend));
-            EventBus.getDefault().post(new ChatIdEvent(mChatId));
+            EventBus.getDefault().post(new ChatEvent(mChatId, mNameFriend, mAvatarFriend));
+//            EventBus.getDefault().post(new ChatIdEvent(mChatId));
         }
     }
 }
