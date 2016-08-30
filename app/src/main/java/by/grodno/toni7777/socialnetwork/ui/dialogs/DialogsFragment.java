@@ -27,6 +27,7 @@ import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
+import by.grodno.toni7777.socialnetwork.base.event.ChatIdEvent;
 import by.grodno.toni7777.socialnetwork.network.model.DialogDTO;
 import by.grodno.toni7777.socialnetwork.ui.chat.ChatActivity;
 import by.grodno.toni7777.socialnetwork.ui.dialogs.adapter.DialogsAdapter;
@@ -116,13 +117,14 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     }
 
     @Subscribe
-    public void openChat(ChatEvent event) {
-        LoginPreferences preferences = new LoginPreferences(getContext());
-        ShareDate shareDate = new ShareDate(event.getChatId(), preferences.getUserId(), preferences.getUserFullName(),
-                preferences.getUserAvatar(), event.getFriendName(), event.getFriendAvatar());
+    public void openChat(ChatIdEvent event) {
+//        LoginPreferences preferences = new LoginPreferences(getContext());
+//        ShareDate shareDate = new ShareDate(event.getChatId(), preferences.getUserId(), preferences.getUserFullName(),
+//                preferences.getUserAvatar(), event.getFriendName(), event.getFriendAvatar());
 
         Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-        chatIntent.putExtra(Constants.SHARE_CHAT_ID, shareDate);
+        chatIntent.putExtra(Constants.SHARE_CHAT_ID, event.getChatId());
+//        chatIntent.putLon(Constants.SHARE_CHAT_ID, shareDate);
         startActivity(chatIntent);
     }
 }

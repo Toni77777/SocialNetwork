@@ -42,7 +42,7 @@ public class ChatFragment extends BaseFragment {
     ListView mMessagesListView;
 
     private ChatAdapter mChatAdapter;
-    private ShareDate mShareDate;
+    //    private ShareDate mShareDate;
     //    private String mURI = "ws://192.168.7.121:8080/chat/"; // Sasha
     private static String mURI = "ws://192.168.7.116:8080/chat/"; // Masha
     private static final WebSocketConnection mConnection = new WebSocketConnection();
@@ -55,9 +55,12 @@ public class ChatFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             if (bundle.containsKey(Constants.SHARE_CHAT_ID)) {
-                ShareDate shareDate = bundle.getParcelable(Constants.SHARE_CHAT_ID);
-                mShareDate = shareDate;
-                mURI += String.valueOf(shareDate.getChatId());
+                long id = bundle.getLong(Constants.SHARE_CHAT_ID);
+//                ShareDate shareDate = bundle.getParcelable(Constants.SHARE_CHAT_ID);
+//                mShareDate = shareDate;
+                Log.e("Chat", "Chat id =  " + id);
+
+                mURI += String.valueOf(id);
                 LoginPreferences loginPreferences = new LoginPreferences(getContext());
                 String token = loginPreferences.getAccessToken();
                 mURI += "/" + token;
@@ -84,8 +87,8 @@ public class ChatFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         mChatAdapter = new ChatAdapter(getActivity(), new ArrayList<>());
         mMessagesListView.setAdapter(mChatAdapter);
-        mFriendName.setText(mShareDate.getNameFriend());
-        mMyName.setText(mShareDate.getFullname());
+//        mFriendName.setText(mShareDate.getNameFriend());
+//        mMyName.setText(mShareDate.getFullname());
     }
 
     @OnClick(R.id.send_message)
@@ -93,6 +96,8 @@ public class ChatFragment extends BaseFragment {
         String message = mInput.getText().toString();
         if (!TextUtils.isEmpty(message.trim())) {
             mConnection.sendTextMessage(new Gson().toJson(new ChatMessage(1, message)));
+            mInput.setText(null);
+        } else {
             mInput.setText(null);
         }
     }

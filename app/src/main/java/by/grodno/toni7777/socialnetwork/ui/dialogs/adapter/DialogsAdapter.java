@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
+import by.grodno.toni7777.socialnetwork.base.event.ChatIdEvent;
 import by.grodno.toni7777.socialnetwork.network.model.DialogDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
 import by.grodno.toni7777.socialnetwork.util.ImageLoad;
@@ -97,7 +98,8 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
 
         @OnClick(R.id.dialog_layout)
         void openChat() {
-            EventBus.getDefault().post(new ChatEvent(mChatId, mNameFriend, mAvatarFriend));
+//            EventBus.getDefault().post(new ChatEvent(mChatId, mNameFriend, mAvatarFriend));
+            EventBus.getDefault().post(new ChatIdEvent(mChatId));
         }
     }
 }
