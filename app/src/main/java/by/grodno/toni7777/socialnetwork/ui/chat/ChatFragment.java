@@ -21,7 +21,7 @@ import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.BaseFragment;
 import by.grodno.toni7777.socialnetwork.network.model.ChatMessageDTO;
 import by.grodno.toni7777.socialnetwork.ui.chat.adapter.ChatAdapter;
-import by.grodno.toni7777.socialnetwork.ui.dialogs.ShareDate;
+import by.grodno.toni7777.socialnetwork.ui.model.ChatDataDVO;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import de.tavendo.autobahn.WebSocketConnection;
@@ -43,7 +43,7 @@ public class ChatFragment extends BaseFragment {
     ListView mMessagesListView;
 
     private ChatAdapter mChatAdapter;
-    private ShareDate mShareDate;
+    private ChatDataDVO mShareDate;
     //    private String mURI = "ws://192.168.7.121:8080/chat/"; // Sasha
     private static String mURI = "ws://192.168.7.116:8080/chat/"; // Masha
     private static final WebSocketConnection mConnection = new WebSocketConnection();
@@ -57,7 +57,7 @@ public class ChatFragment extends BaseFragment {
         if (bundle != null) {
             if (bundle.containsKey(Constants.SHARE_CHAT_ID)) {
 //                long id = bundle.getLong(Constants.SHARE_CHAT_ID);
-                ShareDate shareDate = bundle.getParcelable(Constants.SHARE_CHAT_ID);
+                ChatDataDVO shareDate = bundle.getParcelable(Constants.SHARE_CHAT_ID);
                 mShareDate = shareDate;
                 Log.e("Chat", "Chat id =  " + shareDate.getChatId());
 
@@ -89,7 +89,7 @@ public class ChatFragment extends BaseFragment {
         mChatAdapter = new ChatAdapter(getActivity(), new ArrayList<>());
         mMessagesListView.setAdapter(mChatAdapter);
         mFriendName.setText(mShareDate.getNameFriend());
-        mMyName.setText(mShareDate.getFullname());
+        mMyName.setText(mShareDate.getFullName());
     }
 
     @OnClick(R.id.send_message)

@@ -31,7 +31,7 @@ import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseMvpTabFragment;
 import by.grodno.toni7777.socialnetwork.base.event.RegistrationEvent;
-import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
+import by.grodno.toni7777.socialnetwork.network.model.ProfileRegistrationDTO;
 
 public class ContactFragment extends BaseMvpTabFragment<ContactMVP.View, ContactPresenter>
         implements ContactMVP.View {
@@ -60,7 +60,7 @@ public class ContactFragment extends BaseMvpTabFragment<ContactMVP.View, Contact
     @Inject
     ContactPresenter mPresenter;
 
-    private Profile mProfile;
+    private ProfileRegistrationDTO mProfile;
     private static final String STATE_PROFILE = "profile";
 
     @Override

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
-import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
+import by.grodno.toni7777.socialnetwork.network.model.ProfileRegistrationDTO;
 
 
 public class ContactPresenter extends MvpBasePresenter<ContactMVP.View>
@@ -21,7 +21,7 @@ public class ContactPresenter extends MvpBasePresenter<ContactMVP.View>
     }
 
     @Override
-    public void registration(Profile profile) {
+    public void registration(ProfileRegistrationDTO profile) {
         if (isViewAttached()) {
             getView().showLoading();
         }

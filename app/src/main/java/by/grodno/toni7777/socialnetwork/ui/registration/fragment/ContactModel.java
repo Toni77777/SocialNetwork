@@ -7,8 +7,8 @@ import com.google.gson.Gson;
 import by.grodno.toni7777.socialnetwork.mvp.BaseListener;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.network.model.ProfileRegistrationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
-import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import okhttp3.RequestBody;
@@ -27,7 +27,7 @@ public class ContactModel implements BaseModel, ContactMVP.Model {
     }
 
     @Override
-    public void registration(Profile profile) {
+    public void registration(ProfileRegistrationDTO profile) {
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse(Constants.CONTENT_TYPE_APPLICATION_JSON), (new Gson().toJson(profile)));
         Observable<ResponseDTO> registrationObservable = mNetworkAPI.registration(body);
         mSubscription = registrationObservable
@@ -50,6 +50,7 @@ public class ContactModel implements BaseModel, ContactMVP.Model {
                             unsubscribe();
                         });
     }
+
 
     @Override
     public void unsubscribe() {

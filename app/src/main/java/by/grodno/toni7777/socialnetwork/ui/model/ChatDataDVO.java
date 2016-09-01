@@ -1,24 +1,24 @@
-package by.grodno.toni7777.socialnetwork.ui.dialogs;
+package by.grodno.toni7777.socialnetwork.ui.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ShareDate implements Parcelable {
+public class ChatDataDVO implements Parcelable {
 
     private long mChatId;
     private long mId;
-    private String mFullname;
+    private String mFullName;
     private String mAvatar;
     private String mNameFriend;
     private String mFriendAvatar;
 
-    public ShareDate() {
+    public ChatDataDVO() {
     }
 
-    public ShareDate(long chatId, long id, String fullname, String avatar, String nameFriend, String friendAvatar) {
+    public ChatDataDVO(long chatId, long id, String fullname, String avatar, String nameFriend, String friendAvatar) {
         mChatId = chatId;
         mId = id;
-        mFullname = fullname;
+        mFullName = fullname;
         mAvatar = avatar;
         mNameFriend = nameFriend;
         mFriendAvatar = friendAvatar;
@@ -40,12 +40,12 @@ public class ShareDate implements Parcelable {
         mId = id;
     }
 
-    public String getFullname() {
-        return mFullname;
+    public String getFullName() {
+        return mFullName;
     }
 
-    public void setFullname(String fullname) {
-        mFullname = fullname;
+    public void setFullName(String fullName) {
+        mFullName = fullName;
     }
 
     public String getAvatar() {
@@ -74,10 +74,10 @@ public class ShareDate implements Parcelable {
 
     @Override
     public String toString() {
-        return "ShareDate{" +
+        return "ChatDataDVO{" +
                 "mChatId=" + mChatId +
                 ", mId=" + mId +
-                ", mFullname='" + mFullname + '\'' +
+                ", mFullName='" + mFullName + '\'' +
                 ", mAvatar='" + mAvatar + '\'' +
                 ", mNameFriend='" + mNameFriend + '\'' +
                 ", mFriendAvatar='" + mFriendAvatar + '\'' +
@@ -89,11 +89,11 @@ public class ShareDate implements Parcelable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ShareDate shareDate = (ShareDate) o;
+        ChatDataDVO shareDate = (ChatDataDVO) o;
 
         if (mChatId != shareDate.mChatId) return false;
         if (mId != shareDate.mId) return false;
-        if (mFullname != null ? !mFullname.equals(shareDate.mFullname) : shareDate.mFullname != null)
+        if (mFullName != null ? !mFullName.equals(shareDate.mFullName) : shareDate.mFullName != null)
             return false;
         if (mAvatar != null ? !mAvatar.equals(shareDate.mAvatar) : shareDate.mAvatar != null)
             return false;
@@ -107,7 +107,7 @@ public class ShareDate implements Parcelable {
     public int hashCode() {
         int result = (int) (mChatId ^ (mChatId >>> 32));
         result = 31 * result + (int) (mId ^ (mId >>> 32));
-        result = 31 * result + (mFullname != null ? mFullname.hashCode() : 0);
+        result = 31 * result + (mFullName != null ? mFullName.hashCode() : 0);
         result = 31 * result + (mAvatar != null ? mAvatar.hashCode() : 0);
         result = 31 * result + (mNameFriend != null ? mNameFriend.hashCode() : 0);
         result = 31 * result + (mFriendAvatar != null ? mFriendAvatar.hashCode() : 0);
@@ -123,31 +123,31 @@ public class ShareDate implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeLong(mChatId);
         parcel.writeLong(mId);
-        parcel.writeString(mFullname);
+        parcel.writeString(mFullName);
         parcel.writeString(mAvatar);
         parcel.writeString(mNameFriend);
         parcel.writeString(mFriendAvatar);
 
     }
 
-    protected ShareDate(Parcel in) {
+    protected ChatDataDVO(Parcel in) {
         mChatId = in.readLong();
         mId = in.readLong();
-        mFullname = in.readString();
+        mFullName = in.readString();
         mAvatar = in.readString();
         mNameFriend = in.readString();
         mFriendAvatar = in.readString();
     }
 
-    public static final Creator<ShareDate> CREATOR = new Creator<ShareDate>() {
+    public static final Creator<ChatDataDVO> CREATOR = new Creator<ChatDataDVO>() {
         @Override
-        public ShareDate createFromParcel(Parcel parcel) {
-            return new ShareDate(parcel);
+        public ChatDataDVO createFromParcel(Parcel parcel) {
+            return new ChatDataDVO(parcel);
         }
 
         @Override
-        public ShareDate[] newArray(int size) {
-            return new ShareDate[size];
+        public ChatDataDVO[] newArray(int size) {
+            return new ChatDataDVO[size];
         }
     };
 
