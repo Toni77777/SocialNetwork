@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class ChatMessageDTO {
 
     @SerializedName("senderId")
-    private int mSenderId;
+    private long mSenderId;
 
     @SerializedName("message")
     private String mMessage;
@@ -13,16 +13,16 @@ public class ChatMessageDTO {
     public ChatMessageDTO() {
     }
 
-    public ChatMessageDTO(int senderId, String message) {
+    public ChatMessageDTO(long senderId, String message) {
         mSenderId = senderId;
         mMessage = message;
     }
 
-    public int getSenderId() {
+    public long getSenderId() {
         return mSenderId;
     }
 
-    public void setSenderId(int senderId) {
+    public void setSenderId(long senderId) {
         mSenderId = senderId;
     }
 
@@ -43,12 +43,11 @@ public class ChatMessageDTO {
 
         if (mSenderId != that.mSenderId) return false;
         return mMessage != null ? mMessage.equals(that.mMessage) : that.mMessage == null;
-
     }
 
     @Override
     public int hashCode() {
-        int result = mSenderId;
+        int result = (int) (mSenderId ^ (mSenderId >>> 32));
         result = 31 * result + (mMessage != null ? mMessage.hashCode() : 0);
         return result;
     }

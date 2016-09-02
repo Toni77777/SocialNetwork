@@ -15,13 +15,11 @@ public class ChatActivity extends DrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
-
-        ChatDataDVO shareDate = getIntent().getParcelableExtra(Constants.SHARE_CHAT_ID);
-        Log.e("Chat", "Chat id = " + shareDate);
+        ChatDataDVO chatData = getIntent().getParcelableExtra(Constants.SHARE_CHAT_ID);
         Fragment chatFragment = new ChatFragment();
-        Bundle idBundle = new Bundle();
-        idBundle.putParcelable(Constants.SHARE_CHAT_ID, shareDate);
-        chatFragment.setArguments(idBundle);
+        Bundle chatBundle = new Bundle();
+        chatBundle.putParcelable(Constants.SHARE_CHAT_ID, chatData);
+        chatFragment.setArguments(chatBundle);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.content, chatFragment)

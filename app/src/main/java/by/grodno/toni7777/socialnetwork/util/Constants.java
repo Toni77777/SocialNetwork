@@ -10,7 +10,7 @@ public final class Constants {
 
     public static final String PLACEHOLDER = "/";
 
-    public static final String DATE_DEFAULT = "dd/MM/yyyy";
+    public static final String DATE_DEFAULT = "dd/mm/yyyy";
 
     public static final int START_LOAD = 0;
 

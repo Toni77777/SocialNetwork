@@ -32,8 +32,8 @@ android {
         applicationId "by.grodno.toni7777.socialnetwork"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 10
-        versionName "0.1.0"
+        versionCode 11
+        versionName "0.1.1"
         multiDexEnabled true
 
         buildConfigField "String", "LOGIN", "\"user\""
@@ -57,7 +57,7 @@ android {
         }
 
         release {
-            buildConfigField "String", "BASE_URL", "\"https://sjc2016vs8.fwd.wf/\""
+            buildConfigField "String", "BASE_URL", "\"http://192.168.7.121:8080/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release

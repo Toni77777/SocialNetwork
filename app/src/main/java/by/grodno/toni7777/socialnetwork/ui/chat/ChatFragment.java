@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import by.grodno.toni7777.socialnetwork.network.model.ChatMessageDTO;
 import by.grodno.toni7777.socialnetwork.ui.chat.adapter.ChatAdapter;
 import by.grodno.toni7777.socialnetwork.ui.model.ChatDataDVO;
 import by.grodno.toni7777.socialnetwork.util.Constants;
+import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import de.tavendo.autobahn.WebSocketConnection;
 import de.tavendo.autobahn.WebSocketException;
@@ -31,40 +33,42 @@ import de.tavendo.autobahn.WebSocketHandler;
 public class ChatFragment extends BaseFragment {
 
     @BindView(R.id.friend_name)
-    TextView mFriendName;
+    TextView mFriendNameView;
 
     @BindView(R.id.my_name)
-    TextView mMyName;
+    TextView mMyNameView;
+
+    @BindView(R.id.friend_avatar)
+    ImageView mFriendAvatarView;
+
+    @BindView(R.id.my_avatar)
+    ImageView mMyAvatarView;
 
     @BindView(R.id.input_message)
-    EditText mInput;
+    EditText mInputView;
 
     @BindView(R.id.messages_list_view)
     ListView mMessagesListView;
 
     private ChatAdapter mChatAdapter;
-    private ChatDataDVO mShareDate;
-    //    private String mURI = "ws://192.168.7.121:8080/chat/"; // Sasha
-    private static String mURI = "ws://192.168.7.116:8080/chat/"; // Masha
+    private ChatDataDVO mChatData;
+    private String mURI = "ws://192.168.7.121:8080/chat/"; // Sasha
+    //    private static String mURI = "ws://192.168.7.116:8080/chat/"; // Masha
     private static final WebSocketConnection mConnection = new WebSocketConnection();
     private static final String STATE_URI = "sateURI";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Bundle bundle = getArguments();
         if (bundle != null) {
             if (bundle.containsKey(Constants.SHARE_CHAT_ID)) {
-//                long id = bundle.getLong(Constants.SHARE_CHAT_ID);
-                ChatDataDVO shareDate = bundle.getParcelable(Constants.SHARE_CHAT_ID);
-                mShareDate = shareDate;
-                Log.e("Chat", "Chat id =  " + shareDate.getChatId());
-
-                mURI += String.valueOf(shareDate.getChatId());
+                mChatData = bundle.getParcelable(Constants.SHARE_CHAT_ID);
+                Log.e("Chat", "Chat id =  " + mChatData.getChatId());
+                mURI += String.valueOf(mChatData.getChatId());
                 LoginPreferences loginPreferences = new LoginPreferences(getContext());
                 String token = loginPreferences.getAccessToken();
-                mURI += "/" + token;
+                mURI += Constants.PLACEHOLDER + token;
             }
         }
         if (savedInstanceState != null) {
@@ -72,7 +76,6 @@ public class ChatFragment extends BaseFragment {
                 mURI = savedInstanceState.getString(STATE_URI);
             }
         }
-
         if (!mConnection.isConnected()) {
             start();
         }
@@ -86,20 +89,22 @@ public class ChatFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mChatAdapter = new ChatAdapter(getActivity(), new ArrayList<>());
+        mChatAdapter = new ChatAdapter(getActivity(), new ArrayList<>(), mChatData.getId());
         mMessagesListView.setAdapter(mChatAdapter);
-        mFriendName.setText(mShareDate.getNameFriend());
-        mMyName.setText(mShareDate.getFullName());
+        mFriendNameView.setText(mChatData.getNameFriend());
+        mMyNameView.setText(mChatData.getFullName());
+        ImageLoad.loadCircleImage(mFriendAvatarView, mChatData.getFriendAvatar());
+        ImageLoad.loadCircleImage(mMyAvatarView, mChatData.getAvatar());
     }
 
     @OnClick(R.id.send_message)
     void send() {
-        String message = mInput.getText().toString();
+        String message = mInputView.getText().toString();
         if (!TextUtils.isEmpty(message.trim())) {
-            mConnection.sendTextMessage(new Gson().toJson(new ChatMessageDTO(1, message)));
-            mInput.setText(null);
+            mConnection.sendTextMessage(new Gson().toJson(new ChatMessageDTO(mChatData.getId(), message)));
+            mInputView.setText(null);
         } else {
-            mInput.setText(null);
+            mInputView.setText(null);
         }
     }
 
@@ -115,6 +120,7 @@ public class ChatFragment extends BaseFragment {
         outState.putString(STATE_URI, mURI);
     }
 
+    // TODO: 9/2/16 connect disconnect socket
 //    @Override
 //    public void onStart() {
 //        super.onStart();
@@ -130,7 +136,6 @@ public class ChatFragment extends BaseFragment {
     }
 
     private void start() {
-
         try {
             mConnection.connect(mURI, new WebSocketHandler() {
 
@@ -140,15 +145,15 @@ public class ChatFragment extends BaseFragment {
                 }
 
                 @Override
-                public void onTextMessage(final String payload) {
+                public void onTextMessage(final String message) {
                     getActivity().runOnUiThread(() -> {
-                        Log.e("My content", "Json =" + payload);
-                        if (payload.contains("message")) {
-                            ChatMessageDTO chatMessage = new Gson().fromJson(payload, ChatMessageDTO.class);
+                        Log.e("My content", "Json =" + message);
+                        if (message.contains("message")) {
+                            ChatMessageDTO chatMessage = new Gson().fromJson(message, ChatMessageDTO.class);
                             update(chatMessage);
                         }
                     });
-                    Log.e("Socet", "Got echo: " + payload);
+                    Log.e("Socet", "Got echo: " + message);
                 }
 
                 @Override
@@ -159,6 +164,7 @@ public class ChatFragment extends BaseFragment {
                 }
 
             });
+
         } catch (WebSocketException e) {
             Log.e("Socet", e.toString());
             // TODO: 8/29/16 mConnection close

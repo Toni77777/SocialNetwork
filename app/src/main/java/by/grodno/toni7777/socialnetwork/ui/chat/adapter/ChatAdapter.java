@@ -17,22 +17,24 @@ import by.grodno.toni7777.socialnetwork.network.model.ChatMessageDTO;
 
 public class ChatAdapter extends BaseAdapter {
 
-    private final List<ChatMessageDTO> chatMessages;
-    private Context context;
+    private final List<ChatMessageDTO> mChatMessages;
+    private Context mContext;
+    private long mMyId;
 
-    public ChatAdapter(Context context, List<ChatMessageDTO> chatMessages) {
-        this.context = context;
-        this.chatMessages = chatMessages;
+    public ChatAdapter(Context context, List<ChatMessageDTO> chatMessages, long myId) {
+        mContext = context;
+        mChatMessages = chatMessages;
+        mMyId = myId;
     }
 
     @Override
     public int getCount() {
-        return chatMessages.size();
+        return mChatMessages.size();
     }
 
     @Override
     public ChatMessageDTO getItem(int position) {
-        return chatMessages.get(position);
+        return mChatMessages.get(position);
     }
 
     @Override
@@ -44,7 +46,7 @@ public class ChatAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         ChatMessageDTO chatMessage = getItem(position);
-        LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater vi = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
             convertView = vi.inflate(R.layout.item_chat, null);
@@ -54,23 +56,18 @@ public class ChatAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        boolean myMsg = false;
-        if (chatMessage.getSenderId() == 1) {
-            myMsg = true;
-        } else {
-            myMsg = false;
-        }
-        setAlignment(holder, myMsg);
+        boolean myMessage = chatMessage.getSenderId() == mMyId;
+        setAlignment(holder, myMessage);
         holder.txtMessage.setText(chatMessage.getMessage());
         return convertView;
     }
 
     public void add(ChatMessageDTO message) {
-        chatMessages.add(message);
+        mChatMessages.add(message);
     }
 
     public void add(List<ChatMessageDTO> messages) {
-        chatMessages.addAll(messages);
+        mChatMessages.addAll(messages);
     }
 
     private void setAlignment(ViewHolder holder, boolean isMe) {
