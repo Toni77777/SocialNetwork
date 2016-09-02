@@ -76,9 +76,6 @@ public class ChatFragment extends BaseFragment {
                 mURI = savedInstanceState.getString(STATE_URI);
             }
         }
-        if (!mConnection.isConnected()) {
-            start();
-        }
     }
 
     @Override
@@ -120,19 +117,20 @@ public class ChatFragment extends BaseFragment {
         outState.putString(STATE_URI, mURI);
     }
 
-    // TODO: 9/2/16 connect disconnect socket
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        start();
-//    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (!mConnection.isConnected()) {
+            start();
+        }
+    }
 
     @Override
     public void onStop() {
         super.onStop();
-//        if (mConnection.isConnected()) {
-//            mConnection.disconnect();
-//        }
+        if (mConnection.isConnected()) {
+            mConnection.disconnect();
+        }
     }
 
     private void start() {
@@ -146,13 +144,15 @@ public class ChatFragment extends BaseFragment {
 
                 @Override
                 public void onTextMessage(final String message) {
-                    getActivity().runOnUiThread(() -> {
-                        Log.e("My content", "Json =" + message);
-                        if (message.contains("message")) {
-                            ChatMessageDTO chatMessage = new Gson().fromJson(message, ChatMessageDTO.class);
-                            update(chatMessage);
-                        }
-                    });
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(() -> {
+                            Log.e("My content", "Json =" + message);
+                            if (message.contains("message")) {
+                                ChatMessageDTO chatMessage = new Gson().fromJson(message, ChatMessageDTO.class);
+                                update(chatMessage);
+                            }
+                        });
+                    }
                     Log.e("Socet", "Got echo: " + message);
                 }
 
@@ -164,7 +164,6 @@ public class ChatFragment extends BaseFragment {
                 }
 
             });
-
         } catch (WebSocketException e) {
             Log.e("Socet", e.toString());
             // TODO: 8/29/16 mConnection close
