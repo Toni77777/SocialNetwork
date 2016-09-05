@@ -22,6 +22,7 @@ public final class QueryProperties {
     public static final String GROUPS_FIND_URL = "/groups/find";
     public static final String NOTIFICATION_URL = "/notifications";
     public static final String GROUP_POSTS_URL = "/groups/posts";
+    public static final String DIALOGS_URL = "/dialogs";
 
     public static final String USER_ID = "userId";
     public static final String OFFSET = "offset";

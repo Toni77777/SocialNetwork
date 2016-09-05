@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.ToolbarActivity;
+import by.grodno.toni7777.socialnetwork.network.model.ProfileRegistrationDTO;
 import by.grodno.toni7777.socialnetwork.ui.registration.fragment.ContactFragment;
 import by.grodno.toni7777.socialnetwork.ui.registration.fragment.InfoFragment;
 
@@ -15,7 +16,7 @@ public class RegistrationActivity extends ToolbarActivity
         implements InfoFragment.OnInfoPass {
 
     private FragmentManager mFragmentManager;
-    private Profile mProfile;
+    private ProfileRegistrationDTO mProfile;
     private static final String STATE_PROFILE = "profile";
 
     @Override
@@ -34,7 +35,7 @@ public class RegistrationActivity extends ToolbarActivity
                 mProfile = savedInstanceState.getParcelable(STATE_PROFILE);
             }
         } else {
-            mProfile = new Profile();
+            mProfile = new ProfileRegistrationDTO();
         }
     }
 
@@ -60,21 +61,4 @@ public class RegistrationActivity extends ToolbarActivity
                 .replace(R.id.content, contactFragment)
                 .commit();
     }
-
-//    @Override
-//    public void onLoginPass(String login, String password, String email) {
-//        mProfile.setLogin(login);
-//        mProfile.setPassword(password);
-//        mProfile.setEmail(email);
-//
-//        Fragment contactFragment = new ContactFragmentЕ();
-//        Bundle profile = new Bundle();
-//        profile.putParcelable(SHARE_PROFILE, mProfile);
-//        contactFragment.setArguments(profile);
-//
-//        mFragmentManager.beginTransaction()
-//                .replace(R.id.content, contactFragment)
-//                .commit();
-//
-//    }
 }

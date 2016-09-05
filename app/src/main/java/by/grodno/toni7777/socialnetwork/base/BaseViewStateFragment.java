@@ -28,4 +28,9 @@ public abstract class BaseViewStateFragment<CV extends View, M, V extends MvpLce
             mUnbinder.unbind();
         }
     }
+
+    @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        return null;
+    }
 }

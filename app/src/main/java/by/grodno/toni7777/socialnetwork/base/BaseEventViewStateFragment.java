@@ -11,6 +11,7 @@ import org.greenrobot.eventbus.EventBus;
 /**
  * Need use register unregister from onCreate()/onDestroy() because wail event when View onPause()
  * Override getErrorMessage() because some class don't use this method, but method must override (Mosby)
+ *
  * @param <CV>
  * @param <M>
  * @param <V>
@@ -30,8 +31,4 @@ public abstract class BaseEventViewStateFragment<CV extends View, M, V extends M
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return null;
-    }
 }

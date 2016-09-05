@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,7 @@ public class InfoFragment extends TabFragment {
         String surname = mSurnameView.getEditText().getText().toString();
         String sex = mSexView.getSelectedItem().toString();
         String dateBirth = mDateBirthView.getEditText().getText().toString();
+        Log.e("Date", dateBirth.toString());
         SparseIntArray errors = validateInformation(name, surname, dateBirth);
         if (inNotEmptySparseIntArray(errors)) {
             showErrors(errors);

@@ -5,7 +5,7 @@
     <string name="authorization_password">Пароль</string>
     <string name="authorization_log_in">Войти</string>
     <string name="authorization_sing_up">Регистрация</string>
-    <string name="authorization_forgot_password">Востановить пароль</string>
+    <string name="authorization_forgot_password">Восстановить пароль</string>
 
     <string name="register_navigation_next">Далее</string>
     <string name="register_navigation_create_account">Зарегистрироватсья</string>
@@ -78,5 +78,7 @@
     <string name="preference_notification">notification</string>
     <string name="activity_label_group">Группа</string>
     <string name="activity_label_friend">Друг</string>
+    <string name="activity_label_messages">Сообщения</string>
+    <string name="activity_label_chat">Чат</string>
 
 </resources>

@@ -6,10 +6,11 @@ public final class Constants {
     public static final String SHARE_DATE_PICKER = "share_date";
     public static final String SHARE_GROUP_ID = "share_group_id";
     public static final String SHARE_FRIEND_ID = "share_friend_id";
+    public static final String SHARE_CHAT_ID = "share_chat_id";
 
     public static final String PLACEHOLDER = "/";
 
-    public static final String DATE_DEFAULT = "dd/MM/yyyy";
+    public static final String DATE_DEFAULT = "dd/mm/yyyy";
 
     public static final int START_LOAD = 0;
 
@@ -32,7 +33,11 @@ public final class Constants {
     public static final String NOTIFICATION_SOUND_PREFERENCES = "soundNotificationPreferences";
     public static final String NOTIFICATION_VIBRATE_PREFERENCES = "vibrateNotificationPreferences";
 
-    public static final int TIMEOUT = 40;
+    public static final String CONTENT_TYPE_APPLICATION_JSON = "application/json; charset=utf-8";
+
+    public static final int CONNECTION_TIMEOUT = 40;
+    public static final int WRITE_TIMEOUT = 10;
+    public static final int READ_TIMEOUT = 30;
 
     public static final String EMPTY_STRING = " ";
     public static final long EMPTY_USER_ID = -1;
@@ -42,7 +47,7 @@ public final class Constants {
 
     public static final long[] NOTIFICATION_VIBRATE = new long[]{1000, 1000, 1000, 1000, 1000};
 
-    public static final int REQUEST_PERMISSION =10;
+    public static final int REQUEST_PERMISSION = 10;
 
     private Constants() {
     }

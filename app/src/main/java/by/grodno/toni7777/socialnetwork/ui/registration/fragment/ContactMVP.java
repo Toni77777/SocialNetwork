@@ -2,13 +2,14 @@ package by.grodno.toni7777.socialnetwork.ui.registration.fragment;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
-import by.grodno.toni7777.socialnetwork.ui.registration.Profile;
+import by.grodno.toni7777.socialnetwork.network.model.ProfileRegistrationDTO;
+
 
 public final class ContactMVP {
 
     interface Model {
 
-        void registration(Profile profile);
+        void registration(ProfileRegistrationDTO profile);
 
     }
 
@@ -26,7 +27,7 @@ public final class ContactMVP {
 
     interface Presenter {
 
-        void registration(Profile profile);
+        void registration(ProfileRegistrationDTO profile);
 
     }
 
