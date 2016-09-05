@@ -45,7 +45,7 @@ public final class ConverterDTOtoDSO {
         return new PostDSO(UUID.randomUUID().toString(), sourceDTO.getPostId(), new OwnerDSO(sourceDTO.getOwner().getName(),
                 sourceDTO.getOwner().getSurname(), sourceDTO.getOwner().getAvatar()),
                 sourceDTO.getImage(), sourceDTO.getDate(), sourceDTO.getText(), sourceDTO.getLike(),
-                sourceDTO.getDislike());
+                sourceDTO.getDislike() , sourceDTO.getIsLike());
     }
 
     public static FriendsDSO toFriendDSO(FriendsDTO sourceDTO) {

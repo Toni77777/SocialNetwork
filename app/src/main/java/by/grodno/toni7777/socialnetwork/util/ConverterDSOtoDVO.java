@@ -28,7 +28,7 @@ public final class ConverterDSOtoDVO {
     public static PostDVO converteDTOtoDSO(PostDSO source) {
         return new PostDVO(source.getPostId(), new OwnerDVO(source.getOwner().getName(), source.getOwner().getSurname(),
                 source.getOwner().getAvatar()), source.getImage(), source.getDate(), source.getText(),
-                source.getLike(), source.getDislike());
+                source.getLike(), source.getDislike(),source.getIsLike());
     }
 
     public static List<FriendDVO> toFriendDVO(RealmList<FriendDSO> sourseFriends) {

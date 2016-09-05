@@ -14,11 +14,13 @@ public class PostDSO extends RealmObject {
     private String mText;
     private int mLike;
     private int mDislike;
+    private Integer mIsLike;
 
     public PostDSO() {
     }
 
-    public PostDSO(String key, long postId, OwnerDSO owner, String image, String date, String text, int like, int dislike) {
+    public PostDSO(String key, long postId, OwnerDSO owner, String image, String date, String text, int like,
+                   int dislike, Integer isLike) {
         mKey = key;
         mPostId = postId;
         mOwner = owner;
@@ -27,6 +29,7 @@ public class PostDSO extends RealmObject {
         mText = text;
         mLike = like;
         mDislike = dislike;
+        mIsLike = isLike;
     }
 
     public long getPostId() {
@@ -85,6 +88,14 @@ public class PostDSO extends RealmObject {
         mDislike = dislike;
     }
 
+    public Integer getIsLike() {
+        return mIsLike;
+    }
+
+    public void setIsLike(Integer isLike) {
+        mIsLike = isLike;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -117,13 +128,15 @@ public class PostDSO extends RealmObject {
     @Override
     public String toString() {
         return "PostDSO{" +
-                "mPostId=" + mPostId +
+                "mKey='" + mKey + '\'' +
+                ", mPostId=" + mPostId +
                 ", mOwner=" + mOwner +
                 ", mImage='" + mImage + '\'' +
                 ", mDate='" + mDate + '\'' +
                 ", mText='" + mText + '\'' +
                 ", mLike=" + mLike +
                 ", mDislike=" + mDislike +
+                ", mIsLike=" + mIsLike +
                 '}';
     }
 }

@@ -6,6 +6,8 @@ import by.grodno.toni7777.socialnetwork.network.model.DialogsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.GroupsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ImageResponseDTO;
+import by.grodno.toni7777.socialnetwork.network.model.LikeDTO;
+import by.grodno.toni7777.socialnetwork.network.model.LikeResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.NewPostDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PersonsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
@@ -108,6 +110,12 @@ public interface SocialNetworkAPI {
     Observable<DialogsDTO> getDialogs(@Query(OFFSET) int offset,
                                       @Query(LIMIT) int limit,
                                       @Query(ACCESS_TOKEN) String accessToken);
+
+    @Headers(HEADER_CONTENT_TYPE_APP_JSON)
+    @POST(USERS_LIKE_POST_URL)
+    Observable<LikeResponseDTO> likeUserPost(@Path(PATH_POST_ID) Long postId,
+                                             @Body LikeDTO like,
+                                             @Query(ACCESS_TOKEN) String accessToken);
     // /musics
     // param userId, offset, limit, token
 }

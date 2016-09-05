@@ -3,7 +3,6 @@ package by.grodno.toni7777.socialnetwork.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.grodno.toni7777.socialnetwork.database.model.FriendDSO;
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
@@ -66,7 +65,7 @@ public final class ConverterDTOtoDVO {
     private static PostDVO converteDSOtoDVO(PostDSO source) {
         return new PostDVO(source.getPostId(), new OwnerDVO(source.getOwner().getName(), source.getOwner().getSurname(),
                 source.getOwner().getAvatar()), source.getImage(), source.getDate(), source.getText(),
-                source.getLike(), source.getDislike());
+                source.getLike(), source.getDislike(), source.getIsLike());
     }
 
 }

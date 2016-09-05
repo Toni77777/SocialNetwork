@@ -2,19 +2,25 @@ package by.grodno.toni7777.socialnetwork.ui.wall;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import by.grodno.toni7777.socialnetwork.base.event.LikeEvent;
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
 import by.grodno.toni7777.socialnetwork.database.model.WallDSO;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.network.model.LikeDTO;
+import by.grodno.toni7777.socialnetwork.network.model.LikeResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
+import by.grodno.toni7777.socialnetwork.ui.wall.listener.LikeListener;
 import by.grodno.toni7777.socialnetwork.ui.wall.listener.RemovePostListener;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SMALL_LIMIT;
@@ -38,14 +44,17 @@ public class WallModel implements BaseModel, WallMVP.Model {
     private SocialNetworkAPI mNetworkAPI;
     private DatabaseDAOImp mDatabaseDAO;
     private RemovePostListener mRemoveListener;
+    private LikeListener mLikeListener;
+
 
     public WallModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences, DatabaseDAOImp databaseDAO,
-                     ModelListener<List<PostDVO>> listener, RemovePostListener removeListener) {
+                     ModelListener<List<PostDVO>> listener, RemovePostListener removeListener, LikeListener likeListener) {
         mNetworkAPI = socialNetworkAPI;
         mDatabaseDAO = databaseDAO;
         mPreferences = loginPreferences;
         mListener = listener;
         mRemoveListener = removeListener;
+        mLikeListener = likeListener;
     }
 
     public void loadPosts(int offset) {
@@ -127,6 +136,30 @@ public class WallModel implements BaseModel, WallMVP.Model {
                         throwable -> {
                             unsubscribe();
                             mRemoveListener.removeGetError(throwable);
+                        },
+                        () -> {
+                            unsubscribe();
+                        }
+                );
+    }
+
+    @Override
+    public void sendLike(LikeEvent event) {
+        LikeDTO like = new LikeDTO(event.getLike());
+        Observable<LikeResponseDTO> likeObservable = mNetworkAPI.likeUserPost(event.getPost().getPostId(),
+                like, mPreferences.getAccessToken());
+
+        mSubscription = likeObservable
+                .compose(RxUtil.<LikeResponseDTO>applySchedulers())
+                .subscribe(
+                        response -> {
+                            PostDVO post = event.getPost();
+                            post.setIsLike(response.getIsLike());
+                            mLikeListener.sendLikeCompleted(post);
+                        },
+                        throwable -> {
+                            unsubscribe();
+                            mLikeListener.sendLikeError(throwable);
                         },
                         () -> {
                             unsubscribe();

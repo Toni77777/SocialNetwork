@@ -29,6 +29,7 @@ import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventViewStateFragment;
 import by.grodno.toni7777.socialnetwork.base.EmptyRecyclerView;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
+import by.grodno.toni7777.socialnetwork.base.event.LikeEvent;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
 import by.grodno.toni7777.socialnetwork.base.event.PostPublishSuccess;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
@@ -144,4 +145,14 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
         loadData(true);
     }
 
+    @Subscribe
+    public void sentLike(LikeEvent event) {
+        Log.e("Like", "Like " + event.getLike());
+        presenter.sendLike(event);
+    }
+
+    @Override
+    public void postLiked(PostDVO post) {
+        mPostAdapter.updateLike(post);
+    }
 }

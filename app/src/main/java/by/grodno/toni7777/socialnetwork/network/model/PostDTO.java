@@ -25,6 +25,12 @@ public class PostDTO {
     @SerializedName("dislike")
     private int mDislike;
 
+    /**
+     * Can be NULL
+     */
+    @SerializedName("isLike")
+    private Integer mIsLike;
+
     public PostDTO() {
     }
 
@@ -94,6 +100,14 @@ public class PostDTO {
         mDislike = dislike;
     }
 
+    public Integer getIsLike() {
+        return mIsLike;
+    }
+
+    public void setIsLike(Integer isLike) {
+        mIsLike = isLike;
+    }
+
     @Override
     public String toString() {
         return "PostDTO{" +
@@ -104,6 +118,7 @@ public class PostDTO {
                 ", mText='" + mText + '\'' +
                 ", mLike=" + mLike +
                 ", mDislike=" + mDislike +
+                ", mIsLike=" + mIsLike +
                 '}';
     }
 }

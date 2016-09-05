@@ -9,11 +9,13 @@ public class PostDVO {
     private String mText;
     private int mLike;
     private int mDislike;
+    private Integer mIsLike;
 
     public PostDVO() {
     }
 
-    public PostDVO(long postId, OwnerDVO owner, String image, String date, String text, int like, int dislike) {
+    public PostDVO(long postId, OwnerDVO owner, String image, String date, String text, int like,
+                   int dislike, Integer isLike) {
         mPostId = postId;
         mOwner = owner;
         mImage = image;
@@ -21,6 +23,7 @@ public class PostDVO {
         mText = text;
         mLike = like;
         mDislike = dislike;
+        mIsLike = isLike;
     }
 
     public long getPostId() {
@@ -79,6 +82,14 @@ public class PostDVO {
         mDislike = dislike;
     }
 
+    public Integer getIsLike() {
+        return mIsLike;
+    }
+
+    public void setIsLike(Integer isLike) {
+        mIsLike = isLike;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,11 +98,8 @@ public class PostDVO {
         PostDVO postDVO = (PostDVO) o;
 
         if (mPostId != postDVO.mPostId) return false;
-        if (mLike != postDVO.mLike) return false;
-        if (mDislike != postDVO.mDislike) return false;
         if (mOwner != null ? !mOwner.equals(postDVO.mOwner) : postDVO.mOwner != null) return false;
         if (mImage != null ? !mImage.equals(postDVO.mImage) : postDVO.mImage != null) return false;
-        if (mDate != null ? !mDate.equals(postDVO.mDate) : postDVO.mDate != null) return false;
         return mText != null ? mText.equals(postDVO.mText) : postDVO.mText == null;
 
     }
@@ -101,10 +109,7 @@ public class PostDVO {
         int result = (int) (mPostId ^ (mPostId >>> 32));
         result = 31 * result + (mOwner != null ? mOwner.hashCode() : 0);
         result = 31 * result + (mImage != null ? mImage.hashCode() : 0);
-        result = 31 * result + (mDate != null ? mDate.hashCode() : 0);
         result = 31 * result + (mText != null ? mText.hashCode() : 0);
-        result = 31 * result + mLike;
-        result = 31 * result + mDislike;
         return result;
     }
 
@@ -118,6 +123,7 @@ public class PostDVO {
                 ", mText='" + mText + '\'' +
                 ", mLike=" + mLike +
                 ", mDislike=" + mDislike +
+                ", mIsLike=" + mIsLike +
                 '}';
     }
 }

@@ -23,11 +23,11 @@ import by.grodno.toni7777.socialnetwork.R;
 
 import static by.grodno.toni7777.socialnetwork.util.ImageLoad.*;
 
+import by.grodno.toni7777.socialnetwork.base.event.LikeEvent;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
-import by.grodno.toni7777.socialnetwork.network.model.OwnerDTO;
-import by.grodno.toni7777.socialnetwork.network.model.PostDTO;
 import by.grodno.toni7777.socialnetwork.ui.model.OwnerDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
+import by.grodno.toni7777.socialnetwork.util.Constants;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
@@ -111,6 +111,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
     }
 
+    public void updateLike(PostDVO postLike) {
+        for (PostDVO post : mPosts) {
+            if (post.getPostId() == postLike.getPostId()) {
+                int index = mPosts.indexOf(post);
+                mPosts.get(index).setIsLike(postLike.getIsLike());
+                notifyDataSetChanged();
+//                notifyItemChanged(index, postLike);
+                return;
+            }
+        }
+    }
+
     static abstract class ViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
         public ViewHolder(View v) {
             super(v);
@@ -150,6 +162,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView mDislikeCountView;
 
         private long mPostId;
+        private PostDVO mPost;
 
         @NonNull
         public static FullPostViewHolder newInstance(ViewGroup parent) {
@@ -172,6 +185,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mLikeCountView.setText(String.valueOf(post.getLike()));
             mDislikeCountView.setText(String.valueOf(post.getDislike()));
             mPostId = post.getPostId();
+            Integer isLike = post.getIsLike();
+            if (isLike != null) {
+                mLikeView.setImageResource(R.drawable.ic_like_default);
+                mDislikeView.setImageResource(R.drawable.ic_dislike_default);
+                if (isLike.equals(Constants.POST_LIKE)) {
+                    mLikeView.setImageResource(R.drawable.ic_like_press);
+                } else if (isLike.equals(Constants.POST_DISLIKE)) {
+                    mDislikeView.setImageResource(R.drawable.ic_dislike_press);
+                }
+            }
+            mPost = post;
         }
 
         @OnClick(R.id.post_menu_dot)
@@ -188,6 +212,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 EventBus.getDefault().post(new PostEvent(mPostId));
             }
             return false;
+        }
+
+        @OnClick(R.id.like)
+        void like() {
+            EventBus.getDefault().post(new LikeEvent(mPost, Constants.POST_LIKE));
+        }
+
+        @OnClick(R.id.dislike)
+        void dislike() {
+            EventBus.getDefault().post(new LikeEvent(mPost, Constants.POST_DISLIKE));
         }
     }
 
@@ -222,6 +256,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView mDislikeCountView;
 
         private long mPostId;
+        private PostDVO mPost;
 
         @NonNull
         public static ImagePostViewHolder newInstance(ViewGroup parent) {
@@ -243,6 +278,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mLikeCountView.setText(String.valueOf(post.getLike()));
             mDislikeCountView.setText(String.valueOf(post.getDislike()));
             mPostId = post.getPostId();
+            Integer isLike = post.getIsLike();
+            if (isLike != null) {
+                mLikeView.setImageResource(R.drawable.ic_like_default);
+                mDislikeView.setImageResource(R.drawable.ic_dislike_default);
+                if (isLike.equals(Constants.POST_LIKE)) {
+                    mLikeView.setImageResource(R.drawable.ic_like_press);
+                } else if (isLike.equals(Constants.POST_DISLIKE)) {
+                    mDislikeView.setImageResource(R.drawable.ic_dislike_press);
+                }
+            }
+            mPost = post;
         }
 
         @OnClick(R.id.post_menu_dot)
@@ -259,6 +305,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 EventBus.getDefault().post(new PostEvent(mPostId));
             }
             return false;
+        }
+
+        @OnClick(R.id.like)
+        void like() {
+            EventBus.getDefault().post(new LikeEvent(mPost, Constants.POST_LIKE));
+        }
+
+        @OnClick(R.id.dislike)
+        void dislike() {
+            EventBus.getDefault().post(new LikeEvent(mPost, Constants.POST_DISLIKE));
         }
 
     }
@@ -293,6 +349,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView mDislikeCountView;
 
         private long mPostId;
+        private PostDVO mPost;
 
         @NonNull
         public static TextPostViewHolder newInstance(ViewGroup parent) {
@@ -314,6 +371,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mLikeCountView.setText(String.valueOf(post.getLike()));
             mDislikeCountView.setText(String.valueOf(post.getDislike()));
             mPostId = post.getPostId();
+            Integer isLike = post.getIsLike();
+            if (isLike != null) {
+                mLikeView.setImageResource(R.drawable.ic_like_default);
+                mDislikeView.setImageResource(R.drawable.ic_dislike_default);
+                if (isLike.equals(Constants.POST_LIKE)) {
+                    mLikeView.setImageResource(R.drawable.ic_like_press);
+                } else if (isLike.equals(Constants.POST_DISLIKE)) {
+                    mDislikeView.setImageResource(R.drawable.ic_dislike_press);
+                }
+            }
+            mPost = post;
         }
 
         @OnClick(R.id.post_menu_dot)
@@ -330,6 +398,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 EventBus.getDefault().post(new PostEvent(mPostId));
             }
             return false;
+        }
+
+        @OnClick(R.id.like)
+        void like() {
+            EventBus.getDefault().post(new LikeEvent(mPost, Constants.POST_LIKE));
+        }
+
+        @OnClick(R.id.dislike)
+        void dislike() {
+            EventBus.getDefault().post(new LikeEvent(mPost, Constants.POST_DISLIKE));
         }
     }
 

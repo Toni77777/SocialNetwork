@@ -36,7 +36,7 @@ public final class Constants {
     public static final String CONTENT_TYPE_APPLICATION_JSON = "application/json; charset=utf-8";
 
     public static final int CONNECTION_TIMEOUT = 40;
-    public static final int WRITE_TIMEOUT = 10;
+    public static final int WRITE_TIMEOUT = 15;
     public static final int READ_TIMEOUT = 30;
 
     public static final String EMPTY_STRING = " ";
@@ -48,6 +48,9 @@ public final class Constants {
     public static final long[] NOTIFICATION_VIBRATE = new long[]{1000, 1000, 1000, 1000, 1000};
 
     public static final int REQUEST_PERMISSION = 10;
+
+    public static final int POST_LIKE = 1;
+    public static final int POST_DISLIKE = -1;
 
     private Constants() {
     }
