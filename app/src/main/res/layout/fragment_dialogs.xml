@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.v7.widget.RecyclerView
+            <by.grodno.toni7777.socialnetwork.base.EmptyRecyclerView
                 android:id="@+id/dialogs_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -33,4 +33,11 @@
             android:visibility="gone"/>
 
     </FrameLayout>
+
+    <include
+        android:id="@+id/empty_recycler"
+        layout="@layout/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 </android.support.design.widget.CoordinatorLayout>

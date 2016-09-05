@@ -29,6 +29,7 @@ import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
+import by.grodno.toni7777.socialnetwork.base.EmptyRecyclerView;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.GroupEvent;
 import by.grodno.toni7777.socialnetwork.ui.group.GroupActivity;
@@ -42,10 +43,13 @@ public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, L
         implements GroupsMVP.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.groups_recycler)
-    RecyclerView mGroupsRecycler;
+    EmptyRecyclerView mGroupsRecycler;
 
     @BindView(R.id.progress_pagination_view)
     ProgressBar mProgressPaginView;
+
+    @BindView(R.id.empty_recycler)
+    View mEmptyView;
 
     @Inject
     GroupsPresenter mGroupsPresenter;
@@ -70,6 +74,7 @@ public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, L
         contentView.setOnRefreshListener(this);
         mGroupsAdapter = new GroupsAdapter(new ArrayList<>());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        mGroupsRecycler.setEmptyView(mEmptyView);
         mGroupsRecycler.setAdapter(mGroupsAdapter);
         mGroupsRecycler.setLayoutManager(linearLayoutManager);
         mGroupsRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, presenter));
@@ -128,6 +133,7 @@ public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, L
 
     @Override
     public void loadData(boolean pullToRefresh) {
+        mEmptyView.setVisibility(View.GONE);
         presenter.loadDataWithOffset(pullToRefresh, Constants.START_LOAD);
     }
 

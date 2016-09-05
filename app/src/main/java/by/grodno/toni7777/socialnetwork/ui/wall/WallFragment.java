@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
@@ -26,6 +27,7 @@ import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventViewStateFragment;
+import by.grodno.toni7777.socialnetwork.base.EmptyRecyclerView;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
 import by.grodno.toni7777.socialnetwork.base.event.PostPublishSuccess;
@@ -40,10 +42,13 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
         implements WallMVP.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.posts_recycler)
-    RecyclerView mPostsRecycler;
+    EmptyRecyclerView mPostsRecycler;
 
     @BindView(R.id.progress_pagination_view)
     android.view.View mProgressPaginView;
+
+    @BindView(R.id.empty_recycler)
+    View mEmptyView;
 
     private PostAdapter mPostAdapter;
 
@@ -61,6 +66,7 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
         super.onViewCreated(view, savedInstanceState);
         contentView.setOnRefreshListener(this);
         mPostAdapter = new PostAdapter(new ArrayList<>());
+        mPostsRecycler.setEmptyView(mEmptyView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mPostsRecycler.setAdapter(mPostAdapter);
         mPostsRecycler.setLayoutManager(linearLayoutManager);
@@ -97,6 +103,7 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
 
     @Override
     public void loadData(boolean pullToRefresh) {
+        mEmptyView.setVisibility(View.GONE);
         presenter.loadDataWithOffset(pullToRefresh, START_LOAD);
     }
 

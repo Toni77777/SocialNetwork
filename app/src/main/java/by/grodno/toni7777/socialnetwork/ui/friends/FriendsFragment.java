@@ -30,6 +30,7 @@ import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
+import by.grodno.toni7777.socialnetwork.base.EmptyRecyclerView;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.FriendEvent;
 import by.grodno.toni7777.socialnetwork.ui.friend.FriendActivity;
@@ -45,10 +46,13 @@ public class FriendsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
         implements FriendsMVP.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.friends_recycler)
-    RecyclerView mFreindsRecycler;
+    EmptyRecyclerView mFreindsRecycler;
 
     @BindView(R.id.progress_pagination_view)
     ProgressBar mProgressPaginView;
+
+    @BindView(R.id.empty_recycler)
+    View mEmptyView;
 
     @Inject
     FriendsPresenter mFriendsPresenter;
@@ -73,6 +77,7 @@ public class FriendsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
         contentView.setOnRefreshListener(this);
         mFriendsAdapter = new FriendsAdapter(new ArrayList<>());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        mFreindsRecycler.setEmptyView(mEmptyView);
         mFreindsRecycler.setAdapter(mFriendsAdapter);
         mFreindsRecycler.setLayoutManager(linearLayoutManager);
         mFreindsRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, mFriendsPresenter));
@@ -129,6 +134,7 @@ public class FriendsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
 
     @Override
     public void loadData(boolean pullToRefresh) {
+        mEmptyView.setVisibility(View.GONE);
         presenter.loadDataWithOffset(pullToRefresh, START_LOAD);
     }
 

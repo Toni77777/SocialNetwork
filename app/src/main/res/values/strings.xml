@@ -79,5 +79,6 @@
     <string name="activity_label_friend">Friend</string>
     <string name="activity_label_messages">Messages</string>
     <string name="activity_label_chat">Chat</string>
+    <string name="empty_recycler_view">Have not data. Please, add content</string>
 
 </resources>

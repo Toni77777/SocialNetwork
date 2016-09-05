@@ -80,5 +80,6 @@
     <string name="activity_label_friend">Друг</string>
     <string name="activity_label_messages">Сообщения</string>
     <string name="activity_label_chat">Чат</string>
+    <string name="empty_recycler_view">Нет данных. Пожалуйста, добавьте контент</string>
 
 </resources>

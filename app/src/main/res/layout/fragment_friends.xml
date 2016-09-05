@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <by.grodno.toni7777.socialnetwork.base.EmptyRecyclerView
             android:id="@+id/friends_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -27,5 +27,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:visibility="gone"/>
+
+    <include
+        android:id="@+id/empty_recycler"
+        layout="@layout/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
 </FrameLayout>

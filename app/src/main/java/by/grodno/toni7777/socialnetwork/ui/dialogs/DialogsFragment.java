@@ -26,6 +26,7 @@ import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
+import by.grodno.toni7777.socialnetwork.base.EmptyRecyclerView;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
 import by.grodno.toni7777.socialnetwork.network.model.DialogDTO;
@@ -41,10 +42,13 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
 
 
     @BindView(R.id.dialogs_recycler)
-    RecyclerView mDialogsRecycler;
+    EmptyRecyclerView mDialogsRecycler;
 
     @BindView(R.id.progress_pagination_view)
     View mProgressPaginView;
+
+    @BindView(R.id.empty_recycler)
+    View mEmptyView;
 
     @Inject
     DialogsPresenter mDialogsPresenter;
@@ -64,6 +68,7 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
         contentView.setOnRefreshListener(this);
         mDialogsAdapter = new DialogsAdapter(new ArrayList<>());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        mDialogsRecycler.setEmptyView(mEmptyView);
         mDialogsRecycler.setAdapter(mDialogsAdapter);
         mDialogsRecycler.setLayoutManager(linearLayoutManager);
         mDialogsRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, presenter));
@@ -99,6 +104,7 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
 
     @Override
     public void loadData(boolean pullToRefresh) {
+        mEmptyView.setVisibility(View.GONE);
         presenter.loadDataWithOffset(pullToRefresh, Constants.START_LOAD);
     }
 
