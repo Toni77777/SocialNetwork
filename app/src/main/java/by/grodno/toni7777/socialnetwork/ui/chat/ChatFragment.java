@@ -52,8 +52,8 @@ public class ChatFragment extends BaseFragment {
 
     private ChatAdapter mChatAdapter;
     private ChatDataDVO mChatData;
-    private String mURI = "ws://192.168.7.121:8080/chat/"; // Sasha
-    //    private static String mURI = "ws://192.168.7.116:8080/chat/"; // Masha
+//    private String mURI = "ws://192.168.7.121:8080/chat/"; // Sasha
+        private static String mURI = "ws://192.168.1.2:8080/chat/"; // Masha
     private static final WebSocketConnection mConnection = new WebSocketConnection();
     private static final String STATE_URI = "sateURI";
 
