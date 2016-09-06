@@ -9,7 +9,7 @@ import java.util.Date;
 import by.grodno.toni7777.socialnetwork.BuildConfig;
 import by.grodno.toni7777.socialnetwork.R;
 
-import static by.grodno.toni7777.socialnetwork.util.Constants.DATE_DEFAULT;
+import static by.grodno.toni7777.socialnetwork.util.Constants.DATE_APP_INFO;
 
 public class AppInfoFragment extends PreferenceFragment {
 
@@ -20,6 +20,6 @@ public class AppInfoFragment extends PreferenceFragment {
         findPreference(getString(R.string.preference_version_name)).setSummary(BuildConfig.VERSION_NAME);
         findPreference(getString(R.string.preference_build_number)).setSummary(String.valueOf(BuildConfig.VERSION_CODE));
         findPreference(getString(R.string.preference_build_date))
-                .setSummary(new SimpleDateFormat(DATE_DEFAULT).format(new Date()));
+                .setSummary(new SimpleDateFormat(DATE_APP_INFO).format(new Date()));
     }
 }

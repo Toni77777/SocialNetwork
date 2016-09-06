@@ -26,6 +26,11 @@ public class DatePickerFragment extends DialogFragment
                 calendar.get(Calendar.DAY_OF_MONTH));
     }
 
+    /**
+     * Month range 0 to 11
+     * http://docs.oracle.com/javase/6/docs/api/java/util/Calendar.html#MONTH
+     * Need month added +1
+     */
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Intent intent = new Intent()
                 .putExtra(SHARE_DATE_PICKER, String.valueOf(day) + PLACEHOLDER + month + PLACEHOLDER + year);
