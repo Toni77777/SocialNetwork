@@ -25,6 +25,7 @@ import butterknife.BindView;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
+import by.grodno.toni7777.socialnetwork.base.DividerItemDecoration;
 import by.grodno.toni7777.socialnetwork.base.EmptyRecyclerView;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.ChatEvent;
@@ -68,6 +69,7 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
         mDialogsAdapter = new DialogsAdapter(new ArrayList<>());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mDialogsRecycler.setEmptyView(mEmptyView);
+        mDialogsRecycler.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         mDialogsRecycler.setAdapter(mDialogsAdapter);
         mDialogsRecycler.setLayoutManager(linearLayoutManager);
         mDialogsRecycler.addOnScrollListener(new PaginationOnScrollListener(linearLayoutManager, mProgressPaginView, presenter));
