@@ -85,7 +85,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
             ImageLoad.loadCircleImage(mAvatarView, friendDTO.getAvatar());
             mNameView.setText(friendDTO.getName() + " " + friendDTO.getSurname());
             mChatId = dialog.getChatId();
-            mLastMessageView.setText(dialog.getLastMessage());
+            mLastMessageView.setText(dialog.getChatMessage().toString());
             mNameFriend = friendDTO.getName();
             mAvatarFriend = friendDTO.getAvatar();
         }

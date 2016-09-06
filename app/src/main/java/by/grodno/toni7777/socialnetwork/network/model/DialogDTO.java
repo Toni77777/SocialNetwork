@@ -10,7 +10,7 @@ public class DialogDTO {
     private long mChatId;
 
     @SerializedName("lastMessage")
-    private String mLastMessage;
+    private ChatMessageDTO mChatMessage;
 
     @SerializedName("reciver")
     private List<FriendDTO> mFriends;
@@ -23,12 +23,12 @@ public class DialogDTO {
         mChatId = chatId;
     }
 
-    public String getLastMessage() {
-        return mLastMessage;
+    public ChatMessageDTO getChatMessage() {
+        return mChatMessage;
     }
 
-    public void setLastMessage(String lastMessage) {
-        mLastMessage = lastMessage;
+    public void setChatMessage(ChatMessageDTO chatMessage) {
+        mChatMessage = chatMessage;
     }
 
     public List<FriendDTO> getFriends() {
@@ -47,7 +47,7 @@ public class DialogDTO {
         DialogDTO dialogDTO = (DialogDTO) o;
 
         if (mChatId != dialogDTO.mChatId) return false;
-        if (mLastMessage != null ? !mLastMessage.equals(dialogDTO.mLastMessage) : dialogDTO.mLastMessage != null)
+        if (mChatMessage != null ? !mChatMessage.equals(dialogDTO.mChatMessage) : dialogDTO.mChatMessage != null)
             return false;
         return mFriends != null ? mFriends.equals(dialogDTO.mFriends) : dialogDTO.mFriends == null;
 
@@ -56,7 +56,7 @@ public class DialogDTO {
     @Override
     public int hashCode() {
         int result = (int) (mChatId ^ (mChatId >>> 32));
-        result = 31 * result + (mLastMessage != null ? mLastMessage.hashCode() : 0);
+        result = 31 * result + (mChatMessage != null ? mChatMessage.hashCode() : 0);
         result = 31 * result + (mFriends != null ? mFriends.hashCode() : 0);
         return result;
     }
@@ -65,7 +65,7 @@ public class DialogDTO {
     public String toString() {
         return "DialogDTO{" +
                 "mChatId=" + mChatId +
-                ", mLastMessage='" + mLastMessage + '\'' +
+                ", mChatMessage=" + mChatMessage +
                 ", mFriends=" + mFriends +
                 '}';
     }

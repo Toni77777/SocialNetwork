@@ -32,8 +32,8 @@ android {
         applicationId "by.grodno.toni7777.socialnetwork"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 11
-        versionName "0.1.1"
+        versionCode 12
+        versionName "0.1.2"
         multiDexEnabled true
 
         buildConfigField "String", "LOGIN", "\"user\""
