@@ -1,10 +1,6 @@
 package by.grodno.toni7777.socialnetwork.ui.wall;
 
-import android.util.EventLog;
 import android.util.Log;
-
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 
