@@ -57,7 +57,7 @@ android {
         }
 
         release {
-            buildConfigField "String", "BASE_URL", "\"https://sjc2016vs9.fwd.wf/\""
+            buildConfigField "String", "BASE_URL", "\"http://192.168.7.121:8080\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release

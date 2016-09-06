@@ -1,5 +1,6 @@
 package by.grodno.toni7777.socialnetwork.ui.wall;
 
+import android.util.EventLog;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -25,6 +26,7 @@ import by.grodno.toni7777.socialnetwork.ui.wall.listener.RemovePostListener;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SMALL_LIMIT;
 
+import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDSO;
 import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
@@ -155,6 +157,18 @@ public class WallModel implements BaseModel, WallMVP.Model {
                         response -> {
                             PostDVO post = event.getPost();
                             post.setIsLike(response.getIsLike());
+                            Integer isLike = event.getPost().getIsLike();
+                            Integer isLikeResponse = response.getIsLike();
+
+                            if (isLike.equals(isLikeResponse) && isLikeResponse.equals(Constants.POST_LIKE)) {
+                                post.setLike(post.getLike() - 1);
+                            } else if (isLike.equals(isLikeResponse) && isLikeResponse.equals(Constants.POST_DISLIKE)) {
+                                post.setDislike(post.getDislike() - 1);
+                            } else if (isLike.equals(0) && (isLikeResponse.equals(1))) {
+                                post.setLike(post.getLike() + 1);
+                            } else if (isLike.equals(0) && (isLikeResponse.equals(-1))) {
+                                post.setDislike(post.getDislike() + 1);
+                            }
                             mLikeListener.sendLikeCompleted(post);
                         },
                         throwable -> {
