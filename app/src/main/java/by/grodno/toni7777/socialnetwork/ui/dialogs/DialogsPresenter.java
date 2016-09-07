@@ -52,4 +52,14 @@ public class DialogsPresenter extends MvpBasePresenter<DialogsMVP.View>
             getView().showError(e, mForceRefresh);
         }
     }
+
+    @Override
+    public long getMyId() {
+        return mModel.getMyId();
+    }
+
+    @Override
+    public String getMyAvatar() {
+        return mModel.getMyAvatar();
+    }
 }

@@ -66,7 +66,7 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         contentView.setOnRefreshListener(this);
-        mDialogsAdapter = new DialogsAdapter(new ArrayList<>());
+        mDialogsAdapter = new DialogsAdapter(new ArrayList<>(), presenter.getMyId(), presenter.getMyAvatar());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mDialogsRecycler.setEmptyView(mEmptyView);
         mDialogsRecycler.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));

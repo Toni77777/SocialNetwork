@@ -2,6 +2,7 @@ package by.grodno.toni7777.socialnetwork.ui.dialogs.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +27,13 @@ import by.grodno.toni7777.socialnetwork.util.ImageLoad;
 public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsViewHolder> {
 
     private final List<DialogDTO> mDialogs;
+    private long mMyId;
+    private String mMyAvatar;
 
-    public DialogsAdapter(List<DialogDTO> dialogs) {
+    public DialogsAdapter(List<DialogDTO> dialogs, long myId, String myAvatar) {
         mDialogs = new ArrayList<>(dialogs);
+        mMyId = myId;
+        mMyAvatar = myAvatar;
     }
 
     @Override
@@ -39,7 +44,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
     @Override
     public void onBindViewHolder(DialogsViewHolder holder, int position) {
         DialogDTO dialog = mDialogs.get(position);
-        holder.bind(dialog);
+        holder.bind(dialog, mMyId, mMyAvatar);
     }
 
     @Override
@@ -68,6 +73,9 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
         @BindView(R.id.interlocutor_name)
         TextView mNameView;
 
+        @BindView(R.id.sender_image)
+        ImageView mSenderAvatarView;
+
         @BindView(R.id.last_message)
         TextView mLastMessageView;
 
@@ -80,12 +88,17 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.DialogsV
             ButterKnife.bind(this, view);
         }
 
-        void bind(DialogDTO dialog) {
+        void bind(DialogDTO dialog, long myId, String myAvatar) {
             FriendDTO friendDTO = dialog.getFriends().get(0);
             ImageLoad.loadCircleImage(mAvatarView, friendDTO.getAvatar());
             mNameView.setText(friendDTO.getName() + " " + friendDTO.getSurname());
+            if (dialog.getChatMessage().getSenderId() == myId) {
+                ImageLoad.loadCircleImage(mSenderAvatarView, myAvatar);
+            } else {
+                ImageLoad.loadCircleImage(mSenderAvatarView, friendDTO.getAvatar());
+            }
+            mLastMessageView.setText(dialog.getChatMessage().getMessage());
             mChatId = dialog.getChatId();
-            mLastMessageView.setText(dialog.getChatMessage().toString());
             mNameFriend = friendDTO.getName();
             mAvatarFriend = friendDTO.getAvatar();
         }

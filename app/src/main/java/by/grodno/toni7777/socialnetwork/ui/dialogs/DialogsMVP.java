@@ -13,6 +13,10 @@ public final class DialogsMVP {
 
         void loadDialogs(int offset);
 
+        long getMyId();
+
+        String getMyAvatar();
+
     }
 
     interface View extends MvpLceView<List<DialogDTO>> {
@@ -20,6 +24,10 @@ public final class DialogsMVP {
     }
 
     interface Presenter extends LoadPagination {
+
+        long getMyId();
+
+        String getMyAvatar();
 
     }
 

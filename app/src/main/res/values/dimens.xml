@@ -31,6 +31,7 @@
     <dimen name="group_image_width">60dp</dimen>
     <dimen name="group_image_height">60dp</dimen>
     <dimen name="friend_margin_horizontal">4dp</dimen>
+    <dimen name="margin_horizontal">8dp</dimen>
     <dimen name="weight_dimen">0dp</dimen>
 
 </resources>

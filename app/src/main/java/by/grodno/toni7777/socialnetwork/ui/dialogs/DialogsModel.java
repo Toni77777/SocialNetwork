@@ -58,4 +58,13 @@ public class DialogsModel implements BaseModel, DialogsMVP.Model {
             mSubscription.unsubscribe();
         }
     }
+
+    public long getMyId() {
+        return mPreferences.getUserId();
+    }
+
+    @Override
+    public String getMyAvatar() {
+        return mPreferences.getUserAvatar();
+    }
 }
