@@ -13,5 +13,6 @@
     <color name="newPostBottomColor">#dfdee6</color>
     <color name="toolbar_title">#ffffff</color>
     <color name="message">#aaede7e7</color>
+    <color name="windowBackground">#F5F5F5</color>
 
 </resources>
