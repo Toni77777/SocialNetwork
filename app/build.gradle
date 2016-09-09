@@ -57,7 +57,7 @@ android {
         }
 
         release {
-            buildConfigField "String", "BASE_URL", "\"http://192.168.7.121:8080\""
+            buildConfigField "String", "BASE_URL", "\"https://sjc2016vs9.fwd.wf/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
@@ -104,6 +104,8 @@ def eventBusVersion = '3.0.0'
 def eventBusAPVersion = '3.0.1'
 def firebaseVersion = '9.0.1'
 def multidexVersion = '1.0.0'
+def materialEditTextVersion = '2.1.4'
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -148,6 +150,8 @@ dependencies {
     compile "com.google.firebase:firebase-messaging:$firebaseVersion"
 
     compile "com.android.support:multidex:$multidexVersion"
+
+    compile "com.rengwuxian.materialedittext:library:$materialEditTextVersion"
 }
 
 

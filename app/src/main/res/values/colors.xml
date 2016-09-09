@@ -14,5 +14,7 @@
     <color name="toolbar_title">#ffffff</color>
     <color name="message">#aaede7e7</color>
     <color name="windowBackground">#F5F5F5</color>
+    <color name="normal">#FFC107</color>
+    <color name="press">#FFA000</color>
 
 </resources>
