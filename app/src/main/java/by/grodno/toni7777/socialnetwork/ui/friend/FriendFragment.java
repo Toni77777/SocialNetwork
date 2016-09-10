@@ -30,13 +30,14 @@ import by.grodno.toni7777.socialnetwork.base.BaseEventViewStateFragment;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
 import by.grodno.toni7777.socialnetwork.ui.friend.adapter.FriendAdapter;
 import by.grodno.toni7777.socialnetwork.ui.group.listener.PaginationGroupListener;
+import by.grodno.toni7777.socialnetwork.ui.model.FriendStateDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.ui.newpost.NewPostActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
 
-public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayout, FriendSaveState, FriendMVP.View, FriendPresenter>
+public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayout, FriendStateDVO, FriendMVP.View, FriendPresenter>
         implements FriendMVP.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.posts_recycler)
@@ -45,7 +46,7 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     @BindView(R.id.progress_pagination_view)
     View mProgressPaginView;
 
-    private FriendAdapter mPostAdapter;
+    private FriendAdapter mFriendAdapter;
 
     @Inject
     FriendPresenter mFriendPresenter;
@@ -78,9 +79,9 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         contentView.setOnRefreshListener(this);
-        mPostAdapter = new FriendAdapter(new ArrayList<>());
+        mFriendAdapter = new FriendAdapter(new ArrayList<>());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mPostsRecycler.setAdapter(mPostAdapter);
+        mPostsRecycler.setAdapter(mFriendAdapter);
         mPostsRecycler.setLayoutManager(linearLayoutManager);
         mPostsRecycler.addOnScrollListener(new PaginationGroupListener(linearLayoutManager, mProgressPaginView, mFriendPresenter, mFriendId));
     }
@@ -93,19 +94,19 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
-        mPostAdapter.clear();
+        mFriendAdapter.clear();
         loadData(true);
     }
 
     @Override
-    public LceViewState<FriendSaveState, FriendMVP.View> createViewState() {
+    public LceViewState<FriendStateDVO, FriendMVP.View> createViewState() {
         setRetainInstance(true);
         return new RetainingLceViewState<>();
     }
 
     @Override
-    public FriendSaveState getData() {
-        return new FriendSaveState(mPostAdapter.getProfile(), mPostAdapter.getPosts());
+    public FriendStateDVO getData() {
+        return new FriendStateDVO(mFriendAdapter.getProfile(), mFriendAdapter.getPosts());
     }
 
     @Override
@@ -114,9 +115,9 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     }
 
     @Override
-    public void setData(FriendSaveState saveState) {
-        mPostAdapter.setProfile(saveState.getProfile());
-        mPostAdapter.update(saveState.getPosts());
+    public void setData(FriendStateDVO saveState) {
+        mFriendAdapter.setProfile(saveState.getProfile());
+        mFriendAdapter.update(saveState.getPosts());
     }
 
     @Override
@@ -151,12 +152,12 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
 
     @Override
     public void profileLoaded(ProfileDVO profile) {
-        mPostAdapter.setProfile(profile);
+        mFriendAdapter.setProfile(profile);
     }
 
     @Override
     public void postLoaded(List<PostDVO> posts) {
         contentView.setRefreshing(false);
-        mPostAdapter.update(posts);
+        mFriendAdapter.update(posts);
     }
 }

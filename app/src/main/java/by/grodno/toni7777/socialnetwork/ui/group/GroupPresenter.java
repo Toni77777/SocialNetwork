@@ -9,18 +9,28 @@ import javax.inject.Inject;
 
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.ui.group.listener.GroupInfoListener;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupInfoDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 public class GroupPresenter extends MvpBasePresenter<GroupMVP.View>
-        implements ModelListener<List<PostDVO>>, MvpPresenter<GroupMVP.View>, GroupMVP.Presenter {
+        implements ModelListener<List<PostDVO>>, MvpPresenter<GroupMVP.View>, GroupMVP.Presenter, GroupInfoListener {
 
     private final GroupModel mModel;
     private boolean mForceRefresh;
 
     @Inject
     public GroupPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
-        mModel = new GroupModel(socialNetworkAPI, loginPreferences, this);
+        mModel = new GroupModel(socialNetworkAPI, loginPreferences, this, this);
+    }
+
+    @Override
+    public void loadGroupInfo(long groupId, boolean forceRefresh) {
+        if (isViewAttached()) {
+            getView().showLoading(forceRefresh);
+        }
+        mModel.loadGroupInfo(groupId);
     }
 
     @Override
@@ -43,7 +53,7 @@ public class GroupPresenter extends MvpBasePresenter<GroupMVP.View>
     @Override
     public void loadNext(List<PostDVO> post) {
         if (isViewAttached()) {
-            getView().setData(post);
+            getView().postsLoaded(post);
         }
     }
 
@@ -54,7 +64,17 @@ public class GroupPresenter extends MvpBasePresenter<GroupMVP.View>
         }
     }
 
-    public void loadGroupInfo(long groupId) {
-        mModel.loadGroupInfo(groupId);
+    @Override
+    public void onInfoLoadCompleted(GroupInfoDVO groupInfo) {
+        if (isViewAttached()) {
+            getView().infoLoaded(groupInfo);
+        }
+    }
+
+    @Override
+    public void loadInfoError(Throwable e) {
+        if (isViewAttached()) {
+            getView().showError(e, mForceRefresh);
+        }
     }
 }

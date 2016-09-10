@@ -23,7 +23,6 @@ import by.grodno.toni7777.socialnetwork.ui.wall.listener.RemovePostListener;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.SMALL_LIMIT;
 
-import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDSO;
 import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;

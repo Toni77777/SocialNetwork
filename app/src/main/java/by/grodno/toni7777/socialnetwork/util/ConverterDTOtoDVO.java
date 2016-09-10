@@ -6,10 +6,12 @@ import java.util.List;
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
+import by.grodno.toni7777.socialnetwork.network.model.GroupDataDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PersonsDTO;
 import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.FriendsDVO;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupInfoDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.OwnerDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PersonDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PersonsDVO;
@@ -68,4 +70,13 @@ public final class ConverterDTOtoDVO {
                 source.getLike(), source.getDislike(), source.getIsLike());
     }
 
+    public static GroupInfoDVO toGroupInfo(GroupDataDTO source) {
+        return new GroupInfoDVO(source.getGroupInfo().getGroupId(),
+                source.getGroupInfo().getName(),
+                source.getGroupInfo().getMembers(),
+                source.getGroupInfo().getGroupAvatar(),
+                source.getGroupInfo().getDescription(),
+                source.getGroupInfo().isOwner(),
+                source.getGroupInfo().isMember());
+    }
 }

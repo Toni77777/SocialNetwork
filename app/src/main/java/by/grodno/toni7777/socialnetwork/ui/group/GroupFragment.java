@@ -28,14 +28,16 @@ import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventViewStateFragment;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
+import by.grodno.toni7777.socialnetwork.ui.group.adapter.GroupAdapter;
 import by.grodno.toni7777.socialnetwork.ui.group.listener.PaginationGroupListener;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupInfoDVO;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupStateDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.newpost.NewPostActivity;
-import by.grodno.toni7777.socialnetwork.ui.wall.adapter.PostAdapter;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
 
-public class GroupFragment extends BaseEventViewStateFragment<SwipeRefreshLayout, List<PostDVO>, GroupMVP.View, GroupPresenter>
+public class GroupFragment extends BaseEventViewStateFragment<SwipeRefreshLayout, GroupStateDVO, GroupMVP.View, GroupPresenter>
         implements GroupMVP.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.posts_recycler)
@@ -44,7 +46,7 @@ public class GroupFragment extends BaseEventViewStateFragment<SwipeRefreshLayout
     @BindView(R.id.progress_pagination_view)
     View mProgressPaginView;
 
-    private PostAdapter mPostAdapter;
+    private GroupAdapter mGroupAdapter;
 
     @Inject
     GroupPresenter mWallPresenter;
@@ -77,9 +79,9 @@ public class GroupFragment extends BaseEventViewStateFragment<SwipeRefreshLayout
         ((SocialNetworkApp) getContext().getApplicationContext()).getPresenterComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
         contentView.setOnRefreshListener(this);
-        mPostAdapter = new PostAdapter(new ArrayList<>());
+        mGroupAdapter = new GroupAdapter(new ArrayList<>());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mPostsRecycler.setAdapter(mPostAdapter);
+        mPostsRecycler.setAdapter(mGroupAdapter);
         mPostsRecycler.setLayoutManager(linearLayoutManager);
         mPostsRecycler.addOnScrollListener(new PaginationGroupListener(linearLayoutManager, mProgressPaginView, mWallPresenter, mGroupId));
     }
@@ -92,19 +94,25 @@ public class GroupFragment extends BaseEventViewStateFragment<SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-        mPostAdapter.clear();
+        mGroupAdapter.clear();
         loadData(true);
     }
 
     @Override
-    public LceViewState<List<PostDVO>, GroupMVP.View> createViewState() {
+    public LceViewState<GroupStateDVO, GroupMVP.View> createViewState() {
         setRetainInstance(true);
         return new RetainingLceViewState<>();
     }
 
     @Override
-    public List<PostDVO> getData() {
-        return mPostAdapter.getPosts();
+    public GroupStateDVO getData() {
+        return new GroupStateDVO(mGroupAdapter.getInfo(), mGroupAdapter.getPosts());
+    }
+
+    @Override
+    public void setData(GroupStateDVO groupState) {
+        mGroupAdapter.setInfo(groupState.getGroupInfo());
+        mGroupAdapter.update(groupState.getPosts());
     }
 
     @Override
@@ -113,15 +121,8 @@ public class GroupFragment extends BaseEventViewStateFragment<SwipeRefreshLayout
     }
 
     @Override
-    public void setData(List<PostDVO> data) {
-        contentView.setRefreshing(false);
-        mPostAdapter.update(data);
-    }
-
-    @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadGroupInfo(mGroupId);
-//        presenter.loadDataWithOffset(mGroupId, pullToRefresh, Constants.START_LOAD);
+        presenter.loadGroupInfo(mGroupId, pullToRefresh);
     }
 
     @Override
@@ -149,4 +150,14 @@ public class GroupFragment extends BaseEventViewStateFragment<SwipeRefreshLayout
         startActivity(new Intent(getContext(), NewPostActivity.class));
     }
 
+    @Override
+    public void infoLoaded(GroupInfoDVO info) {
+        mGroupAdapter.setInfo(info);
+    }
+
+    @Override
+    public void postsLoaded(List<PostDVO> posts) {
+        contentView.setRefreshing(false);
+        mGroupAdapter.update(posts);
+    }
 }

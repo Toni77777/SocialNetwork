@@ -1,16 +1,16 @@
-package by.grodno.toni7777.socialnetwork.ui.friend;
+package by.grodno.toni7777.socialnetwork.ui.model;
 
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 
-public class FriendSaveState {
+public class FriendStateDVO {
 
     private ProfileDVO mProfile;
     private List<PostDVO> mPosts;
 
-    public FriendSaveState(ProfileDVO profile, List<PostDVO> posts) {
+    public FriendStateDVO(ProfileDVO profile, List<PostDVO> posts) {
         mProfile = profile;
         mPosts = posts;
     }

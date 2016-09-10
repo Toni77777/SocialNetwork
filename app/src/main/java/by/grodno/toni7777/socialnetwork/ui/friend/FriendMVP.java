@@ -5,6 +5,7 @@ import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.ui.group.listener.GroupPagination;
+import by.grodno.toni7777.socialnetwork.ui.model.FriendStateDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 
@@ -18,7 +19,7 @@ public final class FriendMVP {
 
     }
 
-    interface View extends MvpLceView<FriendSaveState> {
+    interface View extends MvpLceView<FriendStateDVO> {
 
         void profileLoaded(ProfileDVO profile);
 

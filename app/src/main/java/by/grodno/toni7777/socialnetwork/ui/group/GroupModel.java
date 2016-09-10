@@ -1,6 +1,5 @@
 package by.grodno.toni7777.socialnetwork.ui.group;
 
-
 import android.util.Log;
 
 import java.util.List;
@@ -12,6 +11,8 @@ import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDataDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
+import by.grodno.toni7777.socialnetwork.ui.group.listener.GroupInfoListener;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupInfoDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.ConverterDTOtoDSO;
@@ -28,30 +29,36 @@ public class GroupModel implements BaseModel, GroupMVP.Model {
     private Subscription mSubscription;
     private LoginPreferences mPreferences;
     private SocialNetworkAPI mNetworkAPI;
+    private GroupInfoListener mInfoListener;
 
     public GroupModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences,
-                      ModelListener<List<PostDVO>> listener) {
+                      ModelListener<List<PostDVO>> listener, GroupInfoListener infoListener) {
         mNetworkAPI = socialNetworkAPI;
         mPreferences = loginPreferences;
         mListener = listener;
+        mInfoListener = infoListener;
     }
 
+    @Override
     public void loadGroupInfo(long groupId) {
         Observable<GroupDataDTO> postsObservable = mNetworkAPI.getGroupInfo(groupId, mPreferences.getAccessToken());
         unsubscribe();
         mSubscription = postsObservable
-                .compose(RxUtil.<GroupDataDTO>applySchedulers())
+                .map(ConverterDTOtoDVO::toGroupInfo)
+                .compose(RxUtil.<GroupInfoDVO>applySchedulers())
                 .subscribe(
                         info -> {
                             Log.e("Info", "Group info = " + info);
+                            mInfoListener.onInfoLoadCompleted(info);
+                            loadPosts(groupId, Constants.START_LOAD);
+
                         },
                         throwable -> {
+                            mInfoListener.loadInfoError(throwable);
                             unsubscribe();
-                            mListener.loadError(throwable);
                         },
                         () -> {
                             unsubscribe();
-                            mListener.onLoadCompleted();
                         }
                 );
     }

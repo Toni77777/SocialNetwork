@@ -22,9 +22,9 @@ import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.base.event.LikeEvent;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupInfoDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.OwnerDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
-import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 
 import static by.grodno.toni7777.socialnetwork.util.ImageLoad.loadCircleImage;
@@ -33,7 +33,7 @@ import static by.grodno.toni7777.socialnetwork.util.ImageLoad.loadImage;
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> {
 
     private final List<PostDVO> mPosts;
-    private ProfileDVO mProfile;
+    private GroupInfoDVO mInfo;
     private static final int INFORMATION = R.id.type_post_information;
     private static final int FULL = R.id.type_post_full;
     private static final int IMAGE = R.id.type_post_image;
@@ -62,7 +62,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         int viewType = holder.getItemViewType();
         if (viewType == INFORMATION) {
-            ((InformationViewHolder) holder).bind(mProfile);
+            ((InformationViewHolder) holder).bind(mInfo);
         } else {
             PostDVO post = mPosts.get(position - 1);
             if (viewType == FULL) {
@@ -116,12 +116,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         return mPosts;
     }
 
-    public void setProfile(ProfileDVO profile) {
-        mProfile = profile;
+    public GroupInfoDVO getInfo() {
+        return mInfo;
     }
 
-    public ProfileDVO getProfile() {
-        return mProfile;
+    public void setInfo(GroupInfoDVO info) {
+        mInfo = info;
     }
 
     public void deleteRemovedPost(long postId) {
@@ -155,16 +155,22 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
 
     static class InformationViewHolder extends ViewHolder {
 
-        @BindView(R.id.profile_image)
-        ImageView mFriendAvatarView;
+        @BindView(R.id.group_image)
+        ImageView mGroupAvatarView;
 
-        @BindView(R.id.profile_name)
-        TextView mFriendNameView;
+        @BindView(R.id.group_name)
+        TextView mNameView;
+
+        @BindView(R.id.group_members)
+        TextView mMembersView;
+
+        @BindView(R.id.group_description)
+        TextView mDescriptionView;
 
         @NonNull
         public static InformationViewHolder newInstance(ViewGroup parent) {
             return new InformationViewHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_post_profile, parent, false));
+                    .inflate(R.layout.item_group_information, parent, false));
         }
 
         private InformationViewHolder(View view) {
@@ -172,9 +178,11 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             ButterKnife.bind(this, view);
         }
 
-        void bind(ProfileDVO profile) {
-            mFriendNameView.setText(profile.getName() + " " + profile.getSurname());
-            loadCircleImage(mFriendAvatarView, profile.getAvatar());
+        void bind(GroupInfoDVO groupInfo) {
+            loadCircleImage(mGroupAvatarView, groupInfo.getGroupAvatar());
+            mNameView.setText(groupInfo.getName());
+            mMembersView.setText(String.valueOf(groupInfo.getMembers()));
+            mDescriptionView.setText(groupInfo.getDescription());
         }
 
         @Override

@@ -4,8 +4,9 @@ import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 
 import java.util.List;
 
-import by.grodno.toni7777.socialnetwork.base.LoadPagination;
 import by.grodno.toni7777.socialnetwork.ui.group.listener.GroupPagination;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupInfoDVO;
+import by.grodno.toni7777.socialnetwork.ui.model.GroupStateDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 
 public final class GroupMVP {
@@ -14,13 +15,21 @@ public final class GroupMVP {
 
         void loadPosts(long groupId, int offset);
 
+        void loadGroupInfo(long groupId);
+
     }
 
-    interface View extends MvpLceView<List<PostDVO>> {
+    interface View extends MvpLceView<GroupStateDVO> {
+
+        void infoLoaded(GroupInfoDVO info);
+
+        void postsLoaded(List<PostDVO> posts);
 
     }
 
     interface Presenter extends GroupPagination {
+
+        void loadGroupInfo(long groupId, boolean forceRefresh);
 
     }
 
