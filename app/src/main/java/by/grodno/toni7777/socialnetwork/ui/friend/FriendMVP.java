@@ -13,6 +13,8 @@ public final class FriendMVP {
 
         void loadPosts(long friendId, int offset);
 
+        void loadUserInfo(long friendId);
+
     }
 
     interface View extends MvpLceView<List<PostDVO>> {
@@ -20,6 +22,8 @@ public final class FriendMVP {
     }
 
     interface Presenter extends GroupPagination {
+
+        void getProfileInfo(long userId, boolean forceRefresh);
 
     }
 

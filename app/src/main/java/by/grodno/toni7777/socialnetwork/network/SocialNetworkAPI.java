@@ -116,6 +116,10 @@ public interface SocialNetworkAPI {
     Observable<LikeResponseDTO> likeUserPost(@Path(PATH_POST_ID) Long postId,
                                              @Body LikeDTO like,
                                              @Query(ACCESS_TOKEN) String accessToken);
+
+    @GET(USERS_PROFILE_INFO_URL)
+    Observable<ProfileDTO> getUserProfile(@Path(PATH_USER_ID) Long userId,
+                                          @Query(ACCESS_TOKEN) String accessToken);
     // /musics
     // param userId, offset, limit, token
 }

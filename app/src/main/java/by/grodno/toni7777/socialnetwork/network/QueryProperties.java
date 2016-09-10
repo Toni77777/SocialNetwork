@@ -24,6 +24,7 @@ public final class QueryProperties {
     public static final String GROUP_POSTS_URL = "/groups/posts";
     public static final String DIALOGS_URL = "/dialogs";
     public static final String USERS_LIKE_POST_URL = "/users/posts/{idPost}/likes";
+    public static final String USERS_PROFILE_INFO_URL = "/users/{idUser}";
 
     public static final String USER_ID = "userId";
     public static final String OFFSET = "offset";
@@ -36,6 +37,7 @@ public final class QueryProperties {
     public static final String GROUP_ID = "groupId";
     public static final String ID = "id";
     public static final String PATH_POST_ID = "idPost";
+    public static final String PATH_USER_ID = "idUser";
 
 
     public static final String HEADER_AUTORIZATION = "Authorization";

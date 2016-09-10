@@ -121,7 +121,8 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadDataWithOffset(mFriendId, pullToRefresh, Constants.START_LOAD);
+        presenter.getProfileInfo(mFriendId, pullToRefresh);
+//        presenter.loadDataWithOffset(mFriendId, pullToRefresh, Constants.START_LOAD);
     }
 
     @Override
