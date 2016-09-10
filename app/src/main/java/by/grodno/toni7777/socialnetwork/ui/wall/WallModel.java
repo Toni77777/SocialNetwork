@@ -1,6 +1,7 @@
 package by.grodno.toni7777.socialnetwork.ui.wall;
 
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,20 +152,41 @@ public class WallModel implements BaseModel, WallMVP.Model {
                 .compose(RxUtil.<LikeResponseDTO>applySchedulers())
                 .subscribe(
                         response -> {
+//                            Log.e("Like", "like response" + response);
                             PostDVO post = event.getPost();
-                            post.setIsLike(response.getIsLike());
-                            Integer isLike = event.getPost().getIsLike();
-                            Integer isLikeResponse = response.getIsLike();
+//                            Integer isLikePost = post.getIsLike();
+//                            if (isLikePost == null) {
+//                                isLikePost = 0;
+//                            }
+//                            Integer isLikeEvent = event.getLike();
+//                            Integer isLikeResponse = response.getIsLike();
+//                            Log.e("Like", "like response response  " + isLikeResponse);
+//                            //Correct work
+//                            if ((isLikePost.equals(0)) && (isLikeEvent.equals(1)) && (isLikeEvent.equals(isLikeResponse))) {
+//                                Log.e("Like", "Like work !!!");
+//                                Integer countLike = post.getLike();
+//                                Log.e("Like", "Count like  " + countLike);
+//
+//                                post.setLike(countLike + 1);
+//                                Log.e("Like", "Post like  " + post.getLike());
+//                                post.setIsLike(isLikeResponse);
+//                            }
+//                            post.setIsLike(response.getIsLike()); // fail
 
-                            if (isLike.equals(isLikeResponse) && isLikeResponse.equals(Constants.POST_LIKE)) {
-                                post.setLike(post.getLike() - 1);
-                            } else if (isLike.equals(isLikeResponse) && isLikeResponse.equals(Constants.POST_DISLIKE)) {
-                                post.setDislike(post.getDislike() - 1);
-                            } else if (isLike.equals(0) && (isLikeResponse.equals(1))) {
-                                post.setLike(post.getLike() + 1);
-                            } else if (isLike.equals(0) && (isLikeResponse.equals(-1))) {
-                                post.setDislike(post.getDislike() + 1);
-                            }
+//                            if (isLike.equals(isLikeResponse) && isLikeResponse.equals(Constants.POST_LIKE)) {
+//                                post.setLike(post.getLike() - 1);
+//                            } else if (isLike.equals(isLikeResponse) && isLikeResponse.equals(Constants.POST_DISLIKE)) {
+//                                post.setDislike(post.getDislike() - 1);
+//                            } else if (isLike.equals(0) && (isLikeResponse.equals(1))) {
+//                                post.setLike(post.getLike() + 1);
+//                            } else if (isLike.equals(0) && (isLikeResponse.equals(-1))) {
+//                                post.setDislike(post.getDislike() + 1);
+//                            }
+
+//                            if ((isLike.equals(0)) && (isLike.equals(1)) && (response.getIsLike().equals(isLike))) {
+//                                Log.e("Like", "Like work !!!");
+//                                post.setLike(post.getLike() + 1);
+//                            }
                             mLikeListener.sendLikeCompleted(post);
                         },
                         throwable -> {

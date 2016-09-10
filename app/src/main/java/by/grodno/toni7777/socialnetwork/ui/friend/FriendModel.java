@@ -1,5 +1,7 @@
 package by.grodno.toni7777.socialnetwork.ui.friend;
 
+import android.util.Log;
+
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
@@ -26,7 +28,7 @@ public class FriendModel implements BaseModel, FriendMVP.Model {
     private SocialNetworkAPI mNetworkAPI;
 
     public FriendModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences,
-                      ModelListener<List<PostDVO>> listener) {
+                       ModelListener<List<PostDVO>> listener) {
         mNetworkAPI = socialNetworkAPI;
         mPreferences = loginPreferences;
         mListener = listener;
@@ -34,10 +36,11 @@ public class FriendModel implements BaseModel, FriendMVP.Model {
 
     @Override
     public void loadPosts(long friendId, int offset) {
-        Observable<WallDTO> postsObservable = mNetworkAPI.getGroupPosts(friendId, offset, Constants.SMALL_LIMIT, mPreferences.getAccessToken());
+        Observable<WallDTO> postsObservable = mNetworkAPI.getPost(friendId, offset, Constants.SMALL_LIMIT, mPreferences.getAccessToken());
         unsubscribe();
         mSubscription = postsObservable
                 .map(wall -> {
+                    Log.e("Friend", "Wall = " + wall.toString());
                     WallDSO wallDSO = ConverterDTOtoDSO.converteDTOtoDSO(wall);
                     RealmList<PostDSO> posts = wallDSO.getPostDSO();
                     return ConverterDTOtoDVO.converteDSOtoDVO(posts);

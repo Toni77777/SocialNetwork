@@ -50,8 +50,8 @@ public final class Constants {
 
     public static final int REQUEST_PERMISSION = 10;
 
-    public static final int POST_LIKE = 1;
-    public static final int POST_DISLIKE = -1;
+    public static final Integer POST_LIKE = 1;
+    public static final Integer POST_DISLIKE = -1;
 
     private Constants() {
     }
