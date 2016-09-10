@@ -53,4 +53,8 @@ public class GroupPresenter extends MvpBasePresenter<GroupMVP.View>
             getView().showError(e, mForceRefresh);
         }
     }
+
+    public void loadGroupInfo(long groupId) {
+        mModel.loadGroupInfo(groupId);
+    }
 }

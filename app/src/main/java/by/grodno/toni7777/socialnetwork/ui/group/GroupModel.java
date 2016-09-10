@@ -1,6 +1,8 @@
 package by.grodno.toni7777.socialnetwork.ui.group;
 
 
+import android.util.Log;
+
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
@@ -8,6 +10,7 @@ import by.grodno.toni7777.socialnetwork.database.model.WallDSO;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.network.model.GroupDataDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.util.Constants;
@@ -31,6 +34,26 @@ public class GroupModel implements BaseModel, GroupMVP.Model {
         mNetworkAPI = socialNetworkAPI;
         mPreferences = loginPreferences;
         mListener = listener;
+    }
+
+    public void loadGroupInfo(long groupId) {
+        Observable<GroupDataDTO> postsObservable = mNetworkAPI.getGroupInfo(groupId, mPreferences.getAccessToken());
+        unsubscribe();
+        mSubscription = postsObservable
+                .compose(RxUtil.<GroupDataDTO>applySchedulers())
+                .subscribe(
+                        info -> {
+                            Log.e("Info", "Group info = " + info);
+                        },
+                        throwable -> {
+                            unsubscribe();
+                            mListener.loadError(throwable);
+                        },
+                        () -> {
+                            unsubscribe();
+                            mListener.onLoadCompleted();
+                        }
+                );
     }
 
     @Override

@@ -4,6 +4,7 @@ package by.grodno.toni7777.socialnetwork.network;
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.DialogsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
+import by.grodno.toni7777.socialnetwork.network.model.GroupDataDTO;
 import by.grodno.toni7777.socialnetwork.network.model.GroupsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ImageResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.LikeDTO;
@@ -120,6 +121,8 @@ public interface SocialNetworkAPI {
     @GET(USERS_PROFILE_INFO_URL)
     Observable<ProfileDTO> getUserProfile(@Path(PATH_USER_ID) Long userId,
                                           @Query(ACCESS_TOKEN) String accessToken);
-    // /musics
-    // param userId, offset, limit, token
+
+    @GET(FAVORITE_GROUP_URL)
+    Observable<GroupDataDTO> getGroupInfo(@Path(ID) Long userId,
+                                          @Query(ACCESS_TOKEN) String accessToken);
 }

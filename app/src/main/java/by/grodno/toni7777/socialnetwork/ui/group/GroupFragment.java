@@ -120,7 +120,8 @@ public class GroupFragment extends BaseEventViewStateFragment<SwipeRefreshLayout
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadDataWithOffset(mGroupId, pullToRefresh, Constants.START_LOAD);
+        presenter.loadGroupInfo(mGroupId);
+//        presenter.loadDataWithOffset(mGroupId, pullToRefresh, Constants.START_LOAD);
     }
 
     @Override

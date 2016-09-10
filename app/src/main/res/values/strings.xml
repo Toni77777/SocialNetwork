@@ -80,5 +80,7 @@
     <string name="activity_label_messages">Messages</string>
     <string name="activity_label_chat">Chat</string>
     <string name="empty_recycler_view">Have not data. Please, add content</string>
+    <string name="group_members">Members</string>
+    <string name="Description">Description</string>
 
 </resources>
