@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="type_post_profile" type="id"/>
     <item name="type_post_full" type="id"/>
     <item name="type_post_text" type="id"/>
     <item name="type_post_image" type="id"/>

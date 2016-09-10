@@ -24,6 +24,7 @@ import by.grodno.toni7777.socialnetwork.base.event.LikeEvent;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
 import by.grodno.toni7777.socialnetwork.ui.model.OwnerDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
+import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 
 import static by.grodno.toni7777.socialnetwork.util.ImageLoad.loadCircleImage;
@@ -32,6 +33,8 @@ import static by.grodno.toni7777.socialnetwork.util.ImageLoad.loadImage;
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder> {
 
     private final List<PostDVO> mPosts;
+    private ProfileDVO mProfile;
+    private static final int PROFILE = R.id.type_post_profile;
     private static final int FULL = R.id.type_post_full;
     private static final int IMAGE = R.id.type_post_image;
     private static final int TEXT = R.id.type_post_text;
@@ -42,7 +45,9 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == FULL) {
+        if (viewType == PROFILE) {
+            return ProfileViewHolder.newInstance(parent);
+        } else if (viewType == FULL) {
             return FullPostViewHolder.newInstance(parent);
         } else if (viewType == IMAGE) {
             return ImagePostViewHolder.newInstance(parent);
@@ -56,20 +61,27 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         int viewType = holder.getItemViewType();
-        PostDVO post = mPosts.get(position);
-
-        if (viewType == FULL) {
-            ((FullPostViewHolder) holder).bind(post);
-        } else if (viewType == IMAGE) {
-            ((ImagePostViewHolder) holder).bind(post);
-        } else if (viewType == TEXT) {
-            ((TextPostViewHolder) holder).bind(post);
+        if (viewType == PROFILE) {
+            ((ProfileViewHolder) holder).bind(mProfile);
+        } else {
+            PostDVO post = mPosts.get(position - 1);
+            if (viewType == FULL) {
+                ((FullPostViewHolder) holder).bind(post);
+            } else if (viewType == IMAGE) {
+                ((ImagePostViewHolder) holder).bind(post);
+            } else if (viewType == TEXT) {
+                ((TextPostViewHolder) holder).bind(post);
+            }
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        PostDVO post = mPosts.get(position); // backend return null or " " - is all empty field
+        if (isPositionHeader(position)) {
+            return PROFILE;
+        }
+
+        PostDVO post = mPosts.get(position - 1); // backend return null or " " - is all empty field
         if ((post.getImage() == null) || (TextUtils.isEmpty(post.getImage().trim()))) {
             return TEXT;
         } else if ((post.getText() == null) || (TextUtils.isEmpty(post.getText().trim()))) {
@@ -84,11 +96,15 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return mPosts.size();
+        return mPosts.size() + 1;
     }
 
     public void clear() {
         mPosts.clear();
+    }
+
+    private boolean isPositionHeader(int position) {
+        return position == 0;
     }
 
     public void update(List<PostDVO> newPosts) {
@@ -98,6 +114,14 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
 
     public List<PostDVO> getPosts() {
         return mPosts;
+    }
+
+    public void setProfile(ProfileDVO profile) {
+        mProfile = profile;
+    }
+
+    public ProfileDVO getProfile() {
+        return mProfile;
     }
 
     public void deleteRemovedPost(long postId) {
@@ -126,6 +150,36 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
     static abstract class ViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
         public ViewHolder(View v) {
             super(v);
+        }
+    }
+
+    static class ProfileViewHolder extends ViewHolder {
+
+        @BindView(R.id.profile_image)
+        ImageView mFriendAvatarView;
+
+        @BindView(R.id.profile_name)
+        TextView mFriendNameView;
+
+        @NonNull
+        public static ProfileViewHolder newInstance(ViewGroup parent) {
+            return new ProfileViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_post_profile, parent, false));
+        }
+
+        private ProfileViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+
+        void bind(ProfileDVO profile) {
+            mFriendNameView.setText(profile.getName() + " " + profile.getSurname());
+            loadCircleImage(mFriendAvatarView, profile.getAvatar());
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            return false;
         }
     }
 

@@ -54,7 +54,7 @@ public class FriendPresenter extends MvpBasePresenter<FriendMVP.View>
     @Override
     public void loadNext(List<PostDVO> post) {
         if (isViewAttached()) {
-            getView().setData(post);
+            getView().postLoaded(post);
         }
     }
 
@@ -66,8 +66,10 @@ public class FriendPresenter extends MvpBasePresenter<FriendMVP.View>
     }
 
     @Override
-    public void onProfileLoadCompleted(ProfileDVO profileDVO) {
-        // TODO: 9/10/16 show info
+    public void onProfileLoadCompleted(ProfileDVO profile) {
+        if (isViewAttached()) {
+            getView().profileLoaded(profile);
+        }
     }
 
     @Override

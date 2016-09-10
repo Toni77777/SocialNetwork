@@ -6,6 +6,7 @@ import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.ui.group.listener.GroupPagination;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
+import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 
 public final class FriendMVP {
 
@@ -17,7 +18,11 @@ public final class FriendMVP {
 
     }
 
-    interface View extends MvpLceView<List<PostDVO>> {
+    interface View extends MvpLceView<FriendSaveState> {
+
+        void profileLoaded(ProfileDVO profile);
+
+        void postLoaded(List<PostDVO> posts);
 
     }
 

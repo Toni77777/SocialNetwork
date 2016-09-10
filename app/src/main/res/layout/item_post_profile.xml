@@ -21,16 +21,17 @@
             android:layout_height="@dimen/friend_avatar_height"
             android:layout_gravity="center_horizontal"
             android:paddingTop="8dp"
-            android:src="@mipmap/ic_launcher"
         />
 
         <TextView
             android:id="@+id/profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="4dp"
-            android:text="Anton Paliakov"/>
+            android:gravity="center_horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="Anton Paliakov"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
