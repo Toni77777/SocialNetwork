@@ -63,7 +63,40 @@ public class WallModel implements BaseModel, WallMVP.Model {
 
         unsubscribe();
         mSubscription = postsObservable
-                .onErrorResumeNext(refreshTokenAndRetry(postsObservable))
+                .map(new Func1<WallDTO, WallDTO>() {
+                    @Override
+                    public WallDTO call(WallDTO wallDTO) {
+                        Log.e("Call", "Call form wall");
+                        return wallDTO;
+                    }
+                })
+
+                .retryWhen(new Func1<Observable<? extends Throwable>, Observable<?>>() {
+                    @Override
+                    public Observable<?> call(Observable<? extends Throwable> observable) {
+                        return observable.flatMap(new Func1<Throwable, Observable<?>>() {
+                            @Override
+                            public Observable<?> call(Throwable throwable) {
+                                Log.e("Retry", "Error retry !!!!!!!!!!");
+                                if (check(throwable)) {
+                                    Log.e("Retry", "Error retry 401");
+                                    return mNetworkAPI.refreshAccessToken(QueryProperties.GRAND_TYPE_REFRESH_TOKEN, QueryProperties.CLIENT_ID_VALUE, mPreferences.getRefreshToken()).flatMap(new Func1<AuthorizationDTO, Observable<?>>() {
+                                        @Override
+                                        public Observable<?> call(AuthorizationDTO authorizationDTO) {
+                                            mPreferences.setAccessToken(authorizationDTO.getAccessToken());
+                                            Log.e("Retry", "Token " + authorizationDTO.getAccessToken());
+                                            return postsObservable;
+                                        }
+                                    });
+//                                    return Observable.just(postsObservable);
+                                }
+
+                                return Observable.error(throwable);
+                            }
+                        });
+                    }
+                })
+//                .onErrorResumeNext(refreshTokenAndRetry(postsObservable))
                 .map(ConverterDTOtoDSO::converteDTOtoDSO)
                 .doOnNext(wallDSO -> saveInCache(wallDSO, offset))
                 .compose(RxUtil.<WallDSO>applySchedulers())
@@ -88,25 +121,35 @@ public class WallModel implements BaseModel, WallMVP.Model {
                 );
     }
 
-    private <T> Func1<Throwable, ? extends Observable<? extends T>> refreshTokenAndRetry(final Observable<T> toBeResumed) {
-        return new Func1<Throwable, Observable<? extends T>>() {
-            @Override
-            public Observable<? extends T> call(Throwable throwable) {
-                if (check(throwable)) {
-                    return mNetworkAPI.refreshAccessToken(QueryProperties.GRAND_TYPE_REFRESH_TOKEN, QueryProperties.CLIENT_ID_VALUE, mPreferences.getRefreshToken()).flatMap(new Func1<AuthorizationDTO, Observable<? extends T>>() {
-                        @Override
-                        public Observable<? extends T> call(AuthorizationDTO authorizationDTO) {
-                            mPreferences.setAccessToken(authorizationDTO.getAccessToken());
-                            Log.e("RxJava", "RxJava Refresh token = " + authorizationDTO.getRefreshToken());
-                            Log.e("RxJava", "RxJava !!!!!!!!!!! Call");
-                            return toBeResumed.retry();
-                        }
-                    });
-                }
-                return Observable.error(throwable);
-            }
-        };
-    }
+//
+//    http://stackoverflow.com/questions/30517761/implement-retrywhen-logic
+//    http://stackoverflow.com/questions/26201420/retrofit-with-rxjava-handling-network-exceptions-globally
+
+    //   nedd !!!!!
+//    private <T> Func1<Throwable, ? extends Observable<? extends T>> refreshTokenAndRetry(final Observable<T> toBeResumed) {
+//        return new Func1<Throwable, Observable<? extends T>>() {
+//            @Override
+//            public Observable<? extends T> call(Throwable throwable) {
+//                Log.e("RxJava", "RxJava !!!!!!!!!!! Call");
+//                if (check(throwable)) {
+//                    return mNetworkAPI.refreshAccessToken(QueryProperties.GRAND_TYPE_REFRESH_TOKEN, QueryProperties.CLIENT_ID_VALUE, mPreferences.getRefreshToken()).flatMap(new Func1<AuthorizationDTO, Observable<? extends T>>() {
+//                        @Override
+//                        public Observable<? extends T> call(AuthorizationDTO authorizationDTO) {
+//                            mPreferences.setAccessToken(authorizationDTO.getAccessToken());
+//                            Log.e("RxJava", "RxJava Refresh token = " + authorizationDTO.getRefreshToken());
+////                            return toBeResumed.retry();
+////                            return toBeResumed.retry(); do you need retry?
+//                            return toBeResumed;
+//                        }
+//                    });
+//                }
+//                return Observable.error(throwable);
+//            }
+//        };
+//    }
+
+
+//    }
 
     private boolean check(Throwable throwable) {
         return throwable.getMessage().equals("HTTP 401 Unauthorized");
