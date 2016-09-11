@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import butterknife.OnClick;
 import by.grodno.toni7777.socialnetwork.R;
 import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventViewStateFragment;
+import by.grodno.toni7777.socialnetwork.base.event.FriendRemovedEvent;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
 import by.grodno.toni7777.socialnetwork.ui.friend.adapter.FriendAdapter;
 import by.grodno.toni7777.socialnetwork.ui.group.listener.PaginationGroupListener;
@@ -187,6 +189,7 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
 
     @Override
     public void friendRemoved() {
-
+        EventBus.getDefault().post(new FriendRemovedEvent());
+        getActivity().finish();
     }
 }
