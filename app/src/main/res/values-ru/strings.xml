@@ -83,5 +83,7 @@
     <string name="empty_recycler_view">Нет данных. Пожалуйста, добавьте контент</string>
     <string name="group_members">Участники</string>
     <string name="Description">Описание</string>
+    <string name="fab_title_post">Создать пост</string>
+    <string name="fab_title_message">Написать сообщение</string>
 
 </resources>

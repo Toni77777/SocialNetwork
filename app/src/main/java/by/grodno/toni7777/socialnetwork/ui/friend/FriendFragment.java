@@ -145,9 +145,13 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
 //        presenter.removePost(event.getPostId());
     }
 
-    @OnClick(R.id.new_post_fab)
+    @OnClick(R.id.create_post)
     void newPost() {
         startActivity(new Intent(getContext(), NewPostActivity.class));
+    }
+
+    @OnClick(R.id.write_message)
+    void writeMessage() {
     }
 
     @Override

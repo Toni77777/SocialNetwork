@@ -1,8 +1,8 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:fab="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -34,16 +34,39 @@
             android:layout_gravity="bottom"
             android:visibility="gone"/>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/new_post_fab"
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/menu_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_write_post"
-            app:layout_anchor="@id/posts_recycler"
-            app:layout_anchorGravity="bottom|right|end"/>
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            app:fab_addButtonColorNormal="@color/accent"
+            app:fab_addButtonColorPressed="#e4cd00"
+            app:fab_labelStyle="@style/BaseTheme.Fab"
+            app:layout_anchorGravity="bottom|right|end">
 
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/write_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="@color/accent"
+                app:fab_colorPressed="#e4cd00"
+                app:fab_icon="@drawable/ic_message_fab"
+                app:fab_title="@string/fab_title_message"
+            />
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/create_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="@color/accent"
+                app:fab_colorPressed="#e4cd00"
+                app:fab_icon="@drawable/ic_write_post"
+                app:fab_title="@string/fab_title_post"
+            />
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
     </FrameLayout>
+
 </android.support.design.widget.CoordinatorLayout>

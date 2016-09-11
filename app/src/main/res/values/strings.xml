@@ -82,5 +82,7 @@
     <string name="empty_recycler_view">Have not data. Please, add content</string>
     <string name="group_members">Members</string>
     <string name="Description">Description</string>
+    <string name="fab_title_post">Create post</string>
+    <string name="fab_title_message">Write message</string>
 
 </resources>

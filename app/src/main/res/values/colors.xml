@@ -16,5 +16,6 @@
     <color name="windowBackground">#F5F5F5</color>
     <color name="normal">#FFC107</color>
     <color name="press">#FFA000</color>
+    <color name="colorTextBackground">#fafafa</color>
 
 </resources>

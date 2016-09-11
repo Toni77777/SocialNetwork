@@ -38,6 +38,10 @@
         <item name="rippleColor">@android:color/white</item>
     </style>
 
+    <style name="BaseTheme.Fab">
+        <item name="android:background">@drawable/fab_background</item>
+        <item name="android:textColor">@color/colorTextBackground</item>
+    </style>
 
 
 </resources>
