@@ -32,7 +32,7 @@ import static by.grodno.toni7777.socialnetwork.network.QueryProperties.*;
 
 public interface SocialNetworkAPI {
 
-    @POST(LOGIN_URL)
+    @POST(AUTHORIZATION_URL)
     Observable<AuthorizationDTO> loginRequest(@Query(GRAND_TYPE) String grandType,
                                               @Query(CLIENT_ID) String clientId,
                                               @Query(USER_NAME) String username,
@@ -125,4 +125,9 @@ public interface SocialNetworkAPI {
     @GET(FAVORITE_GROUP_URL)
     Observable<GroupDataDTO> getGroupInfo(@Path(ID) Long userId,
                                           @Query(ACCESS_TOKEN) String accessToken);
+
+    @POST(AUTHORIZATION_URL)
+    Observable<AuthorizationDTO> refreshAccessToken(@Query(GRAND_TYPE) String grandType,
+                                                    @Query(CLIENT_ID) String clientId,
+                                                    @Query(REFRESH_TOKEN) String refreshToken);
 }

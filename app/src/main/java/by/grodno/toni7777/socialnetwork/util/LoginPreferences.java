@@ -21,6 +21,14 @@ public class LoginPreferences {
         return mUserPreferences.getString(TOKEN_PREFERENCES, EMPTY_STRING);
     }
 
+    public void setRefreshToken(String token) {
+        mUserPreferences.edit().putString(REFRESH_TOKEN_PREFERENCES, token).apply();
+    }
+
+    public String getRefreshToken() {
+        return mUserPreferences.getString(REFRESH_TOKEN_PREFERENCES, EMPTY_STRING);
+    }
+
     public long getUserId() {
         return mUserPreferences.getLong(USER_ID_PREFERENCES, EMPTY_USER_ID);
     }

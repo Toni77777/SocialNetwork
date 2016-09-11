@@ -7,6 +7,9 @@ public class AuthorizationDTO {
     @SerializedName("access_token")
     private String mAccessToken;
 
+    @SerializedName("refresh_token")
+    private String mRefreshToken;
+
     public String getAccessToken() {
         return mAccessToken;
     }
@@ -15,26 +18,39 @@ public class AuthorizationDTO {
         mAccessToken = accessToken;
     }
 
+    public String getRefreshToken() {
+        return mRefreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        mRefreshToken = refreshToken;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AuthorizationDTO userDTO = (AuthorizationDTO) o;
+        AuthorizationDTO that = (AuthorizationDTO) o;
 
-        return mAccessToken != null ? mAccessToken.equals(userDTO.mAccessToken) : userDTO.mAccessToken == null;
+        if (mAccessToken != null ? !mAccessToken.equals(that.mAccessToken) : that.mAccessToken != null)
+            return false;
+        return mRefreshToken != null ? mRefreshToken.equals(that.mRefreshToken) : that.mRefreshToken == null;
 
     }
 
     @Override
     public int hashCode() {
-        return mAccessToken != null ? mAccessToken.hashCode() : 0;
+        int result = mAccessToken != null ? mAccessToken.hashCode() : 0;
+        result = 31 * result + (mRefreshToken != null ? mRefreshToken.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         return "AuthorizationDTO{" +
                 "mAccessToken='" + mAccessToken + '\'' +
+                ", mRefreshToken='" + mRefreshToken + '\'' +
                 '}';
     }
 }

@@ -23,7 +23,7 @@ import rx.Observable;
 import rx.Subscription;
 
 import static by.grodno.toni7777.socialnetwork.network.QueryProperties.CLIENT_ID_VALUE;
-import static by.grodno.toni7777.socialnetwork.network.QueryProperties.GRAND_TYPE_VALUE;
+import static by.grodno.toni7777.socialnetwork.network.QueryProperties.GRAND_TYPE_PASSWORD;
 
 public class LoginModel implements BaseModel, LoginMVP.Model {
 
@@ -42,13 +42,14 @@ public class LoginModel implements BaseModel, LoginMVP.Model {
 
     @Override
     public void getAccessToken(String login, String password) {
-        Observable<AuthorizationDTO> tokenObservable = mNetworkAPI.loginRequest(GRAND_TYPE_VALUE, CLIENT_ID_VALUE, login, password);
+        Observable<AuthorizationDTO> tokenObservable = mNetworkAPI.loginRequest(GRAND_TYPE_PASSWORD, CLIENT_ID_VALUE, login, password);
 
         mSubscription = tokenObservable
                 .compose(RxUtil.<AuthorizationDTO>applySchedulers())
                 .subscribe(
                         authorization -> {
                             mPreferences.setAccessToken(authorization.getAccessToken());
+                            mPreferences.setRefreshToken(authorization.getRefreshToken());
                             Log.e("Token", authorization.getAccessToken().toString());
                         },
                         throwable -> {

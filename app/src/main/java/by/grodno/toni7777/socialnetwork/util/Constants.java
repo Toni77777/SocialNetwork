@@ -26,6 +26,7 @@ public final class Constants {
     public static final String SETTINGS_PREFERENCES = "settingsPreferences";
 
     public static final String TOKEN_PREFERENCES = "accessToken";
+    public static final String REFRESH_TOKEN_PREFERENCES = "refreshToken";
     public static final String USER_ID_PREFERENCES = "userId";
     public static final String USER_AVATAR_PREFERENCES = "userAvatar";
     public static final String USER_FULL_NAME_PREFERENCES = "userFullName";

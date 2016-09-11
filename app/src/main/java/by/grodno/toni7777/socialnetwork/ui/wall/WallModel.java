@@ -11,7 +11,9 @@ import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
 import by.grodno.toni7777.socialnetwork.database.model.WallDSO;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
+import by.grodno.toni7777.socialnetwork.network.QueryProperties;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
 import by.grodno.toni7777.socialnetwork.network.model.LikeDTO;
 import by.grodno.toni7777.socialnetwork.network.model.LikeResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
@@ -32,6 +34,7 @@ import io.realm.RealmList;
 import io.realm.RealmResults;
 import rx.Observable;
 import rx.Subscription;
+import rx.functions.Func1;
 
 
 public class WallModel implements BaseModel, WallMVP.Model {
@@ -60,6 +63,7 @@ public class WallModel implements BaseModel, WallMVP.Model {
 
         unsubscribe();
         mSubscription = postsObservable
+                .onErrorResumeNext(refreshTokenAndRetry(postsObservable))
                 .map(ConverterDTOtoDSO::converteDTOtoDSO)
                 .doOnNext(wallDSO -> saveInCache(wallDSO, offset))
                 .compose(RxUtil.<WallDSO>applySchedulers())
@@ -69,9 +73,13 @@ public class WallModel implements BaseModel, WallMVP.Model {
                         },
                         throwable -> {
                             unsubscribe();
+//                            if (throwable.getMessage().equals("HTTP 401 Unauthorized")) {
+//                                Log.e("Error", "My Error 401 !!!!!!!!!");
+//                                refreshAccessToken();
+//                            }
                             readPostsFromDB(offset);
                             mListener.loadError(throwable);
-                            Log.e("Wall", "Error " + throwable);
+                            Log.e("Wall", "Error " + throwable.getMessage());
                         },
                         () -> {
                             unsubscribe();
@@ -79,6 +87,52 @@ public class WallModel implements BaseModel, WallMVP.Model {
                         }
                 );
     }
+
+    private <T> Func1<Throwable, ? extends Observable<? extends T>> refreshTokenAndRetry(final Observable<T> toBeResumed) {
+        return new Func1<Throwable, Observable<? extends T>>() {
+            @Override
+            public Observable<? extends T> call(Throwable throwable) {
+                if (check(throwable)) {
+                    return mNetworkAPI.refreshAccessToken(QueryProperties.GRAND_TYPE_REFRESH_TOKEN, QueryProperties.CLIENT_ID_VALUE, mPreferences.getRefreshToken()).flatMap(new Func1<AuthorizationDTO, Observable<? extends T>>() {
+                        @Override
+                        public Observable<? extends T> call(AuthorizationDTO authorizationDTO) {
+                            mPreferences.setAccessToken(authorizationDTO.getAccessToken());
+                            Log.e("RxJava", "RxJava Refresh token = " + authorizationDTO.getRefreshToken());
+                            Log.e("RxJava", "RxJava !!!!!!!!!!! Call");
+                            return toBeResumed.retry();
+                        }
+                    });
+                }
+                return Observable.error(throwable);
+            }
+        };
+    }
+
+    private boolean check(Throwable throwable) {
+        return throwable.getMessage().equals("HTTP 401 Unauthorized");
+    }
+//
+//    private void refreshAccessToken() {
+//        Observable<AuthorizationDTO> tokenObservable = mNetworkAPI.refreshAccessToken(QueryProperties.GRAND_TYPE_REFRESH_TOKEN, QueryProperties.CLIENT_ID_VALUE, mPreferences.getRefreshToken());
+//
+//        mSubscription = tokenObservable
+//                .compose(RxUtil.<AuthorizationDTO>applySchedulers())
+//                .subscribe(
+//                        authorization -> {
+//                            mPreferences.setAccessToken(authorization.getAccessToken());
+//                            mPreferences.setRefreshToken(authorization.getRefreshToken());
+//                            Log.e("Refresh", authorization.getAccessToken().toString());
+//
+//                        },
+//                        throwable -> {
+//                            unsubscribe();
+//                            mListener.loadError(throwable);
+//                            Log.e("Logn Error", "Login Error" + throwable.toString());
+//                        },
+//                        () -> {
+//                            unsubscribe();
+//                        });
+//    }
 
     @Override
     public void saveInCache(WallDSO responseWall, int offset) {
@@ -95,7 +149,6 @@ public class WallModel implements BaseModel, WallMVP.Model {
 
     @Override
     public void readPostsFromDB(int offset) {
-        Log.e("Wall", "Read from db " + offset);
         WallDSO wallDSO = mDatabaseDAO.findFirst(Realm.getDefaultInstance(), WallDSO.class);
 
         if (wallDSO == null) {
