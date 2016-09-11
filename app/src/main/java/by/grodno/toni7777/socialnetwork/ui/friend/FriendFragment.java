@@ -9,6 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -57,6 +60,7 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         if (bundle != null) {
             if (bundle.containsKey(Constants.SHARE_FRIEND_ID)) {
@@ -72,6 +76,22 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_friend, container, false);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_friend, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.friend_remove_item) {
+            presenter.removeUserFromFriends(mFriendId);
+            return true;
+        }
+        return true;
     }
 
     @Override
@@ -163,5 +183,10 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     public void postLoaded(List<PostDVO> posts) {
         contentView.setRefreshing(false);
         mFriendAdapter.update(posts);
+    }
+
+    @Override
+    public void friendRemoved() {
+
     }
 }

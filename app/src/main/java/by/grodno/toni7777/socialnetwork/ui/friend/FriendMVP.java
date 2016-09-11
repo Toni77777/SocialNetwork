@@ -17,6 +17,8 @@ public final class FriendMVP {
 
         void loadUserInfo(long friendId);
 
+        void removeUserFromFriends(long friendId);
+
     }
 
     interface View extends MvpLceView<FriendStateDVO> {
@@ -25,11 +27,15 @@ public final class FriendMVP {
 
         void postLoaded(List<PostDVO> posts);
 
+        void friendRemoved();
+
     }
 
     interface Presenter extends GroupPagination {
 
         void getProfileInfo(long userId, boolean forceRefresh);
+
+        void removeUserFromFriends(long friendId);
 
     }
 

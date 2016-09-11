@@ -10,8 +10,10 @@ import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 import by.grodno.toni7777.socialnetwork.ui.friend.listener.FriendProfileListener;
+import by.grodno.toni7777.socialnetwork.ui.friend.listener.RemoveFriendListener;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.util.Constants;
@@ -31,13 +33,16 @@ public class FriendModel implements BaseModel, FriendMVP.Model {
     private LoginPreferences mPreferences;
     private SocialNetworkAPI mNetworkAPI;
     private FriendProfileListener mProfileListener;
+    private RemoveFriendListener mRemoveFriendListener;
 
     public FriendModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences,
-                       ModelListener<List<PostDVO>> listener, FriendProfileListener profileListener) {
+                       ModelListener<List<PostDVO>> listener, FriendProfileListener profileListener,
+                       RemoveFriendListener removeFriendListener) {
         mNetworkAPI = socialNetworkAPI;
         mPreferences = loginPreferences;
         mListener = listener;
         mProfileListener = profileListener;
+        mRemoveFriendListener = removeFriendListener;
     }
 
     @Override
@@ -89,6 +94,28 @@ public class FriendModel implements BaseModel, FriendMVP.Model {
                         () -> {
                             unsubscribe();
                             mListener.onLoadCompleted();
+                        }
+                );
+    }
+
+    @Override
+    public void removeUserFromFriends(long friendId) {
+        Observable<ResponseDTO> removeObservable = mNetworkAPI.removeUserFormFriends(friendId, mPreferences.getAccessToken());
+        unsubscribe();
+        mSubscription = removeObservable
+                .compose(RxUtil.<ResponseDTO>applySchedulers())
+                .subscribe(
+                        response -> {
+                            if (response.isSuccess()) {
+                                mRemoveFriendListener.onRemoveCompleted();
+                            }
+                        },
+                        throwable -> {
+                            unsubscribe();
+                            mRemoveFriendListener.removeGetError(throwable);
+                        },
+                        () -> {
+                            unsubscribe();
                         }
                 );
     }

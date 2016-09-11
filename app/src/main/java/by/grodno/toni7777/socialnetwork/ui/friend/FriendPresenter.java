@@ -10,19 +10,20 @@ import javax.inject.Inject;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.ui.friend.listener.FriendProfileListener;
+import by.grodno.toni7777.socialnetwork.ui.friend.listener.RemoveFriendListener;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 public class FriendPresenter extends MvpBasePresenter<FriendMVP.View>
-        implements ModelListener<List<PostDVO>>, MvpPresenter<FriendMVP.View>, FriendMVP.Presenter, FriendProfileListener {
+        implements ModelListener<List<PostDVO>>, MvpPresenter<FriendMVP.View>, FriendMVP.Presenter, FriendProfileListener, RemoveFriendListener {
 
     private final FriendModel mModel;
     private boolean mForceRefresh;
 
     @Inject
     public FriendPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
-        mModel = new FriendModel(socialNetworkAPI, loginPreferences, this, this);
+        mModel = new FriendModel(socialNetworkAPI, loginPreferences, this, this, this);
     }
 
     @Override
@@ -41,6 +42,11 @@ public class FriendPresenter extends MvpBasePresenter<FriendMVP.View>
         }
         mForceRefresh = forceRefresh;
         mModel.loadPosts(friendId, offset);
+    }
+
+    @Override
+    public void removeUserFromFriends(long friendId) {
+        mModel.removeUserFromFriends(friendId);
     }
 
 
@@ -76,6 +82,20 @@ public class FriendPresenter extends MvpBasePresenter<FriendMVP.View>
     public void loadProfileError(Throwable e) {
         if (isViewAttached()) {
             getView().showError(e, mForceRefresh);
+        }
+    }
+
+    @Override
+    public void onRemoveCompleted() {
+        if (isViewAttached()) {
+            getView().friendRemoved();
+        }
+    }
+
+    @Override
+    public void removeGetError(Throwable e) {
+        if (isViewAttached()) {
+            getView().showError(e, false);
         }
     }
 }

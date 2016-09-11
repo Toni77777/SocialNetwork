@@ -130,4 +130,8 @@ public interface SocialNetworkAPI {
     Observable<AuthorizationDTO> refreshAccessToken(@Query(GRAND_TYPE) String grandType,
                                                     @Query(CLIENT_ID) String clientId,
                                                     @Query(REFRESH_TOKEN) String refreshToken);
+
+    @DELETE(FRIENDS_URL)
+    Observable<ResponseDTO> removeUserFormFriends(@Query(USER_ID) long userId,
+                                                  @Query(ACCESS_TOKEN) String accessToken);
 }
