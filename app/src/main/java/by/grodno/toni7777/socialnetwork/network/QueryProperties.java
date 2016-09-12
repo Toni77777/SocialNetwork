@@ -26,6 +26,7 @@ public final class QueryProperties {
     public static final String NOTIFICATION_URL = "/notifications";
     public static final String GROUP_POSTS_URL = "/groups/posts";
     public static final String DIALOGS_URL = "/dialogs";
+    public static final String DIALOGS_FIND_URL = "/dialogs/find";
     public static final String USERS_LIKE_POST_URL = "/users/posts/{idPost}/likes";
     public static final String USERS_PROFILE_INFO_URL = "/users/{idUser}";
 

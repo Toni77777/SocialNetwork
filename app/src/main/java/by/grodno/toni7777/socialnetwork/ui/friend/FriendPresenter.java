@@ -9,21 +9,23 @@ import javax.inject.Inject;
 
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.ui.friend.listener.ChatListener;
 import by.grodno.toni7777.socialnetwork.ui.friend.listener.FriendProfileListener;
 import by.grodno.toni7777.socialnetwork.ui.friend.listener.RemoveFriendListener;
+import by.grodno.toni7777.socialnetwork.ui.model.ChatIdDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 public class FriendPresenter extends MvpBasePresenter<FriendMVP.View>
-        implements ModelListener<List<PostDVO>>, MvpPresenter<FriendMVP.View>, FriendMVP.Presenter, FriendProfileListener, RemoveFriendListener {
+        implements ModelListener<List<PostDVO>>, MvpPresenter<FriendMVP.View>, FriendMVP.Presenter, FriendProfileListener, RemoveFriendListener, ChatListener {
 
     private final FriendModel mModel;
     private boolean mForceRefresh;
 
     @Inject
     public FriendPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
-        mModel = new FriendModel(socialNetworkAPI, loginPreferences, this, this, this);
+        mModel = new FriendModel(socialNetworkAPI, loginPreferences, this, this, this, this);
     }
 
     @Override
@@ -49,6 +51,13 @@ public class FriendPresenter extends MvpBasePresenter<FriendMVP.View>
         mModel.removeUserFromFriends(friendId);
     }
 
+    @Override
+    public void getChatId(long friendId, boolean forceRefresh) {
+        if (isViewAttached()) {
+            getView().showLoading(forceRefresh);
+        }
+        mModel.getChatId(friendId);
+    }
 
     @Override
     public void onLoadCompleted() {
@@ -96,6 +105,20 @@ public class FriendPresenter extends MvpBasePresenter<FriendMVP.View>
     public void removeGetError(Throwable e) {
         if (isViewAttached()) {
             getView().showError(e, false);
+        }
+    }
+
+    @Override
+    public void onChatLoadCompleted(ChatIdDVO chatId) {
+        if (isViewAttached()) {
+            getView().onChatIdReceived(chatId.getChatId());
+        }
+    }
+
+    @Override
+    public void loadChatIdError(Throwable e) {
+        if (isViewAttached()) {
+            getView().showError(e, mForceRefresh);
         }
     }
 }

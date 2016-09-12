@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.database.model.PostDSO;
+import by.grodno.toni7777.socialnetwork.network.model.ChatIdDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDataDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PersonDTO;
 import by.grodno.toni7777.socialnetwork.network.model.PersonsDTO;
+import by.grodno.toni7777.socialnetwork.ui.model.ChatIdDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.FriendDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.FriendsDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.GroupInfoDVO;
@@ -79,4 +81,9 @@ public final class ConverterDTOtoDVO {
                 source.getGroupInfo().isOwner(),
                 source.getGroupInfo().isMember());
     }
+
+    public static ChatIdDVO toChatId(ChatIdDTO source) {
+        return new ChatIdDVO(source.getChatId());
+    }
+
 }

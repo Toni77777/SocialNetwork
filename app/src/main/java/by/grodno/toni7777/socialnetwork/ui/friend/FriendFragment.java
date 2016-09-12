@@ -174,6 +174,7 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
 
     @OnClick(R.id.write_message)
     void writeMessage() {
+        presenter.getChatId(mFriendId, true);
     }
 
     @Override
@@ -191,5 +192,10 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     public void friendRemoved() {
         EventBus.getDefault().post(new FriendRemovedEvent());
         getActivity().finish();
+    }
+
+    @Override
+    public void onChatIdReceived(long chatId) {
+        Log.e("TAG", "Chat id = " + chatId);
     }
 }

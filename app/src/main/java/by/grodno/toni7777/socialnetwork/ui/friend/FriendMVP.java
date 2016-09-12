@@ -29,6 +29,8 @@ public final class FriendMVP {
 
         void friendRemoved();
 
+        void onChatIdReceived(long chatId);
+
     }
 
     interface Presenter extends GroupPagination {
@@ -36,6 +38,8 @@ public final class FriendMVP {
         void getProfileInfo(long userId, boolean forceRefresh);
 
         void removeUserFromFriends(long friendId);
+
+        void getChatId(long friendId, boolean forceRefresh);
 
     }
 

@@ -2,6 +2,7 @@ package by.grodno.toni7777.socialnetwork.network;
 
 
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ChatIdDTO;
 import by.grodno.toni7777.socialnetwork.network.model.DialogsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDataDTO;
@@ -140,4 +141,8 @@ public interface SocialNetworkAPI {
     @DELETE(GROUP_URL)
     Observable<ResponseDTO> removeGroupFormFavorite(@Path(GROUP_ID) long groupId,
                                                     @Query(ACCESS_TOKEN) String accessToken);
+
+    @GET(DIALOGS_FIND_URL)
+    Observable<ChatIdDTO> getChatId(@Query(USER_ID) long userId,
+                                    @Query(ACCESS_TOKEN) String accessToken);
 }

@@ -9,11 +9,14 @@ import by.grodno.toni7777.socialnetwork.database.model.WallDSO;
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.network.model.ChatIdDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ProfileDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
+import by.grodno.toni7777.socialnetwork.ui.friend.listener.ChatListener;
 import by.grodno.toni7777.socialnetwork.ui.friend.listener.FriendProfileListener;
 import by.grodno.toni7777.socialnetwork.ui.friend.listener.RemoveFriendListener;
+import by.grodno.toni7777.socialnetwork.ui.model.ChatIdDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.util.Constants;
@@ -34,15 +37,17 @@ public class FriendModel implements BaseModel, FriendMVP.Model {
     private SocialNetworkAPI mNetworkAPI;
     private FriendProfileListener mProfileListener;
     private RemoveFriendListener mRemoveFriendListener;
+    private ChatListener mChatListener;
 
     public FriendModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences,
                        ModelListener<List<PostDVO>> listener, FriendProfileListener profileListener,
-                       RemoveFriendListener removeFriendListener) {
+                       RemoveFriendListener removeFriendListener, ChatListener chatListener) {
         mNetworkAPI = socialNetworkAPI;
         mPreferences = loginPreferences;
         mListener = listener;
         mProfileListener = profileListener;
         mRemoveFriendListener = removeFriendListener;
+        mChatListener = chatListener;
     }
 
     @Override
@@ -113,6 +118,26 @@ public class FriendModel implements BaseModel, FriendMVP.Model {
                         throwable -> {
                             unsubscribe();
                             mRemoveFriendListener.removeGetError(throwable);
+                        },
+                        () -> {
+                            unsubscribe();
+                        }
+                );
+    }
+
+    public void getChatId(long friendId) {
+        Observable<ChatIdDTO> chatObservable = mNetworkAPI.getChatId(friendId, mPreferences.getAccessToken());
+        unsubscribe();
+        mSubscription = chatObservable
+                .map(ConverterDTOtoDVO::toChatId)
+                .compose(RxUtil.<ChatIdDVO>applySchedulers())
+                .subscribe(
+                        chatId -> {
+                            mChatListener.onChatLoadCompleted(chatId);
+                        },
+                        throwable -> {
+                            unsubscribe();
+                            mChatListener.loadChatIdError(throwable);
                         },
                         () -> {
                             unsubscribe();
