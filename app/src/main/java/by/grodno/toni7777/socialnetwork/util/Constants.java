@@ -30,6 +30,7 @@ public final class Constants {
     public static final String USER_ID_PREFERENCES = "userId";
     public static final String USER_AVATAR_PREFERENCES = "userAvatar";
     public static final String USER_FULL_NAME_PREFERENCES = "userFullName";
+    public static final String USER_NAME_PREFERENCES = "userlName";
 
     public static final String NOTIFICATION_PREFERENCES = "notificationPreferences";
     public static final String NOTIFICATION_SOUND_PREFERENCES = "soundNotificationPreferences";

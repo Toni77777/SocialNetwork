@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
@@ -33,14 +34,17 @@ import by.grodno.toni7777.socialnetwork.app.SocialNetworkApp;
 import by.grodno.toni7777.socialnetwork.base.BaseEventViewStateFragment;
 import by.grodno.toni7777.socialnetwork.base.event.FriendRemovedEvent;
 import by.grodno.toni7777.socialnetwork.base.event.PostEvent;
+import by.grodno.toni7777.socialnetwork.ui.chat.ChatActivity;
 import by.grodno.toni7777.socialnetwork.ui.friend.adapter.FriendAdapter;
 import by.grodno.toni7777.socialnetwork.ui.group.listener.PaginationGroupListener;
+import by.grodno.toni7777.socialnetwork.ui.model.ChatDataDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.FriendStateDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.ProfileDVO;
 import by.grodno.toni7777.socialnetwork.ui.newpost.NewPostActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
+import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayout, FriendStateDVO, FriendMVP.View, FriendPresenter>
         implements FriendMVP.View, SwipeRefreshLayout.OnRefreshListener {
@@ -50,6 +54,9 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
 
     @BindView(R.id.progress_pagination_view)
     View mProgressPaginView;
+
+    @BindView(R.id.menu_fab)
+    FloatingActionsMenu mFabMenuView;
 
     private FriendAdapter mFriendAdapter;
 
@@ -185,7 +192,6 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     public void profileLoaded(ProfileDVO profile) {
         mFriendAdapter.setProfile(profile);
         mProfile = profile;
-        // TODO: 9/12/16 save state profile friend
     }
 
     @Override
@@ -202,7 +208,12 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
 
     @Override
     public void onChatIdReceived(long chatId) {
-        Log.e("TAG", "Chat id = " + chatId);
-        Log.e("TAG", "Friend profile" + mProfile.toString());
+        LoginPreferences preferences = new LoginPreferences(getContext());
+        ChatDataDVO shareDate = new ChatDataDVO(chatId, preferences.getUserId(), preferences.getUserName(),
+                preferences.getUserAvatar(), mProfile.getName(), mProfile.getAvatar());
+        Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+        chatIntent.putExtra(Constants.SHARE_CHAT_ID, shareDate);
+        mFabMenuView.collapse();
+        startActivity(chatIntent);
     }
 }

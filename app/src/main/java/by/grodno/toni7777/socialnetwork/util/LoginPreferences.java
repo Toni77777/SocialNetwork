@@ -53,6 +53,14 @@ public class LoginPreferences {
         mUserPreferences.edit().putString(USER_FULL_NAME_PREFERENCES, name + EMPTY_STRING + surname).apply();
     }
 
+    public String getUserName() {
+        return mUserPreferences.getString(USER_NAME_PREFERENCES, EMPTY_STRING);
+    }
+
+    public void setUserName(String name) {
+        mUserPreferences.edit().putString(USER_NAME_PREFERENCES, name).apply();
+    }
+
     public void clearUserLoginInformation() {
         mUserPreferences.edit().clear().apply();
     }

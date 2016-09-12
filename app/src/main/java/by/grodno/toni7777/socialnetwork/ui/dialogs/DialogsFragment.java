@@ -128,7 +128,7 @@ public class DialogsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
     public void openChat(ChatEvent event) {
         Log.e("TAG", "Dialogs fragment " + event.getChatId());
         LoginPreferences preferences = new LoginPreferences(getContext());
-        ChatDataDVO shareDate = new ChatDataDVO(event.getChatId(), preferences.getUserId(), preferences.getUserFullName(),
+        ChatDataDVO shareDate = new ChatDataDVO(event.getChatId(), preferences.getUserId(), preferences.getUserName(),
                 preferences.getUserAvatar(), event.getFriendName(), event.getFriendAvatar());
         Intent chatIntent = new Intent(getContext(), ChatActivity.class);
         chatIntent.putExtra(Constants.SHARE_CHAT_ID, shareDate);

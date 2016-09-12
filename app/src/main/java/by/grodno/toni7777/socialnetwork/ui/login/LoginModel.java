@@ -99,6 +99,7 @@ public class LoginModel implements BaseModel, LoginMVP.Model {
                             mPreferences.setUserId(profile.getId());
                             mPreferences.setUserAvatar(profile.getAvatar());
                             mPreferences.setUserFullName(profile.getName(), profile.getSurname());
+                            mPreferences.setUserName(profile.getName());
                         },
                         throwable -> {
                             unsubscribe();

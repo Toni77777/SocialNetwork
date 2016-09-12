@@ -102,7 +102,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
-                android:hint="Input text"
+                android:hint="@string/chat_input_message"
                 android:padding="4dp"
                 android:paddingRight="8dp"
                 android:singleLine="true"/>
@@ -118,7 +118,7 @@
                 android:layout_marginTop="4dp"
                 android:padding="4dp"
                 android:src="@drawable/ic_send_message_24dp"
-                android:text="Send"/>
+                />
 
         </LinearLayout>
     </RelativeLayout>

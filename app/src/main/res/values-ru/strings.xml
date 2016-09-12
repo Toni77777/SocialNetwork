@@ -87,5 +87,6 @@
     <string name="fab_title_message">Написать сообщение</string>
     <string name="remove_friend_item">Удалить из друзей</string>
     <string name="remove_group_item">Удалить группу</string>
+    <string name="chat_input_message">Введите сообщение</string>
 
 </resources>
