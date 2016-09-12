@@ -1,6 +1,9 @@
 package by.grodno.toni7777.socialnetwork.ui.model;
 
-public class ProfileDVO {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ProfileDVO implements Parcelable {
 
     private long mId;
     private String mName;
@@ -182,4 +185,52 @@ public class ProfileDVO {
                 ", mFullName='" + mFullName + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(mId);
+        parcel.writeString(mName);
+        parcel.writeString(mSurname);
+        parcel.writeInt(mSex);
+        parcel.writeString(mBirthday);
+        parcel.writeString(mAvatar);
+        parcel.writeString(mCity);
+        parcel.writeString(mAbout);
+        parcel.writeInt(mMobile);
+        parcel.writeString(mSkype);
+        parcel.writeString(mEmail);
+        parcel.writeString(mFullName);
+    }
+
+    protected ProfileDVO(Parcel in) {
+        mId = in.readLong();
+        mName = in.readString();
+        mSurname = in.readString();
+        mSex = in.readInt();
+        mBirthday = in.readString();
+        mAvatar = in.readString();
+        mCity = in.readString();
+        mAvatar = in.readString();
+        mMobile = in.readInt();
+        mSkype = in.readString();
+        mEmail = in.readString();
+        mFullName = in.readString();
+    }
+
+    public static final Creator<ProfileDVO> CREATOR = new Creator<ProfileDVO>() {
+        @Override
+        public ProfileDVO createFromParcel(Parcel in) {
+            return new ProfileDVO(in);
+        }
+
+        @Override
+        public ProfileDVO[] newArray(int size) {
+            return new ProfileDVO[size];
+        }
+    };
 }

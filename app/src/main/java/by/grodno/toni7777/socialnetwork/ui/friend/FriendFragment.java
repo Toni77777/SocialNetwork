@@ -57,7 +57,9 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     FriendPresenter mFriendPresenter;
 
     private long mFriendId;
+    private ProfileDVO mProfile;
     private static final String STATE_FRIEND_ID = "stateFriendId";
+    private static final String STATE_PROFILE = "stateProfile";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
         }
         if (savedInstanceState != null) {
             mFriendId = savedInstanceState.getLong(STATE_FRIEND_ID);
+            mProfile = savedInstanceState.getParcelable(STATE_PROFILE);
         }
     }
 
@@ -112,6 +115,7 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong(STATE_FRIEND_ID, mFriendId);
+        outState.putParcelable(STATE_PROFILE, mProfile);
     }
 
     @Override
@@ -180,6 +184,8 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     @Override
     public void profileLoaded(ProfileDVO profile) {
         mFriendAdapter.setProfile(profile);
+        mProfile = profile;
+        // TODO: 9/12/16 save state profile friend
     }
 
     @Override
@@ -197,5 +203,6 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
     @Override
     public void onChatIdReceived(long chatId) {
         Log.e("TAG", "Chat id = " + chatId);
+        Log.e("TAG", "Friend profile" + mProfile.toString());
     }
 }
