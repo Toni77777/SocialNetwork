@@ -152,7 +152,7 @@ public class WallModel implements BaseModel, WallMVP.Model {
 //    }
 
     private boolean check(Throwable throwable) {
-        return throwable.getMessage().equals("HTTP 401 Unauthorized");
+        return throwable.getMessage().contains("HTTP 401");
     }
 //
 //    private void refreshAccessToken() {

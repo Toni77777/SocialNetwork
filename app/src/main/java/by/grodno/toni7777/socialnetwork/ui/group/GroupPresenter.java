@@ -10,19 +10,20 @@ import javax.inject.Inject;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.ui.group.listener.GroupInfoListener;
+import by.grodno.toni7777.socialnetwork.ui.group.listener.RemoveGroupListener;
 import by.grodno.toni7777.socialnetwork.ui.model.GroupInfoDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 public class GroupPresenter extends MvpBasePresenter<GroupMVP.View>
-        implements ModelListener<List<PostDVO>>, MvpPresenter<GroupMVP.View>, GroupMVP.Presenter, GroupInfoListener {
+        implements ModelListener<List<PostDVO>>, MvpPresenter<GroupMVP.View>, GroupMVP.Presenter, GroupInfoListener, RemoveGroupListener {
 
     private final GroupModel mModel;
     private boolean mForceRefresh;
 
     @Inject
     public GroupPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
-        mModel = new GroupModel(socialNetworkAPI, loginPreferences, this, this);
+        mModel = new GroupModel(socialNetworkAPI, loginPreferences, this, this, this);
     }
 
     @Override
@@ -42,6 +43,10 @@ public class GroupPresenter extends MvpBasePresenter<GroupMVP.View>
         mModel.loadPosts(groupId, offset);
     }
 
+    @Override
+    public void removeGroupFromFavorite(long groupId) {
+        mModel.removeGroupFromFavorite(groupId);
+    }
 
     @Override
     public void onLoadCompleted() {
@@ -75,6 +80,20 @@ public class GroupPresenter extends MvpBasePresenter<GroupMVP.View>
     public void loadInfoError(Throwable e) {
         if (isViewAttached()) {
             getView().showError(e, mForceRefresh);
+        }
+    }
+
+    @Override
+    public void onRemoveCompleted() {
+        if (isViewAttached()) {
+            getView().groupRemoved();
+        }
+    }
+
+    @Override
+    public void removeGetError(Throwable e) {
+        if (isViewAttached()) {
+            getView().showError(e, false);
         }
     }
 }

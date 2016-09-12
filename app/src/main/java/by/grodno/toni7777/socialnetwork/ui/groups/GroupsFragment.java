@@ -31,6 +31,7 @@ import by.grodno.toni7777.socialnetwork.base.BaseEventStateFragment;
 import by.grodno.toni7777.socialnetwork.base.EmptyRecyclerView;
 import by.grodno.toni7777.socialnetwork.base.PaginationOnScrollListener;
 import by.grodno.toni7777.socialnetwork.base.event.GroupEvent;
+import by.grodno.toni7777.socialnetwork.base.event.GroupRemovedEvent;
 import by.grodno.toni7777.socialnetwork.ui.group.GroupActivity;
 import by.grodno.toni7777.socialnetwork.ui.groups.adapter.GroupsAdapter;
 import by.grodno.toni7777.socialnetwork.ui.model.GroupDVO;
@@ -156,5 +157,11 @@ public class GroupsFragment extends BaseEventStateFragment<SwipeRefreshLayout, L
         Intent groupIntent = new Intent(getContext(), GroupActivity.class);
         groupIntent.putExtra(Constants.SHARE_GROUP_ID, event.getGroupId());
         startActivity(groupIntent);
+    }
+
+    @Subscribe
+    public void postRemoved(GroupRemovedEvent event) {
+        mGroupsAdapter.clear();
+        loadData(true);
     }
 }

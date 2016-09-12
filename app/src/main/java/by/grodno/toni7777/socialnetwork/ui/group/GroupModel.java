@@ -10,8 +10,10 @@ import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
 import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDataDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.WallDTO;
 import by.grodno.toni7777.socialnetwork.ui.group.listener.GroupInfoListener;
+import by.grodno.toni7777.socialnetwork.ui.group.listener.RemoveGroupListener;
 import by.grodno.toni7777.socialnetwork.ui.model.GroupInfoDVO;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.util.Constants;
@@ -30,13 +32,16 @@ public class GroupModel implements BaseModel, GroupMVP.Model {
     private LoginPreferences mPreferences;
     private SocialNetworkAPI mNetworkAPI;
     private GroupInfoListener mInfoListener;
+    private RemoveGroupListener mRemoveGroupListener;
 
     public GroupModel(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences,
-                      ModelListener<List<PostDVO>> listener, GroupInfoListener infoListener) {
+                      ModelListener<List<PostDVO>> listener, GroupInfoListener infoListener,
+                      RemoveGroupListener removeGroupListener) {
         mNetworkAPI = socialNetworkAPI;
         mPreferences = loginPreferences;
         mListener = listener;
         mInfoListener = infoListener;
+        mRemoveGroupListener = removeGroupListener;
     }
 
     @Override
@@ -85,6 +90,28 @@ public class GroupModel implements BaseModel, GroupMVP.Model {
                         () -> {
                             unsubscribe();
                             mListener.onLoadCompleted();
+                        }
+                );
+    }
+
+    @Override
+    public void removeGroupFromFavorite(long groupId) {
+        Observable<ResponseDTO> removeObservable = mNetworkAPI.removeGroupFormFavorite(groupId, mPreferences.getAccessToken());
+        unsubscribe();
+        mSubscription = removeObservable
+                .compose(RxUtil.<ResponseDTO>applySchedulers())
+                .subscribe(
+                        response -> {
+                            if (response.isSuccess()) {
+                                mRemoveGroupListener.onRemoveCompleted();
+                            }
+                        },
+                        throwable -> {
+                            unsubscribe();
+                            mRemoveGroupListener.removeGetError(throwable);
+                        },
+                        () -> {
+                            unsubscribe();
                         }
                 );
     }

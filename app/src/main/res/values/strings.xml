@@ -85,5 +85,6 @@
     <string name="fab_title_post">Create post</string>
     <string name="fab_title_message">Write message</string>
     <string name="remove_friend_item">Remove friend</string>
+    <string name="remove_group_item">Remove group</string>
 
 </resources>

@@ -21,6 +21,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
@@ -134,4 +135,9 @@ public interface SocialNetworkAPI {
     @DELETE(FRIENDS_URL)
     Observable<ResponseDTO> removeUserFormFriends(@Query(USER_ID) long userId,
                                                   @Query(ACCESS_TOKEN) String accessToken);
+
+    @Headers(HEADER_CONTENT_TYPE_APP_JSON)
+    @DELETE(GROUP_URL)
+    Observable<ResponseDTO> removeGroupFormFavorite(@Path(GROUP_ID) long groupId,
+                                                    @Query(ACCESS_TOKEN) String accessToken);
 }

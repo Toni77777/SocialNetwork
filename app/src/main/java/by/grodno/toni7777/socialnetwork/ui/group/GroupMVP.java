@@ -17,6 +17,8 @@ public final class GroupMVP {
 
         void loadGroupInfo(long groupId);
 
+        void removeGroupFromFavorite(long groupId);
+
     }
 
     interface View extends MvpLceView<GroupStateDVO> {
@@ -25,11 +27,15 @@ public final class GroupMVP {
 
         void postsLoaded(List<PostDVO> posts);
 
+        void groupRemoved();
+
     }
 
     interface Presenter extends GroupPagination {
 
         void loadGroupInfo(long groupId, boolean forceRefresh);
+
+        void removeGroupFromFavorite(long groupId);
 
     }
 
