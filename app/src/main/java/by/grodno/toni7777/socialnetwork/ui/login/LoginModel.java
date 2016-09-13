@@ -66,6 +66,7 @@ public class LoginModel implements BaseModel, LoginMVP.Model {
     public void sendNotificationToken() {
         Log.e("Send notification", "Send notification");
         String token = FirebaseInstanceId.getInstance().getToken();
+        Log.e("Send notification", "Token=" + token);
         NotificationDTO notificationDTO = new NotificationDTO(token);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new Gson().toJson(notificationDTO)));
         Observable<ResponseDTO> notifTokenObservable = mNetworkAPI.sentFCMToken(body, mPreferences.getAccessToken());

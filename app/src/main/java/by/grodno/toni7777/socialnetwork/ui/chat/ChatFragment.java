@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -50,6 +51,9 @@ public class ChatFragment extends BaseFragment {
     @BindView(R.id.messages_list_view)
     ListView mMessagesListView;
 
+    @BindView(R.id.send_message)
+    ImageView mSendView;
+
     private ChatAdapter mChatAdapter;
     private ChatDataDVO mChatData;
     private String mURI = "ws://192.168.7.121:8080/chat/"; // Sasha
@@ -92,17 +96,16 @@ public class ChatFragment extends BaseFragment {
         mMyNameView.setText(mChatData.getFullName());
         ImageLoad.loadCircleImage(mFriendAvatarView, mChatData.getFriendAvatar());
         ImageLoad.loadCircleImage(mMyAvatarView, mChatData.getAvatar());
-    }
-
-    @OnClick(R.id.send_message)
-    void send() {
-        String message = mInputView.getText().toString();
-        if (!TextUtils.isEmpty(message.trim())) {
-            mConnection.sendTextMessage(new Gson().toJson(new ChatMessageDTO(mChatData.getId(), message)));
-            mInputView.setText(null);
-        } else {
-            mInputView.setText(null);
-        }
+        mSendView.setOnClickListener(view1 -> {
+            view1.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.send_anim));
+            String message = mInputView.getText().toString();
+            if (!TextUtils.isEmpty(message.trim())) {
+                mConnection.sendTextMessage(new Gson().toJson(new ChatMessageDTO(mChatData.getId(), message)));
+                mInputView.setText(null);
+            } else {
+                mInputView.setText(null);
+            }
+        });
     }
 
     private void update(ChatMessageDTO message) {
