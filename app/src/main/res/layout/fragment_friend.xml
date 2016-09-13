@@ -41,7 +41,7 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             app:fab_addButtonColorNormal="@color/accent"
-            app:fab_addButtonColorPressed="#e4cd00"
+            app:fab_addButtonColorPressed="#FFA000"
             app:fab_labelStyle="@style/BaseTheme.Fab"
             app:layout_anchorGravity="bottom|right|end">
 
