@@ -24,13 +24,13 @@ public class NewPostPresenter extends MvpBasePresenter<NewPostMVP.View>
     }
 
     @Override
-    public void sendNewPost(String textPost, String imageURL) {
+    public void sendNewPost(long userId, String textPost, String imageURL) {
         if (imageURL == null) {
             if (isViewAttached()) {
                 getView().showLoading();
             }
         }
-        mModel.sendPostToServer(textPost, imageURL);
+        mModel.sendPostToServer(userId, textPost, imageURL);
     }
 
     @Override

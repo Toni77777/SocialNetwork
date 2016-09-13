@@ -101,8 +101,12 @@
             android:name=".ui.dialogs.DialogsActivity"
             android:label="@string/activity_label_messages">
         </activity>
-        <activity android:name=".ui.chat.ChatActivity"
-                  android:label="@string/activity_label_chat">
+        <activity
+            android:name=".ui.chat.ChatActivity"
+            android:label="@string/activity_label_chat">
+        </activity>
+        <activity android:name=".ui.restore.RestoreActivity"
+                  android:label="@string/activity_label_restore">
         </activity>
     </application>
 

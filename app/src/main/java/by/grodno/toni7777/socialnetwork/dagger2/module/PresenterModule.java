@@ -12,6 +12,7 @@ import by.grodno.toni7777.socialnetwork.ui.login.LoginPresenter;
 import by.grodno.toni7777.socialnetwork.ui.friends.FriendsPresenter;
 import by.grodno.toni7777.socialnetwork.ui.profile.ProfilePresenter;
 import by.grodno.toni7777.socialnetwork.ui.registration.fragment.ContactPresenter;
+import by.grodno.toni7777.socialnetwork.ui.restore.RestorePresenter;
 import by.grodno.toni7777.socialnetwork.ui.search.groups.SearchGroupsPresenter;
 import by.grodno.toni7777.socialnetwork.ui.search.persons.PersonsPresenter;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallPresenter;
@@ -86,6 +87,12 @@ public class PresenterModule {
     @Provides
     public DialogsPresenter provideDialogsPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
         return new DialogsPresenter(socialNetworkAPI, loginPreferences);
+    }
+
+    @PresenterScope
+    @Provides
+    public RestorePresenter provideRestorePresenter(SocialNetworkAPI socialNetworkAPI) {
+        return new RestorePresenter(socialNetworkAPI);
     }
 
 }

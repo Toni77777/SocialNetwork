@@ -17,6 +17,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:hint="@string/registration_name"
             />
 
@@ -30,6 +31,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:hint="@string/registration_surname"/>
 
         </android.support.design.widget.TextInputLayout>

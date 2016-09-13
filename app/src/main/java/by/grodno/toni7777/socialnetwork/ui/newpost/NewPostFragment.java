@@ -51,9 +51,11 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
     @Inject
     NewPostPresenter mPresenter;
 
+    private long mUserId;
     private String mFileName;
     private ProgressDialog mProgressDialog;
     private static final String SATE_FILE_NAME = "stateFileName";
+    private static final String SATE_USER_ID = "stateUserId";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +63,13 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
         setRetainInstance(true);
         setHasOptionsMenu(true);
         initProgressDialog();
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            if (bundle.containsKey(Constants.SHARE_USER_ID)) {
+                mUserId = bundle.getLong(Constants.SHARE_USER_ID);
+                Log.e("User", "user id from new  = " + mUserId);
+            }
+        }
     }
 
     @Override
@@ -79,6 +88,8 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
                     Bitmap image = FileUtils.readFileStorage(getContext(), mFileName);
                     mImagePostView.setImageBitmap(image);
                 }
+            } else if (savedInstanceState.containsKey(SATE_USER_ID)) {
+                mUserId = savedInstanceState.getLong(SATE_USER_ID);
             }
         }
         if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -102,7 +113,7 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
                 File file = FileUtils.getAbsolutePathFile(getContext(), mFileName);
                 presenter.sendImagePost(file);
             } else {
-                presenter.sendNewPost(mTextPostView.getText().toString(), null);
+                presenter.sendNewPost(mUserId, mTextPostView.getText().toString(), null);
             }
 
             return true;
@@ -118,6 +129,7 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(SATE_FILE_NAME, mFileName);
+        outState.putLong(SATE_USER_ID, mUserId);
     }
 
     private void initProgressDialog() {
@@ -214,10 +226,10 @@ public class NewPostFragment extends BaseMvpViewStateFragment<NewPostMVP.View, N
         startActivityForResult(gallery, GALLERY_REQUEST);
     }
 
-
+    @Override
     public void onImagePostUploaded(String imageURL) {
         Log.e("Post", "Fragment onImagePostUploaded(Long imageId) Id = " + imageURL);
-        presenter.sendNewPost(mTextPostView.getText().toString(), imageURL);
+        presenter.sendNewPost(mUserId, mTextPostView.getText().toString(), imageURL);
     }
 
     private static final int CAMERA_REQUEST = 0;

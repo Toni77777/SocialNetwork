@@ -43,7 +43,6 @@ public class LoginModel implements BaseModel, LoginMVP.Model {
     @Override
     public void getAccessToken(String login, String password) {
         Observable<AuthorizationDTO> tokenObservable = mNetworkAPI.loginRequest(GRAND_TYPE_PASSWORD, CLIENT_ID_VALUE, login, password);
-
         mSubscription = tokenObservable
                 .compose(RxUtil.<AuthorizationDTO>applySchedulers())
                 .subscribe(

@@ -11,6 +11,7 @@ import by.grodno.toni7777.socialnetwork.ui.newpost.NewPostFragment;
 import by.grodno.toni7777.socialnetwork.ui.friends.FriendsFragment;
 import by.grodno.toni7777.socialnetwork.ui.profile.ProfileFragment;
 import by.grodno.toni7777.socialnetwork.ui.registration.fragment.ContactFragment;
+import by.grodno.toni7777.socialnetwork.ui.restore.RestoreFragment;
 import by.grodno.toni7777.socialnetwork.ui.search.groups.SearchGroupsFragment;
 import by.grodno.toni7777.socialnetwork.ui.search.persons.PersonsFragment;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallFragment;
@@ -43,5 +44,7 @@ public interface PresenterComponent {
     void inject(FriendFragment fragment);
 
     void inject(DialogsFragment fragment);
+
+    void inject(RestoreFragment fragment);
 
 }

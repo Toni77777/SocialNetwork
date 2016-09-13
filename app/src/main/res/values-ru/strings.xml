@@ -88,5 +88,10 @@
     <string name="remove_friend_item">Удалить из друзей</string>
     <string name="remove_group_item">Удалить группу</string>
     <string name="chat_input_message">Введите сообщение</string>
+    <string name="restore_password">Востановить</string>
+    <string name="restore_password_completed">Пароль восстановлен, проверьте почту</string>
+    <string name="activity_label_restore">Восстановить пароль</string>
+    <string name="login_welcome_part_one">Добро пожаловать</string>
+    <string name="login_welcome_part_two">регистрация успешно завершина</string>
 
 </resources>

@@ -145,4 +145,7 @@ public interface SocialNetworkAPI {
     @GET(DIALOGS_FIND_URL)
     Observable<ChatIdDTO> getChatId(@Query(USER_ID) long userId,
                                     @Query(ACCESS_TOKEN) String accessToken);
+
+    @GET(PASSWORD_RESTORE_URL)
+    Observable<ResponseDTO> restorePassword(@Query(EMAIL) String email);
 }

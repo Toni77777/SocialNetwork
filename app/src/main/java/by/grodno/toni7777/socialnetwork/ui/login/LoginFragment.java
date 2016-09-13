@@ -36,7 +36,9 @@ import static by.grodno.toni7777.socialnetwork.util.Constants.*;
 
 import by.grodno.toni7777.socialnetwork.base.BaseMvpViewStateFragment;
 import by.grodno.toni7777.socialnetwork.base.event.RegistrationEvent;
+import by.grodno.toni7777.socialnetwork.base.event.RestoreEvent;
 import by.grodno.toni7777.socialnetwork.ui.registration.RegistrationActivity;
+import by.grodno.toni7777.socialnetwork.ui.restore.RestoreActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.WallActivity;
 import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
@@ -110,6 +112,7 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.View, Login
 
     @OnClick(R.id.forgot_password)
     void restorePassword() {
+        getContext().startActivity(new Intent(getContext(), RestoreActivity.class));
         // TODO start restore activity
     }
 
@@ -180,7 +183,14 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.View, Login
 
     @Subscribe
     public void registrationSuccess(RegistrationEvent event) {
-        Snackbar.make(mForgotPassView, "Welcome " + event.getNameUser() + " registration success ", Snackbar.LENGTH_LONG)
+        Snackbar.make(mForgotPassView, getString(R.string.login_welcome_part_one) + Constants.EMPTY_STRING + event.getNameUser() + Constants.EMPTY_STRING + getString(R.string.login_welcome_part_two), Snackbar.LENGTH_LONG)
+                .setDuration(5000)
+                .show();
+    }
+
+    @Subscribe
+    public void restoreSuccess(RestoreEvent event) {
+        Snackbar.make(mForgotPassView, getString(R.string.restore_password_completed), Snackbar.LENGTH_LONG)
                 .setDuration(5000)
                 .show();
     }

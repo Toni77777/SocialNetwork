@@ -180,7 +180,10 @@ public class FriendFragment extends BaseEventViewStateFragment<SwipeRefreshLayou
 
     @OnClick(R.id.create_post)
     void newPost() {
-        startActivity(new Intent(getContext(), NewPostActivity.class));
+        Intent postIntent = new Intent(getContext(), NewPostActivity.class);
+        postIntent.putExtra(Constants.SHARE_USER_ID, mFriendId);
+        startActivity(postIntent);
+        mFabMenuView.collapse();
     }
 
     @OnClick(R.id.write_message)

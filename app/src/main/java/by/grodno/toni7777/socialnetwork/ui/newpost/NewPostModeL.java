@@ -36,10 +36,10 @@ public class NewPostModel implements BaseModel, NewPostMVP.Model {
     }
 
     @Override
-    public void sendPostToServer(String textPost, String imageURL) {
+    public void sendPostToServer(long userId, String textPost, String imageURL) {
         Log.e("Start", "Sent post to server");
         unsubscribe();
-        NewPostDTO newPost = new NewPostDTO(mPreferences.getUserId(), imageURL, textPost);
+        NewPostDTO newPost = new NewPostDTO(userId, imageURL, textPost);
         Observable<ResponseDTO> tokenObservable = mNetworkAPI.sendNewPost(newPost, mPreferences.getAccessToken());
         mSubscription = tokenObservable
                 .compose(RxUtil.<ResponseDTO>applySchedulers())

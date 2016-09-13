@@ -7,6 +7,7 @@ public final class Constants {
     public static final String SHARE_GROUP_ID = "share_group_id";
     public static final String SHARE_FRIEND_ID = "share_friend_id";
     public static final String SHARE_CHAT_ID = "share_chat_id";
+    public static final String SHARE_USER_ID = "share_user_id";
 
     public static final String PLACEHOLDER = "/";
 
@@ -30,7 +31,7 @@ public final class Constants {
     public static final String USER_ID_PREFERENCES = "userId";
     public static final String USER_AVATAR_PREFERENCES = "userAvatar";
     public static final String USER_FULL_NAME_PREFERENCES = "userFullName";
-    public static final String USER_NAME_PREFERENCES = "userlName";
+    public static final String USER_NAME_PREFERENCES = "userName";
 
     public static final String NOTIFICATION_PREFERENCES = "notificationPreferences";
     public static final String NOTIFICATION_SOUND_PREFERENCES = "soundNotificationPreferences";

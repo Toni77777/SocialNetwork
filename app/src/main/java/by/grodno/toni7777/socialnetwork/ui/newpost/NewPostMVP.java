@@ -8,7 +8,7 @@ public final class NewPostMVP {
 
     interface Model {
 
-        void sendPostToServer(String textPost, String imageURL);
+        void sendPostToServer(long userId, String textPost, String imageURL);
 
         void uploadPostImage(File file);
 
@@ -32,7 +32,7 @@ public final class NewPostMVP {
 
         void sendImagePost(File file);
 
-        void sendNewPost(String textPost, String imageURL);
+        void sendNewPost(long userId, String textPost, String imageURL);
     }
 
     private NewPostMVP() {

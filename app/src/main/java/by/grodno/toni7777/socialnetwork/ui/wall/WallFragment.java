@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +34,9 @@ import by.grodno.toni7777.socialnetwork.base.event.PostPublishSuccess;
 import by.grodno.toni7777.socialnetwork.ui.model.PostDVO;
 import by.grodno.toni7777.socialnetwork.ui.newpost.NewPostActivity;
 import by.grodno.toni7777.socialnetwork.ui.wall.adapter.PostAdapter;
+import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.ErrorHanding;
+import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 
 import static by.grodno.toni7777.socialnetwork.util.Constants.START_LOAD;
 
@@ -136,7 +137,9 @@ public class WallFragment extends BaseEventViewStateFragment<SwipeRefreshLayout,
 
     @OnClick(R.id.new_post_fab)
     void newPost() {
-        startActivity(new Intent(getContext(), NewPostActivity.class));
+        Intent postIntent = new Intent(getContext(), NewPostActivity.class);
+        postIntent.putExtra(Constants.SHARE_USER_ID, new LoginPreferences(getContext()).getUserId());
+        startActivity(postIntent);
     }
 
     @Subscribe
