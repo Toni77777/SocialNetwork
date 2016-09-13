@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.dd.processbutton.iml.ActionProcessButton;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,7 +31,7 @@ public class RestoreFragment extends BaseMvpViewStateFragment<RestoreMVP.View, R
     TextInputLayout mMailView;
 
     @BindView(R.id.restore)
-    Button mRestoreView;
+    ActionProcessButton mRestoreView;
 
     @BindView(R.id.loading)
     View mLoadView;

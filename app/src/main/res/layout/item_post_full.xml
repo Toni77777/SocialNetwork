@@ -57,8 +57,8 @@
 
         <ImageView
             android:id="@+id/post_image"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/post_image_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/owner_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/post_marging_end"/>
@@ -96,8 +96,8 @@
             android:layout_below="@+id/post_text"
             android:layout_marginStart="@dimen/post_marging_start"
             android:layout_marginTop="@dimen/post_image_margin_top"
-            android:src="@drawable/ic_dislike_default"
-            android:layout_toEndOf="@id/like_count"/>
+            android:layout_toEndOf="@id/like_count"
+            android:src="@drawable/ic_dislike_default"/>
 
         <TextView
             android:id="@+id/dislike_count"
