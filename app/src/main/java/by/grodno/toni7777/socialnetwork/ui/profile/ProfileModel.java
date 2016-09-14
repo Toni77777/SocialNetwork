@@ -33,7 +33,6 @@ public class ProfileModel implements BaseModel, ProfileMVP.Model {
     @Override
     public void loadProfileInfo() {
         Observable<ProfileDTO> profileObservable = mNetworkAPI.getProfileInfo(mPreferences.getAccessToken());
-
         mSubscription = profileObservable
                 .map(ConverterDTOtoDSO::converteDTOtoDSO)
                 .doOnNext(profileDSO -> mDatabaseDAO.copyToDatabaseOrUpdate(Realm.getDefaultInstance(), profileDSO))

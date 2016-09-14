@@ -18,6 +18,8 @@
     <string name="registration_phone">Телефон</string>
     <string name="registration_skype">Skype</string>
     <string name="registration_city">Город</string>
+    <string name="registration_sex_male">Мужской</string>
+    <string name="registration_sex_female">Женский</string>
 
     <string name="progress_wait">Пожалуйста подождите, идет загрузка</string>
     <string name="progress_dialog_message">Публикация поста</string>

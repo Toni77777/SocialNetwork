@@ -46,7 +46,7 @@ public class RegistrationActivity extends ToolbarActivity
     }
 
     @Override
-    public void onInfoPass(String name, String surname, String sex, String dateBirth) {
+    public void onInfoPass(String name, String surname, int sex, String dateBirth) {
         mProfile.setName(name);
         mProfile.setSurname(surname);
         mProfile.setSex(sex);

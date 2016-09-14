@@ -59,7 +59,7 @@ public class InfoFragment extends TabFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mSexView.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, new String[]{"male", "female"}));
+        mSexView.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, new String[]{getString(R.string.registration_sex_male), getString(R.string.registration_sex_female)}));
         resetErrorAfterChange(mNameView, mSurnameView);
         if (BuildConfig.DEBUG) {
             mNameView.getEditText().setText("Anton");
@@ -73,14 +73,24 @@ public class InfoFragment extends TabFragment {
     public void nextTab() {
         String name = mNameView.getEditText().getText().toString();
         String surname = mSurnameView.getEditText().getText().toString();
-        String sex = mSexView.getSelectedItem().toString();
+        int sex = getSex(mSexView.getSelectedItem().toString());
         String dateBirth = mDateBirthView.getEditText().getText().toString();
-        Log.e("Date", dateBirth.toString());
+        Log.e("Sex", "Sex =" + sex + " sex = " + mSexView.getSelectedItem().toString());
         SparseIntArray errors = validateInformation(name, surname, dateBirth);
         if (inNotEmptySparseIntArray(errors)) {
             showErrors(errors);
         } else {
             mInfoPasser.onInfoPass(name, surname, sex, dateBirth);
+        }
+    }
+
+    private int getSex(String sex) {
+        if (sex.equals(getString(R.string.registration_sex_male))) {
+            return 1;
+        } else if (sex.equals(getString(R.string.registration_sex_female))) {
+            return 0;
+        } else {
+            throw new IllegalArgumentException("Unknown sex " + sex);
         }
     }
 
@@ -131,7 +141,7 @@ public class InfoFragment extends TabFragment {
     }
 
     public interface OnInfoPass {
-        void onInfoPass(String name, String surname, String sex, String dateBirth);
+        void onInfoPass(String name, String surname, int sex, String dateBirth);
     }
 
     private static final int REQUEST_DATE_BIRTH = 1504;

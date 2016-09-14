@@ -14,7 +14,7 @@ public final class ProfileRegistrationDTO implements Parcelable {
     private String mSurname;
 
     @SerializedName("sex")
-    private String mSex;
+    private int mSex;
 
     @SerializedName("bday")
     private String mDateBirth;
@@ -47,11 +47,11 @@ public final class ProfileRegistrationDTO implements Parcelable {
         this.mSurname = surname;
     }
 
-    public String getSex() {
+    public int getSex() {
         return mSex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.mSex = sex;
     }
 
@@ -97,7 +97,6 @@ public final class ProfileRegistrationDTO implements Parcelable {
         if (mName != null ? !mName.equals(profile.mName) : profile.mName != null) return false;
         if (mSurname != null ? !mSurname.equals(profile.mSurname) : profile.mSurname != null)
             return false;
-        if (mSex != null ? !mSex.equals(profile.mSex) : profile.mSex != null) return false;
         if (mDateBirth != null ? !mDateBirth.equals(profile.mDateBirth) : profile.mDateBirth != null)
             return false;
         if (mLogin != null ? !mLogin.equals(profile.mLogin) : profile.mLogin != null) return false;
@@ -111,7 +110,6 @@ public final class ProfileRegistrationDTO implements Parcelable {
     public int hashCode() {
         int result = mName != null ? mName.hashCode() : 0;
         result = 31 * result + (mSurname != null ? mSurname.hashCode() : 0);
-        result = 31 * result + (mSex != null ? mSex.hashCode() : 0);
         result = 31 * result + (mDateBirth != null ? mDateBirth.hashCode() : 0);
         result = 31 * result + (mLogin != null ? mLogin.hashCode() : 0);
         result = 31 * result + (mPassword != null ? mPassword.hashCode() : 0);
@@ -141,7 +139,7 @@ public final class ProfileRegistrationDTO implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(mName);
         parcel.writeString(mSurname);
-        parcel.writeString(mSex);
+        parcel.writeInt(mSex);
         parcel.writeString(mDateBirth);
         parcel.writeString(mLogin);
         parcel.writeString(mPassword);
@@ -151,7 +149,7 @@ public final class ProfileRegistrationDTO implements Parcelable {
     protected ProfileRegistrationDTO(Parcel in) {
         mName = in.readString();
         mSurname = in.readString();
-        mSex = in.readString();
+        mSex = in.readInt();
         mDateBirth = in.readString();
         mLogin = in.readString();
         mPassword = in.readString();
