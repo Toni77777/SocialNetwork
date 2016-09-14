@@ -113,7 +113,6 @@ public class LoginFragment extends BaseMvpViewStateFragment<LoginMVP.View, Login
     @OnClick(R.id.forgot_password)
     void restorePassword() {
         getContext().startActivity(new Intent(getContext(), RestoreActivity.class));
-        // TODO start restore activity
     }
 
     @Override

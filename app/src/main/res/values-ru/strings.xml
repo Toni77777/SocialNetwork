@@ -63,7 +63,7 @@
     <string name="tab_title_login">Логин</string>
     <string name="tab_error_message">Ошибка</string>
     <string name="error_field_empty">Поле не может быть пустым</string>
-    <string name="error_field_max">Превышена максимальная длина</string>
+    <string name="error_field_max">Превышено максимально допустимое значение для поля</string>
     <string name="error_field_format">Неправильный формат</string>
     <string name="error_click_retry">Ошибка! нажмите чтобы повторить</string>
     <string name="post_clear_image_item">Удалить изображение</string>
