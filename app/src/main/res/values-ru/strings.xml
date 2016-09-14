@@ -95,5 +95,8 @@
     <string name="activity_label_restore">Восстановить пароль</string>
     <string name="login_welcome_part_one">Добро пожаловать</string>
     <string name="login_welcome_part_two">регистрация успешно завершина</string>
+    <string name="profile_city">Город</string>
+    <string name="profile_about">О себе</string>
+    <string name="profile_skype">Skype</string>
 
 </resources>

@@ -98,11 +98,17 @@ public class ProfileFragment extends BaseMvpViewStateFragment<ProfileMVP.View, P
         mNameView.setText(profile.getName());
         mSurnameVew.setText(profile.getSurname());
         mSexView.setText(String.valueOf(profile.getSex()));
-        mCityView.setText(profile.getCity());
-        mAboutView.setText(profile.getAbout());
+        if (profile.getCity() != null) {
+            mCityView.setText(profile.getCity());
+        }
+        if (profile.getAbout() != null) {
+            mAboutView.setText(profile.getAbout());
+        }
         mMobileNumberView.setText(String.valueOf(profile.getMobile()));
         mEmailView.setText(profile.getEmail());
-        mSkypeView.setText(profile.getSkype());
+        if (profile.getSkype() != null) {
+            mSkypeView.setText(profile.getSkype());
+        }
     }
 
     @Override
