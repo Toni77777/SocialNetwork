@@ -71,13 +71,13 @@ public class ChatFragment extends BaseMvpViewStateFragment<ChatMVP.View, ChatPre
     ChatPresenter mChatPresenter;
 
     private long mChatId;
-
     private ChatAdapter mChatAdapter;
     private ChatDataDVO mChatData;
     private String mURI = "ws://192.168.7.121:8080/chat/"; // Sasha
     //        private static String mURI = "ws://192.168.1.2:8080/chat/"; // Masha
     private static final WebSocketConnection mConnection = new WebSocketConnection();
     private static final String STATE_URI = "sateURI";
+    private static final String STATE_CHAT_ID = "sateChatId";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,6 +98,9 @@ public class ChatFragment extends BaseMvpViewStateFragment<ChatMVP.View, ChatPre
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(STATE_URI)) {
                 mURI = savedInstanceState.getString(STATE_URI);
+            }
+            if (savedInstanceState.containsKey(STATE_CHAT_ID)) {
+                mChatId = savedInstanceState.getLong(STATE_CHAT_ID);
             }
         }
     }
@@ -139,6 +142,7 @@ public class ChatFragment extends BaseMvpViewStateFragment<ChatMVP.View, ChatPre
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(STATE_URI, mURI);
+        outState.putLong(STATE_CHAT_ID, mChatId);
     }
 
     @Override
@@ -243,5 +247,10 @@ public class ChatFragment extends BaseMvpViewStateFragment<ChatMVP.View, ChatPre
     @Override
     public void getMessages(List<ChatMessageDTO> data) {
         Log.e("User", "" + data.toString());
+        mChatAdapter.add(data);
+        mChatAdapter.notifyDataSetChanged();
+        mMessagesListView.setSelection(mMessagesListView.getCount() - 1);
+        mLoadView.setVisibility(View.GONE);
+        mContainerView.setVisibility(View.VISIBLE);
     }
 }

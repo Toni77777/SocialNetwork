@@ -5,10 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 import by.grodno.toni7777.socialnetwork.mvp.BaseModel;
-import by.grodno.toni7777.socialnetwork.mvp.ModelListener;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
-import by.grodno.toni7777.socialnetwork.network.model.ChatDTO;
-import by.grodno.toni7777.socialnetwork.network.model.ChatMessageDTO;
 import by.grodno.toni7777.socialnetwork.network.model.HistoryMessagesDTO;
 import by.grodno.toni7777.socialnetwork.ui.chat.listener.ChatListener;
 import by.grodno.toni7777.socialnetwork.util.Constants;
@@ -33,7 +30,7 @@ public class ChatModel implements BaseModel, ChatMVP.Model {
 
     @Override
     public void getLastMessages(long chatId, int offset) {
-        Observable<HistoryMessagesDTO> messagesObservable = mNetworkAPI.getLastMessages(chatId, offset, Constants.MEDIUM_LIMIT, mPreferences.getAccessToken());
+        Observable<HistoryMessagesDTO> messagesObservable = mNetworkAPI.getLastMessages(chatId, offset, Constants.HIGHT_LIMIT, mPreferences.getAccessToken());
         unsubscribe();
         mSubscription = messagesObservable
                 .compose(RxUtil.<HistoryMessagesDTO>applySchedulers())
