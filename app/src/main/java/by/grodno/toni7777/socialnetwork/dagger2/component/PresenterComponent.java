@@ -2,6 +2,7 @@ package by.grodno.toni7777.socialnetwork.dagger2.component;
 
 import by.grodno.toni7777.socialnetwork.dagger2.module.PresenterModule;
 import by.grodno.toni7777.socialnetwork.dagger2.scope.PresenterScope;
+import by.grodno.toni7777.socialnetwork.ui.chat.ChatFragment;
 import by.grodno.toni7777.socialnetwork.ui.dialogs.DialogsFragment;
 import by.grodno.toni7777.socialnetwork.ui.friend.FriendFragment;
 import by.grodno.toni7777.socialnetwork.ui.group.GroupFragment;
@@ -46,5 +47,7 @@ public interface PresenterComponent {
     void inject(DialogsFragment fragment);
 
     void inject(RestoreFragment fragment);
+
+    void inject(ChatFragment fragment);
 
 }

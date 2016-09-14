@@ -30,6 +30,7 @@ public final class QueryProperties {
     public static final String USERS_LIKE_POST_URL = "/users/posts/{idPost}/likes";
     public static final String USERS_PROFILE_INFO_URL = "/users/{idUser}";
     public static final String PASSWORD_RESTORE_URL = "/password/forgotten";
+    public static final String CHAT_MESSAGES_URL = "/dialogs/{dialogId}/messages";
 
     public static final String USER_ID = "userId";
     public static final String OFFSET = "offset";
@@ -44,6 +45,7 @@ public final class QueryProperties {
     public static final String ID = "id";
     public static final String PATH_POST_ID = "idPost";
     public static final String PATH_USER_ID = "idUser";
+    public static final String PATH_MESSAGE_ID = "dialogId";
 
 
     public static final String HEADER_AUTORIZATION = "Authorization";

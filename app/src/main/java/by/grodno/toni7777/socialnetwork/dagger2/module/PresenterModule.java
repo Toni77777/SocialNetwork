@@ -4,6 +4,7 @@ package by.grodno.toni7777.socialnetwork.dagger2.module;
 import by.grodno.toni7777.socialnetwork.dagger2.scope.PresenterScope;
 import by.grodno.toni7777.socialnetwork.database.DatabaseDAOImp;
 import by.grodno.toni7777.socialnetwork.network.SocialNetworkAPI;
+import by.grodno.toni7777.socialnetwork.ui.chat.ChatPresenter;
 import by.grodno.toni7777.socialnetwork.ui.dialogs.DialogsPresenter;
 import by.grodno.toni7777.socialnetwork.ui.friend.FriendPresenter;
 import by.grodno.toni7777.socialnetwork.ui.group.GroupPresenter;
@@ -93,6 +94,12 @@ public class PresenterModule {
     @Provides
     public RestorePresenter provideRestorePresenter(SocialNetworkAPI socialNetworkAPI) {
         return new RestorePresenter(socialNetworkAPI);
+    }
+
+    @PresenterScope
+    @Provides
+    public ChatPresenter provideChatPresenter(SocialNetworkAPI socialNetworkAPI, LoginPreferences loginPreferences) {
+        return new ChatPresenter(socialNetworkAPI, loginPreferences);
     }
 
 }

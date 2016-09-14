@@ -2,11 +2,13 @@ package by.grodno.toni7777.socialnetwork.network;
 
 
 import by.grodno.toni7777.socialnetwork.network.model.AuthorizationDTO;
+import by.grodno.toni7777.socialnetwork.network.model.ChatDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ChatIdDTO;
 import by.grodno.toni7777.socialnetwork.network.model.DialogsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.FriendsDTO;
 import by.grodno.toni7777.socialnetwork.network.model.GroupDataDTO;
 import by.grodno.toni7777.socialnetwork.network.model.GroupsDTO;
+import by.grodno.toni7777.socialnetwork.network.model.HistoryMessagesDTO;
 import by.grodno.toni7777.socialnetwork.network.model.ImageResponseDTO;
 import by.grodno.toni7777.socialnetwork.network.model.LikeDTO;
 import by.grodno.toni7777.socialnetwork.network.model.LikeResponseDTO;
@@ -19,6 +21,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -148,4 +151,14 @@ public interface SocialNetworkAPI {
 
     @GET(PASSWORD_RESTORE_URL)
     Observable<ResponseDTO> restorePassword(@Query(EMAIL) String email);
+
+    @GET(CHAT_MESSAGES_URL)
+    Observable<HistoryMessagesDTO> getLastMessages(@Path(PATH_MESSAGE_ID) Long chatId,
+                                                   @Query(OFFSET) int offset,
+                                                   @Query(LIMIT) int limit,
+                                                   @Query(ACCESS_TOKEN) String accessToken);
+
+    /*
+    dialogs/{dialogId}/messages
+     */
 }
