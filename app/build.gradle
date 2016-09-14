@@ -36,8 +36,8 @@ android {
         versionName "0.1.4"
         multiDexEnabled true
 
-        buildConfigField "String", "LOGIN", "\"user\""
-        buildConfigField "String", "PASS", "\"user\""
+        buildConfigField "String", "LOGIN", "\"victor\""
+        buildConfigField "String", "PASS", "\"victor\""
 
     }
 

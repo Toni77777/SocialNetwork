@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.ViewSwitcher;
@@ -157,6 +158,7 @@ public class ContactFragment extends BaseMvpTabFragment<ContactMVP.View, Contact
         ((ContactViewState) viewState).setShowLoading();
         mContactView.setVisibility(android.view.View.GONE);
         mProgressView.setVisibility(android.view.View.VISIBLE);
+        mNavigationView.setVisibility(View.GONE);
     }
 
     @Override
