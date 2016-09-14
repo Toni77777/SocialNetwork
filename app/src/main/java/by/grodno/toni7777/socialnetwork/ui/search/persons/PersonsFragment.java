@@ -132,7 +132,7 @@ public class PersonsFragment extends BaseEventStateFragment<SwipeRefreshLayout, 
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadDataWithOffset(" ", pullToRefresh, START_LOAD);
+        presenter.loadDataWithOffset("", pullToRefresh, START_LOAD);
     }
 
     @Override

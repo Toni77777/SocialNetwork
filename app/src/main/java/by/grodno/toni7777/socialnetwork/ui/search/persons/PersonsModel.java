@@ -10,6 +10,7 @@ import by.grodno.toni7777.socialnetwork.network.model.PersonsDTO;
 
 import by.grodno.toni7777.socialnetwork.network.model.ResponseDTO;
 import by.grodno.toni7777.socialnetwork.ui.search.persons.listener.FriendListener;
+import by.grodno.toni7777.socialnetwork.util.Constants;
 import by.grodno.toni7777.socialnetwork.util.LoginPreferences;
 import by.grodno.toni7777.socialnetwork.util.RxUtil;
 import rx.Observable;
@@ -32,7 +33,7 @@ public class PersonsModel implements BaseModel, PersonsMVP.Model {
 
     @Override
     public void findPersons(String fullNameSearch, int offset) {
-        Observable<PersonsDTO> postsObservable = mNetworkAPI.findPersons(fullNameSearch, offset, 10, mPreferences.getAccessToken());
+        Observable<PersonsDTO> postsObservable = mNetworkAPI.findPersons(fullNameSearch, offset, Constants.HIGHT_LIMIT, mPreferences.getAccessToken());
 
         unsubscribe();
         mSubscription = postsObservable

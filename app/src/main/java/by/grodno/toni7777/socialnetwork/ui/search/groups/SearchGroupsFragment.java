@@ -115,6 +115,12 @@ public class SearchGroupsFragment extends BaseEventStateFragment<SwipeRefreshLay
     }
 
     @Override
+    public void onStart() {
+        loadData(true);
+        super.onStart();
+    }
+
+    @Override
     public List<GroupDTO> getData() {
         return mSearchGroupsAdapter.getGroups();
     }
@@ -132,13 +138,14 @@ public class SearchGroupsFragment extends BaseEventStateFragment<SwipeRefreshLay
 
     @Override
     public void loadData(boolean pullToRefresh) {
-//        presenter.loadDataWithOffset(" ", pullToRefresh, START_LOAD);
+        presenter.loadDataWithOffset("", pullToRefresh, START_LOAD);
     }
 
     @Override
     public void onRefresh() {
         mSearchGroupsAdapter.clear();
-        presenter.loadDataWithOffset("", true, START_LOAD);
+        loadData(true);
+//        presenter.loadDataWithOffset("", true, START_LOAD);
 
     }
 
